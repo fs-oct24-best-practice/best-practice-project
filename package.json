@@ -28,7 +28,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "lint-staged": "^15.3.0",
     "prettier": "^3.4.2",
     "sass": "^1.83.1",
@@ -43,6 +43,10 @@
     }
   },
   "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "*.ts": [
       "eslint --fix",
       "prettier --write"
