@@ -1,7 +1,8 @@
-import './App.scss';
+//import './App.scss';
 
 export const App = () => (
   <div className="App">
-    <h1>Product Catalog 1</h1>
+    <h1>The site is under development</h1>
   </div>
 );
+ 

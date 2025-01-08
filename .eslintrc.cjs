@@ -9,7 +9,7 @@ module.exports = {
     'airbnb-typescript',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended', // Добавлено
+    'plugin:prettier/recommended', 
   ],
   overrides: [
     {
@@ -33,7 +33,7 @@ module.exports = {
     'import',
     'react-hooks',
     '@typescript-eslint',
-    'prettier', // Добавлено
+    'prettier',
   ],
   rules: {
     // JS
