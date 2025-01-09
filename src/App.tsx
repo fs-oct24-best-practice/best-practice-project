@@ -1,8 +1,18 @@
-//import './App.scss';
+import {Outlet} from 'react-router';
+import './App.scss';
+import {Footer} from './components/Footer';
+import {Header} from './components/Header';
 
-export const App = () => (
-  <div className="App">
-    <h1>The site is under development</h1>
-  </div>
-);
- 
+export const App = () => {
+	return (
+		<div className='App'>
+			<Header />
+
+			<main className='main'>
+				<Outlet />
+			</main>
+
+			<Footer />
+		</div>
+	);
+};
