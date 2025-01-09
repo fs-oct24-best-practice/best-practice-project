@@ -1,5 +1,18 @@
-//import './App.scss';
+import {Outlet} from 'react-router';
+// import './App.scss';
+import {Footer} from './components/Footer';
+import {Header} from './components/Header';
 
-import { Header } from './components/Header/Header'
+export const App = () => {
+	return (
+		<div className='App'>
+			<Header />
 
-export const App = () => <Header />
+			<main className='main'>
+				<Outlet />
+			</main>
+
+			<Footer />
+		</div>
+	);
+};
