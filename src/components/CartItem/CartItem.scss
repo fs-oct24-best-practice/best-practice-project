@@ -53,3 +53,17 @@
 		}
 	}
 }
+
+@media (max-width:630px) {
+	.cart_item{
+		flex-wrap: wrap;
+		gap: 0;
+	}
+	.item_description{
+		margin-left: 40px;
+	}
+	.item_image{
+		margin-left: 18px;
+	}
+
+}
