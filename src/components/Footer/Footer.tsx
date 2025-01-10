@@ -1,6 +1,6 @@
 import styles from './Footer.module.scss';
-import logo from './Logo.svg';
-import back_to_top_icon from './back-to-top-icon.svg';
+import logo from '/img/footer/Logo.svg';
+import back_to_top_icon from '/img/footer/back-to-top-icon.svg';
 
 export const Footer = () => {
 	const scrollToTop = () => {
