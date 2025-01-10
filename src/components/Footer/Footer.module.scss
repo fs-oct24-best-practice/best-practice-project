@@ -1,35 +1,27 @@
 @use '../../utils/mixins' as mixins;
+@use '../../utils/vars' as *;
 
 .footer{
-  --footer-height: 96px;
-  --secondary: #89939A;
-  --white: #FFFFFF;
-  --elements: #E2E6E9;
-  --primary: #313237;
-  --icons: #B4BDC3;
-  --transition-duration: 0.8s;
-  background-color: var(--white);
+  background-color: $white;
 }
 
 .footer_wrapper{
-  height: 96px;
+  height: $footer-height;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 24px; 
-  padding-right: 24px; 
-  border-top: 1px solid var(--elements);
+  padding: 0 24px;
+  border-top: 1px solid $elements;
 
   @include mixins.onMobile {
     height: auto;
     flex-direction: column; 
     gap: 32px;
-    padding-top: 32px;
-    padding-bottom: 32px;;
+    padding: 32px 24px;
   }
 }
 
-.navbar {
+.footer_navbar {
   display: flex;
   justify-content: space-between;
   @include mixins.onMobile {
@@ -38,25 +30,14 @@
   }
 }
 
-.container_for_testing{  // Для тестування
-  background-color: rgb(255, 255, 255);
-  height: 900px;
-  margin: 0 auto;
-}
-
-.wrapper_item{
+.footer_item{
   flex-grow: 1;
   @include mixins.onMobile {
     width: 100%;
   }
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.third_item{
+.back_to_top{
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -67,7 +48,7 @@ body {
 }
 
 a {
-  color: var(--secondary);
+  color: $secondary;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 12px;
@@ -79,14 +60,14 @@ a {
   border: none;
   padding: 0;
   cursor: pointer;
-  border: 1px solid var(--icons);
+  border: 1px solid $icons;
   height: 32px;
   width: 32px;
   display: flex;
   justify-content: center; 
   align-items: center;
-  transition: border var(--transition-duration) ease;
+  transition: border $transition-duration ease;
     &:hover {
-      border: 1px solid var(--primary);
+      border: 1px solid $primary;
     }
 }
