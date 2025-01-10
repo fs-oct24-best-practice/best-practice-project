@@ -1,8 +1,9 @@
 //import './App.scss';
 
+import {ProductDetailsPage} from './pages/ProductDetailsPage';
+
 export const App = () => (
-  <div className="App">
-    <h1>The site is under development</h1>
-  </div>
+	<div className='App'>
+		<ProductDetailsPage />
+	</div>
 );
- 
