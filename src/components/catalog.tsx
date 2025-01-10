@@ -60,7 +60,6 @@ export const Catalog: React.FC<CatalogProps> = ({fetchProducts, title}) => {
 		} else if (sortOption === 'price') {
 			return a.priceRegular - b.priceRegular;
 		} else if (sortOption === 'model') {
-			// Реализация для сортировки по модели
 			const extractModelNumber = (name: string): number => {
 				const parts = name.split(' ');
 				const modelPart = parts.find((part) => {
@@ -150,7 +149,7 @@ export const Catalog: React.FC<CatalogProps> = ({fetchProducts, title}) => {
 						className='border rounded-lg p-4 shadow hover:shadow-lg transition-shadow bg-white hover:bg-gray-50'
 					>
 						<img
-							src={product.images[0]}
+							src={product.image[0]}
 							alt={product.name}
 							className='w-full h-40 object-contain rounded mb-4'
 						/>
