@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@best-practice/images/*": ["public/mockup_img/*"],
-      "@best-practice/pages/*": ["src/pages/*"]
+      "@best-practice/pages/*": ["src/pages/*"],
+      "@best-practice/api/*": ["public/api/*"]
     }
   },
   "files": [],

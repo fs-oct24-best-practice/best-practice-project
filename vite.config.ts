@@ -13,6 +13,7 @@ export default defineConfig({
 		alias: {
 			'@best-practice/images': path.resolve(__dirname, 'public/mockup_img'),
 			'@best-practice/pages': path.resolve(__dirname, 'src/pages'),
+			'@best-practice/api': path.resolve(__dirname, 'public/api'),
 		},
 	},
 });
