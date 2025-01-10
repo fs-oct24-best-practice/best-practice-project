@@ -1,3 +1,5 @@
+import {CartItem} from '../../components/CartItem';
+import './CartPage.scss';
 export const CartPage = () => {
-	return <h1>Cart Page</h1>;
+	return <CartItem />;
 };
