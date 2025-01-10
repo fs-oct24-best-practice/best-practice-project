@@ -1,5 +1,5 @@
 import React from 'react';
-import NotFound from '@best-practice/images/pages/page-not-found.png';
+import NotFound from '../../assets/mockup_img/pages/page-not-found.png';
 import '../../styles.scss';
 
 export const NotFoundPage: React.FC = () => {

@@ -1,3 +1,7 @@
-export const AccessoriesPage = () => {
-	return <h1>Accessories Page</h1>;
+import React from 'react';
+import {Catalog} from '../../components/catalog';
+import {getAccessories} from '../../components/api/apiE';
+
+export const AccessoriesPage: React.FC = () => {
+	return <Catalog fetchProducts={getAccessories} title='Accessories' />;
 };

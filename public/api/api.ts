@@ -1,11 +1,17 @@
-import phonesData from './phones.json';
 import {ProductSpec} from '../../src/types/ProductSpec';
+import {Product} from '../../src/types/Product';
 
-function wait(delay: number): Promise<void> {
+const API_URL = '/public/api/';
+
+function setWait(delay: number) {
 	return new Promise((resolve) => setTimeout(resolve, delay));
 }
 
-export const getPhones = async (): Promise<ProductSpec[]> => {
-	await wait(300);
-	return phonesData;
-};
+type item = ProductSpec | Product;
+type category = 'accessories' | 'phones' | 'products' | 'tablets';
+
+export async function getProductList(category: category): Promise<item[]> {
+	return setWait(1000)
+		.then(() => fetch(API_URL + `${category}.json`))
+		.then((response) => response.json());
+}
