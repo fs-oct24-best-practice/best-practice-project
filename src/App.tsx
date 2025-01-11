@@ -1,18 +1,18 @@
 import './index.css';
-import {Outlet} from 'react-router-dom';
-import {Footer} from './components/Footer';
-import {Header} from './components/Header';
+import { Outlet } from 'react-router-dom'
+import { Footer } from './components/Footer'
+import { Header } from './components/Header'
 
 export const App = () => {
-	return (
-		<div className='App'>
-			<Header />
+  return (
+    <div className="App">
+      <Header />
 
-			<main className='main'>
-				<Outlet />
-			</main>
+      <main className="main">
+        <Outlet />
+      </main>
 
-			<Footer />
-		</div>
-	);
-};
+      <Footer />
+    </div>
+  )
+}
