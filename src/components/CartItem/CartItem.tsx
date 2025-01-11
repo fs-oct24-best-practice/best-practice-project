@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './CartItem.scss';
 
 export const CartItem = () => {
@@ -26,9 +26,9 @@ export const CartItem = () => {
 				className='cart__item__image'
 			/>
 			<div className='cart__item__description'>
-				<NavLink to={`/phones/:productId`} className='cart__item__description__title'>
+				<Link to={`/phones/:productId`} className='cart__item__description__title'>
 					Apple iPhone 14 Pro 128GB Silver (MQ023)
-				</NavLink>
+				</Link>
 			</div>
 			<div className='cart__item__actions'>
 				<div className='cart__item__actions__counter'>
