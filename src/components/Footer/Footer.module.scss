@@ -1,0 +1,73 @@
+@use '../../utils/mixins' as mixins;
+@use '../../utils/vars' as *;
+
+.footer{
+  background-color: $white;
+}
+
+.footer_wrapper{
+  height: $footer-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  border-top: 1px solid $elements;
+
+  @include mixins.onMobile {
+    height: auto;
+    flex-direction: column; 
+    gap: 32px;
+    padding: 32px 24px;
+  }
+}
+
+.footer_navbar {
+  display: flex;
+  justify-content: space-between;
+  @include mixins.onMobile {
+    flex-direction: column; 
+    gap: 16px;
+  }
+}
+
+.footer_item{
+  flex-grow: 1;
+  @include mixins.onMobile {
+    width: 100%;
+  }
+}
+
+.back_to_top{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  @include mixins.onMobile {
+    justify-content: center;
+  }
+}
+
+a {
+  color: $secondary;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.back_to_top_button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border: 1px solid $icons;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  transition: border $transition-duration ease;
+    &:hover {
+      border: 1px solid $primary;
+    }
+}
