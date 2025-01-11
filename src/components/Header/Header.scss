@@ -195,10 +195,11 @@
       display: none;
       flex-direction: column;
       position: absolute;
-      top: 80px;
+      top: 50px;
       right: 0;
       width: 100%;
       overflow: hidden;
+      background-color: #fff;
     }
   
     .icon-burger {
@@ -222,6 +223,7 @@
     .nav.open {
       display: flex;
       align-items: center;
+      height: 260px;
     }
   
     .nav__list {

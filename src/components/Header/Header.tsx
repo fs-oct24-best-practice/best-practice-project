@@ -8,34 +8,34 @@ export const Header = () => {
 	// console.log(location);
 
 	const toggleMenu = () => {
-		setIsOpen(isOpen ? false : true);
+		setIsOpen((prevState) => !prevState);
 	};
 
 	return (
 		<header className='header'>
 			<div className='header__nav'>
-				<Link to='/'>
+				<Link to='/' onClick={toggleMenu}>
 					<img className='img' src='/img/icons&logo/Logo.png' alt='Nice Gadgets Logo' />
 				</Link>
 				<nav className={`nav ${isOpen ? 'open' : ''}`}>
 					<ul className='nav__list'>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/'>
+							<Link className='nav__link' to='/' onClick={toggleMenu}>
 								Home
 							</Link>
 						</li>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/phones'>
+							<Link className='nav__link' to='/phones' onClick={toggleMenu}>
 								Phones
 							</Link>
 						</li>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/tablets'>
+							<Link className='nav__link' to='/tablets' onClick={toggleMenu}>
 								Tablets
 							</Link>
 						</li>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/accessories'>
+							<Link className='nav__link' to='/accessories' onClick={toggleMenu}>
 								Accessories
 							</Link>
 						</li>
@@ -64,12 +64,20 @@ export const Header = () => {
 					<div className='bottom_wrap'>
 						<button className='icon-menu'>
 							<Link to='/favorite'>
-								<img src='/img/icons&logo/Favourites.png' alt='Favourites' />
+								<img
+									src='/img/icons&logo/Favourites.png'
+									alt='Favourites'
+									onClick={toggleMenu}
+								/>
 							</Link>
 						</button>
 						<button className='icon-menu'>
 							<Link to='/cart'>
-								<img src='/img/icons&logo/Cart.png' alt='Shopping-cart' />
+								<img
+									src='/img/icons&logo/Cart.png'
+									alt='Shopping-cart'
+									onClick={toggleMenu}
+								/>
 							</Link>
 						</button>
 					</div>
