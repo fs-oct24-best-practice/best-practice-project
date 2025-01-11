@@ -149,7 +149,7 @@ export const Catalog: React.FC<CatalogProps> = ({fetchProducts, title}) => {
 						className='border rounded-lg p-4 shadow hover:shadow-lg transition-shadow bg-white hover:bg-gray-50'
 					>
 						<img
-							src={product.image[0]}
+							src={product.images[0]}
 							alt={product.name}
 							className='w-full h-40 object-contain rounded mb-4'
 						/>
