@@ -7,7 +7,6 @@ export const Header = () => {
 	//const { pathname, key } = useLocation();
 	// console.log(location);
 
-	//if the menu is open, we close it, and if the menu is closed, we open it.
 	const toggleMenu = () => {
 		setIsOpen(isOpen ? false : true);
 	};
