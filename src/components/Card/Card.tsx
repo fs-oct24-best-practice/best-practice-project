@@ -2,11 +2,14 @@ import { useState } from 'react';
 import styles from './Card.module.scss';
 import favourites_icon from '/img/card/favourites-icon.svg';
 import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
-import cN from 'classnames';
+import cn from 'classnames';
+import { ButtonText } from '../../types/ButtonText';
 
 export const Card = () => {
   const [favouriteIcon, setFavouriteIcon] = useState<string>(favourites_icon);
-  const [buttonText, setButtonText] = useState('Add to cart');
+  const [buttonText, setButtonText] = useState<ButtonText>(
+    ButtonText.ADD_TO_CART
+  );
 
   function toggleFavourite() {
     setFavouriteIcon(
@@ -17,7 +20,11 @@ export const Card = () => {
   }
 
   function onAddToCart() {
-    setButtonText(buttonText === 'Add to cart' ? 'Added' : 'Add to cart');
+    setButtonText(
+      buttonText === ButtonText.ADD_TO_CART
+        ? ButtonText.ADDED
+        : ButtonText.ADD_TO_CART
+    );
   }
 
   const product = {
@@ -82,8 +89,8 @@ export const Card = () => {
       <div className={styles.product_card__actions}>
         <button
           onClick={onAddToCart}
-          className={cN(styles.product_card__buy, {
-            [styles.product_card__added]: buttonText === 'Added',
+          className={cn(styles.product_card__buy, {
+            [styles.product_card__added]: buttonText === ButtonText.ADDED,
           })}
         >
           {buttonText}
