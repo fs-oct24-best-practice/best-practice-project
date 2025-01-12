@@ -1,1 +1,1 @@
-export * from './getProductByItemId';
+export * from './getSpecsList';
