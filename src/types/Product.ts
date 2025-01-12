@@ -1,4 +1,5 @@
-export interface ProductDescription {
+export interface Product {
+	priceRegular: number;
 	id: number;
 	category: string;
 	itemId: string;
@@ -10,5 +11,5 @@ export interface ProductDescription {
 	color: string;
 	ram: string;
 	year: number;
-	image: string;
+	images: string;
 }

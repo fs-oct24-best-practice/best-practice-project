@@ -1,0 +1,50 @@
+@use './variables' as *;
+
+html {
+  background-color: $background;
+  color: $primary;
+  font-size: 14px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.body {
+  margin: 0 auto;
+  padding-bottom: 80px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 80px;
+
+  // ❓❓❓
+  // justify-content: center;
+  // justify-items: center;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@media screen and (min-width: $viewport-width-tablet) {
+  .body {
+    padding-bottom: 64px;
+  }
+
+  .main {
+    row-gap: 64px;
+  }
+}
+
+@media screen and (min-width: $viewport-width-desktop) {
+}

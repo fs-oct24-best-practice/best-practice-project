@@ -5,6 +5,7 @@
 	border: 1px solid #e0e0e0;
 	border-radius: 1px;
 	padding: 16px;
+	margin: 16px;
 	gap: 31px;
 	font-family: 'Mont-Regular', sans-serif;
 	font-size: 14px;
@@ -29,7 +30,7 @@
 			text-decoration: none;
 			color: #313237;
 		}
-	    
+
 		@media (max-width: 639px) {
 			margin-left: 40px;
 		}
@@ -56,7 +57,7 @@
 				width: 32px;
 				color: #313237;
 
-				&--minus{
+				&--minus {
 					margin-bottom: 4px;
 				}
 
@@ -65,14 +66,15 @@
 				}
 			}
 		}
+
+		&__price {
+			font-family: 'Mont-Bold', sans-serif;
+			font-size: 22px;
+			font-weight: 800;
+			line-height: 30.8px;
+		}
 	}
 
-	&__price {
-		font-family: 'Mont-Bold', sans-serif;
-		font-size: 22px;
-		font-weight: 800;
-		line-height: 30.8px;
-	}
 	&__close {
 		margin-left: 24px;
 	}

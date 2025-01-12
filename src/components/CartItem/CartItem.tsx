@@ -1,15 +1,15 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './CartItem.scss';
 
 export const CartItem = () => {
 	return (
 		<div className='cart__item'>
 			<a href='#' className='cart__item__icon__close'>
-				<img src='/img/icons/Close.svg' />
+				<img src='/img/icons/Close.svg' alt='Close' />
 			</a>
 			<img
-				src='./img/phones/apple-iphone-14-pro/spaceblack/00.webp'
-				alt='product'
+				src='/img/phones/apple-iphone-14-pro/spaceblack/00.webp'
+				alt='Product Image'
 				className='cart__item__image'
 			/>
 			<div className='cart__item__description'>
@@ -22,12 +22,16 @@ export const CartItem = () => {
 					<button className='cart__item__actions__counter__button'>
 						<img
 							src='/img/icons/Minus.svg'
+							alt='Decrease quantity'
 							className='cart__item__actions__counter__button--minus'
 						/>
 					</button>
 					<span>1</span>
 					<button className='cart__item__actions__counter__button'>
-						<img src='/img/icons/Union.svg' />
+						<img
+							src='/img/icons/Union.svg'
+							alt='Increase quantity'
+						/>
 					</button>
 				</div>
 				<span className='cart__item__price'>$999</span>

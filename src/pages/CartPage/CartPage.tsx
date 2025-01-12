@@ -1,11 +1,11 @@
-import {CartItem} from '../../components/CartItem';
+import { CartItem } from '../../components/CartItem';
 import './CartPage.scss';
+
 export const CartPage = () => {
 	return (
 		<div className='cart__page'>
 			<div className='cart__back'>
-				<img src='/img/icons/Back.svg' />
-
+				<img src='/img/icons/Back.svg' alt='Back' />
 				<a href='' className='cart__back__button'>
 					Back
 				</a>

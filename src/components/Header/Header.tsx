@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Header.scss';
-import {Link} from 'react-router-dom';
 
 export const Header = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -12,64 +12,79 @@ export const Header = () => {
 	return (
 		<header className='header'>
 			<div className='header__nav'>
-				<Link to='/' onClick={toggleMenu}>
-					<img src='/img/icons/Logo.svg' />
-				</Link>
-				<nav className={`nav ${isOpen ? 'open' : ''}`}>
+				<NavLink to='/' className='header__logo' onClick={toggleMenu}>
+					<img src='/img/icons/Logo.svg' alt='Nice Gadgets Logo' />
+				</NavLink>
+				<nav className={`nav ${isOpen ? 'nav--open' : ''}`}>
 					<ul className='nav__list'>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/' onClick={toggleMenu}>
+							<NavLink
+								className='nav__link'
+								to='/'
+								onClick={toggleMenu}
+							>
 								Home
-							</Link>
+							</NavLink>
 						</li>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/phones' onClick={toggleMenu}>
+							<NavLink
+								className='nav__link'
+								to='/phones'
+								onClick={toggleMenu}
+							>
 								Phones
-							</Link>
+							</NavLink>
 						</li>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/tablets' onClick={toggleMenu}>
+							<NavLink
+								className='nav__link'
+								to='/tablets'
+								onClick={toggleMenu}
+							>
 								Tablets
-							</Link>
+							</NavLink>
 						</li>
 						<li className='nav__item'>
-							<Link className='nav__link' to='/accessories' onClick={toggleMenu}>
+							<NavLink
+								className='nav__link'
+								to='/accessories'
+								onClick={toggleMenu}
+							>
 								Accessories
-							</Link>
+							</NavLink>
 						</li>
 					</ul>
 				</nav>
 			</div>
+
 			<div className='header__icons'>
-				<Link to='/favorite' className='icon icon-favourites'>
-					<img src='/img/icons/Favourites.svg' />
-				</Link>
-				<Link to='/cart' className='icon icon-cart'>
-					<img src='/img/icons/Cart.svg' />
-				</Link>
-				{isOpen ? (
-					<a href='#' className='icon icon-burger' onClick={toggleMenu}>
-						<img src='/img/icons/Close.svg' />
-					</a>
-				) : (
-					<a href='#' className='icon icon-burger' onClick={toggleMenu}>
-						<img src='/img/icons/Menu.svg' />
-					</a>
-				)}
+				<NavLink to='/favorite' className='icon icon--favourites'>
+					<img src='/img/icons/Favourites.svg' alt='Favourites' />
+				</NavLink>
+				<NavLink to='/cart' className='icon icon--cart'>
+					<img src='/img/icons/Cart.svg' alt='Cart' />
+				</NavLink>
+				<a
+					href='#'
+					className='icon icon--burger'
+					onClick={toggleMenu}
+				>
+					<img
+						src={`/img/icons/${isOpen ? 'Close.svg' : 'Menu.svg'}`}
+						alt={isOpen ? 'Close menu' : 'Open menu'}
+					/>
+				</a>
 			</div>
+
 			{isOpen && (
-				<div className='bottom__menu'>
-					<div className='bottom__wrap'>
-						<button className='icon-menu'>
-							<Link to='/favorite' onClick={toggleMenu}>
-								<img src='/img/icons/Favourites.svg' />
-							</Link>
-						</button>
-						<button className='icon-menu'>
-							<Link to='/cart' onClick={toggleMenu}>
-								<img src='/img/icons/Cart.svg' />
-							</Link>
-						</button>
+				<div className='header__bottom-menu'>
+					<div className='header__bottom-wrap'>
+						<NavLink to='/favorite' className='icon-menu' onClick={toggleMenu}>
+							<img src='/img/icons/Favourites.svg' alt='Favourites' />
+						</NavLink>
+						<NavLink to='/cart' className='icon-menu' onClick={toggleMenu}>
+							<img src='/img/icons/Cart.svg' alt='Cart' />
+						</NavLink>
 					</div>
 				</div>
 			)}

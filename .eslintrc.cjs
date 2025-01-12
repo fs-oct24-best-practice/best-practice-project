@@ -83,6 +83,7 @@ module.exports = {
       allowChildren: true,
     }],
     'react/jsx-uses-react': 'off',
+    "react-refresh/only-export-components": "off",
     'react/react-in-jsx-scope': 'off',
 
     // Typescript
