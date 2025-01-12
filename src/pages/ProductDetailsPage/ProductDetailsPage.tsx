@@ -18,7 +18,7 @@ export const ProductDetailsPage: FC = () => {
         setProductSpecs(await getCategoryList(category));
       } catch (error) {
         setIsError(true);
-        throw new Error(error);
+        throw new Error(String(error));
       } finally {
         setIsLoading(false);
       }
