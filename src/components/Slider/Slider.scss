@@ -1,0 +1,37 @@
+.slider__title {
+font-family: 'Mont', sans-serif;
+font-style: normal;
+font-weight: 800;
+font-size: 32px;
+line-height: 41px;
+letter-spacing: -0.01em;
+color: #313237;
+
+
+}
+.swiper {
+    padding-top: 100px;
+    position: relative;
+
+    &-slide {
+
+        img {
+            
+            height: 270px;
+            width: 500px;
+            object-fit: contain;
+        }
+    }
+
+    &-button-prev {
+        position: absolute;
+        top: 50px;
+        left: 93%;
+    }
+
+    &-button-next {
+        position: absolute;
+        top: 50px;
+        right: 0px;
+    }
+}

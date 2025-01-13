@@ -1,0 +1,23 @@
+@use '../../styles/reset.scss';
+.home-page__container {
+    max-width: 1136px;
+    margin: 0 auto;
+    padding: 56px 25px 80px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 80px;
+    justify-items: center;
+}
+
+.home-page__title {
+    font-family: 'Mont', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 56px;
+    /* identical to box height, or 117% */
+    letter-spacing: -0.01em;
+
+    /* Gray / Primary */
+    color: #313237;
+}
