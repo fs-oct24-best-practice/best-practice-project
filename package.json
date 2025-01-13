@@ -13,6 +13,7 @@
   },
   "homepage": "https://fs-oct24-best-practice.github.io/best-practice-project/",
   "dependencies": {
+    "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "express": "^4.21.2",
     "react": "^18.3.1",
