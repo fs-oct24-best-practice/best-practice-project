@@ -1,6 +1,6 @@
 import { FC, useLayoutEffect, useState } from 'react';
 import { ProductSpec, Categories } from '../../types';
-import { getCategoryList } from '../../api';
+import { getSpecsList } from '../../api';
 import { ProductDescription } from '../../components/ProductDescription';
 
 const currentProductID = 'apple-iphone-11-128gb-black';
@@ -15,7 +15,7 @@ export const ProductDetailsPage: FC = () => {
       try {
         setIsError(false);
         setIsLoading(true);
-        setProductSpecs(await getCategoryList(category));
+        setProductSpecs(await getSpecsList(category));
       } catch (error) {
         setIsError(true);
         throw new Error(String(error));
