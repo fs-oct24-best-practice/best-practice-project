@@ -1,93 +1,53 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import './Header.scss';
+import styles from './Header.module.scss';
+import { Navbar } from './Navbar/Navbar';
+import { MobileMenu } from './MobileMenu/MobileMenu';
 
 export const Header = () => {
-	const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 640);
 
-	const toggleMenu = () => {
-		setIsOpen(!isOpen);
-	};
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth > 640);
+    };
 
-	return (
-		<header className='header'>
-			<div className='header__nav'>
-				<NavLink to='/' className='header__logo' onClick={toggleMenu}>
-					<img src='/img/icons/Logo.svg' alt='Nice Gadgets Logo' />
-				</NavLink>
-				<nav className={`nav ${isOpen ? 'nav--open' : ''}`}>
-					<ul className='nav__list'>
-						<li className='nav__item'>
-							<NavLink
-								className='nav__link'
-								to='/'
-								onClick={toggleMenu}
-							>
-								Home
-							</NavLink>
-						</li>
-						<li className='nav__item'>
-							<NavLink
-								className='nav__link'
-								to='/phones'
-								onClick={toggleMenu}
-							>
-								Phones
-							</NavLink>
-						</li>
-						<li className='nav__item'>
-							<NavLink
-								className='nav__link'
-								to='/tablets'
-								onClick={toggleMenu}
-							>
-								Tablets
-							</NavLink>
-						</li>
-						<li className='nav__item'>
-							<NavLink
-								className='nav__link'
-								to='/accessories'
-								onClick={toggleMenu}
-							>
-								Accessories
-							</NavLink>
-						</li>
-					</ul>
-				</nav>
-			</div>
+    window.addEventListener('resize', handleResize);
 
-			<div className='header__icons'>
-				<NavLink to='/favorite' className='icon icon--favourites'>
-					<img src='/img/icons/Favourites.svg' alt='Favourites' />
-				</NavLink>
-				<NavLink to='/cart' className='icon icon--cart'>
-					<img src='/img/icons/Cart.svg' alt='Cart' />
-				</NavLink>
-				<a
-					href='#'
-					className='icon icon--burger'
-					onClick={toggleMenu}
-				>
-					<img
-						src={`/img/icons/${isOpen ? 'Close.svg' : 'Menu.svg'}`}
-						alt={isOpen ? 'Close menu' : 'Open menu'}
-					/>
-				</a>
-			</div>
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-			{isOpen && (
-				<div className='header__bottom-menu'>
-					<div className='header__bottom-wrap'>
-						<NavLink to='/favorite' className='icon-menu' onClick={toggleMenu}>
-							<img src='/img/icons/Favourites.svg' alt='Favourites' />
-						</NavLink>
-						<NavLink to='/cart' className='icon-menu' onClick={toggleMenu}>
-							<img src='/img/icons/Cart.svg' alt='Cart' />
-						</NavLink>
-					</div>
-				</div>
-			)}
-		</header>
-	);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <header className={styles.header}>
+      <NavLink to='/' className={styles.header__logo_wrap}>
+        <img
+          src='/icons/logo.svg'
+          alt='Nice Gadgets Logo'
+          className={styles.header__logo}
+        />
+      </NavLink>
+
+      {isDesktop ? (
+        <Navbar />
+      ) : (
+        <button className={styles.burger} onClick={toggleMenu}>
+          <img
+            src={`/img/icons/${isOpen ? 'Close.svg' : 'Menu.svg'}`}
+            alt={isOpen ? 'Close menu' : 'Open menu'}
+          />
+        </button>
+      )}
+
+      {isOpen && !isDesktop && (
+        <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
+      )}
+    </header>
+  );
 };
