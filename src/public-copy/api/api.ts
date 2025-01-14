@@ -1,7 +1,7 @@
 import { ProductSpec } from '../../types/ProductSpec';
 import { Product } from '../../types/Product';
 
-const API_URL = '/public/api/';
+const API_URL = '/api/';
 
 function setWait(delay: number) {
   return new Promise((resolve) => setTimeout(resolve, delay));

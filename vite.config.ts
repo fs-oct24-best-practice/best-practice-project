@@ -11,9 +11,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@best-practice/images': path.resolve(__dirname, 'public/mockup_img'),
-      '@best-practice/pages': path.resolve(__dirname, 'src/pages'),
-      '@best-practice/styles': path.resolve(__dirname, 'src/styles'),
+      '@best-practice/images': path.resolve('public/mockup_img'),
+      '@best-practice/pages': path.resolve('src/pages'),
+      '@best-practice/styles': path.resolve('src/styles'),
     },
   },
 });
