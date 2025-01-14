@@ -1,4 +1,3 @@
-@use '../../styles/reset.scss';
 .home-page__container {
     max-width: 1136px;
     margin: 0 auto;
@@ -15,9 +14,6 @@
     font-weight: 800;
     font-size: 48px;
     line-height: 56px;
-    /* identical to box height, or 117% */
     letter-spacing: -0.01em;
-
-    /* Gray / Primary */
     color: #313237;
 }

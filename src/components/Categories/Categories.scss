@@ -1,0 +1,109 @@
+@mixin on-tablet {
+    @media (min-width: 640px) {
+        @content;
+    }
+}
+
+@mixin on-desktop {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin page-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(12, 1fr);
+    }
+
+    @media (min-width: 1200px) {
+        grid-template-columns: repeat(24, 1fr);
+    }
+}
+
+.categories {
+    margin-top: 56px;
+
+    @media (min-width: 640px) {
+        margin-top: 64px;
+    }
+
+    @media (min-width: 1200px) {
+        margin-top: 80px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    &__title {
+        font-family: Mont, sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 30.8px;
+        color: #313237;
+        margin-bottom: 24px;
+
+        @media (min-width: 640px) {
+            font-size: 32px;
+            line-height: 41px;
+            letter-spacing: -1%;
+        }
+    }
+
+    &__items {
+        @media (min-width: 640px) {
+            @include page-grid;
+        }
+    }
+
+    &__item {
+        grid-column: span 4;
+
+        @media (min-width: 1200px) {
+            grid-column: span 8;
+        }
+
+        &_link {
+            height: 288px;
+            width: 100%;
+            cursor: pointer;
+
+            &-img {
+            height: 288px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+            }
+
+            &-img:hover {
+            transform: scale(1.05);
+            }
+        }
+    }
+
+    &__info {
+        margin-top: 24px;
+
+        &--title {
+            font-family: Mont, sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 25.56px;
+            color: #313237;
+        }
+
+        &--text {
+            font-family: Mont, sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 21px;
+            color: #89939a;
+        }
+    }
+}
