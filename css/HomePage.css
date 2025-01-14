@@ -1,53 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
-}
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-
-ul,
-ol {
-  list-style: none;
-}
-
-a {
-  color: currentColor;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
-  cursor: pointer;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 .home-page__container {
   max-width: 1136px;
   margin: 0 auto;
@@ -69,8 +19,6 @@ table {
   font-weight: 800;
   font-size: 48px;
   line-height: 56px;
-  /* identical to box height, or 117% */
   letter-spacing: -0.01em;
-  /* Gray / Primary */
   color: #313237;
 }
