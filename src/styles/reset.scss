@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+}
+
+body,
+header,
+footer,
+main,
+h1,
+h2,
+h3,
+h4,
+div,
+p,
+ol,
+ul,
+li,
+a,
+img,
+nav {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

@@ -1,0 +1,116 @@
+@use '../../App.scss';
+
+.carousel {
+    margin-top: 24px;
+
+    @media (min-width: 640px) {
+        margin-top: 32px;
+        }
+
+        @media (min-width: 1200px) {
+        margin-top: 56px;
+        }
+
+    &__slider {
+        height: 352px;
+        max-width: 1200px;
+    
+        @media (min-width: 640px) {
+            display: flex;
+            gap: 19px;
+            height: 221px;
+        }
+
+        @media (min-width: 1200px) {
+            height: 432px;
+            gap: 16px;
+            margin: 0 auto;
+        }
+
+        &-button {
+        display: none;
+
+            @media (min-width: 640px) {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 340px;
+                width: 32px;
+                background-color: #fff;
+                border: 1px solid #b4bdc3;
+                cursor: pointer;
+    
+                &:hover {
+                    border-color: #313237;
+                }
+            }
+    
+            @media (min-width: 1200px) {
+            height: 400px;
+            }
+        }
+
+        &-container {
+            height: 320px;
+            width: 100%;
+            overflow: hidden;
+    
+            @media (min-width: 640px) {
+            height: 340px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            }
+    
+            @media (min-width: 1200px) {
+            height: 400px;
+            }
+        }
+
+        &-list {
+            height: 100%;
+            width: 300%;
+            display: flex;
+            transition: transform 1s;
+        }
+
+        &-item {
+            height: 100%;
+            width: 100%;
+        }
+
+        &-image {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &__dots {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+        margin-top: 8px;
+
+        &-container {
+            display: flex;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-item {
+            width: 14px;
+            height: 4px;
+            background-color: #e2e6e9;
+            border: none;
+            cursor: pointer;
+        }
+    }
+}
+
+.banner-active {
+background-color: #313237;
+}

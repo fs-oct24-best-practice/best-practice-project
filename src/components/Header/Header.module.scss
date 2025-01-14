@@ -1,0 +1,66 @@
+@use '@best-practice/styles/variables' as *;
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 24px;
+  align-items: center;
+  position: sticky;
+  background-color: $background;
+  border-bottom: 3px solid $elements;
+  height: 64px;
+
+  &__logo_wrap {
+    height: 64px;
+    padding: 18px 24px;
+  }
+
+  &__logo {
+    width: 80px;
+    height: 28px;
+    transition: $transition;
+    transition-property: transform;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 48px;
+    margin-right: 24px;
+  }
+}
+
+.burger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  aspect-ratio: 1;
+  border-left: 3px solid $elements;
+}
+
+@media screen and (max-width: $viewport-width-tablet) {
+  .header {
+    justify-content: space-between;
+
+    background-color: $background;
+    border-bottom: 3px solid $elements;
+    height: 48px;
+
+    &__logo_wrap {
+      height: 48px;
+      padding: 13px 16px;
+    }
+
+    &__logo {
+      width: 64px;
+      height: 22px;
+    }
+  }
+}

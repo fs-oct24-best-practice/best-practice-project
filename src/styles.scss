@@ -1,0 +1,28 @@
+.page-not-found-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.page-not-found-title {
+  color: #89939A;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 30.8px;
+  margin: 32px 0 10px;
+}
+
+.not-found-page-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
