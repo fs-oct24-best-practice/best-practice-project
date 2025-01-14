@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import clsx from 'clsx';
+import classNames from 'classnames';
 import { Loader } from '../Loader';
 import { Product } from '../../types/Product';
 import { Card } from '../Card/Card';
@@ -62,9 +62,13 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
   const sortedProducts = [...products].sort((a, b) => {
     if (sortOption === 'alphabet') {
       return a.name.localeCompare(b.name);
-    } else if (sortOption === 'price') {
+    }
+
+    if (sortOption === 'price') {
       return a.priceRegular - b.priceRegular;
-    } else if (sortOption === 'model') {
+    }
+
+    if (sortOption === 'model') {
       const extractModelNumber = (name: string): number => {
         const parts = name.split(' ');
         const modelPart = parts.find((part) => {
@@ -80,10 +84,9 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
         return number;
       };
 
-      const aModelNumber = extractModelNumber(a.name);
-      const bModelNumber = extractModelNumber(b.name);
-      return bModelNumber - aModelNumber;
+      return extractModelNumber(b.name) - extractModelNumber(a.name);
     }
+
     return 0;
   });
 
@@ -160,7 +163,7 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
             key={index}
             disabled={page === index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={clsx(styles.catalog__button, {
+            className={classNames(styles.catalog__button, {
               [styles['catalog__button--active']]: page === index + 1,
             })}
           >
