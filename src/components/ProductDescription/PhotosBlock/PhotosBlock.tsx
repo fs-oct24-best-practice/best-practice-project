@@ -6,10 +6,10 @@ type Props = { currentProductSpec: ProductSpec };
 
 export const PhotosBlock: FC<Props> = (props) => {
   const { currentProductSpec } = props;
-  console.log('currentProductSpec PhotosBlock: ', currentProductSpec);
+  // console.log('currentProductSpec PhotosBlock: ', currentProductSpec); // temporary for developing
 
-  const images = currentProductSpec.images;
-  console.log('images: ', images);
+  // const images = currentProductSpec.images; // temporary for developing
+  // console.log('images: ', images); // temporary for developing
   const [selectedImage, setSelectedImage] = useState(
     currentProductSpec.images[0]
   );

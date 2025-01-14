@@ -30,7 +30,7 @@ export const ProductDetailsPage: FC = () => {
   const currentProductSpec = productSpecs.find(
     (spec) => currentProductID === spec.id
   );
-  console.log('currentProduct ProductDetailsPage: ', currentProductSpec);
+  // console.log('currentProduct ProductDetailsPage: ', currentProductSpec); // temporary for developing
 
   const componentForRender = () => {
     switch (true) {

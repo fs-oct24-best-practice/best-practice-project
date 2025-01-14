@@ -7,7 +7,6 @@ import { MobileMenu } from './MobileMenu/MobileMenu';
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 640);
-  console.log('isDesktop: ', isDesktop);
 
   useEffect(() => {
     const handleResize = () => {
