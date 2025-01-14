@@ -27,9 +27,11 @@ export const HomePage = () => {
     window.scrollTo({ top: 0 });
   }, []);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  const newProducts = [...products].filter((product) => product.year >= 2022);
+
+  //const discountProducts = [...products];
+
+  return (
     <div className='home-page'>
       <div className='home-page__container'>
         <div className='home-page__title'>
@@ -38,15 +40,21 @@ export const HomePage = () => {
 
         <Carousel />
 
-        <section className='new-models'>
-          <Slider products={products} title='Brand new models' />
-        </section>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <section className='new-models'>
+              <Slider products={newProducts} title='Brand new models' />
+            </section>
 
-        <Categories products={products} title={'Shop by category'} />
+            <Categories products={products} title={'Shop by category'} />
 
-        <section className='hot-prices'>
-          <Slider products={products} title='Hot Prices' />
-        </section>
+            <section className='hot-prices'>
+              <Slider products={products} title='Hot Prices' />
+            </section>
+          </>
+        )}
       </div>
     </div>
   );

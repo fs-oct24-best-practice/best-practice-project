@@ -5,10 +5,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
 import './Slider.scss';
+import React from 'react';
+import { Product } from '../../types';
+import { Card } from '../Card';
 
-export const Slider = ({ products, title }) => {
-  // Create array with 500 slides
+type Props = {
+  products: Product[];
+  discount?: boolean;
+  title: string;
+  slash?: boolean | undefined;
+};
 
+export const Slider: React.FC<Props> = ({ products, title }) => {
   return (
     <>
       <h2 className='slider__title'>{title}</h2>
@@ -22,7 +30,7 @@ export const Slider = ({ products, title }) => {
       >
         {products.map((product, index) => (
           <SwiperSlide key={product.id} virtualIndex={index}>
-            <img src={product.image} alt={product.itemId} />
+            <Card product={product} />
           </SwiperSlide>
         ))}
       </Swiper>
