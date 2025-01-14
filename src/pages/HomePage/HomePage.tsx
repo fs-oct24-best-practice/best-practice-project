@@ -6,6 +6,7 @@ import { Carousel } from '../../components/Carousel';
 
 import './HomePage.scss';
 import { Slider } from '../../components/Slider';
+import { Categories } from '../../components/Categories';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,9 +42,7 @@ export const HomePage = () => {
           <Slider products={products} title='Brand new models' />
         </section>
 
-        <section>
-          <h3>Shop by Categories</h3>
-        </section>
+        <Categories products={products} title={'Shop by category'} />
 
         <section className='hot-prices'>
           <Slider products={products} title='Hot Prices' />
