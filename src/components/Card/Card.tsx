@@ -1,65 +1,67 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import cn from 'classnames';
 import styles from './Card.module.scss';
 import favourites_icon from '/img/card/favourites-icon.svg';
 import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
-import cn from 'classnames';
 import { ButtonText } from '../../types/ButtonText';
+import { Product } from '../../types/Product';
 
-export const Card = () => {
-  const [favouriteIcon, setFavouriteIcon] = useState<string>(favourites_icon);
-  const [buttonText, setButtonText] = useState<ButtonText>(
-    ButtonText.ADD_TO_CART
-  );
+type CardItemProps = {
+  product: Product;
+};
 
-  function toggleFavourite() {
+export const Card: React.FC<CardItemProps> = ({ product }) => {
+  const [favouriteIcon, setFavouriteIcon] = useState(favourites_icon);
+  const [buttonText, setButtonText] = useState(ButtonText.ADD_TO_CART);
+
+  const toggleFavourite = () => {
     setFavouriteIcon(
       favouriteIcon === favourites_icon
         ? favourites_filled_icon
         : favourites_icon
     );
-  }
+  };
 
-  function onAddToCart() {
+  const onAddToCart = () => {
     setButtonText(
       buttonText === ButtonText.ADD_TO_CART
         ? ButtonText.ADDED
         : ButtonText.ADD_TO_CART
     );
-  }
-
-  const product = {
-    id: 1,
-    category: 'phones',
-    itemId: 'apple-iphone-7-32gb-black',
-    name: 'Apple iPhone 7 32GB Black',
-    fullPrice: 400,
-    price: 375,
-    screen: "4.7' IPS",
-    capacity: '32GB',
-    color: 'black',
-    ram: '2GB',
-    year: 2016,
-    image: 'img/phones/apple-iphone-7/black/00.webp',
   };
 
   return (
     <div className={styles.product_card}>
       <img
         className={styles.product_card__image}
-        src='/img/card/test.webp'
+        src={product.images[0]}
         alt={`${product.name} Image`}
       />
 
-      <a className={styles.product_card__name} href='#'>
+      <Link
+        to={`/${product.category}/${product.id}`}
+        className={styles.product_card__name}
+      >
         {product.name}
-      </a>
+      </Link>
 
-      <a className={styles.product_card__price} href='#'>
-        {`$${product.price} `}
-        <span
-          className={styles.product_card__fullPrice}
-        >{`$${product.fullPrice}`}</span>
-      </a>
+      <div className={styles.product_card__price}>
+        {product.priceDiscount ? (
+          <>
+            <span className={styles.product_card__price_discount}>
+              ${product.priceDiscount}
+            </span>
+            <span className={styles.product_card__fullPrice}>
+              ${product.priceRegular}
+            </span>
+          </>
+        ) : (
+          <span className={styles.product_card__price}>
+            ${product.priceRegular}
+          </span>
+        )}
+      </div>
 
       <div className={styles.product_card__separator}></div>
 
@@ -100,7 +102,7 @@ export const Card = () => {
           onClick={toggleFavourite}
           className={styles.product_card__favourite_button}
         >
-          <img src={favouriteIcon} alt='back to top icon' />
+          <img src={favouriteIcon} alt='favourite icon' />
         </button>
       </div>
     </div>
