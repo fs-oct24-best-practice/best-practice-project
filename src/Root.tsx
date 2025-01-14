@@ -5,9 +5,7 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ProductDetailsPage } from './pages/ProductDetailsPage';
 import { CartPage } from './pages/CartPage';
 import { FavoritePage } from './pages/FavoritePage';
-import { PhonesPage } from './pages/PhonesPage';
-import { TabletsPage } from './pages/TabletsPage';
-import { AccessoriesPage } from './pages/AccessoriesPage';
+import { CatalogPage } from './pages/CatalogPage/CatalogPage';
 
 export const Root = () => {
   return (
@@ -17,27 +15,15 @@ export const Root = () => {
           <Route path='home' element={<Navigate to='/' replace />} />
           <Route index element={<HomePage />} />
 
-          <Route path='phones'>
-            <Route index element={<PhonesPage />} />
-            <Route path=':productId' element={<ProductDetailsPage />} />
-          </Route>
-
-          <Route path='tablets'>
-            <Route index element={<TabletsPage />} />
-            <Route path=':productId' element={<ProductDetailsPage />} />
-          </Route>
-
-          <Route path='accessories'>
-            <Route index element={<AccessoriesPage />} />
-            <Route path=':productId' element={<ProductDetailsPage />} />
-          </Route>
-
+          <Route path='phones' element={<CatalogPage category='phones' />} />
+          <Route path='tablets' element={<CatalogPage category='tablets' />} />
+          <Route
+            path='accessories'
+            element={<CatalogPage category='accessories' />}
+          />
           <Route path='favorite' element={<FavoritePage />} />
           <Route path='cart' element={<CartPage />} />
-
           <Route path='*' element={<NotFoundPage />} />
-
-          {/* temporary path to navigate to the page*/}
           <Route path='Product' element={<ProductDetailsPage />} />
         </Route>
       </Routes>

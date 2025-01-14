@@ -1,9 +1,9 @@
 import { ProductSpec, Categories } from '../types';
 import { setDelay } from '../utils';
 
-const API_URL = '/public/api/';
+const API_URL = '/api/';
 
-export async function getCategoryList(
+export async function getSpecsList(
   category: Categories
 ): Promise<ProductSpec[]> {
   try {
