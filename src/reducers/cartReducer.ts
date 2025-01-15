@@ -49,4 +49,7 @@ const persistedCartReducer = persistReducer(persistConfig, cartSlice.reducer);
 
 export const { increaseQuantity, decreaseQuantity, deleteCart, clearCart } =
   cartSlice.actions;
+export const selectCartItems = (state: { cart: CartState }) => state.cart.items;
+export const selectCartQuantity = (state: { cart: CartState }) =>
+  state.cart.items.reduce((total, item) => total + item.quantity, 0);
 export default persistedCartReducer;

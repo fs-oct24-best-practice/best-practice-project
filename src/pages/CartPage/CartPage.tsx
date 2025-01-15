@@ -6,9 +6,12 @@ import { Product } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { clearCart } from '../../reducers/cartReducer';
+import { Cart } from '../../types/Cart';
 
 export const CartPage = () => {
+  const [isEmpty, setIsEmpty] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
+  const [modalMessage, setModalMessage] = useState<Cart>(Cart.DEFAULT);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +28,11 @@ export const CartPage = () => {
   );
 
   const handleCheckout = () => {
-    if (cartItems.length > 0) {
+    if (cartItems.length === 0) {
+      setModalMessage(Cart.NO_PRODUCTS);
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
       setIsCheckout(true);
       dispatch(clearCart());
 
@@ -34,6 +41,19 @@ export const CartPage = () => {
         navigate('/');
       }, 3000);
     }
+  };
+
+  const handleClearCart = () => {
+    if (cartItems.length === 0) {
+      setModalMessage(Cart.EMPTY_CART);
+      setIsEmpty(true);
+    } else {
+      dispatch(clearCart());
+    }
+  };
+
+  const closeModal = () => {
+    setIsEmpty(false);
   };
 
   return (
@@ -54,8 +74,8 @@ export const CartPage = () => {
               <p>Cart is empty</p>
               <img
                 src='/img/empty.svg'
-                width={450}
-                height={450}
+                width={350}
+                height={350}
                 alt='Empty Cart'
               />
             </div>
@@ -69,6 +89,9 @@ export const CartPage = () => {
           <button className='checkout__button' onClick={handleCheckout}>
             Checkout
           </button>
+          <button className='checkout__button' onClick={handleClearCart}>
+            Clear Cart
+          </button>
         </div>
       </div>
       {isCheckout && (
@@ -76,17 +99,26 @@ export const CartPage = () => {
           <div className='checkout__modal__content'>
             <h2>The order has been placed successfully!</h2>
             <p>Thank you for your purchase!</p>
-            <img
-              src='/img/order.png'
-              width={300}
-              height={300}
-              alt='Empty Cart'
-            />
+            <img src='/img/order.png' width={300} height={300} alt='Order' />
             <button
               className='checkout__button back__button'
               onClick={() => navigate('/')}
             >
               Back to Home
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isEmpty && (
+        <div className='checkout__modal'>
+          <div className='checkout__modal__content'>
+            <h2>{modalMessage}</h2>
+            <button
+              className='checkout__button back__button'
+              onClick={closeModal}
+            >
+              Close
             </button>
           </div>
         </div>
