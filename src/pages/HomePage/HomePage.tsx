@@ -12,6 +12,8 @@ export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
 
+  const isDiscount = true;
+
   useEffect(() => {
     getProducts()
       .then((data) => setProducts(data))
@@ -27,9 +29,15 @@ export const HomePage = () => {
     window.scrollTo({ top: 0 });
   }, []);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
+  const newProducts = [...products].filter((product) => product.year >= 2022);
+
+  const productsWithDiscount = [...products]
+    .sort(
+      (a, b) => b.fullPrice - (b.price || 0) - (a.fullPrice - (a.price || 0))
+    )
+    .filter((prod) => prod.fullPrice - (prod.price || 0) > 80);
+
+  return (
     <div className='home-page'>
       <div className='home-page__container'>
         <div className='home-page__title'>
@@ -38,15 +46,25 @@ export const HomePage = () => {
 
         <Carousel />
 
-        <section className='new-models'>
-          <Slider products={products} title='Brand new models' />
-        </section>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <section className='new-models'>
+              <Slider products={newProducts} title='Brand new models' />
+            </section>
 
-        <Categories products={products} title={'Shop by category'} />
+            <Categories products={products} title={'Shop by category'} />
 
-        <section className='hot-prices'>
-          <Slider products={products} title='Hot Prices' />
-        </section>
+            <section className='hot-prices'>
+              <Slider
+                products={productsWithDiscount}
+                title='Hot Prices'
+                discount={isDiscount}
+              />
+            </section>
+          </>
+        )}
       </div>
     </div>
   );
