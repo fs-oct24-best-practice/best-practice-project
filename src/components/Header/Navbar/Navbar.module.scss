@@ -74,7 +74,8 @@
     }
   }
 
-  &__notification_badge{
+
+  &__notification_badge {
     position: absolute;
     top: 25%;
     left: 50%;
@@ -90,5 +91,7 @@
     font-size: 9px;
   }
   
+  &__hidden {
+    display: none;
+  }
 }
-

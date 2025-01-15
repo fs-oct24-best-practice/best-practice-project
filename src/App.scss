@@ -1,3 +1,10 @@
 @use './styles/reset.scss';
 @use './utils/vars.scss';
 @use './utils/mixins.scss';
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}

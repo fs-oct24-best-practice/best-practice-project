@@ -1,0 +1,17 @@
+@use '@best-practice/styles/variables' as *;
+
+.preview {
+  display: flex;
+  gap: 8px;
+
+  &__select {
+    width: 51.2px;
+    height: 49px;
+    border: 1px solid $elements;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+}

@@ -1,35 +1,43 @@
-name: Github Page Deploy Workflow
+name: Deploy to GitHub Pages
+
+permissions:
+  contents: write # Required to push to the repository
+  pages: write # Required for GitHub Pages deployment
 
 on:
   push:
-    branches: [main]
+    branches:
+      - develop
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v3
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
+          node-version: '20' # Adjust Node.js version as needed
 
-      - name: Cache Node.js modules
-        uses: actions/cache@v3
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Build the app
+      - name: Build the app
+        run: |
+          npm run build
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      - run: npm ci
-
-      - run: npm run build
-      - name: Deploy
-        uses: crazy-max/ghaction-github-pages@v1
-        with:
-          target_branch: gh-pages
-          build_dir: dist
+          branch: gh-pages # Branch where the app will be deployed
+          folder: dist # Folder containing the built React app
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Automatically generated token for authentication

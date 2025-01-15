@@ -12,6 +12,10 @@ export interface Product {
   color: string;
   ram: string;
   year: number;
+//diana
   images: string;
   quantity: number;
+//vitalii
+  image: string;
+//
 }
