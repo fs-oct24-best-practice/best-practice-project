@@ -16,15 +16,23 @@ export const Root = () => {
           <Route index element={<HomePage />} />
 
           <Route path='phones' element={<CatalogPage category='phones' />} />
+          <Route path='phones/:itemId' element={<ProductDetailsPage />}></Route>
           <Route path='tablets' element={<CatalogPage category='tablets' />} />
+          <Route
+            path='tablets/:itemId'
+            element={<ProductDetailsPage />}
+          ></Route>
           <Route
             path='accessories'
             element={<CatalogPage category='accessories' />}
           />
+          <Route
+            path='accessories/:itemId'
+            element={<ProductDetailsPage />}
+          ></Route>
           <Route path='favorite' element={<FavoritePage />} />
           <Route path='cart' element={<CartPage />} />
           <Route path='*' element={<NotFoundPage />} />
-          <Route path='Product' element={<ProductDetailsPage />} />
         </Route>
       </Routes>
     </HashRouter>
