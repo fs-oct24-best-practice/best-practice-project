@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Card.module.scss';
-import favourites_icon from '/img/card/favourites-icon.svg';
-import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
+import favourites_icon from '/img/icons/Favourites.svg';
+import favourites_filled_icon from '/img/icons/FavouritesFilled.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
 
@@ -69,7 +69,7 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
             <span className={styles.product_card__price_discount}>
               ${product.priceDiscount}
             </span>
-            <span className={styles.product_card__fullPrice}>
+            <span className={styles.product_card__full_price}>
               ${product.priceRegular}
             </span>
           </>
