@@ -7,7 +7,7 @@ export async function getSpecsList(
   category: Categories
 ): Promise<ProductSpec[]> {
   try {
-    await setDelay(1000);
+    await setDelay(300);
     const response = await fetch(`${API_URL}${category}.json`);
     if (!response.ok) {
       throw new Error(`${response.statusText}`);

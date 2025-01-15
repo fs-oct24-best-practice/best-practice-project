@@ -1,6 +1,38 @@
-.div {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  background-color: aqua;
+@use '@best-practice/styles/variables' as *;
+
+.colors {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  &__selector {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 2px solid $white;
+    outline: 1px solid $elements;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+}
+
+.capacity {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+
+  &__selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 63px;
+    border: 1px solid $elements;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
 }

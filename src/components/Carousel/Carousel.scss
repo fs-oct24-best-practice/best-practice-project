@@ -13,7 +13,8 @@
 
     &__slider {
         height: 352px;
-        max-width: 1200px;
+        max-width: 1440px;
+        justify-content: center;
     
         @media (min-width: 640px) {
             display: flex;
