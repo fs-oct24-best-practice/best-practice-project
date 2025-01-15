@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
+import { SearchField } from '../../SearchField/SearchField';
+
 //diana
 import { selectCartQuantity } from '../../../reducers/cartReducer';
 
@@ -37,6 +39,10 @@ export const Navbar = () => {
           );
         })}
       </ul>
+
+      <div className={styles.navbar__search}>
+        <SearchField />
+      </div>
 
       <ul className={styles.navbar__chosen}>
         <li>

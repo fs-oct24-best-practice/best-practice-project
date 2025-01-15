@@ -59,14 +59,38 @@ export const Root = () => {
                 <Route path=':itemId' element={<ProductDetailsPage />} />
               </Route>
 
+<!-- //<<<<<<< search-field
+          <Route path='phones' element={<CatalogPage category='phones' />} />
+          <Route path='phones/:itemId' element={<ProductDetailsPage />}></Route>
+          <Route path='tablets' element={<CatalogPage category='tablets' />} />
+          <Route
+            path='tablets/:itemId'
+            element={<ProductDetailsPage />}
+          ></Route>
+          <Route
+            path='accessories'
+            element={<CatalogPage category='accessories' />}
+          />
+          <Route
+            path='accessories/:itemId'
+            element={<ProductDetailsPage />}
+          ></Route>
+          <Route path='favorite' element={<FavoritePage />} />
+          <Route path='cart' element={<CartPage />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </HashRouter> -->
+<!-- //======= -->
               <Route path='favorite' element={<FavoritePage />} />
               <Route path='cart' element={<CartPage />} />
               <Route path='*' element={<NotFoundPage />} />
->>>>>>> develop
+<!-- //>>>>>>> develop -->
             </Route>
           </Routes>
         </HashRouter>
       </PersistGate>
     </Provider>
+// >>>>>>> develop
   );
 };

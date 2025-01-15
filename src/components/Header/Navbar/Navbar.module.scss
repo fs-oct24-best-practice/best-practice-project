@@ -74,6 +74,13 @@
     }
   }
 
+  &__search {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 300px;
+    margin-right: 20px;
+    flex-grow: 1;
 
   &__notification_badge {
     position: absolute;
