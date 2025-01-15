@@ -6,9 +6,15 @@ import { ProductDetailsPage } from './pages/ProductDetailsPage';
 import { CartPage } from './pages/CartPage';
 import { FavoritePage } from './pages/FavoritePage';
 import { CatalogPage } from './pages/CatalogPage/CatalogPage';
+//diana
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from './store';
+//vitalii
 import store, { persistor } from './app/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+
 
 export const Root = () => {
   return (
@@ -20,6 +26,24 @@ export const Root = () => {
               <Route path='home' element={<Navigate to='/' replace />} />
               <Route index element={<HomePage />} />
 
+<!-- <<<<<<< cart-page-redux-persist
+              <Route
+                path='phones'
+                element={<CatalogPage category='phones' />}
+              />
+              <Route
+                path='tablets'
+                element={<CatalogPage category='tablets' />}
+              />
+              <Route
+                path='accessories'
+                element={<CatalogPage category='accessories' />}
+              />
+              <Route path='favorite' element={<FavoritePage />} />
+              <Route path='cart' element={<CartPage />} />
+              <Route path='*' element={<NotFoundPage />} />
+              <Route path=':category/:id' element={<ProductDetailsPage />} /> -->
+<!-- ======= -->
               <Route path='phones' element={<CatalogPage category='phones' />}>
                 <Route path=':itemId' element={<ProductDetailsPage />} />
               </Route>
@@ -38,6 +62,7 @@ export const Root = () => {
               <Route path='favorite' element={<FavoritePage />} />
               <Route path='cart' element={<CartPage />} />
               <Route path='*' element={<NotFoundPage />} />
+>>>>>>> develop
             </Route>
           </Routes>
         </HashRouter>
