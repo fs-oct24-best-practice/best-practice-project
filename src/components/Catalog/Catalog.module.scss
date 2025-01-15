@@ -2,7 +2,6 @@
   &__container {
     padding: 1rem;
     width: auto;
-    max-width: 1600px;
     margin: 0 auto;
     height: auto;
 
@@ -51,6 +50,7 @@
     @media (min-width: 1200px) {
       grid-template-columns: repeat(4, 272px);
       gap: 40px 16px;
+      justify-items: center;
     }
   }
 
