@@ -4,20 +4,18 @@ import cn from 'classnames';
 import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
 import { SearchField } from '../../SearchField/SearchField';
-
+import { useAppSelector } from '../../../app/hooks';
 //diana
 import { selectCartQuantity } from '../../../reducers/cartReducer';
 
 export const Navbar = () => {
   const cartQuantity = useSelector(selectCartQuantity);
-//vitalii
-import { useAppSelector } from '../../../app/hooks';
+  //vitalii
 
-export const Navbar = () => {
   const favoritesLength = useAppSelector(
     (state) => state.favoritesProducts.favoritesProducts
   ).length;
-//>>>>>>> develop
+  //>>>>>>> develop
 
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
