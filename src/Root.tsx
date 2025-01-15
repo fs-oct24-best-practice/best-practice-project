@@ -16,15 +16,26 @@ export const Root = () => {
           <Route index element={<HomePage />} />
 
           <Route path='phones' element={<CatalogPage category='phones' />} />
+          {/*❓❗ ⤵ чи можна зробити вкалдений маршрут? якщо так, то як?*/}
+          <Route path='phones/:itemId' element={<ProductDetailsPage />}></Route>
           <Route path='tablets' element={<CatalogPage category='tablets' />} />
+          {/*❓❗ ⤵ чи можна зробити вкалдений маршрут? якщо так, то як?*/}
+          <Route
+            path='tablets/:itemId'
+            element={<ProductDetailsPage />}
+          ></Route>
           <Route
             path='accessories'
             element={<CatalogPage category='accessories' />}
           />
+          {/*❓❗ ⤵ чи можна зробити вкалдений маршрут? якщо так, то як?*/}
+          <Route
+            path='accessories/:itemId'
+            element={<ProductDetailsPage />}
+          ></Route>
           <Route path='favorite' element={<FavoritePage />} />
           <Route path='cart' element={<CartPage />} />
           <Route path='*' element={<NotFoundPage />} />
-          <Route path='Product' element={<ProductDetailsPage />} />
         </Route>
       </Routes>
     </HashRouter>

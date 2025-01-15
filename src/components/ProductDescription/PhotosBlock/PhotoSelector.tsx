@@ -1,4 +1,5 @@
 import { FC, Dispatch, SetStateAction } from 'react';
+import styles from './PhotosBlock.module.scss';
 
 type Props = {
   images: string[];
@@ -8,19 +9,18 @@ type Props = {
 export const PhotoSelector: FC<Props> = (props) => {
   const { images, setSelectedImage } = props;
   return (
-    <>
+    <div className={styles.preview}>
       {images.map((image) => {
         return (
           <img
+            className={styles.preview__select}
             src={image}
             key={image}
-            width='80px'
-            height='80px'
             alt='preview'
             onClick={() => setSelectedImage(image)}
           />
         );
       })}
-    </>
+    </div>
   );
 };

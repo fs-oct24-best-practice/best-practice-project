@@ -4,6 +4,8 @@
     "paths": {
       "@best-practice/images/*": ["public/mockup_img/*"],
       "@best-practice/pages/*": ["src/pages/*"],
+      "@best-practice/styles/*": ["src/styles/*"],
+      "@best-practice/types/*": ["src/types/*"]
     }
   },
   "files": [],
