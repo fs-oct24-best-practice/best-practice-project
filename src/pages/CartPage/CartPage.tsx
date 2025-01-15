@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { CartItem } from '../../components/CartItem';
-import './CartPage.scss';
 import { RootState } from '../../store';
 import { Product } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { clearCart } from '../../reducers/cartReducer';
 import { Cart } from '../../types/Cart';
+import styles from './CartPage.module.scss';
 
 export const CartPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
@@ -57,20 +57,20 @@ export const CartPage = () => {
   };
 
   return (
-    <div className='cart__page'>
-      <div className='cart__back'>
+    <div className={styles.cart__page}>
+      <div className={styles.cart__back}>
         <img src='/img/icons/Back.svg' alt='Back' />
-        <a href='' className='cart__back__button'>
+        <a href='' className={styles.cart__back__button}>
           Back
         </a>
       </div>
-      <h1 className='cart__title'>Cart</h1>
-      <div className='cart__content'>
-        <div className='cart__items'>
+      <h1 className={styles.cart__title}>Cart</h1>
+      <div className={styles.cart__content}>
+        <div className={styles.cart__items}>
           {cartItems.length > 0 ? (
             cartItems.map((item) => <CartItem key={item.id} item={item} />)
           ) : (
-            <div className='cart__empty'>
+            <div className={styles.cart__empty}>
               <p>Cart is empty</p>
               <img
                 src='/img/empty.svg'
@@ -81,27 +81,29 @@ export const CartPage = () => {
             </div>
           )}
         </div>
-        <div className='cart__summary'>
-          <div className='summary__total'>
-            <span className='span'>${totalCost}</span>
-            <p className='summary__title'>Total for {totalItems} items:</p>
+        <div className={styles.cart__summary}>
+          <div className={styles.summary__total}>
+            <span className={styles.span}>${totalCost}</span>
+            <p className={styles.summary__title}>
+              Total for {totalItems} items:
+            </p>
           </div>
-          <button className='checkout__button' onClick={handleCheckout}>
+          <button className={styles.checkout__button} onClick={handleCheckout}>
             Checkout
           </button>
-          <button className='checkout__button' onClick={handleClearCart}>
+          <button className={styles.checkout__button} onClick={handleClearCart}>
             Clear Cart
           </button>
         </div>
       </div>
       {isCheckout && (
-        <div className='checkout__modal'>
-          <div className='checkout__modal__content'>
+        <div className={styles.checkout__modal}>
+          <div className={styles.checkout__modal__content}>
             <h2>The order has been placed successfully!</h2>
             <p>Thank you for your purchase!</p>
             <img src='/img/order.png' width={300} height={300} alt='Order' />
             <button
-              className='checkout__button back__button'
+              className={styles.checkout__button + ' ' + styles.back__button}
               onClick={() => navigate('/')}
             >
               Back to Home
@@ -111,11 +113,11 @@ export const CartPage = () => {
       )}
 
       {isEmpty && (
-        <div className='checkout__modal'>
-          <div className='checkout__modal__content'>
+        <div className={styles.checkout__modal}>
+          <div className={styles.checkout__modal__content}>
             <h2>{modalMessage}</h2>
             <button
-              className='checkout__button back__button'
+              className={styles.checkout__button + ' ' + styles.back__button}
               onClick={closeModal}
             >
               Close

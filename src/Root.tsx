@@ -35,7 +35,7 @@ export const Root = () => {
               <Route path='favorite' element={<FavoritePage />} />
               <Route path='cart' element={<CartPage />} />
               <Route path='*' element={<NotFoundPage />} />
-              <Route path='Product' element={<ProductDetailsPage />} />
+              <Route path=':category/:id' element={<ProductDetailsPage />} />
             </Route>
           </Routes>
         </HashRouter>
