@@ -20,22 +20,24 @@ export const Root = () => {
               <Route path='home' element={<Navigate to='/' replace />} />
               <Route index element={<HomePage />} />
 
-              <Route
-                path='phones'
-                element={<CatalogPage category='phones' />}
-              />
-              <Route
-                path='tablets'
-                element={<CatalogPage category='tablets' />}
-              />
+              <Route path='phones' element={<CatalogPage category='phones' />}>
+                <Route path=':itemId' element={<ProductDetailsPage />} />
+              </Route>
+
+              <Route path='tablets' element={<CatalogPage category='tablets' />}>
+                <Route path=':itemId' element={<ProductDetailsPage />} />
+              </Route>
+
               <Route
                 path='accessories'
                 element={<CatalogPage category='accessories' />}
-              />
+              >
+                <Route path=':itemId' element={<ProductDetailsPage />} />
+              </Route>
+
               <Route path='favorite' element={<FavoritePage />} />
               <Route path='cart' element={<CartPage />} />
               <Route path='*' element={<NotFoundPage />} />
-              <Route path='Product' element={<ProductDetailsPage />} />
             </Route>
           </Routes>
         </HashRouter>
