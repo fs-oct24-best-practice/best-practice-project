@@ -32,6 +32,11 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
 
   const added = useAppSelector((state) => state.cartProducts.cartProducts);
 
+  // if (!product || !product.image) {
+  //   console.error('Product or product.image is missing:', product);
+  //   return null;
+  // }
+
   const addToCart = (product: Product) => dispatch(increaseQuantity(product));
 
   const addToFavorite = () => {
@@ -48,21 +53,26 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
     }
   };
 
+  const correctedImagePath = product.image
+    ? product.image.startsWith('/')
+      ? product.image
+      : `/${product.image}`
+    : '/img/phones/apple-iphone-7/black/00.webp';
+
   return (
     <div className={styles.product_card}>
       <img
         className={styles.product_card__image}
-        src={product.image}
+        src={correctedImagePath}
         alt={`${product.name} Image`}
       />
-
+      console.log('Product Image Path:', `/${product.image}`);
       <Link
         to={`/${product.category}/${product.id}`}
         className={styles.product_card__name}
       >
         {product.name}
       </Link>
-
       <div className={styles.product_card__price}>
         {product.priceDiscount ? (
           <>
@@ -79,9 +89,7 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
           </span>
         )}
       </div>
-
       <div className={styles.product_card__separator}></div>
-
       <div className={styles.product_card__features}>
         <div className={styles.product_card__feature}>
           <div className={styles.product_card__feature_label}>Screen:</div>
@@ -104,7 +112,6 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
           </div>
         </div>
       </div>
-
       <div className={styles.product_card__actions}>
         <button
           onClick={onAddToCart}
