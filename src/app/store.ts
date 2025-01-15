@@ -11,11 +11,11 @@ import {
 } from 'redux-persist';
 
 import favoritesProducts from '../features/favoritesProducts';
-import addedProducts from '../features/addedProducts';
+import cartProducts from '../features/cartReducer';
 
 const rootReducer = combineReducers({
   favoritesProducts: favoritesProducts,
-  addedProducts: addedProducts,
+  cartProducts: cartProducts,
 });
 
 const persistConfig = {

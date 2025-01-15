@@ -3,7 +3,7 @@ import {
   increaseQuantity,
   decreaseQuantity,
   deleteCart,
-} from '../../reducers/cartReducer';
+} from '../../features/cartReducer';
 import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
 import { Product } from '../../types';
@@ -32,11 +32,11 @@ export const CartItem: React.FC<Props> = ({ item }) => {
       <button className={styles.cart__item__icon__close} onClick={handleRemove}>
         <img src='/img/icons/Close.svg' alt='Close' />
       </button>
-      <img
-        src={item.images[0]}
+      {/* <img
+        src={item.image[0]}
         alt={`${item.name} Image`}
         className={styles.cart__item__image}
-      />
+      /> */}
       <div className={styles.cart__item__description}>
         <Link
           to={`/${item.category}/${item.id}`}

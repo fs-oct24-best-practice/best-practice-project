@@ -5,14 +5,11 @@ import favourites_icon from '/img/card/favourites-icon.svg';
 import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
-//diana
-//import { increaseQuantity } from '../../reducers/cartReducer';
-//import { useState } from 'react';
-//vitalii
+
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../app/hooks';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
-import { actions as addedActions } from '../../features/addedProducts';
+import { increaseQuantity } from '../../features/cartReducer';
+import { useAppSelector } from '../../app/hooks';
 
 type CardItemProps = {
   product: Product;
@@ -24,22 +21,6 @@ function isProductInList(products: Product[], product: Product) {
 
 export const Card: React.FC<CardItemProps> = ({ product }) => {
   const dispatch = useDispatch();
-  // <<<<<<< cart-page-redux-persist DIANA
-  //   const [favouriteIcon, setFavouriteIcon] = useState(favourites_icon);
-  //   const [buttonText, setButtonText] = useState(ButtonText.ADD_TO_CART);
-
-  //   const toggleFavourite = () => {
-  //     setFavouriteIcon(
-  //       favouriteIcon === favourites_icon
-  //         ? favourites_filled_icon
-  //         : favourites_icon
-  //     );
-  //   };
-
-  //   const onAddToCart = () => {
-  //     dispatch(increaseQuantity(product));
-  //     setButtonText(ButtonText.ADDED);
-  // =======
   const favorites = useAppSelector(
     (state) => state.favoritesProducts.favoritesProducts
   );
@@ -49,8 +30,9 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
   const removeFavorite = (product: Product) =>
     dispatch(favoritesActions.remove(product));
 
-  const added = useAppSelector((state) => state.addedProducts.addedProducts);
-  const addToCart = (product: Product) => dispatch(addedActions.add(product));
+  const added = useAppSelector((state) => state.cartProducts.cartProducts);
+
+  const addToCart = (product: Product) => dispatch(increaseQuantity(product));
 
   const addToFavorite = () => {
     if (isProductInList(favorites, product)) {
@@ -64,7 +46,6 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
     if (!isProductInList(added, product)) {
       addToCart(product);
     }
-    //>>>>>>> develop
   };
 
   return (
