@@ -12,6 +12,8 @@ export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState<Product[]>([]);
 
+  const isDiscount = true;
+
   useEffect(() => {
     getProducts()
       .then((data) => setProducts(data))
@@ -29,7 +31,11 @@ export const HomePage = () => {
 
   const newProducts = [...products].filter((product) => product.year >= 2022);
 
-  //const discountProducts = [...products];
+  const productsWithDiscount = [...products]
+    .sort(
+      (a, b) => b.fullPrice - (b.price || 0) - (a.fullPrice - (a.price || 0))
+    )
+    .filter((prod) => prod.fullPrice - (prod.price || 0) > 80);
 
   return (
     <div className='home-page'>
@@ -51,7 +57,11 @@ export const HomePage = () => {
             <Categories products={products} title={'Shop by category'} />
 
             <section className='hot-prices'>
-              <Slider products={products} title='Hot Prices' />
+              <Slider
+                products={productsWithDiscount}
+                title='Hot Prices'
+                discount={isDiscount}
+              />
             </section>
           </>
         )}

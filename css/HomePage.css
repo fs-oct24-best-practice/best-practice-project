@@ -9,8 +9,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  row-gap: 80px;
   justify-items: center;
+  min-height: 100vh;
 }
 
 .home-page__title {
