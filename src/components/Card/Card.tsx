@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Card.module.scss';
@@ -6,12 +6,15 @@ import favourites_icon from '/img/card/favourites-icon.svg';
 import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
+import { increaseQuantity } from '../../reducers/cartReducer';
+import { useState } from 'react';
 
 type CardItemProps = {
   product: Product;
 };
 
 export const Card: React.FC<CardItemProps> = ({ product }) => {
+  const dispatch = useDispatch();
   const [favouriteIcon, setFavouriteIcon] = useState(favourites_icon);
   const [buttonText, setButtonText] = useState(ButtonText.ADD_TO_CART);
 
@@ -24,11 +27,8 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
   };
 
   const onAddToCart = () => {
-    setButtonText(
-      buttonText === ButtonText.ADD_TO_CART
-        ? ButtonText.ADDED
-        : ButtonText.ADD_TO_CART
-    );
+    dispatch(increaseQuantity(product));
+    setButtonText(ButtonText.ADDED);
   };
 
   return (
