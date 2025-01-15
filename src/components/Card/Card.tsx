@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Card.module.scss';
@@ -6,29 +5,45 @@ import favourites_icon from '/img/card/favourites-icon.svg';
 import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../app/hooks';
+import { actions as favoritesActions } from '../../features/favoritesProducts';
+import { actions as addedActions } from '../../features/addedProducts';
 
 type CardItemProps = {
   product: Product;
 };
 
-export const Card: React.FC<CardItemProps> = ({ product }) => {
-  const [favouriteIcon, setFavouriteIcon] = useState(favourites_icon);
-  const [buttonText, setButtonText] = useState(ButtonText.ADD_TO_CART);
+function isProductInList(products: Product[], product: Product) {
+  return products.some((item) => item.id === product.id);
+}
 
-  const toggleFavourite = () => {
-    setFavouriteIcon(
-      favouriteIcon === favourites_icon
-        ? favourites_filled_icon
-        : favourites_icon
-    );
+export const Card: React.FC<CardItemProps> = ({ product }) => {
+  const dispatch = useDispatch();
+  const favorites = useAppSelector(
+    (state) => state.favoritesProducts.favoritesProducts
+  );
+
+  const addFavorite = (product: Product) =>
+    dispatch(favoritesActions.add(product));
+  const removeFavorite = (product: Product) =>
+    dispatch(favoritesActions.remove(product));
+
+  const added = useAppSelector((state) => state.addedProducts.addedProducts);
+  const addToCart = (product: Product) => dispatch(addedActions.add(product));
+
+  const addToFavorite = () => {
+    if (isProductInList(favorites, product)) {
+      removeFavorite(product);
+    } else {
+      addFavorite(product);
+    }
   };
 
   const onAddToCart = () => {
-    setButtonText(
-      buttonText === ButtonText.ADD_TO_CART
-        ? ButtonText.ADDED
-        : ButtonText.ADD_TO_CART
-    );
+    if (!isProductInList(added, product)) {
+      addToCart(product);
+    }
   };
 
   return (
@@ -92,17 +107,26 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
         <button
           onClick={onAddToCart}
           className={cn(styles.product_card__buy, {
-            [styles.product_card__added]: buttonText === ButtonText.ADDED,
+            [styles.product_card__added]: isProductInList(added, product),
           })}
         >
-          {buttonText}
+          {isProductInList(added, product)
+            ? ButtonText.ADDED
+            : ButtonText.ADD_TO_CART}
         </button>
 
         <button
-          onClick={toggleFavourite}
+          onClick={addToFavorite}
           className={styles.product_card__favourite_button}
         >
-          <img src={favouriteIcon} alt='favourite icon' />
+          <img
+            src={
+              isProductInList(favorites, product)
+                ? favourites_filled_icon
+                : favourites_icon
+            }
+            alt='favourite icon'
+          />
         </button>
       </div>
     </div>
