@@ -1,55 +1,85 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import { ProductSpec } from '../../../types/ProductSpec';
-import css from './Offer.module.scss';
+import styles from './Offer.module.scss';
 
 type Props = {
   currentProductSpec: ProductSpec;
+  handleChangeColor: (color: string) => void;
+  handleChangeCapacity: (capacity: string) => void;
 };
 
 export const Offer: FC<Props> = (props) => {
-  const { currentProductSpec } = props;
+  const {
+    currentProductSpec: {
+      colorsAvailable,
+      namespaceId,
+      capacityAvailable,
+      priceDiscount,
+      priceRegular,
+      screen,
+      resolution,
+      processor,
+      ram,
+    },
+    handleChangeColor,
+    handleChangeCapacity,
+  } = props;
 
   return (
     <>
       <div>
         <p>Available colors</p>
-        <div>
-          {currentProductSpec.colorsAvailable.map((color: string) => {
+        <div className={styles.colors}>
+          {colorsAvailable.map((color: string) => {
             return (
-              <div
+              <Link
+                to='#' // ❗ тимчасово. подумати як підключити логику маршрутизації
                 key={color}
-                className={css.div}
+                className={styles.colors__selector}
                 style={{ backgroundColor: color }}
-              ></div>
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  handleChangeColor(color);
+                }}
+              ></Link>
             );
           })}
         </div>
         <div>
           <p>ID:</p>
-          <p>{currentProductSpec.namespaceId}</p>
+          <p>{namespaceId}</p>
         </div>
       </div>
 
       <div>
         <p>Select capacity</p>
-        <div>
-          {currentProductSpec.capacityAvailable.map((capacity) => {
+        <div className={styles.capacity}>
+          {capacityAvailable.map((capacity) => {
             return (
-              <div className='flex' key={capacity}>
+              <Link
+                to='#' // ❗ тимчасово. подумати як підключити логику маршрутизації
+                className={styles.capacity__selector}
+                key={capacity}
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  handleChangeCapacity(capacity);
+                }}
+              >
                 {capacity}
-              </div>
+              </Link>
             );
           })}
         </div>
       </div>
 
       <div>
-        <p>{currentProductSpec.priceDiscount}</p>
+        <p>{priceDiscount}</p>
       </div>
 
       <div>
-        <p>{currentProductSpec.priceRegular}</p>
+        <p>{priceRegular}</p>
       </div>
 
       <div>
@@ -58,26 +88,24 @@ export const Offer: FC<Props> = (props) => {
         <button>Add to favourites</button>
       </div>
 
-      <table>
-        <tbody>
-          <tr>
-            <td>Screen</td>
-            <td>{currentProductSpec.screen}</td>
-          </tr>
-          <tr>
-            <td>Resolution</td>
-            <td>{currentProductSpec.resolution}</td>
-          </tr>
-          <tr>
-            <td>Processor</td>
-            <td>{currentProductSpec.processor}</td>
-          </tr>
-          <tr>
-            <td>RAM</td>
-            <td>{currentProductSpec.ram}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div>
+        <div>
+          <p>Screen</p>
+          <p>{screen}</p>
+        </div>
+        <div>
+          <p>Resolution</p>
+          <p>{resolution}</p>
+        </div>
+        <div>
+          <p>Processor</p>
+          <p>{processor}</p>
+        </div>
+        <div>
+          <p>RAM</p>
+          <p>{ram}</p>
+        </div>
+      </div>
     </>
   );
 };

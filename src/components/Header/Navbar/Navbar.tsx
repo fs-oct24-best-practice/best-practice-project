@@ -1,10 +1,24 @@
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
 import { SearchField } from '../../SearchField/SearchField';
 
+//diana
+import { selectCartQuantity } from '../../../reducers/cartReducer';
+
 export const Navbar = () => {
+  const cartQuantity = useSelector(selectCartQuantity);
+//vitalii
+import { useAppSelector } from '../../../app/hooks';
+
+export const Navbar = () => {
+  const favoritesLength = useAppSelector(
+    (state) => state.favoritesProducts.favoritesProducts
+  ).length;
+//>>>>>>> develop
+
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.navbar__link]: true,
@@ -39,6 +53,13 @@ export const Navbar = () => {
                 alt='Favourites'
                 className={styles.navbar__chosen__icon}
               />
+              <div
+                className={cn([styles.navbar__notification_badge], {
+                  [styles.navbar__hidden]: !favoritesLength,
+                })}
+              >
+                {favoritesLength}
+              </div>
             </div>
           </NavLink>
         </li>
@@ -51,6 +72,11 @@ export const Navbar = () => {
                 alt='Cart'
                 className={styles.navbar__chosen__icon}
               />
+              {cartQuantity > 0 && (
+                <span className={styles.navbar__notification_badge}>
+                  {cartQuantity}
+                </span>
+              )}
             </div>
           </NavLink>
         </li>

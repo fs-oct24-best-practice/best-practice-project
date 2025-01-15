@@ -3,6 +3,8 @@ import phonesImg from '../../assets/categories/phones.png';
 import tabletsImg from '../../assets/categories/tablets.png';
 import accessoriesImg from '../../assets/categories/accessories.png';
 import { Link } from 'react-router-dom';
+import { Product } from '../../types';
+import React from 'react';
 
 type CategoriesCard = {
   title: string;
@@ -16,7 +18,12 @@ type CategoriesList = {
   accessories: CategoriesCard;
 };
 
-export const Categories = ({ products, title }) => {
+type Props = {
+  products: Product[];
+  title: string;
+};
+
+export const Categories: React.FC<Props> = ({ products, title }) => {
   const allProducts = products;
 
   const productsCount = (productType: string) => {
