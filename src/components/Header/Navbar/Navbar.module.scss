@@ -1,0 +1,76 @@
+@use '@best-practice/styles/variables' as *;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  &__pages {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+
+  &__link {
+    position: relative;
+    padding: 24px 0;
+    text-align: center;
+    color: $secondary;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4px;
+      bottom: 2px;
+      left: 0;
+      border-radius: 3px;
+      background: $primary;
+      transition: $transition;
+      transition-property: width;
+    }
+
+    &:hover {
+      color: $primary;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
+    &_active {
+      color: $primary;
+
+      &::after {
+        width: 100%;
+        background: $primary;
+      }
+    }
+  }
+
+  &__chosen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &__block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 64px;
+      width: 64px;
+
+      border-left: 3px solid $elements;
+    }
+
+    &__icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

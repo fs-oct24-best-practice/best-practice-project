@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { Loader } from '../Loader';
 import { Product } from '../../types/Product';
 import { Card } from '../Card/Card';
@@ -163,7 +163,7 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
             key={index}
             disabled={page === index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={classNames(styles.catalog__button, {
+            className={cn(styles.catalog__button, {
               [styles['catalog__button--active']]: page === index + 1,
             })}
           >
