@@ -1,18 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { CartItem } from '../../components/CartItem';
-import { RootState } from '../../store';
 import { Product } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { clearCart } from '../../reducers/cartReducer';
+import { clearCart } from '../../features/cartReducer';
 import { Cart } from '../../types/Cart';
 import styles from './CartPage.module.scss';
+import { useAppSelector } from '../../app/hooks';
 
 export const CartPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
   const [modalMessage, setModalMessage] = useState<Cart>(Cart.DEFAULT);
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItems = useAppSelector((state) => state.cartProducts.cartProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -68,7 +68,9 @@ export const CartPage = () => {
       <div className={styles.cart__content}>
         <div className={styles.cart__items}>
           {cartItems.length > 0 ? (
-            cartItems.map((item) => <CartItem key={item.id} item={item} />)
+            cartItems.map((item: Product) => (
+              <CartItem key={item.id} item={item} />
+            ))
           ) : (
             <div className={styles.cart__empty}>
               <p>Cart is empty</p>
