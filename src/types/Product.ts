@@ -1,12 +1,14 @@
+import { Categories } from './Categories';
+
 export interface Product {
+  id: number;
+  name: string;
+  itemId: string;
+  price?: number;
   priceRegular: number;
   priceDiscount?: number;
-  id: number;
-  category: string;
-  itemId: string;
-  name: string;
   fullPrice: number;
-  price?: number;
+  category: Categories;
   screen: string;
   capacity: string;
   color: string;
