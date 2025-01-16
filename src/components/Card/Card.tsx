@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Card.module.scss';
-import favourites_icon from '/img/card/favourites-icon.svg';
-import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
+import favourites_icon from '/img/icons/Favourites.svg';
+import favourites_filled_icon from '/img/icons/FavouritesFilled.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
 
@@ -52,24 +52,22 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
     <div className={styles.product_card}>
       <img
         className={styles.product_card__image}
-        src={product.image}
+        src={product.images[0]}
         alt={`${product.name} Image`}
       />
-
       <Link
         to={`/${product.category}/${product.id}`}
         className={styles.product_card__name}
       >
         {product.name}
       </Link>
-
       <div className={styles.product_card__price}>
         {product.priceDiscount ? (
           <>
             <span className={styles.product_card__price_discount}>
               ${product.priceDiscount}
             </span>
-            <span className={styles.product_card__fullPrice}>
+            <span className={styles.product_card__full_price}>
               ${product.priceRegular}
             </span>
           </>
@@ -79,9 +77,7 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
           </span>
         )}
       </div>
-
       <div className={styles.product_card__separator}></div>
-
       <div className={styles.product_card__features}>
         <div className={styles.product_card__feature}>
           <div className={styles.product_card__feature_label}>Screen:</div>
@@ -104,7 +100,6 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
           </div>
         </div>
       </div>
-
       <div className={styles.product_card__actions}>
         <button
           onClick={onAddToCart}
