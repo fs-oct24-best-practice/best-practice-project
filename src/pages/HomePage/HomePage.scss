@@ -4,6 +4,7 @@
 @import '../../utils/mixins.scss';
 
 .home-page {
+
     &__title {
         display: flex;
         justify-content: center;
@@ -38,22 +39,3 @@
         }
     }
 }
-
-// .home-page__container {
-//     margin: 0 auto;
-//     padding: 56px 25px 80px;
-//     display: flex;
-//     flex-direction: column;
-//     justify-items: center;
-//     min-height: 100vh;
-// }
-
-// .home-page__title {
-//     font-family: 'Mont', sans-serif;
-//     font-style: normal;
-//     font-weight: 800;
-//     font-size: 48px;
-//     line-height: 56px;
-//     letter-spacing: -0.01em;
-//     color: $primary;
-// }
