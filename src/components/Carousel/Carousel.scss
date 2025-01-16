@@ -6,6 +6,8 @@
 
 .Carousel {
     margin-top: 24px;
+    z-index: 1;
+    
 
     @include on-tablet {
         margin-top: 32px;
@@ -18,6 +20,7 @@
     &__slider {
         height: 352px;
         max-width: 1200px;
+        
     
         @include on-tablet {
             display: flex;
@@ -34,6 +37,7 @@
 
         &-button {
             display: none;
+            
 
             @include on-tablet {
                 display: flex;
@@ -59,6 +63,7 @@
             height: 320px;
             width: 100%;
             overflow: hidden;
+            
     
             @include on-tablet {
                 height: 189px;
@@ -79,6 +84,7 @@
         &-item {
             height: 100%;
             width: 100%;
+            
         }
 
         &-image {
