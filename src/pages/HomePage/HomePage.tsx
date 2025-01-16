@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 import { getProducts } from '../../components/api/apiE';
-import { Loader } from '../../components/Loader';
 import { Carousel } from '../../components/Carousel';
 
 import './HomePage.scss';
@@ -49,27 +48,30 @@ export const HomePage = () => {
         <Carousel />
       </section>
 
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <section className='new-models'>
-            <Slider products={newProducts} title='Brand new models' />
-          </section>
+      <section className='new-models'>
+        <Slider
+          products={newProducts}
+          title='Brand new models'
+          isLoading={isLoading}
+        />
+      </section>
 
-          <section className='categories'>
-            <Categories products={products} title={'Shop by category'} />
-          </section>
+      <section className='categories'>
+        <Categories
+          products={products}
+          title={'Shop by category'}
+          isLoading={isLoading}
+        />
+      </section>
 
-          <section className='hot-prices'>
-            <Slider
-              products={productsWithDiscount}
-              title='Hot Prices'
-              discount={isDiscount}
-            />
-          </section>
-        </>
-      )}
+      <section className='hot-prices'>
+        <Slider
+          products={productsWithDiscount}
+          title='Hot Prices'
+          discount={isDiscount}
+          isLoading={isLoading}
+        />
+      </section>
     </div>
   );
 };

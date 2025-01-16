@@ -7,14 +7,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
 
 import './Slider.scss';
+import { CardSkeleton } from '../skeletons';
 
 type Props = {
   products: Product[];
   discount?: boolean;
   title: string;
+  isLoading: boolean;
 };
 
-export const Slider: React.FC<Props> = ({ products, title }) => {
+export const Slider: React.FC<Props> = ({ products, title, isLoading }) => {
   return (
     <div className='slider'>
       <div className='slider__container'>
@@ -44,11 +46,17 @@ export const Slider: React.FC<Props> = ({ products, title }) => {
           navigation={true}
           virtual
         >
-          {products.map((product, index) => (
-            <SwiperSlide key={product.id} virtualIndex={index}>
-              <Card product={product} />
-            </SwiperSlide>
-          ))}
+          {isLoading
+            ? Array.from({ length: 4 }).map((_, index) => (
+                <SwiperSlide key={index} virtualIndex={index}>
+                  <CardSkeleton />
+                </SwiperSlide>
+              ))
+            : products.map((product, index) => (
+                <SwiperSlide key={product.id} virtualIndex={index}>
+                  <Card product={product} />
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </div>
