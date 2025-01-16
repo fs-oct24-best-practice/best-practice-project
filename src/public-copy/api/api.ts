@@ -1,5 +1,6 @@
 // import { ProductSpec } from '../../types/ProductSpec';
 import { Product } from '../../types/Product';
+import { ProductCategories } from '../../utils/ProductCategories';
 
 const API_URL = '/api/';
 
@@ -13,9 +14,11 @@ function processScreenInfo(screen: string): string {
 }
 
 type item = Product;
-type category = 'accessories' | 'phones' | 'products' | 'tablets';
+// type category = 'accessories' | 'phones' | 'products' | 'tablets';
 
-export async function getProductList(category: category): Promise<item[]> {
+export async function getProductList(
+  category: ProductCategories
+): Promise<item[]> {
   return setWait(100)
     .then(() => fetch(API_URL + `${category}.json`))
     .then((response) => response.json())

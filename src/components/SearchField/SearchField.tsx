@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './SearchField.module.scss';
 import { Product } from '../../types/Product';
-import { getProducts } from '../../components/api/apiE';
+import { getProductList } from '../../public-copy/api/api';
 import { Link, useParams } from 'react-router-dom';
 import { RoutesPathes } from '../../utils/RoutesPathes';
 import { ProductCategories } from '../../utils/ProductCategories';
@@ -34,14 +34,16 @@ export const SearchField: React.FC = () => {
   const fetchProducts = (query: string) => {
     const preparedQuery = query.trim().toLowerCase();
 
-    getProducts().then((productsFromServer) => {
-      const filteredProducts = productsFromServer.filter(
-        (product: Product) =>
-          preparedQuery !== '' &&
-          product.name.toLowerCase().includes(preparedQuery)
-      );
-      setProducts(filteredProducts);
-    });
+    getProductList(ProductCategories.PHONES).then(
+      (productsFromServer: Product[]) => {
+        const filteredProducts = productsFromServer.filter(
+          (product: Product) =>
+            preparedQuery !== '' &&
+            product.name.toLowerCase().includes(preparedQuery)
+        );
+        setProducts(filteredProducts);
+      }
+    );
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchProductsWithDelay = useCallback(debounce(fetchProducts, 500), [
@@ -100,7 +102,7 @@ export const SearchField: React.FC = () => {
       >
         <div>
           <img
-            src={product.image}
+            src={product.images[0]}
             alt={product.name}
             className={styles.image}
           />
