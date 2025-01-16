@@ -1,3 +1,66 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body,
+header,
+footer,
+main,
+h1,
+h2,
+h3,
+h4,
+div,
+p,
+ol,
+ul,
+li,
+a,
+img,
+nav {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+@font-face {
+  font-family: "Bold";
+  src: url("/fonts/Mont-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Regular";
+  src: url("/fonts/Mont-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "SemiBold";
+  src: url("/fonts/Mont-SemiBold.otf") format("opentype");
+}
 .categories {
   margin-top: 56px;
 }
@@ -22,7 +85,7 @@
   gap: 32px;
 }
 .categories__title {
-  font-family: Mont, sans-serif;
+  font-family: "Mont", sans-serif;
   font-weight: 800;
   font-size: 22px;
   line-height: 30.8px;
@@ -85,16 +148,32 @@
   margin-top: 24px;
 }
 .categories__info--title {
-  font-family: Mont, sans-serif;
+  font-family: "Mont", sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 25.56px;
   color: #313237;
 }
 .categories__info--text {
-  font-family: Mont, sans-serif;
+  font-family: "Mont", sans-serif;
   font-weight: 600;
   font-size: 14px;
   line-height: 21px;
-  color: #89939a;
+  color: #89939A;
+}
+
+.container {
+  padding-inline: 16px;
+}
+@media (min-width: 640px) {
+  .container {
+    padding-inline: 24px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    padding-inline: 32px;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
 }
