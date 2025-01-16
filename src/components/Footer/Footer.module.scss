@@ -1,5 +1,5 @@
+@use '@best-practice/styles/variables' as *;
 @use '../../utils/mixins' as mixins;
-@use '../../utils/vars' as *;
 
 .footer{
   background-color: $white;
@@ -64,7 +64,7 @@
     display: flex;
     justify-content: center; 
     align-items: center;
-    transition: border $transition-duration ease;
+    transition: border $transition;
       &:hover {
         border: 1px solid $primary;
       }

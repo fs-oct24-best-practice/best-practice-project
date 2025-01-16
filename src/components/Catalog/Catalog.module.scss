@@ -34,7 +34,6 @@
     gap: 40px 16px;
     padding: 32px;
     justify-items: center;
-    align-items: center;
 
     @media (min-width: 640px) and (max-width: 767px) {
       grid-template-columns: repeat(2, 288px);
