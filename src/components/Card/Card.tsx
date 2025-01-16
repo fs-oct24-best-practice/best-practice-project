@@ -52,17 +52,15 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
     <div className={styles.product_card}>
       <img
         className={styles.product_card__image}
-        src={product.image}
+        src={product.images[0]}
         alt={`${product.name} Image`}
       />
-
       <Link
         to={`/${product.category}/${product.id}`}
         className={styles.product_card__name}
       >
         {product.name}
       </Link>
-
       <div className={styles.product_card__price}>
         {product.priceDiscount ? (
           <>
@@ -79,9 +77,7 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
           </span>
         )}
       </div>
-
       <div className={styles.product_card__separator}></div>
-
       <div className={styles.product_card__features}>
         <div className={styles.product_card__feature}>
           <div className={styles.product_card__feature_label}>Screen:</div>
@@ -104,7 +100,6 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
           </div>
         </div>
       </div>
-
       <div className={styles.product_card__actions}>
         <button
           onClick={onAddToCart}
