@@ -1,53 +1,57 @@
-@use '../../App.scss';
+@import '../../styles/root';
+@import '../../styles/reset';
+@import '../../styles/fonts';
+@import '../../utils/vars.scss';
+@import '../../utils/mixins.scss';
 
-.carousel {
+.Carousel {
     margin-top: 24px;
 
-    @media (min-width: 640px) {
+    @include on-tablet {
         margin-top: 32px;
-        }
+    }
 
-        @media (min-width: 1200px) {
+    @include on-desktop {
         margin-top: 56px;
-        }
+    }
 
     &__slider {
         height: 352px;
-        max-width: 1440px;
-        justify-content: center;
+        max-width: 1200px;
     
-        @media (min-width: 640px) {
+        @include on-tablet {
             display: flex;
             gap: 19px;
             height: 221px;
+            padding-inline: 24px;
         }
 
-        @media (min-width: 1200px) {
+        @include on-desktop {
             height: 432px;
             gap: 16px;
             margin: 0 auto;
         }
 
         &-button {
-        display: none;
+            display: none;
 
-            @media (min-width: 640px) {
+            @include on-tablet {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                height: 340px;
+                height: 189px;
                 width: 32px;
-                background-color: #fff;
-                border: 1px solid #b4bdc3;
+                background-color: $white;
+                border: 1px solid $icons;
                 cursor: pointer;
     
                 &:hover {
-                    border-color: #313237;
+                    border-color: $primary;
                 }
             }
     
-            @media (min-width: 1200px) {
-            height: 400px;
+            @include on-desktop {
+                height: 400px;
             }
         }
 
@@ -56,15 +60,12 @@
             width: 100%;
             overflow: hidden;
     
-            @media (min-width: 640px) {
-            height: 340px;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
+            @include on-tablet {
+                height: 189px;
             }
     
-            @media (min-width: 1200px) {
-            height: 400px;
+            @include on-desktop {
+                height: 400px;
             }
         }
 
@@ -83,7 +84,7 @@
         &-image {
             height: 100%;
             width: 100%;
-            object-fit: contain;
+            object-fit: cover;
         }
     }
 
@@ -105,7 +106,7 @@
         &-item {
             width: 14px;
             height: 4px;
-            background-color: #e2e6e9;
+            background-color: $elements;
             border: none;
             cursor: pointer;
         }
@@ -113,5 +114,5 @@
 }
 
 .banner-active {
-background-color: #313237;
+    background-color: $primary;
 }

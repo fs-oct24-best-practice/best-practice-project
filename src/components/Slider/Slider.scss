@@ -1,14 +1,41 @@
-.slider__title {
-font-family: 'Mont', sans-serif;
-font-style: normal;
-font-weight: 800;
-font-size: 32px;
-line-height: 41px;
-letter-spacing: -0.01em;
-color: #313237;
+@import '../../styles/reset';
+@import '../../styles/fonts';
+@import '../../utils/vars.scss';
+@import '../../utils/mixins.scss';
 
+.slider {
+    margin-top: 56px;
 
+    &__title {
+        font-family: 'Mont', sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 32px;
+        color: $primary;
+
+        @include on-tablet {
+            width: 100%;
+            font-size: 32px;
+            line-height: 42px;
+            letter-spacing: 1%;
+        }
+    }
+
+    &__container {
+        padding-left: 16px;
+
+        @include on-tablet {
+            padding-left: 24px;
+        }
+
+        @include on-desktop {
+            padding-left: 32px;
+            max-width: 1200px;
+            margin-inline: auto;
+        }
+    }
 }
+
 .swiper {
     padding-top: 100px;
     position: relative;
@@ -34,8 +61,8 @@ color: #313237;
         position: absolute;
         top: 50px;
         left: 93%;
-        color: #89939A;
-        border: 1px solid #B4BDC3;
+        color: $secondary;
+        border: 1px solid $icons;
         width: 32px;
         height: 32px;
         display: flex;
@@ -52,8 +79,8 @@ color: #313237;
         position: absolute;
         top: 50px;
         right: 0px;
-        color: #89939A;
-        border: 1px solid #B4BDC3;
+        color: $secondary;
+        border: 1px solid $icons;
         width: 32px;
         height: 32px;
         display: flex;
@@ -66,7 +93,7 @@ color: #313237;
     }
 
     &-button-disabled {
-        color: #B4BDC4;
-        border: 1px solid #E2E6E9;
+        color: $icons;
+        border: 1px solid $elements;
     }
 }

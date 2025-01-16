@@ -3,3 +3,29 @@
     @content;
   }
 }
+
+@mixin on-tablet {
+  @media (min-width: 640px) {
+      @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: 1200px) {
+      @content;
+  }
+}
+
+@mixin page-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  @media (min-width: 640px) {
+      grid-template-columns: repeat(12, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+      grid-template-columns: repeat(24, 1fr);
+  }
+}

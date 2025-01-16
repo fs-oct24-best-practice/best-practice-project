@@ -56,27 +56,27 @@ export const Carousel = () => {
   }, [currentSlideIndex, handleNextSlide]);
 
   return (
-    <section className='carousel'>
-      <div className='carousel__slider'>
+    <section className='Carousel'>
+      <div className='Carousel__slider'>
         <button
           type='button'
-          className='carousel__slider-button'
+          className='Carousel__slider-button'
           onClick={() => handlePrevSlide()}
         >
           <img src={arrowLeft} alt='Arrow left' className='icon--left' />
         </button>
 
-        <div className='carousel__slider-container' ref={banner}>
+        <div className='Carousel__slider-container' ref={banner}>
           <ul
-            className='carousel__slider-list'
+            className='Carousel__slider-list'
             style={{
               transform: `translateX(-${transformValue}px)`,
             }}
           >
             {bannerImages.map((img) => (
-              <li className='carousel__slider-item' key={img}>
+              <li className='Carousel__slider-item' key={img}>
                 <img
-                  className='carousel__slider-image'
+                  className='Carousel__slider-image'
                   src={img}
                   alt='Banner image'
                 />
@@ -87,19 +87,19 @@ export const Carousel = () => {
 
         <button
           type='button'
-          className='carousel__slider-button'
+          className='Carousel__slider-button'
           onClick={() => handleNextSlide()}
         >
           <img src={arrowRight} alt='Arrow left' className='icon--right' />
         </button>
       </div>
 
-      <div className='carousel__dots'>
+      <div className='Carousel__dots'>
         {bannerImages.map((img, i) => (
-          <label className='carousel__dots-container' key={img}>
+          <label className='Carousel__dots-container' key={img}>
             <button
               type='button'
-              className={classNames('carousel__dots-item', {
+              className={classNames('Carousel__dots-item', {
                 'banner-active': currentSlideIndex === i,
               })}
               onClick={() => handleDotActive(i)}

@@ -1,10 +1,11 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Product } from '../../types';
 import './Categories.scss';
+
 import phonesImg from '../../assets/categories/phones.png';
 import tabletsImg from '../../assets/categories/tablets.png';
 import accessoriesImg from '../../assets/categories/accessories.png';
-import { Link } from 'react-router-dom';
-import { Product } from '../../types';
-import React from 'react';
 
 type CategoriesCard = {
   title: string;
@@ -63,7 +64,7 @@ export const Categories: React.FC<Props> = ({ products, title }) => {
                 <Link to={`${category.type}`} className='categories__item_link'>
                   <img
                     src={category.image}
-                    alt='Phones'
+                    alt={category.title}
                     className='categories__item_link-img'
                   />
                 </Link>

@@ -39,33 +39,37 @@ export const HomePage = () => {
 
   return (
     <div className='home-page'>
-      <div className='home-page__container'>
-        <div className='home-page__title'>
-          <h1>Welcome to Nice Gadgets store!</h1>
-        </div>
-
-        <Carousel />
-
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <section className='new-models'>
-              <Slider products={newProducts} title='Brand new models' />
-            </section>
-
-            <Categories products={products} title={'Shop by category'} />
-
-            <section className='hot-prices'>
-              <Slider
-                products={productsWithDiscount}
-                title='Hot Prices'
-                discount={isDiscount}
-              />
-            </section>
-          </>
-        )}
+      <div className='home-page__title'>
+        <h1 className='home-page__title--text'>
+          Welcome to Nice Gadgets store!
+        </h1>
       </div>
+
+      <section className='carousel'>
+        <Carousel />
+      </section>
+
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <section className='new-models'>
+            <Slider products={newProducts} title='Brand new models' />
+          </section>
+
+          <section className='categories'>
+            <Categories products={products} title={'Shop by category'} />
+          </section>
+
+          <section className='hot-prices'>
+            <Slider
+              products={productsWithDiscount}
+              title='Hot Prices'
+              discount={isDiscount}
+            />
+          </section>
+        </>
+      )}
     </div>
   );
 };
