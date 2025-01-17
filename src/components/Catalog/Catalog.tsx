@@ -8,12 +8,11 @@ import { Card } from '../Card/Card';
 import styles from './Catalog.module.scss';
 import { CardSkeleton } from '../skeletons';
 
-type CatalogProps = {
-  fetchProducts: () => Promise<Product[]>;
-  title: string;
+type Props = {
+  products: Product[];
 };
 
-export const Catalog: React.FC<CatalogProps> = ({ products }) => {
+export const Catalog: React.FC<Props> = ({ products }) => {
   // const [products, setProducts] = useState<Product[]>([]);
   // const [isLoading, setIsLoading] = useState(false);
   // const [error, setError] = useState(false);

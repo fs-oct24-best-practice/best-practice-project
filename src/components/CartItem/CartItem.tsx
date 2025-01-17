@@ -6,10 +6,10 @@ import {
 } from '../../features/cartReducer';
 import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
-import { Product } from '../../types';
+import { ProductInCart } from '../../types/ProductInCart';
 
 type Props = {
-  item: Product;
+  item: ProductInCart;
 };
 
 export const CartItem: React.FC<Props> = ({ item }) => {
@@ -33,13 +33,13 @@ export const CartItem: React.FC<Props> = ({ item }) => {
         <img src='/img/icons/Close.svg' alt='Close' />
       </button>
       <img
-        src={item.images[0]}
+        src={item.image}
         alt={`${item.name} Image`}
         className={styles.cart__item__image}
       />
       <div className={styles.cart__item__description}>
         <Link
-          to={`/${item.category}/${item.id}`}
+          to={`/${item.category}/${item.itemId}`}
           className={styles.cart__item__description__title}
         >
           {item.name}

@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { CartItem } from '../../components/CartItem';
-import { Product } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { clearCart } from '../../features/cartReducer';
 import { Cart } from '../../types/Cart';
 import styles from './CartPage.module.scss';
 import { useAppSelector } from '../../app/hooks';
+import { ProductInCart } from '../../types/ProductInCart';
 
 export const CartPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
@@ -17,13 +17,13 @@ export const CartPage = () => {
   const navigate = useNavigate();
 
   const totalCost = cartItems.reduce(
-    (sum: number, item: Product) =>
+    (sum: number, item: ProductInCart) =>
       sum + (item.price || item.fullPrice) * item.quantity,
     0
   );
 
   const totalItems = cartItems.reduce(
-    (count: number, item: Product) => count + item.quantity,
+    (count: number, item: ProductInCart) => count + item.quantity,
     0
   );
 
@@ -68,7 +68,7 @@ export const CartPage = () => {
       <div className={styles.cart__content}>
         <div className={styles.cart__items}>
           {cartItems.length > 0 ? (
-            cartItems.map((item: Product) => (
+            cartItems.map((item: ProductInCart) => (
               <CartItem key={item.id} item={item} />
             ))
           ) : (
