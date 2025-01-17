@@ -1,3 +1,7 @@
+export * from './_utils/browserSupportedColors';
+export * from './_utils/replaceSpaceWithDash';
+export * from './_utils/sortStrings';
+export * from './_utils/createNewItemId';
 export * from './ProductDescription';
 export * from './PhotosBlock/PhotoPreview';
 export * from './About/About';
