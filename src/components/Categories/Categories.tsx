@@ -6,6 +6,7 @@ import './Categories.scss';
 import phonesImg from '../../assets/categories/phones.png';
 import tabletsImg from '../../assets/categories/tablets.png';
 import accessoriesImg from '../../assets/categories/accessories.png';
+import { CategorySkeleton } from '../skeletons';
 
 type CategoriesCard = {
   title: string;
@@ -22,9 +23,10 @@ type CategoriesList = {
 type Props = {
   products: Product[];
   title: string;
+  isLoading: boolean;
 };
 
-export const Categories: React.FC<Props> = ({ products, title }) => {
+export const Categories: React.FC<Props> = ({ products, title, isLoading }) => {
   const allProducts = products;
 
   const productsCount = (productType: string) => {
@@ -59,22 +61,34 @@ export const Categories: React.FC<Props> = ({ products, title }) => {
         <div className='categories__content'>
           <h2 className='categories__title'>{title}</h2>
           <div className='categories__items'>
-            {Object.values(categoriesList).map((category) => (
-              <div className='categories__item' key={category.title}>
-                <Link to={`${category.type}`} className='categories__item_link'>
-                  <img
-                    src={category.image}
-                    alt={category.title}
-                    className='categories__item_link-img'
-                  />
-                </Link>
-
-                <div className='categories__info'>
-                  <h3 className='categories__info--title'>{category.title}</h3>
-                  <p className='categories__info--text'>{`${productsCount(category.type)} models`}</p>
-                </div>
-              </div>
-            ))}
+            {isLoading
+              ? Array.from({ length: 3 }).map((_, index) => (
+                  <div className='categories__item' key={index}>
+                    <CategorySkeleton />
+                  </div>
+                ))
+              : Object.values(categoriesList).map((category) => (
+                  <div className='categories__item' key={category.title}>
+                    <Link
+                      to={`/${category.type}`}
+                      className='categories__item_link'
+                    >
+                      <img
+                        src={category.image}
+                        alt={category.title}
+                        className='categories__item_link-img'
+                      />
+                    </Link>
+                    <div className='categories__info'>
+                      <h3 className='categories__info--title'>
+                        {category.title}
+                      </h3>
+                      <p className='categories__info--text'>
+                        {`${productsCount(category.type)} models`}
+                      </p>
+                    </div>
+                  </div>
+                ))}
           </div>
         </div>
       </div>
