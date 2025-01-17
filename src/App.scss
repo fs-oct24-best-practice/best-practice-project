@@ -1,6 +1,6 @@
 @use '@best-practice/styles/variables' as *;
-@use './styles/reset.scss';
-@use './utils/mixins.scss';
+@use '../src/styles/reset.scss';
+@use '../src/styles/mixins.scss';
 
 .App {
     display: flex;
