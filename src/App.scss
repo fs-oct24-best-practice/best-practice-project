@@ -1,5 +1,5 @@
+@use '@best-practice/styles/variables' as *;
 @use './styles/reset.scss';
-@use './utils/vars.scss';
 @use './utils/mixins.scss';
 
 .App {
@@ -7,4 +7,8 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 100vh;
+}
+
+.main {
+  flex: 1;
 }

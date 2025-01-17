@@ -10,9 +10,12 @@ export const Navbar = () => {
     (state) => state.favoritesProducts.favoritesProducts
   ).length;
 
-  const cartLength = useAppSelector(
-    (state) => state.cartProducts.cartProducts
-  ).length;
+  const cartLength = useAppSelector((state) =>
+    state.cartProducts.cartProducts.reduce(
+      (total, item) => total + item.quantity,
+      0
+    )
+  );
 
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({

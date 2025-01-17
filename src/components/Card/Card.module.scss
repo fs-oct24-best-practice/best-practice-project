@@ -1,19 +1,4 @@
-@use '../../utils/vars' as *;
-
-@font-face {
-  font-family: 'Mont-Regular';
-  src: url('/fonts/Mont-Regular.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'Mont-Bold';
-  src: url('/fonts/Mont-Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'Mont-SemiBold';
-  src: url('/fonts/Mont-SemiBold.otf') format('opentype');
-}
+@use '@best-practice/styles/variables' as *;
 
 .product_card {
   background-color: #FFFFFF;
@@ -23,7 +8,7 @@
   align-items: center;
   width: 100%;
   max-width: 272px;
-  height: 506px;
+  height: 100%;
   padding: 32px;
   box-sizing: border-box;
 
@@ -37,7 +22,6 @@
 
   @media (max-width: 639px) {
     max-width: 287px;
-    height: 440px;
   }
 
   &__image {
@@ -45,9 +29,14 @@
     height: 180px;
     object-fit: contain;
     margin-bottom: 8px;
+    transition: transform $transition;
 
     @media (max-width: 639px) {
       max-height: 140px;
+    }
+
+    &:hover {
+      transform: scale(1.1);
     }
   }
 
@@ -61,6 +50,12 @@
     padding-top: 16px;
     width: 100%;
     margin-bottom: 8px;
+    flex: 1;
+    transition: transform $transition;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &__price {
@@ -164,7 +159,7 @@
     display: flex;
     justify-content: center; 
     align-items: center;
-    transition: border $transition-duration ease;
+    transition: border $transition;
       &:hover {
         border: 1px solid $primary;
       }
