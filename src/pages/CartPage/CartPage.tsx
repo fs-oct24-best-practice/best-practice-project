@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { clearCart } from '../../features/cartReducer';
 import { Cart } from '../../types/Cart';
 import styles from './CartPage.module.scss';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { ProductInCart } from '../../types/ProductInCart';
 
 export const CartPage = () => {

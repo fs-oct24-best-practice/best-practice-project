@@ -6,7 +6,7 @@ export const CardSkeleton = () => (
     width={1200}
     height={400}
     viewBox='0 0 1200 400'
-    backgroundColor='#fcd854'
+    backgroundColor='#E2E6E9'
     foregroundColor='#ecebeb'
   >
     <rect x='32' y='126' rx='0' ry='0' width='1' height='2' />

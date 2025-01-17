@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 import { Catalog } from '../../components/Catalog/Catalog';
 
 export const FavoritePage = () => {
@@ -9,7 +9,7 @@ export const FavoritePage = () => {
   return (
     <>
       <h1>Fawotites Page</h1>
-      <Catalog products={favorites} />
+      <Catalog productList={favorites} isLoading={false} isError={false} />
     </>
   );
 };

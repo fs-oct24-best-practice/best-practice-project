@@ -7,6 +7,7 @@ export const CategorySkeleton = () => (
     height={450}
     viewBox='0 0 1136 450'
     backgroundColor='#fcd854'
+    opacity='0.4'
     foregroundColor='#ecebeb'
   >
     <rect x='-326' y='-72' rx='52' ry='52' width='202' height='506' />

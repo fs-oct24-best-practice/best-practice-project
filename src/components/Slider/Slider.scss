@@ -1,76 +1,75 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/reset';
 @import '../../styles/fonts';
-@import '../../utils/mixins.scss';
+@import '../../styles/mixins.scss';
 
 .slider {
-    margin-top: 56px;
+  margin-top: 56px;
 
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    font-family: 'Mont', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 32px;
+    color: $primary;
+
+    @include on-tablet {
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 1%;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  .slider__arrow {
+    border: 1px solid $elements;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      border: 1px solid $icons;
+    }
+  }
+
+  &__container {
+    padding-left: 16px;
+
+    @include on-tablet {
+      padding-left: 24px;
+      padding-bottom: 64px;
     }
 
-    &__title {
-        font-family: 'Mont', sans-serif;
-        font-weight: 800;
-        font-size: 22px;
-        line-height: 32px;
-        color: $primary;
-
-        @include on-tablet {
-            font-size: 32px;
-            line-height: 42px;
-            letter-spacing: 1%;
-        }
+    @include on-desktop {
+      padding-left: 32px;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-bottom: 80px;
     }
-
-    &__buttons {
-      display: flex;
-      gap: 16px;
-    }
-
-    .slider__arrow {
-      border: 1px solid $elements;      
-      width: 32px;
-      height: 32px;
-      
-      &:hover {
-        border: 1px solid $icons;
-    }
-    }
-
-    &__container {
-        padding-left: 16px;
-
-        @include on-tablet {
-            padding-left: 24px;
-            padding-bottom: 64px;
-        }
-
-        @include on-desktop {
-            padding-left: 32px;
-            max-width: 1200px;
-            margin-inline: auto;
-            padding-bottom: 80px;
-        }
-    }  
+  }
 }
 
-.swiper {    
+.swiper {
   &-slide {
     width: auto;
     flex: 0 0 auto;
     max-width: 212px;
-  
+
     @include on-tablet {
       max-width: 237px;
     }
-  
+
     @include on-desktop {
       max-width: 272px;
     }
-  }    
+  }
 }

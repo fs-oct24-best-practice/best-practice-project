@@ -5,7 +5,7 @@ const API_URL = '/data/';
 
 export async function getProductList(): Promise<Product[]> {
   try {
-    await setDelay(300);
+    await setDelay(200);
     const response = await fetch(`${API_URL}products.json`);
     if (!response.ok) {
       throw new Error(`${response.statusText}`);

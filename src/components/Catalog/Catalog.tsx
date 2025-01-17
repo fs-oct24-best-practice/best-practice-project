@@ -1,44 +1,28 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import { useState, FC, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
-import { Product } from '../../types/Product';
 import { Card } from '../Card/Card';
-
+import { Product } from '../../types';
 import styles from './Catalog.module.scss';
 import { CardSkeleton } from '../skeletons';
 
 type Props = {
-  products: Product[];
+  productList: Product[];
+  isLoading: boolean;
+  isError: boolean;
 };
 
-export const Catalog: React.FC<Props> = ({ products }) => {
-  // const [products, setProducts] = useState<Product[]>([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(false);
+export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
+  const [showSkeleton, setShowSkeleton] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    setShowSkeleton(isLoading);
+  }, [isLoading]);
 
   const sortOption = searchParams.get('sort') || 'model';
   const page = parseInt(searchParams.get('page') || '1', 10);
   const perPage = searchParams.get('perPage') || 'all';
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     setError(false);
-
-  //     try {
-  //       const data = await fetchProducts();
-  //       setProducts(data);
-  //     } catch {
-  //       setError(true);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [fetchProducts]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -60,13 +44,13 @@ export const Catalog: React.FC<Props> = ({ products }) => {
     });
   };
 
-  const sortedProducts = [...products].sort((a, b) => {
+  const sortedProducts = [...productList].sort((a, b) => {
     if (sortOption === 'alphabet') {
       return a.name.localeCompare(b.name);
     }
 
     if (sortOption === 'price') {
-      return a.priceRegular - b.priceRegular;
+      return a.fullPrice - b.fullPrice;
     }
 
     if (sortOption === 'model') {
@@ -92,46 +76,46 @@ export const Catalog: React.FC<Props> = ({ products }) => {
   });
 
   const itemsPerPage =
-    perPage === 'all' ? products.length : parseInt(perPage, 10);
+    perPage === 'all' ? productList.length : parseInt(perPage, 10);
 
   const paginatedProducts = sortedProducts.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const totalPages = Math.ceil(productList.length / itemsPerPage);
 
-  // if (isLoading) {
-  //   return (
-  //     <div className={styles.catalog__container}>
-  //       <ul className={styles.catalog__grid}>
-  //         {Array.from({ length: 8 }).map((_, index) => (
-  //           <li key={index} className={styles.catalog__card}>
-  //             <CardSkeleton />
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   );
-  // }
+  if (showSkeleton) {
+    return (
+      <div className={styles.catalog__container}>
+        <ul className={styles.catalog__grid}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <li key={index} className={styles.catalog__card}>
+              <CardSkeleton />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <div className={styles.catalog__container}>
-  //       <p className={styles.catalog__error}>
-  //         Something went wrong. Please try again.
-  //       </p>
-  //       <button
-  //         onClick={() => window.location.reload()}
-  //         className={styles.catalog__reload}
-  //       >
-  //         Reload
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  if (isError) {
+    return (
+      <div className={styles.catalog__container}>
+        <p className={styles.catalog__error}>
+          Something went wrong. Please try again.
+        </p>
+        <button
+          onClick={() => window.location.reload()}
+          className={styles.catalog__reload}
+        >
+          Reload
+        </button>
+      </div>
+    );
+  }
 
-  if (products.length === 0) {
+  if (productList.length === 0) {
     return <p className={styles.catalog__message}>No products available.</p>;
   }
 

@@ -1,20 +1,20 @@
 @use '@best-practice/styles/variables' as *;
-@use '../../utils/mixins' as mixins;
+@use '@best-practice/styles/mixins' as mixins;
 
-.footer{
+.footer {
   background-color: $white;
 
-  &__wrapper{
+  &__wrapper {
     height: $footer-height;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
     border-top: 1px solid $elements;
-  
+
     @include mixins.onMobile {
       height: auto;
-      flex-direction: column; 
+      flex-direction: column;
       gap: 32px;
       padding: 32px 24px;
     }
@@ -24,26 +24,26 @@
     display: flex;
     justify-content: space-between;
     @include mixins.onMobile {
-      flex-direction: column; 
+      flex-direction: column;
       gap: 16px;
     }
   }
 
-  &__item{
+  &__item {
     flex-grow: 1;
     @include mixins.onMobile {
       width: 100%;
     }
   }
 
-  &__links{
+  &__links {
     color: $secondary;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 800;
   }
 
-  &__back_to_top{
+  &__back_to_top {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -62,13 +62,11 @@
     height: 32px;
     width: 32px;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
     transition: border $transition;
-      &:hover {
-        border: 1px solid $primary;
-      }
+    &:hover {
+      border: 1px solid $primary;
+    }
   }
 }
-
-

@@ -1,93 +1,91 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/reset';
 @import '../../styles/fonts';
-@import '../../utils/mixins.scss';
+@import '../../styles/mixins.scss';
 
 .categories {
-    
-    &__content {
-        display: flex;
-        flex-direction: column;
-        gap: 32px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__title {
+    font-family: 'Mont', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 30.8px;
+    color: $primary;
+    margin-bottom: 24px;
+
+    @include on-tablet {
+      font-size: 32px;
+      line-height: 41px;
+      letter-spacing: -1%;
+    }
+  }
+
+  &__items {
+    @include on-tablet {
+      @include page-grid;
+    }
+  }
+
+  &__item {
+    grid-column: span 4;
+
+    @include on-desktop {
+      grid-column: span 8;
     }
 
-    &__title {
-        font-family: 'Mont', sans-serif;
-        font-weight: 800;
-        font-size: 22px;
-        line-height: 30.8px;
-        color: $primary;
-        margin-bottom: 24px;
+    &_link {
+      height: 288px;
+      width: 100%;
+      cursor: pointer;
 
-        @include on-tablet {
-            font-size: 32px;
-            line-height: 41px;
-            letter-spacing: -1%;
-        }
+      &-img {
+        height: 288px;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      &-img:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__info {
+    margin-top: 24px;
+
+    &--title {
+      font-family: 'Mont', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 25.56px;
+      color: $primary;
     }
 
-    &__items {
-        @include on-tablet {
-            @include page-grid;
-        }
+    &--text {
+      font-family: 'Mont', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      color: $secondary;
     }
-
-    &__item {
-        grid-column: span 4;
-
-        @include on-desktop {
-            grid-column: span 8;
-        }
-
-        &_link {
-            height: 288px;
-            width: 100%;
-            cursor: pointer;
-
-            &-img {
-            height: 288px;
-            width: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-            }
-
-            &-img:hover {
-            transform: scale(1.05);
-            }
-        }
-    }
-
-    &__info {
-        margin-top: 24px;
-
-        &--title {
-            font-family: 'Mont', sans-serif;
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 25.56px;
-            color: $primary;
-        }
-
-        &--text {
-            font-family: 'Mont', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 21px;
-            color: $secondary;
-        }
-    }
+  }
 }
 
 .container {
-    padding-inline: 5px;
+  padding-inline: 5px;
 
-    @include on-tablet {
-        padding-left: 10px;
-    }
+  @include on-tablet {
+    padding-left: 10px;
+  }
 
-    @include on-desktop {
-        padding-left: 32px;
-        max-width: 1200px;
-        margin-inline: auto;
-    }
+  @include on-desktop {
+    padding-left: 32px;
+    max-width: 1200px;
+    margin-inline: auto;
+  }
 }

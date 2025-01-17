@@ -8,7 +8,7 @@ import { FavoritePage } from './pages/FavoritePage';
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from './app/store';
+import store, { persistor } from './store/store';
 import { PhonesPage } from './pages/PhonesPage/PhonesPage';
 import { AccessoriesPage } from './pages/AccessoriesPage/AccessoriesPage';
 import { TabletsPage } from './pages/TabletsPage/TabletsPage';

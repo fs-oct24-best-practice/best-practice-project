@@ -9,7 +9,7 @@ import { Product } from '../../types/Product';
 import { useDispatch } from 'react-redux';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
-import { useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../hooks/hooks';
 
 type Props = {
   product: Product;
