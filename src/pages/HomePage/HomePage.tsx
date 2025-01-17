@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable */
+import { useEffect, useState, useLayoutEffect } from 'react';
 import { Product } from '../../types/Product';
 
 // import { getProducts } from '../../components/api/apiE';
@@ -7,20 +8,45 @@ import { Carousel } from '../../components/Carousel';
 import './HomePage.scss';
 import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
-import { getProductList } from '../../public-copy/api/api';
-import { ProductCategories } from '../../utils/ProductCategories';
+import { getProductList } from '../../api/getProductList';
+// import { ProductCategories } from '../../utils/ProductCategories';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [productList, setProductList] = useState<Product[]>([]);
+  // const [isError, setIsError] = useState(false);
 
+  // console.log('productList: ', productList);
   const isDiscount = true;
 
-  console.log(products);
+  // useLayoutEffect(() => {
+  //   async function fetchProductList() {
+  //     setIsError(false);
+  //     setIsLoading(true);
+  //     try {
+  //       const data = await fetchProductList();
+  //       console.log('data: ', data);
+  //       // const productList = await fetchProductList();
+
+  //       // const currentProductSpec = specsList.find((spec) => spec.id === itemId);
+  //       // if (currentProductSpec) {
+  //       //   setCurrentProductSpec(currentProductSpec);
+  //       // } else {
+  //       //   throw Error;
+  //       // }
+  //     } catch {
+  //       setIsError(true);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+
+  //   fetchProductList();
+  // }, []);
 
   useEffect(() => {
-    getProductList(ProductCategories.PRODUCTS)
-      .then((data) => setProducts(data))
+    getProductList()
+      .then((data) => setProductList(data))
       .catch(() => 'Unable to load data from server!')
       .finally(() => {
         setTimeout(() => {
@@ -33,9 +59,11 @@ export const HomePage = () => {
     window.scrollTo({ top: 0 });
   }, []);
 
-  const newProducts = [...products].filter((product) => product.year >= 2022);
+  const newProducts = [...productList].filter(
+    (product) => product.year >= 2022
+  );
 
-  const productsWithDiscount = [...products]
+  const productsWithDiscount = [...productList]
     .sort(
       (a, b) => b.fullPrice - (b.price || 0) - (a.fullPrice - (a.price || 0))
     )
@@ -63,7 +91,7 @@ export const HomePage = () => {
 
       <section className='categories'>
         <Categories
-          products={products}
+          products={productList}
           title={'Shop by category'}
           isLoading={isLoading}
         />

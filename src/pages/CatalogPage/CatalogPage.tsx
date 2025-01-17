@@ -1,6 +1,6 @@
 import React from 'react';
 import { Catalog } from '../../components/Catalog/Catalog';
-import { getProductList } from '../../public-copy/api/api';
+import { getProductList } from '../../_public/api/api';
 import { ProductCategories } from '../../utils/ProductCategories';
 import { Product } from '../../types/Product';
 

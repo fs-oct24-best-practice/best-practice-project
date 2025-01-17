@@ -2,18 +2,16 @@ import { Categories } from './Categories';
 
 export interface Product {
   id: number;
-  name: string;
-  itemId: string;
-  price?: number;
-  priceRegular: number;
-  priceDiscount?: number;
-  fullPrice: number;
   category: Categories;
+  itemId: string;
+  name: string;
+  fullPrice: number;
+  price?: number;
   screen: string;
   capacity: string;
   color: string;
   ram: string;
   year: number;
-  images: string[];
-  quantity: number;
+  image: string;
+  quantity?: number;
 }

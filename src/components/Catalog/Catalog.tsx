@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
@@ -12,33 +13,33 @@ type CatalogProps = {
   title: string;
 };
 
-export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+export const Catalog: React.FC<CatalogProps> = ({ products }) => {
+  // const [products, setProducts] = useState<Product[]>([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortOption = searchParams.get('sort') || 'model';
   const page = parseInt(searchParams.get('page') || '1', 10);
   const perPage = searchParams.get('perPage') || 'all';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(false);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true);
+  //     setError(false);
 
-      try {
-        const data = await fetchProducts();
-        setProducts(data);
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  //     try {
+  //       const data = await fetchProducts();
+  //       setProducts(data);
+  //     } catch {
+  //       setError(true);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, [fetchProducts]);
+  //   fetchData();
+  // }, [fetchProducts]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -93,41 +94,43 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
 
   const itemsPerPage =
     perPage === 'all' ? products.length : parseInt(perPage, 10);
+
   const paginatedProducts = sortedProducts.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
+
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
-  if (isLoading) {
-    return (
-      <div className={styles.catalog__container}>
-        <ul className={styles.catalog__grid}>
-          {Array.from({ length: 8 }).map((_, index) => (
-            <li key={index} className={styles.catalog__card}>
-              <CardSkeleton />
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className={styles.catalog__container}>
+  //       <ul className={styles.catalog__grid}>
+  //         {Array.from({ length: 8 }).map((_, index) => (
+  //           <li key={index} className={styles.catalog__card}>
+  //             <CardSkeleton />
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     </div>
+  //   );
+  // }
 
-  if (error) {
-    return (
-      <div className={styles.catalog__container}>
-        <p className={styles.catalog__error}>
-          Something went wrong. Please try again.
-        </p>
-        <button
-          onClick={() => window.location.reload()}
-          className={styles.catalog__reload}
-        >
-          Reload
-        </button>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className={styles.catalog__container}>
+  //       <p className={styles.catalog__error}>
+  //         Something went wrong. Please try again.
+  //       </p>
+  //       <button
+  //         onClick={() => window.location.reload()}
+  //         className={styles.catalog__reload}
+  //       >
+  //         Reload
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   if (products.length === 0) {
     return <p className={styles.catalog__message}>No products available.</p>;
@@ -135,8 +138,6 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
 
   return (
     <div className={styles.catalog__container}>
-      <h1 className={styles.catalog__title}>{title}</h1>
-
       <div className={styles.catalog__filters}>
         <select
           value={sortOption}
