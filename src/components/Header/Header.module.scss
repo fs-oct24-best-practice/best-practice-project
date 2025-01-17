@@ -6,6 +6,9 @@
   gap: 24px;
   align-items: center;
   position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
   background-color: $background;
   border-bottom: 3px solid $elements;
   height: 64px;

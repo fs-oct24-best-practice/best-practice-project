@@ -14,7 +14,7 @@ export interface ProductSpec {
   priceDiscount?: number;
   colorsAvailable: string[];
   color: string;
-  image: string[];
+  images: string[];
   description: ProductDescription[];
   screen?: string;
   resolution: string;

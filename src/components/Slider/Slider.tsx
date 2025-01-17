@@ -19,8 +19,7 @@ type Props = {
   isLoading: boolean;
 };
 
-
-export const Slider: React.FC<Props> = ({ products, title }) => {
+export const Slider: React.FC<Props> = ({ products, title, isLoading }) => {
   const swiperRef = useRef<SwiperRef | null>(null);
 
   const handlePrevClick = () => {
@@ -30,7 +29,7 @@ export const Slider: React.FC<Props> = ({ products, title }) => {
   const handleNextClick = () => {
     swiperRef.current?.swiper.slideNext();
   };
-    
+
   return (
     <div className='slider'>
       <div className='slider__container'>
@@ -63,25 +62,21 @@ export const Slider: React.FC<Props> = ({ products, title }) => {
           freeMode={true}
           className='swiper'
         >
-
           {isLoading
             ? Array.from({ length: 4 }).map((_, index) => (
-                <SwiperSlide key={index}
-                  virtualIndex={index}>
+                <SwiperSlide key={index} virtualIndex={index}>
                   <CardSkeleton />
                 </SwiperSlide>
               ))
-           
             : products.map((product, index) => (
-            <SwiperSlide
-              key={product.id}
-              virtualIndex={index}
-              className='swiper-slide'
-            >
-              <Card product={product} />
-            </SwiperSlide>
-          ))}
-
+                <SwiperSlide
+                  key={product.id}
+                  virtualIndex={index}
+                  className='swiper-slide'
+                >
+                  <Card product={product} />
+                </SwiperSlide>
+              ))}
         </Swiper>
       </div>
     </div>

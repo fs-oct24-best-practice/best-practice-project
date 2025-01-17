@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 
-import { getProducts } from '../../components/api/apiE';
+// import { getProducts } from '../../components/api/apiE';
 import { Carousel } from '../../components/Carousel';
 
 import './HomePage.scss';

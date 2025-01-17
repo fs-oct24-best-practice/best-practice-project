@@ -13,7 +13,7 @@ body:has(.slideDown) {
 }
 
 .searchContainer {
-  position: relative;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,6 +58,7 @@ body:has(.slideDown) {
   margin-right: 8px;
   width: 100%;
   transition: max-width 0.5s ease-in-out;
+  
 
   @media (max-width: 1200px) {
     position: fixed;
@@ -76,7 +77,8 @@ body:has(.slideDown) {
 }
 
 .slideDown {
-  max-width: 200px;
+  max-width: 100%;
+  right: 0;
 
   @media (max-width: 1200px) {
     max-width: 100%;
