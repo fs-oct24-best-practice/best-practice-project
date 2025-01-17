@@ -6,6 +6,13 @@
 .slider {
     margin-top: 56px;
 
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
     &__title {
         font-family: 'Mont', sans-serif;
         font-weight: 800;
@@ -14,11 +21,25 @@
         color: $primary;
 
         @include on-tablet {
-            width: 100%;
             font-size: 32px;
             line-height: 42px;
             letter-spacing: 1%;
         }
+    }
+
+    &__buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .slider__arrow {
+      border: 1px solid $elements;      
+      width: 32px;
+      height: 32px;
+      
+      &:hover {
+        border: 1px solid $icons;
+    }
     }
 
     &__container {
@@ -26,74 +47,30 @@
 
         @include on-tablet {
             padding-left: 24px;
+            padding-bottom: 64px;
         }
 
         @include on-desktop {
             padding-left: 32px;
             max-width: 1200px;
             margin-inline: auto;
+            padding-bottom: 80px;
         }
-    }
+    }  
 }
 
-.swiper {
-    padding-top: 100px;
-    position: relative;
-    top: -50px;
-    width: 100%;
-    height: 100%;
-    
-    &--slide {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;  
-        
-        img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.swiper {    
+  &-slide {
+    width: auto;
+    flex: 0 0 auto;
+    max-width: 212px;
+  
+    @include on-tablet {
+      max-width: 237px;
     }
-
-    &-button-prev {
-        position: absolute;
-        top: 50px;
-        left: 93%;
-        color: $secondary;
-        border: 1px solid $icons;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-
-        &::after {
-            font-size: 10px;
-        }
+  
+    @include on-desktop {
+      max-width: 272px;
     }
-
-    &-button-next {
-        position: absolute;
-        top: 50px;
-        right: 0px;
-        color: $secondary;
-        border: 1px solid $icons;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &::after {
-            font-size: 10px;
-        }
-    }
-
-    &-button-disabled {
-        color: $icons;
-        border: 1px solid $elements;
-    }
+  }    
 }
