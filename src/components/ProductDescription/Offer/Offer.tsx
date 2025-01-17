@@ -1,18 +1,24 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
-
+import { NavLink, useLocation } from 'react-router-dom';
 import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './Offer.module.scss';
 
+import {
+  browserSupportedColors,
+  replaceSpaceWithDash,
+  sortStrings,
+  createNewItemId,
+} from '..';
+import { ActionButtons } from '../../ActionButtons/ActionButtons';
+
 type Props = {
   currentProductSpec: ProductSpec;
-  handleChangeColor: (color: string) => void;
-  handleChangeCapacity: (capacity: string) => void;
 };
 
 export const Offer: FC<Props> = (props) => {
   const {
     currentProductSpec: {
+      id,
       colorsAvailable,
       namespaceId,
       capacityAvailable,
@@ -22,28 +28,36 @@ export const Offer: FC<Props> = (props) => {
       resolution,
       processor,
       ram,
+      capacity,
+      color,
     },
-    handleChangeColor,
-    handleChangeCapacity,
   } = props;
 
+  const location = useLocation();
+
+  const category = location.pathname.split('/')[1];
+
   return (
-    <>
+    <div>
       <div>
         <p>Available colors</p>
         <div className={styles.colors}>
-          {colorsAvailable.map((color: string) => {
+          {sortStrings(colorsAvailable).map((color: string) => {
+            const currentColor: string =
+              replaceSpaceWithDash(color).toLowerCase();
             return (
-              <Link
-                to='#' // ❗ тимчасово. подумати як підключити логику маршрутизації
-                key={color}
+              <NavLink
+                to={`/${category}/${createNewItemId(
+                  namespaceId,
+                  capacity,
+                  currentColor
+                )}`}
+                key={currentColor}
                 className={styles.colors__selector}
-                style={{ backgroundColor: color }}
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  handleChangeColor(color);
+                style={{
+                  backgroundColor: browserSupportedColors[currentColor],
                 }}
-              ></Link>
+              ></NavLink>
             );
           })}
         </div>
@@ -56,19 +70,19 @@ export const Offer: FC<Props> = (props) => {
       <div>
         <p>Select capacity</p>
         <div className={styles.capacity}>
-          {capacityAvailable.map((capacity) => {
+          {sortStrings(capacityAvailable).map((capacity) => {
             return (
-              <Link
-                to='#' // ❗ тимчасово. подумати як підключити логику маршрутизації
+              <NavLink
+                to={`/${category}/${createNewItemId(
+                  namespaceId,
+                  capacity,
+                  replaceSpaceWithDash(color).toLowerCase()
+                )}`}
                 className={styles.capacity__selector}
                 key={capacity}
-                onClick={(evt) => {
-                  evt.preventDefault();
-                  handleChangeCapacity(capacity);
-                }}
               >
                 {capacity}
-              </Link>
+              </NavLink>
             );
           })}
         </div>
@@ -82,11 +96,7 @@ export const Offer: FC<Props> = (props) => {
         <p>{priceRegular}</p>
       </div>
 
-      <div>
-        <button>Add to cart</button>
-
-        <button>Add to favourites</button>
-      </div>
+      <ActionButtons category={category} currentProductId={id} />
 
       <div>
         <div>
@@ -106,6 +116,6 @@ export const Offer: FC<Props> = (props) => {
           <p>{ram}</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };

@@ -3,27 +3,20 @@ import { Offer, About, PhotosBlock, TechSpecs } from '.';
 import { ProductSpec } from '../../types';
 
 type Props = {
-  currentProduct: ProductSpec;
-  handleChangeColor: (color: string) => void;
-  handleChangeCapacity: (capacity: string) => void;
+  currentProductSpec: ProductSpec;
 };
 
-export const ProductDescription: FC<Props> = ({
-  currentProduct,
-  handleChangeColor,
-  handleChangeCapacity,
-}) => {
+export const ProductDescription: FC<Props> = (props) => {
+  const { currentProductSpec } = props;
   return (
-    <>
-      <h2>{currentProduct.name}</h2>
-      <PhotosBlock currentProductSpec={currentProduct} />
-      <Offer
-        currentProductSpec={currentProduct}
-        handleChangeColor={handleChangeColor}
-        handleChangeCapacity={handleChangeCapacity}
-      />
-      <About currentProductSpec={currentProduct} />
-      <TechSpecs currentProductSpec={currentProduct} />
-    </>
+    <section className=''>
+      <h2>{currentProductSpec.name}</h2>
+      <div>
+        <PhotosBlock currentProductSpec={currentProductSpec} />
+        <Offer currentProductSpec={currentProductSpec} />
+        <About currentProductSpec={currentProductSpec} />
+        <TechSpecs currentProductSpec={currentProductSpec} />
+      </div>
+    </section>
   );
 };

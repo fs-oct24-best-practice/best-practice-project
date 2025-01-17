@@ -19,49 +19,48 @@ export const TechSpecs: FC<Props> = (props) => {
   return (
     <>
       <h3>Tech specs</h3>
-      <table>
-        <tbody>
-          <tr>
-            <td>Screen</td>
-            <td className='text-smtext-red-600 text-lg'>{screen}</td>
-          </tr>
 
-          <tr>
-            <td>Resolution</td>
-            <td>{resolution}</td>
-          </tr>
+      <div>
+        <div>
+          <p>Screen</p>
+          <p className='text-smtext-red-600 text-lg'>{screen}</p>
+        </div>
 
-          <tr>
-            <td>Processor</td>
-            <td>{processor}</td>
-          </tr>
+        <div>
+          <p>Resolution</p>
+          <p>{resolution}</p>
+        </div>
 
-          <tr>
-            <td>RAM</td>
-            <td>{ram}</td>
-          </tr>
+        <div>
+          <p>Processor</p>
+          <p>{processor}</p>
+        </div>
 
-          <tr>
-            <td>Built in memory</td>
-            <td>{capacity}</td>
-          </tr>
+        <div>
+          <p>RAM</p>
+          <p>{ram}</p>
+        </div>
 
-          <tr>
-            <td>Camera</td>
-            <td>{camera}</td>
-          </tr>
+        <div>
+          <p>Built in memory</p>
+          <p>{capacity}</p>
+        </div>
 
-          <tr>
-            <td>Zoom</td>
-            <td>{zoom}</td>
-          </tr>
+        <div>
+          <p>Camera</p>
+          <p>{camera}</p>
+        </div>
 
-          <tr>
-            <td>Cell</td>
-            <td>{cell?.join(', ')}</td>
-          </tr>
-        </tbody>
-      </table>
+        <div>
+          <p>Zoom</p>
+          <p>{zoom}</p>
+        </div>
+
+        <div>
+          <p>Cell</p>
+          <p>{cell?.join(', ')}</p>
+        </div>
+      </div>
     </>
   );
 };

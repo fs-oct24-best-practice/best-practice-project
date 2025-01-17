@@ -1,1 +1,2 @@
-export * from './getSpecsList';
+export * from './getSpecList';
+export * from './getProductList';

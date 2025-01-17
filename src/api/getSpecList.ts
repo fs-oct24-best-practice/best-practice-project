@@ -1,13 +1,11 @@
 import { ProductSpec, Categories } from '../types';
-import { setDelay } from '../utils';
 
 const API_URL = '/api/';
 
-export async function getSpecsList(
+export async function getSpecList(
   category: Categories
 ): Promise<ProductSpec[]> {
   try {
-    await setDelay(300);
     const response = await fetch(`${API_URL}${category}.json`);
     if (!response.ok) {
       throw new Error(`${response.statusText}`);
