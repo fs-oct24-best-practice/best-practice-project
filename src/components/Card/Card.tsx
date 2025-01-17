@@ -52,7 +52,7 @@ export const Card: React.FC<CardItemProps> = ({ product }) => {
     <div className={styles.product_card}>
       <img
         className={styles.product_card__image}
-        src={product.images[0]}
+        src={product.image}
         alt={`${product.name} Image`}
       />
       <Link

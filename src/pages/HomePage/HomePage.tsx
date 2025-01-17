@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
+
 import { getProducts } from '../../components/api/apiE';
 import { Carousel } from '../../components/Carousel';
 
 import './HomePage.scss';
 import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
+import { getProductList } from '../../public-copy/api/api';
+import { ProductCategories } from '../../utils/ProductCategories';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,8 +16,10 @@ export const HomePage = () => {
 
   const isDiscount = true;
 
+  console.log(products);
+
   useEffect(() => {
-    getProducts()
+    getProductList(ProductCategories.PRODUCTS)
       .then((data) => setProducts(data))
       .catch(() => 'Unable to load data from server!')
       .finally(() => {
