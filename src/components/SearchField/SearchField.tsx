@@ -34,16 +34,14 @@ export const SearchField: React.FC = () => {
   const fetchProducts = (query: string) => {
     const preparedQuery = query.trim().toLowerCase();
 
-    getProductList(ProductCategories.PHONES).then(
-      (productsFromServer: Product[]) => {
-        const filteredProducts = productsFromServer.filter(
-          (product: Product) =>
-            preparedQuery !== '' &&
-            product.name.toLowerCase().includes(preparedQuery)
-        );
-        setProducts(filteredProducts);
-      }
-    );
+    getProductList().then((productsFromServer: Product[]) => {
+      const filteredProducts = productsFromServer.filter(
+        (product: Product) =>
+          preparedQuery !== '' &&
+          product.name.toLowerCase().includes(preparedQuery)
+      );
+      setProducts(filteredProducts);
+    });
   };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchProductsWithDelay = useCallback(debounce(fetchProducts, 500), [
@@ -102,7 +100,7 @@ export const SearchField: React.FC = () => {
       >
         <div>
           <img
-            src={product.images[0]}
+            src={product.image}
             alt={product.name}
             className={styles.image}
           />
