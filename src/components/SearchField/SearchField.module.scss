@@ -29,7 +29,7 @@ body:has(.slideDown) {
   cursor: pointer;
   width: 48px;
   height: 48px;
-  margin-right: 5px;
+  //margin-right: 5px;
   background-image: url(../../assets/icons/search_icons/search-alt-2.svg);
   background-position: center;
   background-size: 20px 20px;
@@ -53,8 +53,10 @@ body:has(.slideDown) {
 }
 
 .searchInput {
-  height: 30px;
+  height: px;
   overflow: hidden;
+  margin-right: 8px;
+  width: 100%;
   transition: max-width 0.5s ease-in-out;
 
   @media (max-width: 1200px) {
@@ -101,13 +103,13 @@ input[type='text'] {
   width: 400px;
   overflow: hidden;
   height: 500px;
-  z-index: 2;
+  z-index: 1000;
 
   @media (max-width: 1200px) {
     position: fixed;
     top: 140px;
     left: 20%;
-    z-index: 10;
+    z-index: 1000;
     width: 60%;
   }
 }
@@ -119,6 +121,8 @@ input[type='text'] {
   background-color: $elements-color;
   border-bottom: 1px solid $secondary-color;
   box-sizing: border-box;
+  z-index: 1000;
+
 }
 
 .searchClose {

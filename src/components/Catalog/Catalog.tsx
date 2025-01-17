@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
-import { Loader } from '../Loader';
 import { Product } from '../../types/Product';
 import { Card } from '../Card/Card';
+
 import styles from './Catalog.module.scss';
+import { CardSkeleton } from '../skeletons';
 
 type CatalogProps = {
   fetchProducts: () => Promise<Product[]>;
@@ -99,7 +100,17 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className={styles.catalog__container}>
+        <ul className={styles.catalog__grid}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <li key={index} className={styles.catalog__card}>
+              <CardSkeleton />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 
   if (error) {

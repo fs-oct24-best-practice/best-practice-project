@@ -10,12 +10,15 @@ import prevArrow from '../../assets/icons/arrow-left.svg';
 import nextArrow from '../../assets/icons/arrow-right.svg';
 
 import './Slider.scss';
+import { CardSkeleton } from '../skeletons';
 
 type Props = {
   products: Product[];
   discount?: boolean;
   title: string;
+  isLoading: boolean;
 };
+
 
 export const Slider: React.FC<Props> = ({ products, title }) => {
   const swiperRef = useRef<SwiperRef | null>(null);
@@ -27,7 +30,7 @@ export const Slider: React.FC<Props> = ({ products, title }) => {
   const handleNextClick = () => {
     swiperRef.current?.swiper.slideNext();
   };
-
+    
   return (
     <div className='slider'>
       <div className='slider__container'>
@@ -60,7 +63,16 @@ export const Slider: React.FC<Props> = ({ products, title }) => {
           freeMode={true}
           className='swiper'
         >
-          {products.map((product, index) => (
+
+          {isLoading
+            ? Array.from({ length: 4 }).map((_, index) => (
+                <SwiperSlide key={index}
+                  virtualIndex={index}>
+                  <CardSkeleton />
+                </SwiperSlide>
+              ))
+           
+            : products.map((product, index) => (
             <SwiperSlide
               key={product.id}
               virtualIndex={index}
@@ -69,6 +81,7 @@ export const Slider: React.FC<Props> = ({ products, title }) => {
               <Card product={product} />
             </SwiperSlide>
           ))}
+
         </Swiper>
       </div>
     </div>
