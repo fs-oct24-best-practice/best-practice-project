@@ -8,8 +8,8 @@ import favourites_filled_icon from '/img/icons/FavouritesFilled.svg';
 import { Product } from '../../types';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
-import { useAppSelector } from '../../app/hooks';
-import { getProductList } from '../../public-copy/api/api';
+import { useAppSelector } from '../../hooks/hooks';
+import { getProductList } from '../../api/getProductList';
 import styles from '../Card/Card.module.scss';
 
 function isProductInList(products: Product[], product: Product) {

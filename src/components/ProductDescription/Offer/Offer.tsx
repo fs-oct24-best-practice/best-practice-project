@@ -9,7 +9,7 @@ import {
   sortStrings,
   createNewItemId,
 } from '..';
-import { ActionButtons } from '../../ActionButtons/ActionButtons';
+// import { ActionButtons } from '../../ActionButtons/ActionButtons';
 
 type Props = {
   currentProductSpec: ProductSpec;
@@ -18,7 +18,7 @@ type Props = {
 export const Offer: FC<Props> = (props) => {
   const {
     currentProductSpec: {
-      id,
+      // id,
       colorsAvailable,
       namespaceId,
       capacityAvailable,
@@ -96,7 +96,7 @@ export const Offer: FC<Props> = (props) => {
         <p>{priceRegular}</p>
       </div>
 
-      <ActionButtons category={category} currentProductId={id} />
+      {/* <ActionButtons category={category} currentProductId={id} /> */}
 
       <div>
         <div>

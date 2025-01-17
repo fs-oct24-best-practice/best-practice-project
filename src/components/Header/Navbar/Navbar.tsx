@@ -3,7 +3,7 @@ import cn from 'classnames';
 import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
 import { SearchField } from '../../SearchField/SearchField';
-import { useAppSelector } from '../../../app/hooks';
+import { useAppSelector } from '../../../hooks/hooks';
 
 export const Navbar = () => {
   const favoritesLength = useAppSelector(

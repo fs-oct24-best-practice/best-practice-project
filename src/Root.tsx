@@ -5,11 +5,13 @@ import { NotFoundPage } from './pages/NotFoundPage';
 import { ProductDetailsPage } from './pages/ProductDetailsPage';
 import { CartPage } from './pages/CartPage';
 import { FavoritePage } from './pages/FavoritePage';
-import { CatalogPage } from './pages/CatalogPage/CatalogPage';
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from './app/store';
+import store, { persistor } from './store/store';
+import { PhonesPage } from './pages/PhonesPage/PhonesPage';
+import { AccessoriesPage } from './pages/AccessoriesPage/AccessoriesPage';
+import { TabletsPage } from './pages/TabletsPage/TabletsPage';
 
 export const Root = () => {
   return (
@@ -20,6 +22,19 @@ export const Root = () => {
             <Route path='/' element={<App />}>
               <Route path='home' element={<Navigate to='/' replace />} />
               <Route index element={<HomePage />} />
+              <Route path='phones'>
+                <Route index element={<PhonesPage />} />
+                <Route path=':itemId' element={<ProductDetailsPage />} />
+              </Route>
+              <Route path='tablets'>
+                <Route index element={<TabletsPage />} />
+                <Route path=':itemId' element={<ProductDetailsPage />} />
+              </Route>
+              <Route path='accessories'>
+                <Route index element={<AccessoriesPage />} />
+                <Route path=':itemId' element={<ProductDetailsPage />} />
+              </Route>
+              {/*
               <Route
                 path='phones'
                 element={<CatalogPage category='phones' />}
@@ -28,6 +43,7 @@ export const Root = () => {
                 path='phones/:itemId'
                 element={<ProductDetailsPage />}
               ></Route>
+             
               <Route
                 path='tablets'
                 element={<CatalogPage category='tablets' />}
@@ -44,6 +60,7 @@ export const Root = () => {
                 path='accessories/:itemId'
                 element={<ProductDetailsPage />}
               ></Route>
+               */}
               <Route path='favorite' element={<FavoritePage />} />
               <Route path='cart' element={<CartPage />} />
               <Route path='*' element={<NotFoundPage />} />
