@@ -1,7 +1,7 @@
 import { Product } from '../types';
 import { setDelay } from '../utils';
 
-const API_URL = '/api/';
+const API_URL = '/data/';
 
 export async function getProductList(): Promise<Product[]> {
   try {

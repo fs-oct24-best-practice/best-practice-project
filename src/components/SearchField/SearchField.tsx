@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './SearchField.module.scss';
 import { Product } from '../../types/Product';
-import { getProductList } from '../../_public/api/api';
+import { getProductList } from '../../api/getProductList';
 import { Link, useParams } from 'react-router-dom';
 import { RoutesPathes } from '../../utils/RoutesPathes';
 import { ProductCategories } from '../../utils/ProductCategories';

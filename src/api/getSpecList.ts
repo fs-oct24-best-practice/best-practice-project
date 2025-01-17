@@ -1,6 +1,6 @@
 import { ProductSpec, Categories } from '../types';
 
-const API_URL = '/api/';
+const API_URL = '/data/';
 
 export async function getSpecList(
   category: Categories

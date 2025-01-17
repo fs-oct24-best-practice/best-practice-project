@@ -9,7 +9,7 @@ import { Product } from '../../types';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
 import { useAppSelector } from '../../app/hooks';
-import { getProductList } from '../../_public/api/api';
+import { getProductList } from '../../api/getProductList';
 import styles from '../Card/Card.module.scss';
 
 function isProductInList(products: Product[], product: Product) {

@@ -1,8 +1,6 @@
-/* eslint-disable */
-import { useEffect, useState, useLayoutEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 
-// import { getProducts } from '../../components/api/apiE';
 import { Carousel } from '../../components/Carousel';
 
 import './HomePage.scss';
