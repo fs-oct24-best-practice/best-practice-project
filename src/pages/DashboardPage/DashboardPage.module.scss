@@ -1,0 +1,110 @@
+@use '@best-practice/styles/variables' as *;
+
+.dashboard-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: $background;
+  min-height: 100vh;
+
+  h2 {
+    font-size: 24px;
+    color: $primary;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: $secondary;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .logout-button {
+    padding: 12px 20px;
+    border: 1px solid $elements;
+    background-color: $primary;
+    color: $white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 30px;
+
+    &:hover {
+      background-color: $hover;
+      color: $green;
+    }
+
+    &:disabled {
+      background-color: $secondary;
+      color: $elements;
+      cursor: not-allowed;
+    }
+  }
+
+  .orders-section {
+    width: 100%;
+    max-width: 600px;
+    background-color: $white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    h3 {
+      font-size: 20px;
+      color: $primary;
+      margin-bottom: 20px;
+    }
+
+    .order-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+
+      button {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid $elements;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        background-color: $background;
+        color: $primary;
+
+        &.active {
+          background-color: $primary;
+          color: $white;
+        }
+
+        &:hover {
+          background-color: $hover;
+          color: $green;
+        }
+      }
+    }
+
+    .order-content {
+      font-size: 16px;
+      color: $secondary;
+
+      h4 {
+        font-size: 18px;
+        color: $primary;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 14px;
+        color: $secondary;
+      }
+    }
+  }
+}

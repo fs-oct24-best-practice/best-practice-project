@@ -1,0 +1,113 @@
+@use '@best-practice/styles/variables' as *;
+
+.auth-page {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $background;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  min-width: 320px;
+  padding: 30px;
+  background-color: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form {
+  width: 100%;
+  background-color: $white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  h2 {
+    font-size: 24px;
+    color: $primary;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .Field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  label {
+    font-size: 14px;
+    color: $primary-search-color;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid $elements;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .FieldError {
+    color: $red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  button {
+    padding: 12px;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid $elements;
+    background-color: $primary;
+    color: $white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+
+    &:disabled {
+      background-color: $secondary;
+      color: $elements;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: $hover;
+      color: $green;
+    }
+  }
+
+  .switch-form {
+    text-align: center;
+
+    button {
+      background: none;
+      border: none;
+      color: $primary;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+  }
+
+  h3 {
+    font-size: 16px;
+    color: $secondary;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
