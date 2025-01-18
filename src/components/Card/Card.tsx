@@ -5,8 +5,7 @@ import favourites_icon from '/img/icons/Favourites.svg';
 import favourites_filled_icon from '/img/icons/FavouritesFilled.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
-import { Toaster, toast } from 'react-hot-toast';
-import toastStyles from './Toaster/toastStyles.module.scss';
+import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
@@ -140,13 +139,6 @@ export const Card: React.FC<Props> = ({ product }) => {
           />
         </button>
       </div>
-      <Toaster
-        position='bottom-right'
-        reverseOrder={false}
-        toastOptions={{
-          className: toastStyles.customToast,
-        }}
-      />
     </div>
   );
 };

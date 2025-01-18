@@ -1,9 +1,8 @@
-@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/variables' as *; 
 
-.customToast{
+.customToast {
   font-family: 'Mont-SemiBold', sans-serif;
   font-size: 16px;
-  box-shadow: none;
-  padding: 24px;
+  padding: 20px !important;
   border: 1px solid #e0e0e0;
 }
