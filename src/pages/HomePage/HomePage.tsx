@@ -1,19 +1,20 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 
-import { Carousel } from '../../components/Carousel';
+//import { BannerSlider } from '../../components/BannerSlider';
 
 import styles from './HomePage.module.scss';
 import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
 import { getProductList } from '../../api/getProductList';
+import { Carousel } from '../../components/Carousel';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [productList, setProductList] = useState<Product[]>([]);
   const isDiscount = true;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     getProductList()
       .then((data) => setProductList(data))
       .catch(() => 'Unable to load data from server!')

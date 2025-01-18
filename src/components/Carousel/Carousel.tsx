@@ -1,5 +1,5 @@
 import './Carousel.scss';
-
+import bannerVideo from '../../assets/banner-images/nice-gadjets-promo-Clipchamp.mp4';
 import bannerAccessories from '../../assets/banner-images/banner-accessories.png';
 import bannerPhones from '../../assets/banner-images/banner-phones.png';
 import bannerTablets from '../../assets/banner-images/banner-tablets.png';
@@ -8,20 +8,36 @@ import arrowRight from '../../assets/icons/arrow-right.svg';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-const bannerImages = [bannerAccessories, bannerPhones, bannerTablets];
+const bannerSlides = [
+  { type: 'video', src: bannerVideo },
+  { type: 'image', src: bannerAccessories },
+  { type: 'image', src: bannerPhones },
+  { type: 'image', src: bannerTablets },
+];
 
 export const Carousel = () => {
   const firstSlideIndex = 0;
-  const lastSlideIndex = bannerImages.length - 1;
+  const lastSlideIndex = bannerSlides.length - 1;
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(firstSlideIndex);
   const [sliderWidth, setSliderWidth] = useState(0);
 
   const banner = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const transformValue = sliderWidth * currentSlideIndex;
 
+  const clearExistingTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
   const handlePrevSlide = () => {
+    clearExistingTimeout();
+
     if (currentSlideIndex !== firstSlideIndex) {
       setCurrentSlideIndex(currentSlideIndex - 1);
     } else {
@@ -30,6 +46,8 @@ export const Carousel = () => {
   };
 
   const handleNextSlide = useCallback(() => {
+    clearExistingTimeout();
+
     if (currentSlideIndex !== lastSlideIndex) {
       setCurrentSlideIndex(currentSlideIndex + 1);
     } else {
@@ -38,6 +56,8 @@ export const Carousel = () => {
   }, [currentSlideIndex, lastSlideIndex]);
 
   const handleDotActive = (index: number) => {
+    clearExistingTimeout();
+
     setCurrentSlideIndex(index);
   };
 
@@ -45,14 +65,34 @@ export const Carousel = () => {
     if (banner.current) {
       setSliderWidth(banner.current.offsetWidth);
     }
-  }, [currentSlideIndex]);
+  }, []);
 
   useEffect(() => {
-    const timerID = setInterval(() => {
-      handleNextSlide();
-    }, 5000);
+    const currentSlide = bannerSlides[currentSlideIndex];
+    clearExistingTimeout();
 
-    return () => clearInterval(timerID);
+    if (currentSlide.type === 'video' && videoRef.current) {
+      const video = videoRef.current;
+      video.currentTime = 0;
+
+      video.play();
+
+      const onVideoEnd = () => {
+        handleNextSlide();
+      };
+
+      video.addEventListener('ended', onVideoEnd);
+
+      return () => {
+        video.removeEventListener('ended', onVideoEnd);
+      };
+    } else {
+      timeoutRef.current = window.setTimeout(() => {
+        handleNextSlide();
+      }, 5000);
+    }
+
+    return () => clearExistingTimeout();
   }, [currentSlideIndex, handleNextSlide]);
 
   return (
@@ -73,15 +113,32 @@ export const Carousel = () => {
               transform: `translateX(-${transformValue}px)`,
             }}
           >
-            {bannerImages.map((img) => (
-              <li className='Carousel__slider-item' key={img}>
-                <img
-                  className='Carousel__slider-image'
-                  src={img}
-                  alt='Banner image'
-                />
-              </li>
-            ))}
+            {bannerSlides.map((slide, index) =>
+              slide.type === 'video' ? (
+                <li className='Carousel__slider-item' key={index}>
+                  <div className='Carousel__video-container'>
+                    <video
+                      ref={videoRef}
+                      style={{
+                        width: '100%',
+                        objectFit: 'cover',
+                      }}
+                      className='Carousel__slider-video'
+                      src={slide.src}
+                      muted
+                    />
+                  </div>
+                </li>
+              ) : (
+                <li className='Carousel__slider-item' key={index}>
+                  <img
+                    className='Carousel__slider-image'
+                    src={slide.src}
+                    alt={`Slide ${index + 1}`}
+                  />
+                </li>
+              )
+            )}
           </ul>
         </div>
 
@@ -95,8 +152,8 @@ export const Carousel = () => {
       </div>
 
       <div className='Carousel__dots'>
-        {bannerImages.map((img, i) => (
-          <label className='Carousel__dots-container' key={img}>
+        {bannerSlides.map((_, i) => (
+          <label className='Carousel__dots-container' key={i}>
             <button
               type='button'
               className={classNames('Carousel__dots-item', {
