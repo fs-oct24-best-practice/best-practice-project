@@ -1,3 +1,5 @@
+@use '@best-practice/styles/mixins' as *;
+
 .cart__item {
 	height: 128px;
 	display: flex;
@@ -16,7 +18,7 @@
 	&__image {
 		height: 88px;
 
-		@media (max-width: 639px) {
+		@include onMobile  {
 			margin-left: 18px;
 		}
 	}
@@ -29,12 +31,12 @@
 			text-decoration: none;
 			color: #313237;
 
-			@media (max-width: 639px) {
+			@include onMobile {
 				font-size: 12px;
 			}
 		}
 
-		@media (max-width: 639px) {
+		@include onMobile {
 			margin-left: 40px;
 		}
 	}
@@ -83,7 +85,7 @@
 		all: unset;
 	}
 
-	@media (max-width: 639px) {
+	@include onMobile {
 		flex-wrap: wrap;
 		gap: 0;
 		height: 190px;
