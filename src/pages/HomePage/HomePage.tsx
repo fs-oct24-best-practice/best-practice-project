@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 
-//import { BannerSlider } from '../../components/BannerSlider';
-
 import styles from './HomePage.module.scss';
 import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
@@ -24,8 +22,6 @@ export const HomePage = () => {
         }, 500);
       });
   }, []);
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
