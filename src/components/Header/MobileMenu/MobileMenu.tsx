@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
@@ -9,9 +9,7 @@ type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const MobileMenu: FC<Props> = (props) => {
-  const { isOpen, setIsOpen } = props;
-
+export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.menu__link]: true,
@@ -23,22 +21,32 @@ export const MobileMenu: FC<Props> = (props) => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
-    <nav className={styles.menu}>
+    <nav className={cn(styles.menu, { [styles.menu_open]: isOpen })}>
       <ul className={styles.menu__pages}>
-        {Object.entries(Pages).map((page) => {
-          return (
-            <li key={page[0]} className={styles.menu__page}>
-              <NavLink
-                className={setNavClasses}
-                to={`/${page[1]}`}
-                onClick={toggleMenu}
-              >
-                {page[0]}
-              </NavLink>
-            </li>
-          );
-        })}
+        {Object.entries(Pages).map(([name, path]) => (
+          <li key={name} className={styles.menu__page}>
+            <NavLink
+              className={setNavClasses}
+              to={`/${path}`}
+              onClick={toggleMenu}
+            >
+              {name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
 
       <ul className={styles.menu__chosen}>

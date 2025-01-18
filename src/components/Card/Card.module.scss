@@ -136,6 +136,7 @@
   }
 
   &__buy {
+    all: unset;
     text-decoration: none;
     color: $white;
     background-color: $primary;
