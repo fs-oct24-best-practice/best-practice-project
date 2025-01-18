@@ -28,6 +28,10 @@
 		&__title {
 			text-decoration: none;
 			color: #313237;
+
+			@media (max-width: 639px) {
+				font-size: 12px;
+			}
 		}
 
 		@media (max-width: 639px) {
@@ -76,10 +80,12 @@
 
 	&__close {
 		margin-left: 24px;
+		all: unset;
 	}
 
 	@media (max-width: 639px) {
 		flex-wrap: wrap;
 		gap: 0;
+		height: 190px;
 	}
 }
