@@ -63,6 +63,7 @@
     width: auto;
     flex: 0 0 auto;
     max-width: 212px;
+    height: 100%;
 
     @include on-tablet {
       max-width: 237px;
