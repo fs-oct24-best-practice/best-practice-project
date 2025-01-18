@@ -1,0 +1,71 @@
+@use '@best-practice/styles/variables' as *;
+
+.registration-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: $background;
+  min-height: 100vh;
+
+  &__title {
+    font-size: 24px;
+    color: $primary;
+    margin-bottom: 20px;
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+  }
+
+  &__input-container {
+    width: 100%;
+  }
+
+  &__input {
+    padding: 12px;
+    border: 1px solid $elements;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    height: 40px;
+  }
+
+  &__input--error {
+    border: 2px solid red;
+    background-color: #fff0f0;
+  }
+
+  &__error {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  &__register-button {
+    padding: 12px 20px;
+    border: 1px solid $elements;
+    background-color: $primary;
+    color: $white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+
+  &__register-button--disabled {
+    background-color: $background;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background-color: $hover;
+    color: $green;
+  }
+}

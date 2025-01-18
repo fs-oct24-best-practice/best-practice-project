@@ -14,6 +14,7 @@ import { AccessoriesPage } from './pages/AccessoriesPage/AccessoriesPage';
 import { TabletsPage } from './pages/TabletsPage/TabletsPage';
 import { AuthPage } from './pages/AuthPage/AuthPage';
 import { DashboardPage } from './pages/DashboardPage/DashboardPage';
+import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 
 export const Root = () => {
   const isAuthenticated = (): boolean => {
@@ -53,6 +54,7 @@ export const Root = () => {
                   )
                 }
               />
+              <Route path='register' element={<RegistrationPage />} />
               <Route path='*' element={<NotFoundPage />} />
             </Route>
           </Routes>
