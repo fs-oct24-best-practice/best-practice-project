@@ -1,12 +1,13 @@
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './Carousel.scss';
+import classNames from 'classnames';
+
 import bannerVideo from '../../assets/banner-images/nice-gadjets-promo-Clipchamp.mp4';
 import bannerAccessories from '../../assets/banner-images/banner-accessories.png';
 import bannerPhones from '../../assets/banner-images/banner-phones.png';
 import bannerTablets from '../../assets/banner-images/banner-tablets.png';
 import arrowLeft from '../../assets/icons/arrow-left.svg';
 import arrowRight from '../../assets/icons/arrow-right.svg';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
 
 const bannerSlides = [
   { type: 'video', src: bannerVideo },
@@ -116,18 +117,12 @@ export const Carousel = () => {
             {bannerSlides.map((slide, index) =>
               slide.type === 'video' ? (
                 <li className='Carousel__slider-item' key={index}>
-                  <div className='Carousel__video-container'>
-                    <video
-                      ref={videoRef}
-                      style={{
-                        width: '100%',
-                        objectFit: 'cover',
-                      }}
-                      className='Carousel__slider-video'
-                      src={slide.src}
-                      muted
-                    />
-                  </div>
+                  <video
+                    ref={videoRef}
+                    className='Carousel__slider-video'
+                    src={slide.src}
+                    muted
+                  />
                 </li>
               ) : (
                 <li className='Carousel__slider-item' key={index}>
