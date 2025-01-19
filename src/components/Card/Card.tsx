@@ -64,7 +64,7 @@ export const Card: React.FC<Props> = ({ product }) => {
   const onAddToCart = () => {
     if (!isProductInList(added, product)) {
       addToCart(product);
-      toast('Added in cart!', {
+      toast('Added to cart!', {
         icon: '🛒',
       });
     } else {

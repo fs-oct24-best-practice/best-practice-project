@@ -99,7 +99,7 @@ export const CartPage = () => {
         </div>
         <div className={styles.cart__summary}>
           <div className={styles.summary__total}>
-            <span className={styles.span}>${totalCost}</span>
+            <span className={styles.summary__total__cost}>${totalCost}</span>
             <p className={styles.summary__title}>
               Total for {totalItems} items:
             </p>

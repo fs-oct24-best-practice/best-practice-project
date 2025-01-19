@@ -45,7 +45,7 @@
   }
 
   &__name {
-    font-family: 'Mont-Regular', sans-serif;
+    font-family: 'Regular', sans-serif;
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
@@ -72,7 +72,7 @@
   &__price {
     text-decoration: none;
     font-size: 22px;
-    font-family: 'Mont-Bold', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 700;
     line-height: 30px;
     margin-bottom: 8px;
@@ -83,7 +83,7 @@
 
   &__price_discount {
     font-size: 22px;
-    font-family: 'Mont-Bold', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 700;
     line-height: 30px;
 
@@ -99,7 +99,7 @@
 
   &__full_price {
     font-size: 22px;
-    font-family: 'Mont-Regular', sans-serif;
+    font-family: 'Regular', sans-serif;
     font-weight: 600;
     line-height: 28.12px;
     text-decoration-line: line-through;
@@ -144,7 +144,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-family: 'Mont-Regular', sans-serif;
+    font-family: 'Regular', sans-serif;
     font-weight: 600;
 
     &_label {
@@ -188,7 +188,7 @@
     text-decoration: none;
     height: 40px;
     font-size: 14px;
-    font-family: 'Mont-Bold', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 700;
     line-height: 40px;
     text-align: center;
