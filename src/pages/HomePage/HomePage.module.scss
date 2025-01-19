@@ -1,5 +1,4 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/fonts';
 @import '@best-practice/styles/mixins.scss';
 
 .homePage {
@@ -25,7 +24,7 @@
 }
 
 .title__text {
-  font-family: 'Mont', sans-serif;
+  font-family: 'Bold', sans-serif;
   font-weight: 800;
   font-size: 32px;
   line-height: 41px;

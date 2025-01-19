@@ -1,5 +1,4 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/fonts';
 @import '../../styles/mixins.scss';
 
 .categories {
@@ -10,7 +9,7 @@
   }
 
   &__title {
-    font-family: 'Mont', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 800;
     font-size: 22px;
     line-height: 30.8px;
@@ -59,7 +58,7 @@
     margin-top: 24px;
 
     &--title {
-      font-family: 'Mont', sans-serif;
+      font-family: 'SemiBold', sans-serif;
       font-weight: 700;
       font-size: 20px;
       line-height: 25.56px;
@@ -67,7 +66,7 @@
     }
 
     &--text {
-      font-family: 'Mont', sans-serif;
+      font-family: 'Regular', sans-serif;
       font-weight: 600;
       font-size: 14px;
       line-height: 21px;

@@ -65,7 +65,7 @@ export const Navbar = () => {
           >
             <img
               src={`/img/icons/${theme === Theme.DARK ? 'SunWhite.svg' : 'Moon.svg'}`}
-              alt='Favourites'
+              alt='Switch Theme'
               className={styles.navbar__theme_toggle}
             />
           </div>
@@ -110,7 +110,7 @@ export const Navbar = () => {
         <li className={styles.navbar__divider}></li>
 
         <li>
-          <div className={styles.navbar__auth_button}>
+          <div className={styles.navbar__chosen__block}>
             <AuthButton />
           </div>
         </li>

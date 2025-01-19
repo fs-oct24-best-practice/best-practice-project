@@ -67,7 +67,7 @@ export const DashboardPage: React.FC = () => {
             <h4>Last Order</h4>
             <div>
               {lastOrder.items.map((item: ProductInCart, index: number) => (
-                <CartItem key={index} item={item} />
+                <CartItem key={index} item={item} isDisabled={true} />
               ))}
             </div>
             <p>Total: ${lastOrder.totalCost}</p>
@@ -88,7 +88,7 @@ export const DashboardPage: React.FC = () => {
                   </h5>
                   <div>
                     {order.items.map((item: ProductInCart, idx: number) => (
-                      <CartItem key={idx} item={item} />
+                      <CartItem key={idx} item={item} isDisabled={true} />
                     ))}
                   </div>
                   <p>Total: ${order.totalCost}</p>

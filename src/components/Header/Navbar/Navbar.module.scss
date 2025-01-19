@@ -46,7 +46,6 @@
       border-radius: 3px;
       transition: $transition;
       transition-property: width;
-
       background: $primary;
 
       .dark & {
@@ -85,7 +84,28 @@
       align-items: center;
       height: 64px;
       width: 64px;
-      border-left: 1px solid $elements;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 4px;
+        bottom: 2px;
+        left: 0;
+        border-radius: 3px;
+        transition: $transition;
+        transition-property: width;
+        background: $primary;
+
+        .dark & {
+          background: $white-dark;
+        }
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
 
       .light & {
         border-left: 3px solid $elements;
@@ -140,36 +160,11 @@
   &__theme_toggle {
     width: 30px;
     height: 30px;
-  }
-
-  &__auth_button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 48px;
-    padding: 10px 20px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 
     &:hover {
-      transform: scale(1.1);
+      cursor: pointer;
     }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px $primary;
-    }
-  }
-
-  &__divider {
-    height: 64px;
-    width: 2.5px;
-    background-color: $elements;
   }
 }
+
+
