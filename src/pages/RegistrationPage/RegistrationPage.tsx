@@ -20,9 +20,9 @@ interface FormData {
   confirmPassword: string;
 }
 
-interface FirebaseError extends Error {
-  code: string;
-}
+// interface FirebaseError extends Error {
+//   code: string;
+// }
 
 export const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
@@ -107,7 +107,10 @@ export const RegistrationPage: React.FC = () => {
 
       const methods = await fetchSignInMethodsForEmail(auth, email);
       if (methods.length > 0) {
-        toast.error('This email is already in use, please use another one');
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          email: 'This email is already in use, please use another one',
+        }));
         return;
       }
 
@@ -133,11 +136,7 @@ export const RegistrationPage: React.FC = () => {
       }, 500);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        if ((error as FirebaseError).code === 'auth/email-already-in-use') {
-          toast.error('This email is already in use');
-        } else {
-          toast.error('Registration failed');
-        }
+        toast.error('Registration failed');
         console.error('Registration error:', error);
       } else {
         toast.error('An unknown error occurred');
@@ -156,31 +155,30 @@ export const RegistrationPage: React.FC = () => {
     <div className={styles['registration-page']}>
       <h2 className={styles['registration-page__title']}>Register</h2>
       <div className={styles['registration-page__form-group']}>
-        {[
-          'first Name',
-          'last Name',
-          'email',
-          'phone Number',
-          'city',
-          'nova Poshta Office №',
-          'password',
-          'confirm Password',
-        ].map((field) => (
+        {Object.keys(formData).map((field) => (
           <div
             key={field}
             className={styles['registration-page__input-container']}
           >
             <input
-              type={field.includes('password') ? 'password' : 'text'}
+              type={
+                field.toLowerCase().includes('password') ? 'password' : 'text'
+              }
               name={field}
               placeholder={
                 field === 'newPostOffice'
                   ? 'Nova Poshta Office №'
-                  : field.charAt(0).toUpperCase() + field.slice(1)
+                  : field
+                      .replace(/([A-Z])/g, ' $1')
+                      .replace(/^./, (str) => str.toUpperCase())
               }
               value={formData[field as keyof FormData]}
               onChange={handleInputChange}
-              className={`${styles['registration-page__input']} ${submitted && errors[field] ? styles['registration-page__input--error'] : ''}`}
+              className={`${styles['registration-page__input']} ${
+                submitted && errors[field]
+                  ? styles['registration-page__input--error']
+                  : ''
+              }`}
             />
             {submitted && errors[field] && (
               <span className={styles['registration-page__error']}>
@@ -191,7 +189,11 @@ export const RegistrationPage: React.FC = () => {
         ))}
       </div>
       <button
-        className={`${styles['registration-page__register-button']} ${isButtonDisabled ? styles['registration-page__register-button--disabled'] : ''}`}
+        className={`${styles['registration-page__register-button']} ${
+          isButtonDisabled
+            ? styles['registration-page__register-button--disabled']
+            : ''
+        }`}
         onClick={handleRegister}
         disabled={isButtonDisabled}
       >
