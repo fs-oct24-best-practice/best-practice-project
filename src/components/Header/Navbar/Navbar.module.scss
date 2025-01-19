@@ -91,6 +91,7 @@
       align-items: center;
       height: 64px;
       width: 64px;
+      border-left: 1px solid $elements;
 
       .light & {
         border-left: 3px solid $elements;
@@ -98,7 +99,7 @@
       .dark & {
         border-left: 3px solid $elements-dark;
       }
-
+     }
     }
 
     &__icon {

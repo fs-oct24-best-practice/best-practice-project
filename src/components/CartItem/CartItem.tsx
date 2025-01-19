@@ -29,7 +29,7 @@ export const CartItem: React.FC<Props> = ({ item }) => {
 
   return (
     <div className={styles.cart__item}>
-      <button className={styles.cart__item__icon__close} onClick={handleRemove}>
+      <button className={styles.cart__item__close} onClick={handleRemove}>
         <img src='/img/icons/Close.svg' alt='Close' />
       </button>
       <img
