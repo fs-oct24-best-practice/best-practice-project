@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { Pages } from '../../../types';
+import { useAppSelector } from '../../../hooks/hooks';
 
 type Props = {
   isOpen: boolean;
@@ -21,6 +22,9 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
     setIsOpen(!isOpen);
   };
 
+
+  const theme = useAppSelector((state) => state.theme.theme);
+    
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -34,7 +38,7 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
   }, [isOpen]);
 
   return (
-    <nav className={cn(styles.menu, { [styles.menu_open]: isOpen })}>
+    <nav className={cn(styles.menu, styles[theme], { [styles.menu_open]: isOpen })}>
       <ul className={styles.menu__pages}>
         {Object.entries(Pages).map(([name, path]) => (
           <li key={name} className={styles.menu__page}>
@@ -58,7 +62,7 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
           >
             <div className={styles.menu__chosen__block}>
               <img
-                src='/img/icons/Favourites.svg'
+                src='/img/icons/Favourite.svg'
                 alt='Favourites'
                 className={styles.menu__chosen__icon}
               />

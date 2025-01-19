@@ -1,6 +1,4 @@
-$secondary-color: #89939a;
-$elements-color: #e2e6e9;
-$white-color: #fff;
+@use '@best-practice/styles/variables' as *;
 
 body:has(.slideDown) {
   @media (max-width: 1200px) {
@@ -18,7 +16,14 @@ body:has(.slideDown) {
   justify-content: center;
   align-items: center;
   height: 48px;
-  border-left: 1px solid #e2e6e9;
+  
+  &.light {
+    border-left: 3px solid $elements;
+  }
+
+  &.dark {
+    border-left: 3px solid $elements-dark;
+  }
 
   @media (min-width: 1200px) {
     height: 64px;
@@ -30,14 +35,14 @@ body:has(.slideDown) {
   width: 48px;
   height: 48px;
   //margin-right: 5px;
-  background-image: url(../../assets/icons/search_icons/search-alt-2.svg);
   background-position: center;
   background-size: 20px 20px;
   background-repeat: no-repeat;
   transition: transform 0.3s ease;
-  
-//for the future dark mode
-  &.dark {
+  .light & {
+    background-image: url(../../assets/icons/search_icons/search-alt-2.svg);
+  }
+  .dark & {
     background-image: url(../../assets/icons/search_icons/search-alt-2darkMode.svg);
   }
 
@@ -90,6 +95,15 @@ input[type='text'] {
   border-radius: 0.25em;
   box-sizing: border-box;
   border: 0.1em solid #ccc;
+  background-color: $icons;
+
+  .light & {
+    background-color: $white;
+  }
+  .dark &:focus {
+    outline: none;
+    background-color: $white;
+  }
 
   @media (max-width: 1200px) {
     width: 100%;
@@ -120,11 +134,25 @@ input[type='text'] {
   display: flex;
   height: 100px;
   padding: 15px;
-  background-color: $elements-color;
-  border-bottom: 1px solid $secondary-color;
+  border-bottom: 1px solid $secondary;
   box-sizing: border-box;
   z-index: 1000;
 
+  &.light {
+    border-bottom: 1px solid $secondary;
+  }
+
+  &.dark {
+    border-bottom: 1px solid $secondary-dark;
+  }
+
+  .light & {
+    background-color: $elements;
+  }
+
+  .dark & {
+    background-color: $surface2-dark;
+  }
 }
 
 .searchClose {
@@ -134,7 +162,7 @@ input[type='text'] {
   top: 10px;
   left: -100px;
   font-size: 30px;
-  color: $white-color;
+  color: $white;
   cursor: pointer;
   transition:
     left 0.5s ease,
@@ -161,14 +189,21 @@ input[type='text'] {
 
 .text {
   font-size: 18px;
-  color: #313237;
   font-weight: 600;
   text-align: left;
   cursor: pointer;
   box-sizing: border-box;
 
+  .light & {
+    color: $primary;
+  }
+
+  .dark & {
+    color: $white-dark;
+  }
+
   &:hover {
-    color: #626666;
+    color: $secondary;
   }
 
   @media (max-width: 600px) {

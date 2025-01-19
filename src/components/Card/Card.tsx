@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Card.module.scss';
-import favourites_icon from '/img/icons/Favourites.svg';
-import favourites_filled_icon from '/img/icons/FavouritesFilled.svg';
+import favourites_icon from '/img/icons/Favourite.svg';
+import favourites_icon_white from '/img/icons/FavoriteWhite.svg';
+import favourites_icon_filled from '/img/icons/FavouritesFilled.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
 import { toast } from 'react-hot-toast';
@@ -10,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
 import { useAppSelector } from '../../hooks/hooks';
+import { Theme } from '../../types/Theme';
 
 type Props = {
   product: Product;
@@ -72,8 +74,10 @@ export const Card: React.FC<Props> = ({ product }) => {
     }
   };
 
+  const theme = useAppSelector((state) => state.theme.theme);
+
   return (
-    <div className={styles.product_card}>
+    <div className={`${styles.product_card} ${styles[theme]}`}>
       <img
         className={styles.product_card__image}
         src={image}
@@ -93,7 +97,7 @@ export const Card: React.FC<Props> = ({ product }) => {
             </span>
           </>
         ) : (
-          <span className={styles.product_card__price}>${fullPrice}</span>
+          <span className={styles.product_card__full_price}>${fullPrice}</span>
         )}
       </div>
       <div className={styles.product_card__separator}></div>
@@ -117,7 +121,10 @@ export const Card: React.FC<Props> = ({ product }) => {
         <button
           onClick={onAddToCart}
           className={cn(styles.product_card__buy, {
-            [styles.product_card__added]: isProductInList(added, product),
+            [styles.product_card__added_to_cart]: isProductInList(
+              added,
+              product
+            ),
           })}
         >
           {isProductInList(added, product)
@@ -127,13 +134,20 @@ export const Card: React.FC<Props> = ({ product }) => {
 
         <button
           onClick={addToFavorite}
-          className={styles.product_card__favourite_button}
+          className={cn(styles.product_card__favourite_button, {
+            [styles.product_card__added_to_favourite]: isProductInList(
+              favorites,
+              product
+            ),
+          })}
         >
           <img
             src={
               isProductInList(favorites, product)
-                ? favourites_filled_icon
-                : favourites_icon
+                ? favourites_icon_filled
+                : theme === Theme.DARK
+                  ? favourites_icon_white
+                  : favourites_icon
             }
             alt='favourite icon'
           />
