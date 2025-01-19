@@ -65,7 +65,11 @@ export const Navbar = () => {
             <img
               src={`/img/icons/${theme === Theme.DARK ? 'SunWhite.svg' : 'Moon.svg'}`}
               alt='Favourites'
-              className={styles.navbar__theme_toggle}
+              className={
+                theme === Theme.DARK
+                  ? styles.navbar__theme_toggle_icon_dark
+                  : styles.navbar__theme_toggle_icon_light
+              }
             />
           </div>
         </li>

@@ -1,8 +1,9 @@
+@use '@best-practice/styles/variables' as *;
+
 .cart__item {
 	height: 128px;
 	display: flex;
 	align-items: center;
-	border: 1px solid #e0e0e0;
 	border-radius: 1px;
 	padding: 16px;
 	margin: 16px;
@@ -11,7 +12,17 @@
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 21px;
-	color: #313237;
+
+  &.light {
+    color: $primary;
+    background-color: $white;
+    border: 1px solid $elements;
+  }
+
+  &.dark {
+    color: $white-dark;
+    background-color: $surface1-dark;
+  }
 
 	&__image {
 		height: 88px;
@@ -27,7 +38,14 @@
 
 		&__title {
 			text-decoration: none;
-			color: #313237;
+			
+      .light & {
+        color: $primary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
 		}
 
 		@media (max-width: 639px) {
@@ -48,21 +66,48 @@
 			gap: 16px;
 
 			&__button {
-				background-color: #ffffff;
-				border: 1px solid #ccc;
-				padding: 6px;
-				cursor: pointer;
-				height: 32px;
-				width: 32px;
-				color: #313237;
+        padding: 6px;
+        cursor: pointer;
+        height: 32px;
+        width: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-				&--minus {
-					margin-bottom: 4px;
-				}
+        .light & {
+          background-color: $white;
+          &:hover {
+            border: 1px solid $primary;
+          }
+        }
 
-				&:hover {
-					border: 1px solid #000000;
-				}
+        .dark & {
+          &:hover {
+            background-color: $icons-dark;
+          }
+        }
+      }
+
+			&__button_minus {
+        .light & {
+          border: 1px solid $elements;
+        }
+        
+        .dark & {
+          background-color: $surface1-dark;
+          border: 1px solid $elements-dark;
+        }
+      }
+
+      &__button_plus {
+        .light & {
+          border: 1px solid $icons;
+        }
+        
+        .dark & {
+          background-color: $surface2-dark;
+          border: none;
+        }
 			}
 		}
 
@@ -74,8 +119,22 @@
 		}
 	}
 
-	&__close {
+	&__icon__close {
 		margin-left: 24px;
+    border: none;
+    transition: transform $transition;
+
+    &:hover {
+      transform: scale(1.4);
+    }
+    
+    .light & {
+      background-color: $white;
+    }
+
+    .dark & {
+      background-color: $surface1-dark;
+    }
 	}
 
 	@media (max-width: 639px) {
