@@ -7,6 +7,7 @@ import { Cart } from '../../types/Cart';
 import styles from './CartPage.module.scss';
 import { useAppSelector } from '../../hooks/hooks';
 import { ProductInCart } from '../../types/ProductInCart';
+import cn from 'classnames';
 
 export const CartPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
@@ -15,6 +16,8 @@ export const CartPage = () => {
   const cartItems = useAppSelector((state) => state.cartProducts.cartProducts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const totalCost = cartItems.reduce(
     (sum: number, item: ProductInCart) =>
@@ -57,7 +60,7 @@ export const CartPage = () => {
   };
 
   return (
-    <div className={styles.cart__page}>
+    <div className={cn(styles.cart__page, styles[theme])}>
       <div className={styles.cart__back}>
         <img src='/img/icons/Back.svg' alt='Back' />
         <a href='' className={styles.cart__back__button}>

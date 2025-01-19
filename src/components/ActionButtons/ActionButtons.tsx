@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useEffect, useState } from 'react';
 import cn from 'classnames';
-import favourites_icon from '/img/icons/Favourites.svg';
+import favourites_icon from '/img/icons/Favourite.svg';
 import { useDispatch } from 'react-redux';
 import { ButtonText } from '../../types/ButtonText';
 import favourites_filled_icon from '/img/icons/FavouritesFilled.svg';

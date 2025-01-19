@@ -5,7 +5,15 @@ import { Pages } from '../../../types';
 import { SearchField } from '../../SearchField/SearchField';
 import { useAppSelector } from '../../../hooks/hooks';
 
+import { useDispatch } from 'react-redux';
+import { switchTheme } from '../../../features/theme';
+import { Theme } from '../../../types/Theme';
+
 export const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const theme = useAppSelector((state) => state.theme.theme);
+
   const favoritesLength = useAppSelector(
     (state) => state.favoritesProducts.favoritesProducts
   ).length;
@@ -17,6 +25,8 @@ export const Navbar = () => {
     )
   );
 
+  const swichTheme = () => dispatch(switchTheme());
+
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.navbar__link]: true,
@@ -24,8 +34,12 @@ export const Navbar = () => {
     });
   };
 
+  const onThemeSwitch = () => {
+    swichTheme();
+  };
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${styles[theme]}`}>
       <ul className={styles.navbar__pages}>
         {Object.entries(Pages).map((page) => {
           return (
@@ -44,10 +58,23 @@ export const Navbar = () => {
 
       <ul className={styles.navbar__chosen}>
         <li>
+          <div
+            className={`${styles.navbar__chosen__block}`}
+            onClick={onThemeSwitch}
+          >
+            <img
+              src={`/img/icons/${theme === Theme.DARK ? 'SunWhite.svg' : 'Moon.svg'}`}
+              alt='Favourites'
+              className={styles.navbar__theme_toggle}
+            />
+          </div>
+        </li>
+
+        <li>
           <NavLink to='/favorite' className={setNavClasses}>
             <div className={styles.navbar__chosen__block}>
               <img
-                src='/img/icons/Favourites.svg'
+                src={`/img/icons/${theme === Theme.DARK ? 'FavoriteWhite.svg' : 'Favourite.svg'}`}
                 alt='Favourites'
                 className={styles.navbar__chosen__icon}
               />
@@ -66,7 +93,7 @@ export const Navbar = () => {
           <NavLink to='/cart' className={setNavClasses}>
             <div className={styles.navbar__chosen__block}>
               <img
-                src='/img/icons/Cart.svg'
+                src={`/img/icons/${theme === Theme.DARK ? 'CartWhite.svg' : 'Cart.svg'}`}
                 alt='Cart'
                 className={styles.navbar__chosen__icon}
               />

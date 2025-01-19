@@ -13,3 +13,13 @@
 .main {
   flex: 1;
 }
+
+.light {
+  background-color: $white;
+  color: $primary;
+}
+
+.dark {
+  background-color: $black-dark;
+  color: $white-dark;
+}

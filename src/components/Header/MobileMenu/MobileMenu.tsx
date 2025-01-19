@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { Pages } from '../../../types';
+import { useAppSelector } from '../../../hooks/hooks';
 
 type Props = {
   isOpen: boolean;
@@ -23,8 +24,10 @@ export const MobileMenu: FC<Props> = (props) => {
     setIsOpen(!isOpen);
   };
 
+  const theme = useAppSelector((state) => state.theme.theme);
+
   return (
-    <nav className={styles.menu}>
+    <nav className={cn(styles.menu, styles[theme])}>
       <ul className={styles.menu__pages}>
         {Object.entries(Pages).map((page) => {
           return (
@@ -50,7 +53,7 @@ export const MobileMenu: FC<Props> = (props) => {
           >
             <div className={styles.menu__chosen__block}>
               <img
-                src='/img/icons/Favourites.svg'
+                src='/img/icons/Favourite.svg'
                 alt='Favourites'
                 className={styles.menu__chosen__icon}
               />

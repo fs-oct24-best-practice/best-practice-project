@@ -12,10 +12,12 @@ import {
 
 import favoritesProducts from '../features/favoritesProducts';
 import cartProducts from '../features/cartReducer';
+import theme from '../features/theme';
 
 const rootReducer = combineReducers({
-  favoritesProducts: favoritesProducts,
-  cartProducts: cartProducts,
+  favoritesProducts,
+  cartProducts,
+  theme,
 });
 
 const persistConfig = {
