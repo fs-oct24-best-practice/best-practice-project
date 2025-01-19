@@ -12,12 +12,16 @@ import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
 import { useAppSelector } from '../../hooks/hooks';
 import { Theme } from '../../types/Theme';
+import { ProductInCart } from '../../types/ProductInCart';
 
 type Props = {
   product: Product;
 };
 
-function isProductInList(products: Product[], product: Product) {
+function isProductInList<T extends { id: string | number }>(
+  products: T[],
+  product: T
+): boolean {
   return products.some((item) => item.id === product.id);
 }
 
@@ -45,7 +49,8 @@ export const Card: React.FC<Props> = ({ product }) => {
 
   const added = useAppSelector((state) => state.cartProducts.cartProducts);
 
-  const addToCart = (product: Product) => dispatch(increaseQuantity(product));
+  const addToCart = (product: ProductInCart) =>
+    dispatch(increaseQuantity(product as ProductInCart));
 
   const addToFavorite = () => {
     if (isProductInList(favorites, product)) {
@@ -62,8 +67,8 @@ export const Card: React.FC<Props> = ({ product }) => {
   };
 
   const onAddToCart = () => {
-    if (!isProductInList(added, product)) {
-      addToCart(product);
+    if (!isProductInList(added, product as ProductInCart)) {
+      addToCart(product as ProductInCart);
       toast('Added to cart!', {
         icon: '🛒',
       });
@@ -123,11 +128,11 @@ export const Card: React.FC<Props> = ({ product }) => {
           className={cn(styles.product_card__buy, {
             [styles.product_card__added_to_cart]: isProductInList(
               added,
-              product
+              product as ProductInCart
             ),
           })}
         >
-          {isProductInList(added, product)
+          {isProductInList(added, product as ProductInCart)
             ? ButtonText.ADDED
             : ButtonText.ADD_TO_CART}
         </button>
