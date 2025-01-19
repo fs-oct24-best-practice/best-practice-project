@@ -138,7 +138,7 @@
       border: 1px solid $black-dark;
     }
   }
-  
+
   &__hidden {
     display: none;
   }
@@ -148,3 +148,37 @@
     height: 30px;
   }
 }
+
+  &__auth_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 5px $primary;
+    }
+  }
+
+  &__divider {
+    height: 64px;
+    width: 2.5px;
+
+    background-color: $elements;
+  }
+}
+

@@ -39,9 +39,20 @@ export const CartPage = () => {
       setIsCheckout(true);
       dispatch(clearCart());
 
+      const order = {
+        items: cartItems,
+        totalCost,
+        totalItems,
+        date: new Date().toISOString(),
+      };
+
+      const previousOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      const updatedOrders = [...previousOrders, order];
+      localStorage.setItem('orders', JSON.stringify(updatedOrders));
+
       setTimeout(() => {
         setIsCheckout(false);
-        navigate('/');
+        navigate('/dashboard');
       }, 3000);
     }
   };

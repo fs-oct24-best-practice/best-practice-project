@@ -4,6 +4,7 @@ import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
 import { SearchField } from '../../SearchField/SearchField';
 import { useAppSelector } from '../../../hooks/hooks';
+import AuthButton from '../../../firebase/AuthButton';
 
 import { useDispatch } from 'react-redux';
 import { switchTheme } from '../../../features/theme';
@@ -104,6 +105,14 @@ export const Navbar = () => {
               )}
             </div>
           </NavLink>
+        </li>
+
+        <li className={styles.navbar__divider}></li>
+
+        <li>
+          <div className={styles.navbar__auth_button}>
+            <AuthButton />
+          </div>
         </li>
       </ul>
     </nav>
