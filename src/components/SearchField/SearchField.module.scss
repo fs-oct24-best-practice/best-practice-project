@@ -16,7 +16,7 @@ body:has(.slideDown) {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 64px;
   
   &.light {
     border-left: 3px solid $elements;
@@ -55,10 +55,10 @@ body:has(.slideDown) {
 }
 
 .searchInput {
-  height: px;
+  position: relative;
+  height: 34px;
+  width: 300px;
   overflow: hidden;
-  margin-right: 8px;
-  width: 100%;
   transition: max-width 0.5s ease-in-out;
   
 
@@ -110,7 +110,6 @@ input[type='text'] {
 }
 
 .optionsContainer {
-  position: absolute;
   top: 65px;
   left: 0;
   width: 400px;
@@ -167,6 +166,10 @@ input[type='text'] {
 
   &:hover {
     transform: scale(1.1);
+  }
+
+  @include on-desktop {
+    display: none;
   }
 }
 
