@@ -4,6 +4,7 @@ import { ProductSpec, Categories } from '../../types';
 import { getSpecList } from '../../api';
 import { ProductDescription } from '../../components/ProductDescription';
 import { Loader } from '../../components/Loader';
+import styles from './ProductDetailsPage.module.scss';
 
 export const ProductDetailsPage: FC = () => {
   const [isError, setIsError] = useState(false);
@@ -44,7 +45,8 @@ export const ProductDetailsPage: FC = () => {
   }, [category, itemId]);
 
   return (
-    <>
+    <div className={styles.container}>
+      <h1 className={styles.visually_hidden}>Detailed product specification</h1>
       <div>* Bread crumbs ... *</div>
       <div>Back</div>
       {isLoading && <Loader />}
@@ -54,6 +56,6 @@ export const ProductDetailsPage: FC = () => {
       {!isError && !!currentProductSpec && (
         <ProductDescription currentProductSpec={currentProductSpec} />
       )}
-    </>
+    </div>
   );
 };

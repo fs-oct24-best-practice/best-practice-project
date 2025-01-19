@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { ProductSpec } from '../../../types/ProductSpec';
+import styles from './TechSpecs.module.scss';
 
 type Props = { currentProductSpec: ProductSpec };
 
@@ -16,51 +17,31 @@ export const TechSpecs: FC<Props> = (props) => {
       capacity,
     },
   } = props;
+
+  const techProperties = {
+    Screen: screen,
+    Resolution: resolution,
+    Processor: processor,
+    RAM: ram,
+    'Built in memory': capacity,
+    Camera: camera,
+    Zoom: zoom,
+    Cell: cell?.join(', '),
+  };
+
   return (
-    <>
-      <h3>Tech specs</h3>
-
-      <div>
-        <div>
-          <p>Screen</p>
-          <p className='text-smtext-red-600 text-lg'>{screen}</p>
-        </div>
-
-        <div>
-          <p>Resolution</p>
-          <p>{resolution}</p>
-        </div>
-
-        <div>
-          <p>Processor</p>
-          <p>{processor}</p>
-        </div>
-
-        <div>
-          <p>RAM</p>
-          <p>{ram}</p>
-        </div>
-
-        <div>
-          <p>Built in memory</p>
-          <p>{capacity}</p>
-        </div>
-
-        <div>
-          <p>Camera</p>
-          <p>{camera}</p>
-        </div>
-
-        <div>
-          <p>Zoom</p>
-          <p>{zoom}</p>
-        </div>
-
-        <div>
-          <p>Cell</p>
-          <p>{cell?.join(', ')}</p>
-        </div>
-      </div>
-    </>
+    <section className={styles.section}>
+      <h3 className={styles.section__title}>Tech specs</h3>
+      <ul className={styles.section__list}>
+        {Object.entries(techProperties).map((property) => {
+          return (
+            <li key={property[0]} className={styles.property}>
+              <p className={styles.property__title}>{property[0]}</p>
+              <p className={styles.property__value}>{property[1]}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 };

@@ -1,17 +1,74 @@
 @use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.section {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px;
+  align-items: center;
+}
+
+.image {
+  width: 288px;
+  height: 288px;
+  object-fit: contain;
+}
 
 .preview {
   display: flex;
   gap: 8px;
 
   &__select {
-    width: 51.2px;
-    height: 49px;
+    width: 50px;
+    height: 50px;
     border: 1px solid $elements;
+    object-fit: contain;
     cursor: pointer;
 
     &:hover {
       border-color: $primary;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .section {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 338px;
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__select {
+      width: 35px;
+      height: 35px;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .section {
+    width: calc(50% - 32px);
+  }
+
+  .image {
+    width: 464px;
+    height: 464px;
+    object-fit: contain;
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__select {
+      width: 80px;
+      height: 80px;
     }
   }
 }

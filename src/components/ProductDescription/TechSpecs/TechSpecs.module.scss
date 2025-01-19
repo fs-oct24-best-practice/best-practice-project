@@ -1,0 +1,49 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__title {
+    @include font.m-h3;
+    height: 42px;
+    border-bottom: 2px solid $elements;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.property {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+  @include font.dt-body-text;
+  color: $secondary;
+
+  &__value {
+    color: $primary;
+    text-align: end;
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .section {
+    &__title {
+      @include font.dt-h3;
+      height: 47px;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .section {
+    width: calc(50% - 32px);
+  }
+}

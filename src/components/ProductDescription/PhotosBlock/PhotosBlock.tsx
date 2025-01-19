@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { PhotoSelector, PhotoPreview } from '..';
 import { ProductSpec } from '../../../types/ProductSpec';
+import styles from './PhotosBlock.module.scss';
 
 type Props = { currentProductSpec: ProductSpec };
 
@@ -15,12 +16,12 @@ export const PhotosBlock: FC<Props> = (props) => {
   }, [currentProductSpec]);
 
   return (
-    <>
+    <section className={styles.section}>
       <PhotoSelector
         images={currentProductSpec.images}
         setSelectedImage={setSelectedImage}
       />
       <PhotoPreview selectedImage={selectedImage} />
-    </>
+    </section>
   );
 };
