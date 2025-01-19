@@ -1,38 +1,129 @@
 @use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  &__subtitle {
+    @include font.dt-small-text;
+    color: $secondary;
+  }
+}
 
 .colors {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 8px;
+  border-bottom: 2px solid $elements;
+  height: 79px;
 
   &__selector {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    border: 2px solid $white;
-    outline: 1px solid $elements;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
 
-    &:hover {
-      border-color: $primary;
+    &__color {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      border: 2px solid $white;
+      outline: 1px solid $elements;
+      transition: $transition outline-color;
+
+      &_active {
+        outline-color: $primary;
+      }
+
+      &:hover {
+        outline-color: $primary;
+      }
     }
   }
 }
 
 .capacity {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 8px;
+  border-bottom: 2px solid $elements;
+  height: 79px;
 
   &__selector {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 32px;
-    width: 63px;
-    border: 1px solid $elements;
+    flex-direction: row;
+    gap: 8px;
 
-    &:hover {
-      border-color: $primary;
+    &__item {
+      @include font.dt-body-text;
+      color: $primary;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 8px;
+      border: 1px solid $elements;
+      transition: $transition border;
+
+      &_active {
+        background-color: $primary;
+        color: $white;
+      }
+
+      &:hover {
+        border-color: $primary;
+      }
     }
+  }
+}
+
+.properties {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.property {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+  @include font.dt-small-text;
+  color: $secondary;
+
+  &__value {
+    color: $primary;
+    text-align: right;
+  }
+}
+
+.prices {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+
+  &__discount {
+    @include font.dt-h2;
+  }
+
+  &__regular {
+    @include font.dt-h4;
+    color: $secondary;
+    text-decoration: line-through;
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .section {
+    width: 237px;
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .section {
+    width: 320px;
   }
 }

@@ -1,5 +1,5 @@
-import { FC, Fragment } from 'react';
-import css from './About.module.scss';
+import { FC } from 'react';
+import styles from './About.module.scss';
 
 import { ProductSpec } from '../../../types/ProductSpec';
 
@@ -12,20 +12,22 @@ export const About: FC<Props> = (props) => {
     currentProductSpec: { description },
   } = props;
   return (
-    <>
-      <h3 className={css.title}>About</h3>
+    <section className={styles.section}>
+      <h3 className={styles.section__title}>About</h3>
       {description.map((declaration, idx) => {
         return (
-          <Fragment key={idx}>
-            <h4>{declaration.title}</h4>
-            <div>
-              {declaration.text.map((paragraph, idx) => {
-                return <p key={idx}>{paragraph}</p>;
-              })}
-            </div>
-          </Fragment>
+          <div key={idx} className={styles.declaration}>
+            <h4 className={styles.declaration__title}>{declaration.title}</h4>
+            {declaration.text.map((paragraph, idx) => {
+              return (
+                <p key={idx} className={styles.declaration__text}>
+                  {paragraph}
+                </p>
+              );
+            })}
+          </div>
         );
       })}
-    </>
+    </section>
   );
 };

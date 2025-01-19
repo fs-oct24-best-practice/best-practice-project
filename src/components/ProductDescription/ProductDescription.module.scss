@@ -1,0 +1,60 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.description {
+  &__title {
+    @include font.m-h2;
+    margin-bottom: 32px;
+  }
+
+  &__wrapper {
+    width: 288px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    justify-content: flex-end;
+  }
+}
+
+.top_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 56px;
+}
+
+.bottom_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  margin-bottom: 56px;
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .description {
+    &__title {
+      @include font.dt-h2;
+      margin-bottom: 40px;
+    }
+  }
+  .top_wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 64px;
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .top_wrap {
+    gap: 64px;
+    margin-bottom: 80px;
+  }
+
+  .bottom_wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 64px;
+    justify-content: space-between;
+  }
+}
