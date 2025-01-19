@@ -3,7 +3,11 @@ import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styles from './RegistrationPage.module.scss';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  fetchSignInMethodsForEmail,
+} from 'firebase/auth';
 
 interface FormData {
   firstName: string;
@@ -14,6 +18,10 @@ interface FormData {
   newPostOffice: string;
   password: string;
   confirmPassword: string;
+}
+
+interface FirebaseError extends Error {
+  code: string;
 }
 
 export const RegistrationPage: React.FC = () => {
@@ -31,21 +39,25 @@ export const RegistrationPage: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setErrors({
-      ...errors,
-      [name]: '',
-    });
-
     setFormData({
       ...formData,
       [name]: value,
     });
+
+    setErrors((prevErrors) => {
+      const newErrors = { ...prevErrors };
+      if (value.trim() !== '' && newErrors[name]) {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
   };
 
-  const handleRegister = async () => {
+  const validateForm = () => {
     const {
       email,
       firstName,
@@ -56,6 +68,7 @@ export const RegistrationPage: React.FC = () => {
       password,
       confirmPassword,
     } = formData;
+
     const newErrors: { [key: string]: string } = {};
 
     // Validation checks
@@ -71,39 +84,87 @@ export const RegistrationPage: React.FC = () => {
       newErrors.confirmPassword = 'Confirm password is required';
 
     if (password !== confirmPassword)
-      newErrors.password = 'Passwords do not match';
+      newErrors.confirmPassword = 'Passwords do not match';
+
     if (password.length < 8)
       newErrors.password = 'Password must be at least 8 characters long';
 
+    return newErrors;
+  };
+
+  const handleRegister = async () => {
+    setSubmitted(true);
+
+    const newErrors = validateForm();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const { email, password } = formData;
+      console.log('Registering with', email, password);
+
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.length > 0) {
+        toast.error('This email is already in use, please use another one');
+        return;
+      }
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log('User created:', userCredential);
+
+      const signInCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log('User logged in:', signInCredential);
+
       localStorage.setItem('user', JSON.stringify({ ...formData, email }));
-      toast.success('Registration successful');
-      navigate('/dashboard');
-    } catch (error) {
-      toast.error('Registration failed');
-      console.error(error);
+
+      toast.success('Registration and login successful');
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 500);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        if ((error as FirebaseError).code === 'auth/email-already-in-use') {
+          toast.error('This email is already in use');
+        } else {
+          toast.error('Registration failed');
+        }
+        console.error('Registration error:', error);
+      } else {
+        toast.error('An unknown error occurred');
+        console.error('Unknown error:', error);
+      }
     }
   };
+
+  const isFormValid =
+    Object.keys(errors).length === 0 &&
+    Object.values(formData).every((value) => value.trim() !== '');
+
+  const isButtonDisabled = submitted && !isFormValid;
 
   return (
     <div className={styles['registration-page']}>
       <h2 className={styles['registration-page__title']}>Register</h2>
       <div className={styles['registration-page__form-group']}>
         {[
-          'firstName',
-          'lastName',
+          'first Name',
+          'last Name',
           'email',
-          'phoneNumber',
+          'phone Number',
           'city',
-          'newPostOffice',
+          'nova Poshta Office №',
           'password',
-          'confirmPassword',
+          'confirm Password',
         ].map((field) => (
           <div
             key={field}
@@ -112,12 +173,16 @@ export const RegistrationPage: React.FC = () => {
             <input
               type={field.includes('password') ? 'password' : 'text'}
               name={field}
-              placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+              placeholder={
+                field === 'newPostOffice'
+                  ? 'Nova Poshta Office №'
+                  : field.charAt(0).toUpperCase() + field.slice(1)
+              }
               value={formData[field as keyof FormData]}
               onChange={handleInputChange}
-              className={`${styles['registration-page__input']} ${errors[field] ? styles['registration-page__input--error'] : ''}`}
+              className={`${styles['registration-page__input']} ${submitted && errors[field] ? styles['registration-page__input--error'] : ''}`}
             />
-            {errors[field] && (
+            {submitted && errors[field] && (
               <span className={styles['registration-page__error']}>
                 {errors[field]}
               </span>
@@ -126,9 +191,9 @@ export const RegistrationPage: React.FC = () => {
         ))}
       </div>
       <button
-        className={`${styles['registration-page__register-button']} ${Object.keys(errors).length > 0 ? styles['registration-page__register-button--disabled'] : ''}`}
+        className={`${styles['registration-page__register-button']} ${isButtonDisabled ? styles['registration-page__register-button--disabled'] : ''}`}
         onClick={handleRegister}
-        disabled={Object.keys(errors).length > 0}
+        disabled={isButtonDisabled}
       >
         Register
       </button>

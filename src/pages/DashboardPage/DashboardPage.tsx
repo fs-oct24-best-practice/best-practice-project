@@ -3,6 +3,15 @@ import { auth } from '../../firebase/firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import styles from './DashboardPage.module.scss';
+import { CartItem } from '../../components/CartItem/CartItem';
+import { ProductInCart } from '../../types/ProductInCart';
+
+interface Order {
+  items: ProductInCart[];
+  totalCost: number;
+  totalItems: number;
+  date: string;
+}
 
 export const DashboardPage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -11,6 +20,10 @@ export const DashboardPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState<
     'lastOrder' | 'orderHistory'
   >('lastOrder');
+
+  const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+
+  const lastOrder = orders.length > 0 ? orders[orders.length - 1] : null;
 
   const handleLogout = async () => {
     try {
@@ -49,17 +62,39 @@ export const DashboardPage: React.FC = () => {
           </button>
         </div>
 
-        {activeSection === 'lastOrder' && (
+        {activeSection === 'lastOrder' && lastOrder && (
           <div className={styles['order-content']}>
             <h4>Last Order</h4>
-            <p>Information about the last order.</p>
+            <div>
+              {lastOrder.items.map((item: ProductInCart, index: number) => (
+                <CartItem key={index} item={item} />
+              ))}
+            </div>
+            <p>Total: ${lastOrder.totalCost}</p>
+            <p>Ordered on: {new Date(lastOrder.date).toLocaleDateString()}</p>
           </div>
         )}
 
         {activeSection === 'orderHistory' && (
           <div className={styles['order-content']}>
             <h4>Order History</h4>
-            <p>List of all previous orders.</p>
+            {orders.length === 0 ? (
+              <p>No previous orders.</p>
+            ) : (
+              orders.map((order: Order, index: number) => (
+                <div key={index}>
+                  <h5>
+                    Order placed on: {new Date(order.date).toLocaleDateString()}
+                  </h5>
+                  <div>
+                    {order.items.map((item: ProductInCart, idx: number) => (
+                      <CartItem key={idx} item={item} />
+                    ))}
+                  </div>
+                  <p>Total: ${order.totalCost}</p>
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
