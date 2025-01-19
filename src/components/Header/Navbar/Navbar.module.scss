@@ -22,12 +22,12 @@
 
     .light & {
       color: $secondary;
-      
+
       &:hover {
         color: $primary;
       }
     }
-    
+
     .dark & {
       color: $secondary-dark;
 
@@ -46,9 +46,9 @@
       border-radius: 3px;
       transition: $transition;
       transition-property: width;
-      .light & {
-        background: $primary;
-      }
+
+      background: $primary;
+
       .dark & {
         background: $white-dark;
       }
@@ -62,18 +62,12 @@
       .light & {
         color: $primary;
       }
+
       .dark & {
         color: $white-dark;
       }
 
       &::after {
-        .light & {
-          background: $primary;
-        }
-
-        .dark & {
-          background: $white-dark;
-        }
         width: 100%;
       }
     }
@@ -96,10 +90,10 @@
       .light & {
         border-left: 3px solid $elements;
       }
+
       .dark & {
         border-left: 3px solid $elements-dark;
       }
-     }
     }
 
     &__icon {
@@ -143,11 +137,10 @@
     display: none;
   }
 
-  &__theme_toggle{
+  &__theme_toggle {
     width: 30px;
     height: 30px;
   }
-}
 
   &__auth_button {
     display: flex;
@@ -167,7 +160,7 @@
     &:hover {
       transform: scale(1.1);
     }
-  
+
     &:focus {
       outline: none;
       box-shadow: 0 0 5px $primary;
@@ -177,8 +170,6 @@
   &__divider {
     height: 64px;
     width: 2.5px;
-
     background-color: $elements;
   }
 }
-
