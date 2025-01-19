@@ -7,6 +7,10 @@
   align-items: center;
   height: 100vh;
   background-color: $background;
+
+  &.dark {
+    background-color: $surface1-dark;
+  }
 }
 
 .auth-container {
@@ -20,11 +24,15 @@
   background-color: $white;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  &.dark {
+    background-color: $surface1-dark;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .auth-form {
   width: 100%;
-  background-color: $white;
   padding: 30px;
   border-radius: 8px;
   text-align: left;
@@ -32,23 +40,23 @@
   flex-direction: column;
   gap: 20px;
 
+  &.dark {
+    background-color: $surface1-dark;
+    color: $white-dark;
+  }
+
   h2 {
     font-size: 24px;
-    color: $primary;
     text-align: center;
     margin-bottom: 20px;
-  }
 
-  .Field {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+    &.dark {
+      color: $white-dark;
+    }
 
-  label {
-    font-size: 14px;
-    color: $primary-search-color;
+    &:not(.dark) {
+      color: $primary;
+    }
   }
 
   input {
@@ -58,12 +66,12 @@
     border-radius: 4px;
     font-size: 16px;
     box-sizing: border-box;
-  }
 
-  .FieldError {
-    color: $red;
-    font-size: 12px;
-    margin-top: 5px;
+    &.dark {
+      background-color: $surface1-dark;
+      color: $white-dark;
+      border-color: $elements-dark;
+    }
   }
 
   button {
@@ -89,9 +97,19 @@
       background-color: $hover;
       color: $green;
     }
+
+    &.dark {
+      background-color: $surface2-dark;
+      color: $white-dark;
+      border-color: $elements-dark;
+
+      &:hover {
+        background-color: $acept-dark;
+      }
+    }
   }
 
-  .switch-form {
+  .auth-switch {
     text-align: center;
 
     button {
@@ -101,13 +119,24 @@
       cursor: pointer;
       font-size: 14px;
       text-decoration: underline;
+
+      &.dark {
+        color: $white-dark;
+      }
     }
   }
 
   h3 {
     font-size: 16px;
-    color: $secondary;
     text-align: center;
     margin-top: 10px;
+
+    &.dark {
+      color: $white-dark;
+    }
+
+    &:not(.dark) {
+      color: $secondary;
+    }
   }
 }

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import styles from './DashboardPage.module.scss';
 import { CartItem } from '../../components/CartItem/CartItem';
 import { ProductInCart } from '../../types/ProductInCart';
+import { useAppSelector } from '../../hooks/hooks';
 
 interface Order {
   items: ProductInCart[];
@@ -16,13 +17,12 @@ interface Order {
 export const DashboardPage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const navigate = useNavigate();
+  const theme = useAppSelector((state) => state.theme.theme); // Получение текущей темы
 
   const [activeSection, setActiveSection] = useState<
     'lastOrder' | 'orderHistory'
   >('lastOrder');
-
   const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-
   const lastOrder = orders.length > 0 ? orders[orders.length - 1] : null;
 
   const handleLogout = async () => {
@@ -38,24 +38,27 @@ export const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className={styles['dashboard-page']}>
+    <div className={`${styles['dashboard-page']} ${styles[theme]}`}>
       <h2>Welcome, {user?.email || 'Guest'}!</h2>
       <p>This is your dashboard.</p>
-      <button className={styles['logout-button']} onClick={handleLogout}>
+      <button
+        className={`${styles['logout-button']} ${styles[theme]}`}
+        onClick={handleLogout}
+      >
         Logout
       </button>
 
-      <div className={styles['orders-section']}>
+      <div className={`${styles['orders-section']} ${styles[theme]}`}>
         <h3>My Orders</h3>
         <div className={styles['order-buttons']}>
           <button
-            className={activeSection === 'lastOrder' ? styles.active : ''}
+            className={`${activeSection === 'lastOrder' ? styles.active : ''} ${styles[theme]}`}
             onClick={() => setActiveSection('lastOrder')}
           >
             Last Order
           </button>
           <button
-            className={activeSection === 'orderHistory' ? styles.active : ''}
+            className={`${activeSection === 'orderHistory' ? styles.active : ''} ${styles[theme]}`}
             onClick={() => setActiveSection('orderHistory')}
           >
             Order History
@@ -63,7 +66,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {activeSection === 'lastOrder' && lastOrder && (
-          <div className={styles['order-content']}>
+          <div className={`${styles['order-content']} ${styles[theme]}`}>
             <h4>Last Order</h4>
             <div>
               {lastOrder.items.map((item: ProductInCart, index: number) => (
@@ -76,7 +79,7 @@ export const DashboardPage: React.FC = () => {
         )}
 
         {activeSection === 'orderHistory' && (
-          <div className={styles['order-content']}>
+          <div className={`${styles['order-content']} ${styles[theme]}`}>
             <h4>Order History</h4>
             {orders.length === 0 ? (
               <p>No previous orders.</p>

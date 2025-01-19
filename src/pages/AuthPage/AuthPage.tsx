@@ -11,11 +11,13 @@ import { validateEmail } from '../../firebase/util';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useAppSelector } from '../../hooks/hooks';
 
 export const AuthPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState({ value: '', isTouched: false });
   const navigate = useNavigate();
+  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -63,15 +65,18 @@ export const AuthPage: React.FC = () => {
   };
 
   return (
-    <div className={styles['auth-page']}>
-      <div className={styles['auth-container']}>
-        <div className={styles['auth-form']}>
-          <h2>Login with Email and Password</h2>
+    <div className={`${styles['auth-page']} ${styles[theme]}`}>
+      <div className={`${styles['auth-container']} ${styles[theme]}`}>
+        <div className={`${styles['auth-form']} ${styles[theme]}`}>
+          <h2 className={styles[`${theme}-text`]}>
+            Login with Email and Password
+          </h2>
           <input
             type='email'
             placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className={styles[theme]}
           />
           <input
             type='password'
@@ -80,6 +85,7 @@ export const AuthPage: React.FC = () => {
             onChange={(e) =>
               setPassword({ ...password, value: e.target.value })
             }
+            className={styles[theme]}
           />
           <button onClick={handleEmailLogin} disabled={!getIsFormValid()}>
             Login
@@ -87,7 +93,7 @@ export const AuthPage: React.FC = () => {
           <button onClick={handleGoogleLogin}>Sign In with Google</button>
 
           <div className={styles['auth-switch']}>
-            <p>Don't have an account?</p>
+            <p className={styles[`${theme}-text`]}>Don't have an account?</p>
             <button onClick={() => navigate('/register')}>Register</button>
           </div>
         </div>

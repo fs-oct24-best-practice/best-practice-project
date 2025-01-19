@@ -8,11 +8,19 @@
   background-color: $background;
   min-height: 100vh;
 
+  &.dark {
+    background-color: $surface1-dark;
+  }
+
   h2 {
     font-size: 24px;
     color: $primary;
     text-align: center;
     margin-bottom: 10px;
+
+    &.dark {
+      color: $white-dark;
+    }
   }
 
   p {
@@ -20,6 +28,10 @@
     color: $secondary;
     text-align: center;
     margin-bottom: 20px;
+
+    &.dark {
+      color: $secondary-dark;
+    }
   }
 
   .logout-button {
@@ -44,6 +56,21 @@
       color: $elements;
       cursor: not-allowed;
     }
+
+    &.dark {
+      background-color: $surface2-dark;
+      color: $white-dark;
+      border-color: $elements-dark;
+
+      &:hover {
+        background-color: $surface2-dark;
+      }
+
+      &:disabled {
+        background-color: $secondary-dark;
+        color: $elements-dark;
+      }
+    }
   }
 
   .orders-section {
@@ -57,10 +84,20 @@
     flex-direction: column;
     gap: 20px;
 
+    &.dark {
+      background-color: $surface1-dark;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      color: $white-dark;
+    }
+
     h3 {
       font-size: 20px;
       color: $primary;
       margin-bottom: 20px;
+
+      &.dark {
+        color: $white;
+      }
     }
 
     .order-buttons {
@@ -88,6 +125,21 @@
           background-color: $hover;
           color: $green;
         }
+
+        &.dark {
+          background-color: $surface1-dark;
+          color: $surface2-dark;
+          border-color: $elements-dark;
+
+          &.active {
+            background-color: $surface2-dark;
+            color: $white-dark;
+          }
+
+          &:hover {
+            background-color: $acept-dark;
+          }
+        }
       }
     }
 
@@ -99,11 +151,23 @@
         font-size: 18px;
         color: $primary;
         margin-bottom: 10px;
+
+        &.dark {
+          color: $white-dark;
+        }
       }
 
       p {
         font-size: 14px;
         color: $secondary;
+
+        &.dark {
+          color: $white-dark;
+        }
+      }
+
+      &.dark {
+        color: $white-dark;
       }
     }
   }
