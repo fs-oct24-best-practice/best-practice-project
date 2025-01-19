@@ -5,6 +5,7 @@ import { Card } from '../Card/Card';
 import { Product } from '../../types';
 import styles from './Catalog.module.scss';
 import { CardSkeleton } from '../skeletons';
+import { useAppSelector } from '../../hooks/hooks';
 
 type Props = {
   productList: Product[];
@@ -15,6 +16,8 @@ type Props = {
 export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
     setShowSkeleton(isLoading);
@@ -120,7 +123,7 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
   }
 
   return (
-    <div className={styles.catalog__container}>
+    <div className={cn(styles.catalog__container, styles[theme])}>
       <div className={styles.catalog__filters}>
         <select
           value={sortOption}

@@ -12,8 +12,15 @@ import store, { persistor } from './store/store';
 import { PhonesPage } from './pages/PhonesPage/PhonesPage';
 import { AccessoriesPage } from './pages/AccessoriesPage/AccessoriesPage';
 import { TabletsPage } from './pages/TabletsPage/TabletsPage';
+import { AuthPage } from './pages/AuthPage/AuthPage';
+import { DashboardPage } from './pages/DashboardPage/DashboardPage';
+import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 
 export const Root = () => {
+  const isAuthenticated = (): boolean => {
+    const user = localStorage.getItem('user');
+    return !!user;
+  };
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -34,35 +41,20 @@ export const Root = () => {
                 <Route index element={<AccessoriesPage />} />
                 <Route path=':itemId' element={<ProductDetailsPage />} />
               </Route>
-              {/*
-              <Route
-                path='phones'
-                element={<CatalogPage category='phones' />}
-              />
-              <Route
-                path='phones/:itemId'
-                element={<ProductDetailsPage />}
-              ></Route>
-             
-              <Route
-                path='tablets'
-                element={<CatalogPage category='tablets' />}
-              />
-              <Route
-                path='tablets/:itemId'
-                element={<ProductDetailsPage />}
-              ></Route>
-              <Route
-                path='accessories'
-                element={<CatalogPage category='accessories' />}
-              />
-              <Route
-                path='accessories/:itemId'
-                element={<ProductDetailsPage />}
-              ></Route>
-               */}
               <Route path='favorite' element={<FavoritePage />} />
               <Route path='cart' element={<CartPage />} />
+              <Route path='auth' element={<AuthPage />} />
+              <Route
+                path='dashboard'
+                element={
+                  isAuthenticated() ? (
+                    <DashboardPage />
+                  ) : (
+                    <Navigate to='/auth' replace />
+                  )
+                }
+              />
+              <Route path='register' element={<RegistrationPage />} />
               <Route path='*' element={<NotFoundPage />} />
             </Route>
           </Routes>

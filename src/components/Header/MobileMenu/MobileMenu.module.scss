@@ -12,6 +12,15 @@
   flex-direction: column;
   justify-content: space-between;
 
+  &.light {
+    border-top: 3px solid $elements;
+    background-color: $white;
+  }
+  
+  &.dark {
+    border-top: 3px solid $elements-dark;
+    background-color: $black-dark;
+  }
 
   &__pages {
     display: flex;
@@ -24,10 +33,17 @@
   &__link {
     position: relative;
     padding: 8px 0;
-    color: $secondary;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 800;
+
+    .light & {
+      color: $secondary;
+    }
+    
+    .dark & {
+      color: $secondary-dark;
+    }
 
     &::after {
       content: '';
@@ -37,13 +53,26 @@
       bottom: 2px;
       left: 0;
       border-radius: 3px;
-      background: $primary;
       transition: $transition;
       transition-property: width;
+
+      .light & {
+        background: $primary;
+      }
+      
+      .dark & {
+        background: $white-dark
+      }
     }
 
     &:hover {
-      color: $primary;
+      .light & {
+        color: $primary;
+      }
+      
+      .dark & {
+        color: $white-dark;
+      }
     }
 
     &:hover::after {
@@ -51,7 +80,13 @@
     }
 
     &_active {
-      color: $primary;
+      .light & {
+        color: $primary;
+      }
+      
+      .dark & {
+        color: $white-dark;
+      }
 
       &::after {
         width: 100%;
@@ -72,9 +107,23 @@
       align-items: center;
       height: 64px;
       width: calc(100vw / 2);
-      border-top: 3px solid $elements;
-      &:first-child {
-        border-right: 3px solid $elements;
+
+      .light & {
+        border-top: 3px solid $elements;
+      }
+
+      .dark & {
+        border-top: 3px solid $elements-dark;
+      }
+      
+      &:first-child {        
+        .light & {
+          border-right: 3px solid $elements;
+        }
+  
+        .dark & {
+          border-right: 3px solid $elements-dark;
+        }
       }
     }
 

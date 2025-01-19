@@ -9,9 +9,16 @@
   top: 0;
   left: 0;
   z-index: 100;
-  background-color: $background;
-  border-bottom: 3px solid $elements;
   height: 64px;
+
+  &.light {
+    background-color: $background;
+    border-bottom: 3px solid $elements;
+  }
+  &.dark {
+    background-color: $black-dark;
+    border-bottom: 3px solid $elements-dark;
+  }
 
   &__logo_wrap {
     height: 64px;
@@ -44,17 +51,22 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-
   aspect-ratio: 1;
+  border: none;
+}
+
+.light .burger {
+  background-color: $background;
   border-left: 3px solid $elements;
+}
+.dark .burger {
+  background-color: $black-dark;
+  border-left: 3px solid $elements-dark;
 }
 
 @media screen and (max-width: $viewport-width-tablet) {
   .header {
     justify-content: space-between;
-
-    background-color: $background;
-    border-bottom: 3px solid $elements;
     height: 48px;
 
     &__logo_wrap {

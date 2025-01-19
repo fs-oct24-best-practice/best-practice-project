@@ -2,8 +2,6 @@
 @import '../../styles/mixins.scss';
 
 .product_card {
-  background-color: #FFFFFF;
-  border: 1px solid #E2E6E9;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,6 +10,15 @@
   height: 439px;
   padding: 32px;
   box-sizing: border-box;
+
+  &.light {
+    border: 1px solid $elements;
+    background-color: $white;
+  }
+  &.dark {
+    border: 1px solid $surface2-dark;
+    background-color: $surface1-dark;
+  }
 
   @include on-tablet {
     height: 512px;
@@ -38,30 +45,36 @@
   }
 
   &__name {
-    font-family: 'Mont-Regular', sans-serif;
+    font-family: 'Regular', sans-serif;
     font-weight: 600;
     text-decoration: none;
     font-size: 14px;
     line-height: 21px;
-    color: $primary;
     padding-top: 16px;
     width: 100%;
     margin-bottom: 8px;
     flex: 1;
     transition: transform $transition;
-    
+
     &:hover {
       transform: scale(1.1);
+    }
+
+    .light & {
+      color: $primary;
+    }
+  
+    .dark & {
+      color: $white-dark;
     }
   }
 
   &__price {
     text-decoration: none;
     font-size: 22px;
-    font-family: 'Mont-Bold', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 700;
     line-height: 30px;
-    color: $primary;
     margin-bottom: 8px;
     width: 100%;
     display: flex;
@@ -70,27 +83,49 @@
 
   &__price_discount {
     font-size: 22px;
-    font-family: 'Mont-Bold', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 700;
     line-height: 30px;
-    color: $primary;
+
+    .light & {
+      color: $primary;
+    }
+  
+    .dark & {
+      color: $white-dark;
+    }
   }
+
 
   &__full_price {
     font-size: 22px;
-    font-family: 'Mont-Regular', sans-serif;
+    font-family: 'Regular', sans-serif;
     font-weight: 600;
     line-height: 28.12px;
     text-decoration-line: line-through;
     text-decoration-skip-ink: none;
-    color: $secondary;
     margin-left: 8px;
+
+    .light & {
+      color: $secondary;
+    }
+  
+    .dark & {
+      color: $secondary-dark;
+    }
   }
 
   &__separator {
-    border-top: 1px solid $elements;
     margin-bottom: 8px;
     width: 100%;
+
+    .light & {
+      border-top: 1px solid $elements;
+    }
+  
+    .dark & {
+      border-top: 1px solid $elements-dark;
+    }
   }
 
   &__features {
@@ -109,19 +144,33 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-family: 'Mont-Regular', sans-serif;
+    font-family: 'Regular', sans-serif;
     font-weight: 600;
 
     &_label {
       font-size: 12px;
       line-height: 15px;
-      color: $secondary;
-    }
     
+      .light & {
+        color: $secondary;
+      }
+    
+      .dark & {
+        color: $secondary-dark;
+      }
+    }
+
     &_value {
-      color: $primary;
       font-size: 12px;
       line-height: 15px;
+    
+      .light & {
+        color: $primary;
+      }
+    
+      .dark & {
+        color: $white-dark;
+      }
     }
   }
 
@@ -133,39 +182,78 @@
   }
 
   &__buy {
+    border: none;
     all: unset;
+
     text-decoration: none;
-    color: $white;
-    background-color: $primary;
     height: 40px;
     font-size: 14px;
-    font-family: 'Mont-Bold', sans-serif;
+    font-family: 'Bold', sans-serif;
     font-weight: 700;
     line-height: 40px;
     text-align: center;
     flex-grow: 1;
+  
+    .light & {
+      color: $white;
+      background-color: $primary;
+    }
+  
+    .dark & {
+      color: $white-dark;
+      background-color: $acept-dark
+    }
   }
 
   &__favourite_button {
-    background: none;
-    border: none;
     padding: 0;
     cursor: pointer;
-    border: 1px solid $icons;
     height: 40px;
     width: 40px;
     display: flex;
     justify-content: center; 
     align-items: center;
-    transition: border $transition;
+
+    .light & {
+      background-color: white;
+      border: 1px solid $icons;
+      transition: border $transition;
       &:hover {
         border: 1px solid $primary;
       }
+    }
+  
+    .dark & {
+      background-color: $surface2-dark;
+      border: none;
+      transition: none;
+      &:hover {
+        background-color:$icons-dark;
+      }
+    }
   }
-
-  &__added {
-    color: $green;
-    background-color: $white;
-    border: 1px solid $elements;
+  
+  &__added_to_favourite {
+    .light & {
+      border: 1px solid $elements;
+    }
+    
+    .dark & {
+      border: 1px solid $elements-dark;
+      background-color: $black-dark;
+    }
+  }
+  
+  &__added_to_cart{
+    .light & {
+      color: $green;
+      background-color: $white;
+      border: 1px solid $elements;
+    }
+  
+    .dark & {
+      color: $white-dark;
+      background-color: $surface2-dark;
+    }
   }
 }

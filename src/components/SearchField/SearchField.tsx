@@ -8,6 +8,7 @@ import { ProductCategories } from '../../utils/ProductCategories';
 import { debounce } from '../../utils/debounce';
 import { FixedSizeList as List } from 'react-window';
 import classNames from 'classnames';
+import { useAppSelector } from '../../hooks/hooks';
 
 export const SearchField: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,6 +17,8 @@ export const SearchField: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const params = useParams();
+
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const toggleSearch = () => {
     setIsVisible(!isVisible);
@@ -96,7 +99,7 @@ export const SearchField: React.FC = () => {
         to={`${route}/${product.itemId}`}
         key={product.id}
         style={style}
-        className={classNames(styles.searchOption, styles.link)}
+        className={classNames(styles.searchOption, styles.link, styles[theme])}
       >
         <div>
           <img
@@ -113,7 +116,7 @@ export const SearchField: React.FC = () => {
   };
 
   return (
-    <div className={styles.searchContainer}>
+    <div className={classNames(styles.searchContainer, styles[theme])}>
       <div className={classNames(styles.icon)} onClick={toggleSearch}></div>
       <div
         className={`${styles.searchInput} ${isVisible ? styles.slideDown : styles.slideUp}`}

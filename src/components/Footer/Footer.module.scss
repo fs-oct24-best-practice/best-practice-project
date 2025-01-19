@@ -2,7 +2,12 @@
 @use '@best-practice/styles/mixins' as mixins;
 
 .footer {
-  background-color: $white;
+  &.light {
+    background-color: $white;
+  }
+  &.dark {
+    background-color: $black-dark;
+  }
 
   &__wrapper {
     height: $footer-height;
@@ -10,7 +15,14 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 24px;
-    border-top: 1px solid $elements;
+
+    .light & {
+      border-top: 3px solid $elements;
+    }
+
+    .dark & {
+      border-top: 3px solid $elements-dark;
+    }
 
     @include mixins.onMobile {
       height: auto;
@@ -37,13 +49,21 @@
   }
 
   &__links {
-    color: $secondary;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 800;
+
+    .light & {
+      color: $secondary;
+    }
+    
+    .dark & {
+      color: $white-dark;
+    }
   }
 
   &__back_to_top {
+    color: $secondary;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -55,18 +75,28 @@
 
   &__back_to_top_button {
     background: none;
-    border: none;
     padding: 0;
     cursor: pointer;
-    border: 1px solid $icons;
     height: 32px;
     width: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: border $transition;
-    &:hover {
-      border: 1px solid $primary;
+ 
+    .light & {
+      border: 1px solid $icons;
+      &:hover {
+        border: 1px solid $primary;
+      }
+    }
+    
+    .dark & {
+      background-color: $surface2-dark;
+      border: none;
+      &:hover {
+        background-color: $icons-dark;
+      }
     }
   }
 }

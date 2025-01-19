@@ -10,26 +10,37 @@ import { ProductInCart } from '../../types/ProductInCart';
 
 type Props = {
   item: ProductInCart;
+  isDisabled?: boolean;
 };
 
-export const CartItem: React.FC<Props> = ({ item }) => {
+export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
   const dispatch = useDispatch();
 
   const handleIncrease = () => {
-    dispatch(increaseQuantity(item));
+    if (!isDisabled) {
+      dispatch(increaseQuantity(item));
+    }
   };
 
   const handleDecrease = () => {
-    dispatch(decreaseQuantity(item));
+    if (!isDisabled) {
+      dispatch(decreaseQuantity(item));
+    }
   };
 
   const handleRemove = () => {
-    dispatch(deleteCart(item));
+    if (!isDisabled) {
+      dispatch(deleteCart(item));
+    }
   };
 
   return (
     <div className={styles.cart__item}>
-      <button className={styles.cart__item__close} onClick={handleRemove}>
+      <button
+        className={styles.cart__item__close}
+        onClick={handleRemove}
+        disabled={isDisabled}
+      >
         <img src='/img/icons/Close.svg' alt='Close' />
       </button>
       <img
@@ -50,6 +61,7 @@ export const CartItem: React.FC<Props> = ({ item }) => {
           <button
             className={styles.cart__item__actions__counter__button}
             onClick={handleDecrease}
+            disabled={isDisabled}
           >
             <img src='/img/icons/Minus.svg' alt='Decrease quantity' />
           </button>
@@ -57,6 +69,7 @@ export const CartItem: React.FC<Props> = ({ item }) => {
           <button
             className={styles.cart__item__actions__counter__button}
             onClick={handleIncrease}
+            disabled={isDisabled}
           >
             <img src='/img/icons/Union.svg' alt='Increase quantity' />
           </button>

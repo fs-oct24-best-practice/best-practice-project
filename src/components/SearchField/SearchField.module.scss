@@ -1,9 +1,8 @@
-$secondary-color: #89939a;
-$elements-color: #e2e6e9;
-$white-color: #fff;
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/mixins' as *;
 
 body:has(.slideDown) {
-  @media (max-width: 1200px) {
+  @include on-tablet {
     overflow: hidden;
 
     .searchClose {
@@ -17,11 +16,14 @@ body:has(.slideDown) {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
-  border-left: 1px solid #e2e6e9;
+  height: 60px;
+  
+  &.light {
+    border-left: 3px solid $elements;
+  }
 
-  @media (min-width: 1200px) {
-    height: 64px;
+  &.dark {
+    border-left: 3px solid $elements-dark;
   }
 }
 
@@ -29,15 +31,15 @@ body:has(.slideDown) {
   cursor: pointer;
   width: 48px;
   height: 48px;
-  //margin-right: 5px;
-  background-image: url(../../assets/icons/search_icons/search-alt-2.svg);
+  margin-right: 5px;
   background-position: center;
   background-size: 20px 20px;
   background-repeat: no-repeat;
   transition: transform 0.3s ease;
-  
-//for the future dark mode
-  &.dark {
+  .light & {
+    background-image: url(../../assets/icons/search_icons/search-alt-2.svg);
+  }
+  .dark & {
     background-image: url(../../assets/icons/search_icons/search-alt-2darkMode.svg);
   }
 
@@ -45,7 +47,7 @@ body:has(.slideDown) {
     transform: scale(1.1);
   }
 
-  @media (min-width: 1200px) {
+  @include on-desktop {
     width: 64px;
     height: 64px;
     background-size: 25px 25px;
@@ -80,7 +82,7 @@ body:has(.slideDown) {
   max-width: 100%;
   right: 0;
 
-  @media (max-width: 1200px) {
+  @include on-tablet {
     max-width: 100%;
   }
 }
@@ -90,8 +92,17 @@ input[type='text'] {
   border-radius: 0.25em;
   box-sizing: border-box;
   border: 0.1em solid #ccc;
+  background-color: $icons;
 
-  @media (max-width: 1200px) {
+  .light & {
+    background-color: $white;
+  }
+  .dark &:focus {
+    outline: none;
+    background-color: $white;
+  }
+
+  @include on-tablet {
     width: 100%;
     max-width: 60%;
     margin: 100px 0 0 20%;
@@ -107,7 +118,7 @@ input[type='text'] {
   height: 500px;
   z-index: 1000;
 
-  @media (max-width: 1200px) {
+  @include on-tablet {
     position: fixed;
     top: 140px;
     left: 20%;
@@ -120,11 +131,25 @@ input[type='text'] {
   display: flex;
   height: 100px;
   padding: 15px;
-  background-color: $elements-color;
-  border-bottom: 1px solid $secondary-color;
+  border-bottom: 1px solid $secondary;
   box-sizing: border-box;
   z-index: 1000;
 
+  &.light {
+    border-bottom: 1px solid $secondary;
+  }
+
+  &.dark {
+    border-bottom: 1px solid $secondary-dark;
+  }
+
+  .light & {
+    background-color: $elements;
+  }
+
+  .dark & {
+    background-color: $surface2-dark;
+  }
 }
 
 .searchClose {
@@ -134,7 +159,7 @@ input[type='text'] {
   top: 10px;
   left: -100px;
   font-size: 30px;
-  color: $white-color;
+  color: $white;
   cursor: pointer;
   transition:
     left 0.5s ease,
@@ -161,17 +186,24 @@ input[type='text'] {
 
 .text {
   font-size: 18px;
-  color: #313237;
   font-weight: 600;
   text-align: left;
   cursor: pointer;
   box-sizing: border-box;
 
-  &:hover {
-    color: #626666;
+  .light & {
+    color: $primary;
   }
 
-  @media (max-width: 600px) {
+  .dark & {
+    color: $white-dark;
+  }
+
+  &:hover {
+    color: $secondary;
+  }
+
+  @include onMobile {
     font-size: 15px;
   }
 }
@@ -181,7 +213,7 @@ input[type='text'] {
 }
 
 .productList {
-  @media (min-width: 1200px) {
+  @include on-desktop {
     scrollbar-width: none;
     -ms-overflow-style: none;
 

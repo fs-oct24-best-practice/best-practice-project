@@ -1,48 +1,51 @@
-@font-face {
-	font-family: 'Mont-Regular';
-	src: url('/fonts/Mont-Regular.otf') format('opentype');
-  }
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts' as *;
+
   
-  @font-face {
-	font-family: 'Mont-Bold';
-	src: url('/fonts/Mont-Bold.otf') format('opentype');
-  }
-  
-  @font-face {
-	font-family: 'Mont-SemiBold';
-	src: url('/fonts/Mont-SemiBold.otf') format('opentype');
-  }
-  
-  .cart {
+.cart {
 	&__back {
 	  margin-bottom: 16px;
 	  display: flex;
 	  align-items: baseline;
   
 	  &__button {
-		margin-left: 10px;
-		font-family: 'Mont-SemiBold';
-		font-size: 12px;
-		line-height: 15.34px;
-		color: #89939A;
-		text-align: center;
-		text-decoration: none;
+      margin-left: 10px;
+      font-family: 'SemiBold';
+      font-size: 12px;
+      line-height: 15.34px;
+      text-align: center;
+      text-decoration: none;
+
+      .light & {
+        color: $secondary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
 	  }
 	}
   
 	&__page {
-	  font-family: 'Mont-Regular', sans-serif;
+	  font-family: 'Regular', sans-serif;
 	  padding: 32px;
 	}
   
 	&__title {
-	  font-family: 'Mont-Bold';
+	  font-family: 'Bold';
 	  font-size: 48px;
 	  font-weight: 800;
 	  line-height: 56px;
 	  letter-spacing: -0.01em;
 	  margin-bottom: 24px;
-	  color: #313237;
+
+    .light & {
+      color: $primary;
+    }
+
+    .dark & {
+      color: $white-dark;
+    }
 	}
   
 	&__content {
@@ -63,62 +66,95 @@
   
 	&__summary {
 	  padding: 24px;
-	  border: 1px solid #e0e0e0;
 	  border-radius: 1px;
-	  background-color: #fff;
 	  max-width: 368px;
 	  position: relative;
 	  margin-top: 14px;
 	  height: 230px;
+
+    .light & {
+      color: $white;
+      border: 1px solid $elements;
+      background-color: $white;
+    }
+    
+    .dark & {
+      color: $black-dark;
+      border: 1px solid $elements-dark;
+      background-color: $black-dark;
+    }
   
 	  @media (max-width: 1199px) {
-		max-width: none;
-		margin-top: 32px;
+      max-width: none;
+      margin-top: 32px;
 	  }
   
 	  .summary {
-		&__total {
-		  display: flex;
-		  margin-bottom: 16px;
-		  flex-direction: column;
-		  align-items: center;
-  
-		  span {
-			font-family: 'Mont-Bold';
+      &__total {
+        display: flex;
+        margin-bottom: 16px;
+        flex-direction: column;
+        align-items: center;
+
+		&__cost {
+			font-family: 'Bold';
 			font-size: 32px;
 			font-weight: 800;
 			line-height: 41px;
 			letter-spacing: -0.01em;
+		  
+			.light & {
+			  color: $primary;
+			}
+		  
+			.dark & {
+			  color: $white-dark;
+			}
 		  }
-		}
+      }
   
-		&__title {
-		  font-family: 'Mont-Regular';
-		  color: #89939a;
-		  font-size: 14px;
-		  font-weight: 500;
-		  line-height: 21px;
-		  text-align: center;
-		}
+		  &__title {
+        font-family: 'Regular';
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 21px;
+        text-align: center;
+
+        .light & {
+          color: $secondary;
+        }
+    
+        .dark & {
+          color: $secondary-dark;
+        }
+		  }
 	  }
 	}
-  }
+}
   
-  .checkout {
+.checkout {
 	&__button {
-	  font-family: 'Mont-Regular', sans-serif;
+	  font-family: 'Regular', sans-serif;
 	  font-size: 14px;
 	  font-weight: 700;
 	  line-height: 21px;
 	  width: 100%;
 	  padding: 12px 0;
-	  background-color: #313237;
-	  color: white;
 	  border: none;
 	  border-radius: 1px;
 	  cursor: pointer;
 	  height: 48px;
 	  margin-bottom: 10px;
+
+    .light & {
+      color: $white;
+	    background-color: $primary;
+    }
+
+    .dark & {
+      color: $primary;
+	    background-color: $acept-dark;
+    }
   
 	  &:hover {
 		box-shadow: 2px 4px 18px -3px #17203166, 0px 0px 16px -19px #17203166;
@@ -137,16 +173,27 @@
 		background: rgba(0, 0, 0, 0.5);
 
 		&__content {
-			background: #fff;
 			padding: 20px;
 			border-radius: 1px;
 			text-align: center;
-			border: 3px solid #e0e0e0;
-		  }
-	  }
-	  
-  }
-  .back__button {
+
+      .light & {
+        border: 3px solid $elements;
+        background-color: $white;
+        color: $secondary;
+      }
+
+      .dark & {
+        border: 3px solid $elements-dark;
+        background-color: $black-dark;
+        color: $secondary-dark;
+      }
+		}
+	} 
+}
+
+.back__button {
 	margin-top: 10px;
-  }
+}
+  
   
