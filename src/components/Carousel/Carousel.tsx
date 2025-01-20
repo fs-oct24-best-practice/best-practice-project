@@ -2,20 +2,23 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './Carousel.scss';
 import classNames from 'classnames';
 
-import bannerVideo from '../../assets/banner-images/nice-gadjets-promo-Clipchamp.mp4';
-import bannerAccessories from '../../assets/banner-images/banner-accessories.png';
-import bannerPhones from '../../assets/banner-images/banner-phones.png';
-import bannerTablets from '../../assets/banner-images/banner-tablets.png';
+import bannerClip1 from '../../assets/banner-videos/banner-clip1.mp4';
+import bannerClip2 from '../../assets/banner-videos/banner-clip2.mp4';
+import bannerClip3 from '../../assets/banner-videos/banner-clip3.mp4';
+import bannerClip4 from '../../assets/banner-videos/banner-clip4.mp4';
+import bannerClip5 from '../../assets/banner-videos/banner-clip5.mp4';
+
 import arrowLeft from '../../assets/icons/arrow-left.svg';
 import arrowRight from '../../assets/icons/arrow-right.svg';
 import arrowLeftLight from '../../assets/icons/arrow-left-light.svg';
 import arrowRightLight from '../../assets/icons/arrow-right-light.svg';
 
 const bannerSlides = [
-  { type: 'video', src: bannerVideo },
-  { type: 'image', src: bannerAccessories },
-  { type: 'image', src: bannerPhones },
-  { type: 'image', src: bannerTablets },
+  { src: bannerClip1 },
+  { src: bannerClip2 },
+  { src: bannerClip3 },
+  { src: bannerClip4 },
+  { src: bannerClip5 },
 ];
 
 type Props = {
@@ -30,41 +33,29 @@ export const Carousel: React.FC<Props> = ({ themeColor }) => {
   const [sliderWidth, setSliderWidth] = useState(0);
 
   const banner = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<number | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const transformValue = sliderWidth * currentSlideIndex;
 
-  const clearExistingTimeout = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-  };
-
   const handlePrevSlide = () => {
-    clearExistingTimeout();
+    const prevIndex =
+      currentSlideIndex === firstSlideIndex
+        ? lastSlideIndex
+        : currentSlideIndex - 1;
 
-    if (currentSlideIndex !== firstSlideIndex) {
-      setCurrentSlideIndex(currentSlideIndex - 1);
-    } else {
-      setCurrentSlideIndex(lastSlideIndex);
-    }
+    setCurrentSlideIndex(prevIndex);
   };
 
   const handleNextSlide = useCallback(() => {
-    clearExistingTimeout();
+    const nextIndex =
+      currentSlideIndex === lastSlideIndex
+        ? firstSlideIndex
+        : currentSlideIndex + 1;
 
-    if (currentSlideIndex !== lastSlideIndex) {
-      setCurrentSlideIndex(currentSlideIndex + 1);
-    } else {
-      setCurrentSlideIndex(firstSlideIndex);
-    }
+    setCurrentSlideIndex(nextIndex);
   }, [currentSlideIndex, lastSlideIndex]);
 
   const handleDotActive = (index: number) => {
-    clearExistingTimeout();
-
     setCurrentSlideIndex(index);
   };
 
@@ -75,31 +66,22 @@ export const Carousel: React.FC<Props> = ({ themeColor }) => {
   }, []);
 
   useEffect(() => {
-    const currentSlide = bannerSlides[currentSlideIndex];
-    clearExistingTimeout();
+    const currentVideo = videoRefs.current[currentSlideIndex];
 
-    if (currentSlide.type === 'video' && videoRef.current) {
-      const video = videoRef.current;
-      video.currentTime = 0;
+    if (currentVideo) {
+      currentVideo.currentTime = 0;
+      currentVideo.play();
 
-      video.play();
-
-      const onVideoEnd = () => {
+      const handleVideoEnd = () => {
         handleNextSlide();
       };
 
-      video.addEventListener('ended', onVideoEnd);
+      currentVideo.addEventListener('ended', handleVideoEnd);
 
       return () => {
-        video.removeEventListener('ended', onVideoEnd);
+        currentVideo.removeEventListener('ended', handleVideoEnd);
       };
-    } else {
-      timeoutRef.current = window.setTimeout(() => {
-        handleNextSlide();
-      }, 5000);
     }
-
-    return () => clearExistingTimeout();
   }, [currentSlideIndex, handleNextSlide]);
 
   return (
@@ -108,7 +90,7 @@ export const Carousel: React.FC<Props> = ({ themeColor }) => {
         <button
           type='button'
           className='Carousel__slider-button'
-          onClick={() => handlePrevSlide()}
+          onClick={handlePrevSlide}
         >
           <img
             src={themeColor === 'light' ? arrowLeft : arrowLeftLight}
@@ -123,33 +105,23 @@ export const Carousel: React.FC<Props> = ({ themeColor }) => {
               transform: `translateX(-${transformValue}px)`,
             }}
           >
-            {bannerSlides.map((slide, index) =>
-              slide.type === 'video' ? (
-                <li className='Carousel__slider-item' key={index}>
-                  <video
-                    ref={videoRef}
-                    className='Carousel__slider-video'
-                    src={slide.src}
-                    muted
-                  />
-                </li>
-              ) : (
-                <li className='Carousel__slider-item' key={index}>
-                  <img
-                    className='Carousel__slider-image'
-                    src={slide.src}
-                    alt={`Slide ${index + 1}`}
-                  />
-                </li>
-              )
-            )}
+            {bannerSlides.map((slide, index) => (
+              <li className='Carousel__slider-item' key={index}>
+                <video
+                  ref={(el) => (videoRefs.current[index] = el)}
+                  className='Carousel__slider-video'
+                  src={slide.src}
+                  muted
+                />
+              </li>
+            ))}
           </ul>
         </div>
 
         <button
           type='button'
           className='Carousel__slider-button'
-          onClick={() => handleNextSlide()}
+          onClick={handleNextSlide}
         >
           <img
             src={themeColor === 'light' ? arrowRight : arrowRightLight}
