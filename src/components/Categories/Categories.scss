@@ -23,6 +23,10 @@
     }
   }
 
+  .title_dark {
+    color: $white;
+  }
+
   &__items {
     @include mixins.on-tablet {
       @include mixins.page-grid;

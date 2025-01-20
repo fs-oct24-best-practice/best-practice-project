@@ -7,6 +7,7 @@ import phonesImg from '../../assets/categories/phones.png';
 import tabletsImg from '../../assets/categories/tablets.png';
 import accessoriesImg from '../../assets/categories/accessories.png';
 import { CategorySkeleton } from '../skeletons';
+import classNames from 'classnames';
 
 type CategoriesCard = {
   title: string;
@@ -24,9 +25,15 @@ type Props = {
   products: Product[];
   title: string;
   isLoading: boolean;
+  themeColor: string;
 };
 
-export const Categories: React.FC<Props> = ({ products, title, isLoading }) => {
+export const Categories: React.FC<Props> = ({
+  products,
+  title,
+  isLoading,
+  themeColor,
+}) => {
   const allProducts = products;
 
   const productsCount = (productType: string) => {
@@ -59,7 +66,13 @@ export const Categories: React.FC<Props> = ({ products, title, isLoading }) => {
     <section className='categories'>
       <div className='container'>
         <div className='categories__content'>
-          <h2 className='categories__title'>{title}</h2>
+          <h2
+            className={classNames('slider__title', {
+              title_dark: themeColor !== 'light',
+            })}
+          >
+            {title}
+          </h2>
           <div className='categories__items'>
             {isLoading
               ? Array.from({ length: 3 }).map((_, index) => (
@@ -80,7 +93,11 @@ export const Categories: React.FC<Props> = ({ products, title, isLoading }) => {
                       />
                     </Link>
                     <div className='categories__info'>
-                      <h3 className='categories__info--title'>
+                      <h3
+                        className={classNames('categories__info--title', {
+                          title_dark: themeColor !== 'light',
+                        })}
+                      >
                         {category.title}
                       </h3>
                       <p className='categories__info--text'>

@@ -6,11 +6,13 @@ import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
 import { getProductList } from '../../api/getProductList';
 import { Carousel } from '../../components/Carousel';
+import { useAppSelector } from '../../hooks/hooks';
+import classNames from 'classnames';
 
 export const HomePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [productList, setProductList] = useState<Product[]>([]);
-  const isDiscount = true;
+  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
     getProductList()
@@ -40,11 +42,17 @@ export const HomePage = () => {
   return (
     <div className={styles.homePage}>
       <div className={styles.homePage__title}>
-        <h1 className={styles.title__text}>Welcome to Nice Gadgets store!</h1>
+        <h1
+          className={classNames(styles.title__text, {
+            [styles.title_dark]: theme !== 'light', // Використовуємо styles для модульних класів
+          })}
+        >
+          Welcome to Nice Gadgets store!
+        </h1>
       </div>
 
       <section className={styles.carousel}>
-        <Carousel />
+        <Carousel themeColor={theme} />
       </section>
 
       <section className={styles.newMmodels}>
@@ -52,6 +60,7 @@ export const HomePage = () => {
           products={newProducts}
           title='Brand new models'
           isLoading={isLoading}
+          themeColor={theme}
         />
       </section>
 
@@ -60,6 +69,7 @@ export const HomePage = () => {
           products={productList}
           title={'Shop by category'}
           isLoading={isLoading}
+          themeColor={theme}
         />
       </section>
 
@@ -67,8 +77,8 @@ export const HomePage = () => {
         <Slider
           products={productsWithDiscount}
           title='Hot Prices'
-          discount={isDiscount}
           isLoading={isLoading}
+          themeColor={theme}
         />
       </section>
     </div>
