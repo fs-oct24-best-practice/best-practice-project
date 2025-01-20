@@ -39,7 +39,7 @@
         align-items: center;
         height: 189px;
         width: 32px;
-        background-color: $white;
+        background-color: transparent;
         border: 1px solid $icons;
         cursor: pointer;
 
@@ -107,7 +107,7 @@
       height: 4px;
       background-color: $elements;
       border: none;
-      cursor: pointer;
+      cursor: pointer;      
     }
   }
 }
