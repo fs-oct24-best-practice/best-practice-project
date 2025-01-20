@@ -7,6 +7,7 @@ export const CardSkeleton = () => (
     height={400}
     viewBox='0 0 1200 400'
     backgroundColor='#E2E6E9'
+    opacity={0.4}
     foregroundColor='#ecebeb'
   >
     <rect x='32' y='126' rx='0' ry='0' width='1' height='2' />
