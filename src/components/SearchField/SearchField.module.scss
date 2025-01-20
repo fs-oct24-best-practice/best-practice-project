@@ -1,7 +1,8 @@
 @use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/mixins' as *;
 
 body:has(.slideDown) {
-  @media (max-width: 1200px) {
+  @include on-tablet {
     overflow: hidden;
 
     .searchClose {
@@ -15,7 +16,7 @@ body:has(.slideDown) {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 64px;
   
   &.light {
     border-left: 3px solid $elements;
@@ -24,17 +25,13 @@ body:has(.slideDown) {
   &.dark {
     border-left: 3px solid $elements-dark;
   }
-
-  @media (min-width: 1200px) {
-    height: 64px;
-  }
 }
 
 .icon {
   cursor: pointer;
   width: 48px;
   height: 48px;
-  //margin-right: 5px;
+  margin-right: 5px;
   background-position: center;
   background-size: 20px 20px;
   background-repeat: no-repeat;
@@ -50,7 +47,7 @@ body:has(.slideDown) {
     transform: scale(1.1);
   }
 
-  @media (min-width: 1200px) {
+  @include on-desktop {
     width: 64px;
     height: 64px;
     background-size: 25px 25px;
@@ -58,10 +55,10 @@ body:has(.slideDown) {
 }
 
 .searchInput {
-  height: px;
+  position: relative;
+  height: 34px;
+  width: 300px;
   overflow: hidden;
-  margin-right: 8px;
-  width: 100%;
   transition: max-width 0.5s ease-in-out;
   
 
@@ -85,7 +82,7 @@ body:has(.slideDown) {
   max-width: 100%;
   right: 0;
 
-  @media (max-width: 1200px) {
+  @include on-tablet {
     max-width: 100%;
   }
 }
@@ -105,7 +102,7 @@ input[type='text'] {
     background-color: $white;
   }
 
-  @media (max-width: 1200px) {
+  @include on-tablet {
     width: 100%;
     max-width: 60%;
     margin: 100px 0 0 20%;
@@ -113,7 +110,6 @@ input[type='text'] {
 }
 
 .optionsContainer {
-  position: absolute;
   top: 65px;
   left: 0;
   width: 400px;
@@ -121,7 +117,7 @@ input[type='text'] {
   height: 500px;
   z-index: 1000;
 
-  @media (max-width: 1200px) {
+  @include on-tablet {
     position: fixed;
     top: 140px;
     left: 20%;
@@ -171,6 +167,10 @@ input[type='text'] {
   &:hover {
     transform: scale(1.1);
   }
+
+  @include on-desktop {
+    display: none;
+  }
 }
 
 .image {
@@ -206,7 +206,7 @@ input[type='text'] {
     color: $secondary;
   }
 
-  @media (max-width: 600px) {
+  @include onMobile {
     font-size: 15px;
   }
 }
@@ -216,7 +216,7 @@ input[type='text'] {
 }
 
 .productList {
-  @media (min-width: 1200px) {
+  @include on-desktop {
     scrollbar-width: none;
     -ms-overflow-style: none;
 

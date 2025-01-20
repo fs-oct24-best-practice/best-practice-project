@@ -39,9 +39,20 @@ export const CartPage = () => {
       setIsCheckout(true);
       dispatch(clearCart());
 
+      const order = {
+        items: cartItems,
+        totalCost,
+        totalItems,
+        date: new Date().toISOString(),
+      };
+
+      const previousOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      const updatedOrders = [...previousOrders, order];
+      localStorage.setItem('orders', JSON.stringify(updatedOrders));
+
       setTimeout(() => {
         setIsCheckout(false);
-        navigate('/');
+        navigate('/dashboard');
       }, 3000);
     }
   };
@@ -88,7 +99,7 @@ export const CartPage = () => {
         </div>
         <div className={styles.cart__summary}>
           <div className={styles.summary__total}>
-            <span className={styles.span}>${totalCost}</span>
+            <span className={styles.summary__total__cost}>${totalCost}</span>
             <p className={styles.summary__title}>
               Total for {totalItems} items:
             </p>

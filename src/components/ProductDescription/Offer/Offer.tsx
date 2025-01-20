@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './Offer.module.scss';
+import cn from 'classnames';
 
 import {
   browserSupportedColors,
@@ -37,11 +38,32 @@ export const Offer: FC<Props> = (props) => {
 
   const category = location.pathname.split('/')[1];
 
+  const setColorsClasses = ({ isActive }: { isActive: boolean }) => {
+    return cn({
+      [styles.colors__selector__color]: true,
+      [styles.colors__selector__color_active]: isActive,
+    });
+  };
+
+  const setCapacityClasses = ({ isActive }: { isActive: boolean }) => {
+    return cn({
+      [styles.capacity__selector__item]: true,
+      [styles.capacity__selector__item_active]: isActive,
+    });
+  };
+
+  const techProperties = {
+    Screen: screen,
+    Resolution: resolution,
+    Processor: processor,
+    RAM: ram,
+  };
+
   return (
-    <div>
-      <div>
-        <p>Available colors</p>
-        <div className={styles.colors}>
+    <section className={styles.section}>
+      <div className={styles.colors}>
+        <p className={styles.section__subtitle}>Available colors</p>
+        <div className={styles.colors__selector}>
           {sortStrings(colorsAvailable).map((color: string) => {
             const currentColor: string =
               replaceSpaceWithDash(color).toLowerCase();
@@ -53,7 +75,7 @@ export const Offer: FC<Props> = (props) => {
                   currentColor
                 )}`}
                 key={currentColor}
-                className={styles.colors__selector}
+                className={setColorsClasses}
                 style={{
                   backgroundColor: browserSupportedColors[currentColor],
                 }}
@@ -61,15 +83,11 @@ export const Offer: FC<Props> = (props) => {
             );
           })}
         </div>
-        <div>
-          <p>ID:</p>
-          <p>{namespaceId}</p>
-        </div>
       </div>
 
-      <div>
-        <p>Select capacity</p>
-        <div className={styles.capacity}>
+      <div className={styles.capacity}>
+        <p className={styles.section__subtitle}>Select capacity</p>
+        <div className={styles.capacity__selector}>
           {sortStrings(capacityAvailable).map((capacity) => {
             return (
               <NavLink
@@ -78,7 +96,7 @@ export const Offer: FC<Props> = (props) => {
                   capacity,
                   replaceSpaceWithDash(color).toLowerCase()
                 )}`}
-                className={styles.capacity__selector}
+                className={setCapacityClasses}
                 key={capacity}
               >
                 {capacity}
@@ -88,34 +106,25 @@ export const Offer: FC<Props> = (props) => {
         </div>
       </div>
 
-      <div>
-        <p>{priceDiscount}</p>
-      </div>
-
-      <div>
-        <p>{priceRegular}</p>
+      <div className={styles.prices}>
+        <p className={styles.prices__discount}>${priceDiscount}</p>
+        <p className={styles.prices__regular}>${priceRegular}</p>
       </div>
 
       {/* <ActionButtons category={category} currentProductId={id} /> */}
 
-      <div>
-        <div>
-          <p>Screen</p>
-          <p>{screen}</p>
-        </div>
-        <div>
-          <p>Resolution</p>
-          <p>{resolution}</p>
-        </div>
-        <div>
-          <p>Processor</p>
-          <p>{processor}</p>
-        </div>
-        <div>
-          <p>RAM</p>
-          <p>{ram}</p>
-        </div>
+      <div className={styles.properties}>
+        <ul className={styles.properties__list}>
+          {Object.entries(techProperties).map((property) => {
+            return (
+              <li key={property[0]} className={styles.property}>
+                <p className={styles.property__title}>{property[0]}</p>
+                <p className={styles.property__value}>{property[1]}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-    </div>
+    </section>
   );
 };

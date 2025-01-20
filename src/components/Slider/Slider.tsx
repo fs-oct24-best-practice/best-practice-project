@@ -63,7 +63,7 @@ export const Slider: React.FC<Props> = ({ products, title, isLoading }) => {
           className='swiper'
         >
           {isLoading
-            ? Array.from({ length: 4 }).map((_, index) => (
+            ? Array.from({ length: 8 }).map((_, index) => (
                 <SwiperSlide key={index} virtualIndex={index}>
                   <CardSkeleton />
                 </SwiperSlide>

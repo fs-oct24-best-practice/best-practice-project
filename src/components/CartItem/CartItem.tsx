@@ -13,29 +13,40 @@ import { Theme } from '../../types/Theme';
 
 type Props = {
   item: ProductInCart;
+  isDisabled?: boolean;
 };
 
-export const CartItem: React.FC<Props> = ({ item }) => {
+export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
   const dispatch = useDispatch();
 
   const theme = useAppSelector((state) => state.theme.theme);
 
   const handleIncrease = () => {
-    dispatch(increaseQuantity(item));
+    if (!isDisabled) {
+      dispatch(increaseQuantity(item));
+    }
   };
 
   const handleDecrease = () => {
-    dispatch(decreaseQuantity(item));
+    if (!isDisabled) {
+      dispatch(decreaseQuantity(item));
+    }
   };
 
   const handleRemove = () => {
-    dispatch(deleteCart(item));
+    if (!isDisabled) {
+      dispatch(deleteCart(item));
+    }
   };
 
   return (
     <div className={cn(styles.cart__item, styles[theme])}>
-      <button className={styles.cart__item__icon__close} onClick={handleRemove}>
+      <button
+        className={styles.cart__item__icon__close}
+        onClick={handleRemove}>
         <img src='/img/icons/Close2.svg' alt='Close' />
+        disabled={isDisabled}
+      >
       </button>
       <img
         src={item.image}
@@ -58,6 +69,7 @@ export const CartItem: React.FC<Props> = ({ item }) => {
               styles.cart__item__actions__counter__button_plus
             )}
             onClick={handleDecrease}
+            disabled={isDisabled}
           >
             <img src='/img/icons/Minus.svg' alt='Decrease quantity' />
           </button>
@@ -68,6 +80,7 @@ export const CartItem: React.FC<Props> = ({ item }) => {
               styles.cart__item__actions__counter__button_plus
             )}
             onClick={handleIncrease}
+            disabled={isDisabled}
           >
             <img
               src={`/img/icons/${theme === Theme.DARK ? 'UnionWhite.svg' : 'Union.svg'}`}

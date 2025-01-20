@@ -1,17 +1,18 @@
+@use '@best-practice/styles/mixins' as *;
 @use '@best-practice/styles/variables' as *;
 
 .cart__item {
-	height: 128px;
-	display: flex;
-	align-items: center;
-	border-radius: 1px;
-	padding: 16px;
-	margin: 16px;
-	gap: 31px;
-	font-family: 'Mont-Regular', sans-serif;
-	font-size: 14px;
-	font-weight: 600;
-	line-height: 21px;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  border-radius: 1px;
+  padding: 16px;
+  margin: 16px;
+  gap: 31px;
+  font-family: 'Mont-Regular', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
 
   &.light {
     color: $primary;
@@ -24,21 +25,25 @@
     background-color: $surface1-dark;
   }
 
-	&__image {
-		height: 88px;
+  &__image {
+    height: 88px;
 
-		@media (max-width: 639px) {
-			margin-left: 18px;
-		}
-	}
+    @media (max-width: 639px) {
+      margin-left: 18px;
+    }
 
-	&__description {
-		flex: 1;
-		margin: 0 16px;
+    @include onMobile {
+      margin-left: 18px;
+    }
+  }
 
-		&__title {
-			text-decoration: none;
-			
+  &__description {
+    flex: 1;
+    margin: 0 16px;
+
+    &__title {
+      text-decoration: none;
+
       .light & {
         color: $primary;
       }
@@ -46,26 +51,34 @@
       .dark & {
         color: $white-dark;
       }
-		}
 
-		@media (max-width: 639px) {
-			margin-left: 40px;
-		}
-	}
+      @include onMobile {
+        font-size: 12px;
+      }
+    }
 
-	&__actions {
-		display: flex;
-		align-items: center;
-		margin-right: 24px;
+    @media (max-width: 639px) {
+      margin-left: 40px;
+    }
 
-		&__counter {
-			display: flex;
-			align-items: center;
-			border-radius: 1px;
-			margin-right: 48px;
-			gap: 16px;
+    @include onMobile {
+      margin-left: 40px;
+    }
+  }
 
-			&__button {
+  &__actions {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+
+    &__counter {
+      display: flex;
+      align-items: center;
+      border-radius: 1px;
+      margin-right: 48px;
+      gap: 16px;
+
+      &__button {
         padding: 6px;
         cursor: pointer;
         height: 32px;
@@ -86,13 +99,21 @@
             background-color: $icons-dark;
           }
         }
+
+        background-color: $white;
+        border: 1px solid #ccc;
+        color: #313237;
+
+        &:hover {
+          border: 1px solid #000000;
+        }
       }
 
-			&__button_minus {
+      &__button_minus {
         .light & {
           border: 1px solid $elements;
         }
-        
+
         .dark & {
           background-color: $surface1-dark;
           border: 1px solid $elements-dark;
@@ -103,31 +124,31 @@
         .light & {
           border: 1px solid $icons;
         }
-        
+
         .dark & {
           background-color: $surface2-dark;
           border: none;
         }
-			}
-		}
+      }
+    }
 
-		&__price {
-			font-family: 'Mont-Bold', sans-serif;
-			font-size: 22px;
-			font-weight: 800;
-			line-height: 30.8px;
-		}
-	}
+    &__price {
+      font-family: 'Mont-Bold', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 30.8px;
+    }
+  }
 
-	&__icon__close {
-		margin-left: 24px;
+  &__icon__close {
+    margin-left: 24px;
     border: none;
     transition: transform $transition;
 
     &:hover {
       transform: scale(1.4);
     }
-    
+
     .light & {
       background-color: $white;
     }
@@ -135,10 +156,20 @@
     .dark & {
       background-color: $surface1-dark;
     }
-	}
+  }
 
-	@media (max-width: 639px) {
-		flex-wrap: wrap;
-		gap: 0;
-	}
+  @media (max-width: 639px) {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  @include onMobile {
+    flex-wrap: wrap;
+    gap: 0;
+    height: 190px;
+  }
+}
+
+button:disabled {
+  display: none;
 }

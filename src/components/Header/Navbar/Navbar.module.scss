@@ -22,12 +22,12 @@
 
     .light & {
       color: $secondary;
-      
+
       &:hover {
         color: $primary;
       }
     }
-    
+
     .dark & {
       color: $secondary-dark;
 
@@ -46,9 +46,8 @@
       border-radius: 3px;
       transition: $transition;
       transition-property: width;
-      .light & {
-        background: $primary;
-      }
+      background: $primary;
+
       .dark & {
         background: $white-dark;
       }
@@ -62,18 +61,12 @@
       .light & {
         color: $primary;
       }
+
       .dark & {
         color: $white-dark;
       }
 
       &::after {
-        .light & {
-          background: $primary;
-        }
-
-        .dark & {
-          background: $white-dark;
-        }
         width: 100%;
       }
     }
@@ -91,14 +84,36 @@
       align-items: center;
       height: 64px;
       width: 64px;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 4px;
+        bottom: 2px;
+        left: 0;
+        border-radius: 3px;
+        transition: $transition;
+        transition-property: width;
+        background: $primary;
+
+        .dark & {
+          background: $white-dark;
+        }
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
 
       .light & {
         border-left: 3px solid $elements;
       }
+
       .dark & {
         border-left: 3px solid $elements-dark;
       }
-
     }
 
     &__icon {
@@ -137,7 +152,7 @@
       border: 1px solid $black-dark;
     }
   }
-  
+
   &__hidden {
     display: none;
   }
@@ -149,5 +164,11 @@
   &__theme_toggle_icon_dark {
     width: 30px;
     height: 30px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
+
+

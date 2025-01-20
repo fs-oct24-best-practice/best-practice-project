@@ -6,7 +6,7 @@ import favourites_icon_white from '/img/icons/FavoriteWhite.svg';
 import favourites_icon_filled from '/img/icons/FavouritesFilled.svg';
 import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
-
+import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
 import { actions as favoritesActions } from '../../features/favoritesProducts';
 import { increaseQuantity } from '../../features/cartReducer';
@@ -50,14 +50,27 @@ export const Card: React.FC<Props> = ({ product }) => {
   const addToFavorite = () => {
     if (isProductInList(favorites, product)) {
       removeFavorite(product);
+      toast('Removed from favorites!', {
+        icon: '💔',
+      });
     } else {
       addFavorite(product);
+      toast('Added to favorites!', {
+        icon: '❤️',
+      });
     }
   };
 
   const onAddToCart = () => {
     if (!isProductInList(added, product)) {
       addToCart(product);
+      toast('Added to cart!', {
+        icon: '🛒',
+      });
+    } else {
+      toast('Already in the cart!', {
+        icon: '🔔',
+      });
     }
   };
 

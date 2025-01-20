@@ -4,6 +4,7 @@ import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
 import { SearchField } from '../../SearchField/SearchField';
 import { useAppSelector } from '../../../hooks/hooks';
+import AuthButton from '../../../firebase/AuthButton';
 
 import { useDispatch } from 'react-redux';
 import { switchTheme } from '../../../features/theme';
@@ -64,7 +65,7 @@ export const Navbar = () => {
           >
             <img
               src={`/img/icons/${theme === Theme.DARK ? 'SunWhite.svg' : 'Moon.svg'}`}
-              alt='Favourites'
+              alt='Switch Theme'
               className={
                 theme === Theme.DARK
                   ? styles.navbar__theme_toggle_icon_dark
@@ -108,6 +109,14 @@ export const Navbar = () => {
               )}
             </div>
           </NavLink>
+        </li>
+
+        <li className={styles.navbar__divider}></li>
+
+        <li>
+          <div className={styles.navbar__chosen__block}>
+            <AuthButton />
+          </div>
         </li>
       </ul>
     </nav>

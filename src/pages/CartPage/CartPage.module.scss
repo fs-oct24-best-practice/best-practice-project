@@ -1,19 +1,6 @@
 @use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts' as *;
 
-@font-face {
-	font-family: 'Mont-Regular';
-	src: url('/fonts/Mont-Regular.otf') format('opentype');
-}
-  
-@font-face {
-  font-family: 'Mont-Bold';
-  src: url('/fonts/Mont-Bold.otf') format('opentype');
-}
-
-@font-face {
-  font-family: 'Mont-SemiBold';
-  src: url('/fonts/Mont-SemiBold.otf') format('opentype');
-}
   
 .cart {
 	&__back {
@@ -23,7 +10,7 @@
   
 	  &__button {
       margin-left: 10px;
-      font-family: 'Mont-SemiBold';
+      font-family: 'SemiBold';
       font-size: 12px;
       line-height: 15.34px;
       text-align: center;
@@ -40,12 +27,12 @@
 	}
   
 	&__page {
-	  font-family: 'Mont-Regular', sans-serif;
+	  font-family: 'Regular', sans-serif;
 	  padding: 32px;
 	}
   
 	&__title {
-	  font-family: 'Mont-Bold';
+	  font-family: 'Bold';
 	  font-size: 48px;
 	  font-weight: 800;
 	  line-height: 56px;
@@ -108,18 +95,26 @@
         margin-bottom: 16px;
         flex-direction: column;
         align-items: center;
-    
-        span {
-          font-family: 'Mont-Bold';
-          font-size: 32px;
-          font-weight: 800;
-          line-height: 41px;
-          letter-spacing: -0.01em;
-        }
+
+		&__cost {
+			font-family: 'Bold';
+			font-size: 32px;
+			font-weight: 800;
+			line-height: 41px;
+			letter-spacing: -0.01em;
+		  
+			.light & {
+			  color: $primary;
+			}
+		  
+			.dark & {
+			  color: $white-dark;
+			}
+		  }
       }
   
 		  &__title {
-        font-family: 'Mont-Regular';
+        font-family: 'Regular';
         font-size: 14px;
         font-weight: 500;
         line-height: 21px;
@@ -139,7 +134,7 @@
   
 .checkout {
 	&__button {
-	  font-family: 'Mont-Regular', sans-serif;
+	  font-family: 'Regular', sans-serif;
 	  font-size: 14px;
 	  font-weight: 700;
 	  line-height: 21px;
@@ -200,4 +195,5 @@
 .back__button {
 	margin-top: 10px;
 }
+  
   

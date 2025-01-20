@@ -17,7 +17,9 @@ export const PhotoSelector: FC<Props> = (props) => {
             src={image}
             key={image}
             alt='preview'
-            onClick={() => setSelectedImage(image)}
+            onClick={() => {
+              setSelectedImage(image);
+            }}
           />
         );
       })}

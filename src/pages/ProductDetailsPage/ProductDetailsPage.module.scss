@@ -1,0 +1,38 @@
+@use '@best-practice/styles/variables' as *;
+
+.visually_hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 8px;
+}
+
+@media (min-width: $viewport-width-mobile) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .container {
+    padding: 0 32px;
+  }
+}
