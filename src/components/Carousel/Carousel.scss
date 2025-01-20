@@ -1,15 +1,15 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/mixins.scss';
+@use '../../styles/mixins.scss' as mixins;
 
 .Carousel {
   margin-top: 24px;
   z-index: 1;
 
-  @include on-tablet {
+  @include mixins.on-tablet {
     margin-top: 32px;
   }
 
-  @include on-desktop {
+  @include mixins.on-desktop {
     margin-top: 56px;
   }
 
@@ -17,14 +17,14 @@
     height: 352px;
     max-width: 1200px;
 
-    @include on-tablet {
+    @include mixins.on-tablet {
       display: flex;
       gap: 19px;
       height: 221px;
-      padding-left: 24px;
+      // padding-left: 24px; // commented by VS
     }
 
-    @include on-desktop {
+    @include mixins.on-desktop {
       height: 432px;
       gap: 16px;
       margin: 0 auto;
@@ -33,7 +33,7 @@
     &-button {
       display: none;
 
-      @include on-tablet {
+      @include mixins.on-tablet {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -48,7 +48,7 @@
         }
       }
 
-      @include on-desktop {
+      @include mixins.on-desktop {
         height: 400px;
       }
     }
@@ -58,11 +58,11 @@
       width: 100%;
       overflow: hidden;
 
-      @include on-tablet {
+      @include mixins.on-tablet {
         height: 189px;
       }
 
-      @include on-desktop {
+      @include mixins.on-desktop {
         height: 400px;
       }
     }

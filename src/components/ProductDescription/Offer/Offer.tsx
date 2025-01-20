@@ -3,7 +3,6 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './Offer.module.scss';
 import cn from 'classnames';
-
 import buttonstyles from '../../Card/Card.module.scss';
 import favourites_icon from '/img/icons/Favourite.svg';
 import favourites_icon_white from '/img/icons/FavoriteWhite.svg';
@@ -23,7 +22,7 @@ import {
   replaceSpaceWithDash,
   sortStrings,
   createNewItemId,
-} from '..';
+} from '../../../utils';
 
 function isProductInList<T extends { id: string | number }>(
   products: T[],

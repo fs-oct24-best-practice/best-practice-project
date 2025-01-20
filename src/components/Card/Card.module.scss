@@ -1,5 +1,5 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/mixins.scss';
+@use '../../styles/mixins' as mixins;
 
 .product_card {
   display: flex;
@@ -20,12 +20,21 @@
     background-color: $surface1-dark;
   }
 
-  @include on-tablet {
+  @include mixins.on-tablet {
     height: 512px;
   }
 
-  @include on-desktop {
+  @include mixins.on-desktop {
     height: 506px;
+  }
+
+  &__link {
+    &_content {
+      transition: transform $transition;
+    }
+    &:hover &_content {
+      transform: scale(1.1);
+    }
   }
 
   &__image {
@@ -33,14 +42,9 @@
     height: 180px;
     object-fit: contain;
     margin-bottom: 8px;
-    transition: transform $transition;
 
     @media (max-width: 639px) {
       max-height: 140px;
-    }
-
-    &:hover {
-      transform: scale(1.1);
     }
   }
 
@@ -54,16 +58,11 @@
     width: 100%;
     margin-bottom: 8px;
     flex: 1;
-    transition: transform $transition;
-
-    &:hover {
-      transform: scale(1.1);
-    }
 
     .light & {
       color: $primary;
     }
-  
+
     .dark & {
       color: $white-dark;
     }
@@ -90,12 +89,11 @@
     .light & {
       color: $primary;
     }
-  
+
     .dark & {
       color: $white-dark;
     }
   }
-
 
   &__full_price {
     font-size: 22px;
@@ -109,7 +107,7 @@
     .light & {
       color: $secondary;
     }
-  
+
     .dark & {
       color: $secondary-dark;
     }
@@ -122,7 +120,7 @@
     .light & {
       border-top: 1px solid $elements;
     }
-  
+
     .dark & {
       border-top: 1px solid $elements-dark;
     }
@@ -150,11 +148,11 @@
     &_label {
       font-size: 12px;
       line-height: 15px;
-    
+
       .light & {
         color: $secondary;
       }
-    
+
       .dark & {
         color: $secondary-dark;
       }
@@ -163,11 +161,11 @@
     &_value {
       font-size: 12px;
       line-height: 15px;
-    
+
       .light & {
         color: $primary;
       }
-    
+
       .dark & {
         color: $white-dark;
       }
@@ -193,15 +191,15 @@
     line-height: 40px;
     text-align: center;
     flex-grow: 1;
-  
+
     .light & {
       color: $white;
       background-color: $primary;
     }
-  
+
     .dark & {
       color: $white-dark;
-      background-color: $acept-dark
+      background-color: $acept-dark;
     }
   }
 
@@ -211,7 +209,7 @@
     height: 40px;
     width: 40px;
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 
     .light & {
@@ -222,35 +220,35 @@
         border: 1px solid $primary;
       }
     }
-  
+
     .dark & {
       background-color: $surface2-dark;
       border: none;
       transition: none;
       &:hover {
-        background-color:$icons-dark;
+        background-color: $icons-dark;
       }
     }
   }
-  
+
   &__added_to_favourite {
     .light & {
       border: 1px solid $elements;
     }
-    
+
     .dark & {
       border: 1px solid $elements-dark;
       background-color: $black-dark;
     }
   }
-  
-  &__added_to_cart{
+
+  &__added_to_cart {
     .light & {
       color: $green;
       background-color: $white;
       border: 1px solid $elements;
     }
-  
+
     .dark & {
       color: $white-dark;
       background-color: $surface2-dark;

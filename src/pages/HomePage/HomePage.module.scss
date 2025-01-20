@@ -1,5 +1,5 @@
 @use '@best-practice/styles/variables' as *;
-@import '@best-practice/styles/mixins.scss';
+@use '@best-practice/styles/mixins.scss' as mixins;
 
 .homePage {
   &__title {
@@ -7,19 +7,19 @@
     justify-content: center;
     margin-top: 24px;
     padding-inline: 16px;
-  
-    @include on-tablet {
+
+    @include mixins.on-tablet {
       margin-top: 32px;
       padding-inline: 24px;
       justify-content: left;
     }
-  
-    @include on-desktop {
+
+    @include mixins.on-desktop {
       margin-top: 56px;
       padding-inline: 32px;
       max-width: 1200px;
       margin-inline: auto;
-    }  
+    }
   }
 }
 
@@ -31,7 +31,7 @@
   letter-spacing: -1%;
   color: $primary;
 
-  @include on-tablet {
+  @include mixins.on-tablet {
     font-size: 48px;
     line-height: 56px;
   }

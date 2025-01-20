@@ -1,5 +1,5 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/mixins.scss';
+@use '../../styles/mixins.scss' as mixins;
 
 .categories {
   &__content {
@@ -16,7 +16,7 @@
     color: $primary;
     margin-bottom: 24px;
 
-    @include on-tablet {
+    @include mixins.on-tablet {
       font-size: 32px;
       line-height: 41px;
       letter-spacing: -1%;
@@ -24,15 +24,15 @@
   }
 
   &__items {
-    @include on-tablet {
-      @include page-grid;
+    @include mixins.on-tablet {
+      @include mixins.page-grid;
     }
   }
 
   &__item {
     grid-column: span 4;
 
-    @include on-desktop {
+    @include mixins.on-desktop {
       grid-column: span 8;
     }
 
@@ -78,11 +78,11 @@
 .container {
   padding-inline: 5px;
 
-  @include on-tablet {
+  @include mixins.on-tablet {
     padding-left: 10px;
   }
 
-  @include on-desktop {
+  @include mixins.on-desktop {
     padding-left: 32px;
     max-width: 1200px;
     margin-inline: auto;
