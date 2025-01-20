@@ -41,12 +41,8 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
 
   return (
     <div className={cn(styles.cart__item, styles[theme])}>
-      <button
-        className={styles.cart__item__icon__close}
-        onClick={handleRemove}>
+      <button className={styles.cart__item__icon__close} onClick={handleRemove}>
         <img src='/img/icons/Close2.svg' alt='Close' />
-        disabled={isDisabled}
-      >
       </button>
       <img
         src={item.image}
