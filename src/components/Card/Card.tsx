@@ -83,13 +83,16 @@ export const Card: React.FC<Props> = ({ product }) => {
 
   return (
     <div className={`${styles.product_card} ${styles[theme]}`}>
-      <img
-        className={styles.product_card__image}
-        src={image}
-        alt={`${name} Image`}
-      />
-      <Link to={`/${category}/${itemId}`} className={styles.product_card__name}>
-        {name}
+      <Link to={`/${category}/${itemId}`} className={styles.product_card__link}>
+        <div className={styles.product_card__link_content}>
+          <img
+            className={styles.product_card__image}
+            src={image}
+            alt={`${name} Image`}
+          />
+
+          <div className={styles.product_card__name}>{name}</div>
+        </div>
       </Link>
       <div className={styles.product_card__price}>
         {price ? (

@@ -22,9 +22,19 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
     setIsOpen(!isOpen);
   };
 
+  const favoritesLength = useAppSelector(
+    (state) => state.favoritesProducts.favoritesProducts
+  ).length;
+
+  const cartLength = useAppSelector((state) =>
+    state.cartProducts.cartProducts.reduce(
+      (total, item) => total + item.quantity,
+      0
+    )
+  );
 
   const theme = useAppSelector((state) => state.theme.theme);
-    
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -38,7 +48,9 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
   }, [isOpen]);
 
   return (
-    <nav className={cn(styles.menu, styles[theme], { [styles.menu_open]: isOpen })}>
+    <nav
+      className={cn(styles.menu, styles[theme], { [styles.menu_open]: isOpen })}
+    >
       <ul className={styles.menu__pages}>
         {Object.entries(Pages).map(([name, path]) => (
           <li key={name} className={styles.menu__page}>
@@ -66,6 +78,13 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
                 alt='Favourites'
                 className={styles.menu__chosen__icon}
               />
+              <div
+                className={cn([styles.menu__notification_badge], {
+                  [styles.menu__hidden]: !favoritesLength,
+                })}
+              >
+                {favoritesLength}
+              </div>
             </div>
           </NavLink>
         </li>
@@ -78,6 +97,11 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
                 alt='Cart'
                 className={styles.menu__chosen__icon}
               />
+              {cartLength > 0 && (
+                <span className={styles.menu__notification_badge}>
+                  {cartLength}
+                </span>
+              )}
             </div>
           </NavLink>
         </li>

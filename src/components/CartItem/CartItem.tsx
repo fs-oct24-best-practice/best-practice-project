@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import {
   increaseQuantity,
@@ -18,32 +19,30 @@ type Props = {
 
 export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
   const dispatch = useDispatch();
-
   const theme = useAppSelector((state) => state.theme.theme);
 
   const handleIncrease = () => {
-    if (!isDisabled) {
-      dispatch(increaseQuantity(item));
-    }
+    if (!isDisabled) dispatch(increaseQuantity(item));
   };
 
   const handleDecrease = () => {
-    if (!isDisabled) {
-      dispatch(decreaseQuantity(item));
-    }
+    if (!isDisabled) dispatch(decreaseQuantity(item));
   };
 
   const handleRemove = () => {
-    if (!isDisabled) {
-      dispatch(deleteCart(item));
-    }
+    if (!isDisabled) dispatch(deleteCart(item));
   };
 
   return (
     <div className={cn(styles.cart__item, styles[theme])}>
-      <button className={styles.cart__item__icon__close} onClick={handleRemove}>
-        <img src='/img/icons/Close2.svg' alt='Close' />
-      </button>
+      {!isDisabled && (
+        <button
+          className={styles.cart__item__icon__close}
+          onClick={handleRemove}
+        >
+          <img src='/img/icons/Close2.svg' alt='Close' />
+        </button>
+      )}
       <img
         src={item.image}
         alt={`${item.name} Image`}
@@ -62,7 +61,7 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
           <button
             className={cn(
               styles.cart__item__actions__counter__button,
-              styles.cart__item__actions__counter__button_plus
+              styles.cart__item__actions__counter__button_minus
             )}
             onClick={handleDecrease}
             disabled={isDisabled}

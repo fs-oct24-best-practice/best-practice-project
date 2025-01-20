@@ -9,7 +9,7 @@
   padding: 16px;
   margin: 16px;
   gap: 31px;
-  font-family: 'Mont-Regular', sans-serif;
+  font-family: 'regular', sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
@@ -27,10 +27,6 @@
 
   &__image {
     height: 88px;
-
-    @media (max-width: 639px) {
-      margin-left: 18px;
-    }
 
     @include onMobile {
       margin-left: 18px;
@@ -55,10 +51,6 @@
       @include onMobile {
         font-size: 12px;
       }
-    }
-
-    @media (max-width: 639px) {
-      margin-left: 40px;
     }
 
     @include onMobile {
@@ -133,7 +125,7 @@
     }
 
     &__price {
-      font-family: 'Mont-Bold', sans-serif;
+      font-family: 'bold', sans-serif;
       font-size: 22px;
       font-weight: 800;
       line-height: 30.8px;
