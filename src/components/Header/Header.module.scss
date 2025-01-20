@@ -11,6 +11,15 @@
   z-index: 100;
   height: 64px;
 
+  @media (min-width: 640px) and (max-width: 900px) {
+    height: 48px;
+    gap: 12px;
+  }
+
+  @media (min-width: 640px) and (max-width: 770px) {
+    height: 36px;
+  }
+
   &.light {
     background-color: $background;
     border-bottom: 3px solid $elements;

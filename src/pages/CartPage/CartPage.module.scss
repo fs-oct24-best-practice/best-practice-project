@@ -10,7 +10,7 @@
   
 	  &__button {
       margin-left: 10px;
-      font-family: 'SemiBold';
+      font-family: 'semi-bold';
       font-size: 12px;
       line-height: 15.34px;
       text-align: center;
@@ -27,12 +27,12 @@
 	}
   
 	&__page {
-	  font-family: 'Regular', sans-serif;
+	  font-family: 'regular', sans-serif;
 	  padding: 32px;
 	}
   
 	&__title {
-	  font-family: 'Bold';
+	  font-family: 'bold';
 	  font-size: 48px;
 	  font-weight: 800;
 	  line-height: 56px;
@@ -97,7 +97,7 @@
         align-items: center;
 
 		&__cost {
-			font-family: 'Bold';
+			font-family: 'bold';
 			font-size: 32px;
 			font-weight: 800;
 			line-height: 41px;
@@ -114,7 +114,7 @@
       }
   
 		  &__title {
-        font-family: 'Regular';
+        font-family: 'regular';
         font-size: 14px;
         font-weight: 500;
         line-height: 21px;
@@ -134,7 +134,7 @@
   
 .checkout {
 	&__button {
-	  font-family: 'Regular', sans-serif;
+	  font-family: 'regular', sans-serif;
 	  font-size: 14px;
 	  font-weight: 700;
 	  line-height: 21px;

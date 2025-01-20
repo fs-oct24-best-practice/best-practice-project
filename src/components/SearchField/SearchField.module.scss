@@ -17,6 +17,13 @@ body:has(.slideDown) {
   justify-content: center;
   align-items: center;
   height: 64px;
+
+  @media (min-width: 640px) and (max-width: 900px) {
+    height: 48px;
+  }
+  @media (min-width: 640px) and (max-width: 770px) {
+    height: 36px;
+  }
   
   &.light {
     border-left: 3px solid $elements;

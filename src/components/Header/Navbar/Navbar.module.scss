@@ -10,6 +10,14 @@
     display: flex;
     align-items: center;
     gap: 64px;
+      
+    @media (min-width: 770px) and (max-width: 900px) {
+      gap: 32px;
+    }
+
+    @media (min-width: 640px) and (max-width: 770px) {
+      gap: 20px;
+    }
   }
 
   &__link {
@@ -47,6 +55,14 @@
       transition: $transition;
       transition-property: width;
       background: $primary;
+
+      @media (min-width: 770px) and (max-width: 900px) {
+        bottom: 10px;
+      }
+
+      @media (min-width: 640px) and (max-width: 770px) {
+       bottom: 16px;
+      }
 
       .dark & {
         background: $white-dark;
@@ -86,6 +102,16 @@
       width: 64px;
       position: relative;
 
+      @media (min-width: 770px) and (max-width: 900px) {
+        height: 48px;
+        width: 48px;
+      }
+
+      @media (min-width: 640px) and (max-width: 770px) {
+        width: 36px;
+        height: 36px;
+      }
+
       &::after {
         content: '';
         position: absolute;
@@ -97,6 +123,10 @@
         transition: $transition;
         transition-property: width;
         background: $primary;
+
+        @media (min-width: 640px) and (max-width: 900px) {
+          height: 4px;
+        }
 
         .dark & {
           background: $white-dark;
