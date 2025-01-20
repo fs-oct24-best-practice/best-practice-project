@@ -45,15 +45,11 @@
   }
 
   &__container {
-    // padding-left: 16px; // commented by VS
-
     @include mixins.on-tablet {
-      // padding-left: 24px; // commented by VS
       padding-bottom: 64px;
     }
 
     @include mixins.on-desktop {
-      // padding-left: 32px; // commented by VS
       max-width: 1200px;
       margin-inline: auto;
       padding-bottom: 80px;

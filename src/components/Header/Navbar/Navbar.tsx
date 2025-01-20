@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
@@ -12,6 +12,7 @@ import { Theme } from '../../../types/Theme';
 
 export const Navbar = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -95,7 +96,11 @@ export const Navbar = () => {
         </li>
 
         <li>
-          <NavLink to='/cart' className={setNavClasses}>
+          <NavLink
+            to='/cart'
+            className={setNavClasses}
+            state={{ from: location }}
+          >
             <div className={styles.navbar__chosen__block}>
               <img
                 src={`/img/icons/${theme === Theme.DARK ? 'CartWhite.svg' : 'Cart.svg'}`}

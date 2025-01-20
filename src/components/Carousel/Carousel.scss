@@ -21,7 +21,6 @@
       display: flex;
       gap: 19px;
       height: 221px;
-      // padding-left: 24px; // commented by VS
     }
 
     @include mixins.on-desktop {
@@ -107,7 +106,7 @@
       height: 4px;
       background-color: $elements;
       border: none;
-      cursor: pointer;      
+      cursor: pointer;
     }
   }
 }

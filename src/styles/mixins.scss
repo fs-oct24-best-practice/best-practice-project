@@ -1,4 +1,4 @@
-@mixin onMobile {
+@mixin on-mobile {
   @media (max-width: 639px) {
     @content;
   }
@@ -6,13 +6,13 @@
 
 @mixin on-tablet {
   @media (min-width: 640px) {
-      @content;
+    @content;
   }
 }
 
 @mixin on-desktop {
   @media (min-width: 1200px) {
-      @content;
+    @content;
   }
 }
 
@@ -22,10 +22,10 @@
   gap: 16px;
 
   @media (min-width: 640px) {
-      grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(12, 1fr);
   }
 
   @media (min-width: 1200px) {
-      grid-template-columns: repeat(24, 1fr);
+    grid-template-columns: repeat(24, 1fr);
   }
 }

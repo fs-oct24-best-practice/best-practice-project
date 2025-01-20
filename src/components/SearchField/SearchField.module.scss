@@ -112,7 +112,6 @@ body:has(.slideDown) {
     width: 100%;
     max-width: 60%;
     margin: 100px 0 0 20%;
-  
   }
 }
 
@@ -213,7 +212,7 @@ body:has(.slideDown) {
     color: $secondary;
   }
 
-  @include onMobile {
+  @include on-mobile {
     font-size: 15px;
   }
 }

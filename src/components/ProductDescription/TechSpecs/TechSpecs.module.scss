@@ -24,7 +24,7 @@
   flex-direction: row;
   gap: 16px;
   justify-content: space-between;
-  @include font.dt-body-text;
+  @include font.body-text;
   color: $secondary;
 
   &__value {

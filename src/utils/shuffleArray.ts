@@ -1,3 +1,4 @@
+// Fisher-Yates shuffle algorithm
 export const shuffleArray = <T>(array: T[]): T[] => {
   const shuffled = [...array];
 

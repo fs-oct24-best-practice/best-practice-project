@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Card.module.scss';
 import favourites_icon from '/img/icons/Favourite.svg';
@@ -42,6 +42,8 @@ export const Card: React.FC<Props> = ({ product }) => {
     (state) => state.favoritesProducts.favoritesProducts
   );
 
+  const location = useLocation();
+
   const addFavorite = (product: Product) =>
     dispatch(favoritesActions.add(product));
   const removeFavorite = (product: Product) =>
@@ -83,7 +85,11 @@ export const Card: React.FC<Props> = ({ product }) => {
 
   return (
     <div className={`${styles.product_card} ${styles[theme]}`}>
-      <Link to={`/${category}/${itemId}`} className={styles.product_card__link}>
+      <Link
+        to={`/${category}/${itemId}`}
+        className={styles.product_card__link}
+        state={{ from: location }}
+      >
         <div className={styles.product_card__link_content}>
           <img
             className={styles.product_card__image}

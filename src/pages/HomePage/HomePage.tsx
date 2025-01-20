@@ -44,7 +44,7 @@ export const HomePage = () => {
       <div className={styles.homePage__title}>
         <h1
           className={classNames(styles.title__text, {
-            [styles.title_dark]: theme !== 'light', // Використовуємо styles для модульних класів
+            [styles.title_dark]: theme !== 'light',
           })}
         >
           Welcome to Nice Gadgets store!
