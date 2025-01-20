@@ -8,18 +8,26 @@ import 'swiper/swiper-bundle.css';
 
 import prevArrow from '../../assets/icons/arrow-left.svg';
 import nextArrow from '../../assets/icons/arrow-right.svg';
+import prevArrowLight from '../../assets/icons/arrow-left-light.svg';
+import nextArrowLight from '../../assets/icons/arrow-right-light.svg';
 
 import './Slider.scss';
 import { CardSkeleton } from '../skeletons';
+import classNames from 'classnames';
 
 type Props = {
   products: Product[];
-  discount?: boolean;
   title: string;
   isLoading: boolean;
+  themeColor: string;
 };
 
-export const Slider: React.FC<Props> = ({ products, title, isLoading }) => {
+export const Slider: React.FC<Props> = ({
+  products,
+  title,
+  isLoading,
+  themeColor,
+}) => {
   const swiperRef = useRef<SwiperRef | null>(null);
 
   const handlePrevClick = () => {
@@ -34,18 +42,24 @@ export const Slider: React.FC<Props> = ({ products, title, isLoading }) => {
     <div className='slider'>
       <div className='slider__container'>
         <div className='slider__header'>
-          <h2 className='slider__title'>{title}</h2>
+          <h2
+            className={classNames('slider__title', {
+              title_dark: themeColor !== 'light',
+            })}
+          >
+            {title}
+          </h2>
           <div className='slider__buttons'>
             <img
               className='slider__arrow'
-              src={prevArrow}
-              alt='arrow-left'
+              src={themeColor === 'light' ? prevArrow : prevArrowLight}
+              alt='prev button icon'
               onClick={handlePrevClick}
             />
             <img
               className='slider__arrow'
-              src={nextArrow}
-              alt='arrow-rigth'
+              src={themeColor === 'light' ? nextArrow : nextArrowLight}
+              alt='next button icon'
               onClick={handleNextClick}
             />
           </div>

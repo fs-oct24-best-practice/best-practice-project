@@ -16,13 +16,17 @@
     font-weight: 800;
     font-size: 22px;
     line-height: 32px;
-    color: $primary;
+    color: $primary;    
 
     @include on-tablet {
       font-size: 32px;
       line-height: 42px;
       letter-spacing: 1%;
     }
+  }
+
+  .title_dark {
+    color: $white;
   }
 
   &__buttons {
@@ -36,7 +40,7 @@
     height: 32px;
 
     &:hover {
-      border: 1px solid $icons;
+      border: 1px solid $secondary;
     }
   }
 

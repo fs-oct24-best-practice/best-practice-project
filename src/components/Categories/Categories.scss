@@ -23,6 +23,10 @@
     }
   }
 
+  .title_dark {
+    color: $white;
+  }
+
   &__items {
     @include on-tablet {
       @include page-grid;

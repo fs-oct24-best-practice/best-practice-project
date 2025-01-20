@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './Carousel.scss';
 import classNames from 'classnames';
 
@@ -8,6 +8,8 @@ import bannerPhones from '../../assets/banner-images/banner-phones.png';
 import bannerTablets from '../../assets/banner-images/banner-tablets.png';
 import arrowLeft from '../../assets/icons/arrow-left.svg';
 import arrowRight from '../../assets/icons/arrow-right.svg';
+import arrowLeftLight from '../../assets/icons/arrow-left-light.svg';
+import arrowRightLight from '../../assets/icons/arrow-right-light.svg';
 
 const bannerSlides = [
   { type: 'video', src: bannerVideo },
@@ -16,7 +18,11 @@ const bannerSlides = [
   { type: 'image', src: bannerTablets },
 ];
 
-export const Carousel = () => {
+type Props = {
+  themeColor: string;
+};
+
+export const Carousel: React.FC<Props> = ({ themeColor }) => {
   const firstSlideIndex = 0;
   const lastSlideIndex = bannerSlides.length - 1;
 
@@ -104,7 +110,10 @@ export const Carousel = () => {
           className='Carousel__slider-button'
           onClick={() => handlePrevSlide()}
         >
-          <img src={arrowLeft} alt='Arrow left' className='icon--left' />
+          <img
+            src={themeColor === 'light' ? arrowLeft : arrowLeftLight}
+            alt='Arrow left'
+          />
         </button>
 
         <div className='Carousel__slider-container' ref={banner}>
@@ -142,7 +151,10 @@ export const Carousel = () => {
           className='Carousel__slider-button'
           onClick={() => handleNextSlide()}
         >
-          <img src={arrowRight} alt='Arrow left' className='icon--right' />
+          <img
+            src={themeColor === 'light' ? arrowRight : arrowRightLight}
+            alt='Arrow right'
+          />
         </button>
       </div>
 
