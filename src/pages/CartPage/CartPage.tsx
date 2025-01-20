@@ -8,6 +8,7 @@ import styles from './CartPage.module.scss';
 import { useAppSelector } from '../../hooks/hooks';
 import { ProductInCart } from '../../types/ProductInCart';
 import cn from 'classnames';
+import { Theme } from '../../types/Theme';
 
 export const CartPage = () => {
   const [isEmpty, setIsEmpty] = useState(false);
@@ -89,7 +90,11 @@ export const CartPage = () => {
             <div className={styles.cart__empty}>
               <p>Cart is empty</p>
               <img
-                src='/img/empty.svg'
+                src={
+                  theme === Theme.DARK
+                    ? '/img/empty-dark.svg'
+                    : '/img/empty.svg'
+                }
                 width={350}
                 height={350}
                 alt='Empty Cart'

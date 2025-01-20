@@ -10,7 +10,13 @@
   &__title {
     @include font.m-h3;
     height: 42px;
-    border-bottom: 2px solid $elements;
+
+    .light & {
+      border-bottom: 2px solid $elements;
+    }
+    .dark & {
+      border-bottom: 2px solid $elements-dark;
+    }
   }
 }
 
@@ -25,7 +31,14 @@
 
   &__text {
     @include font.dt-body-text;
-    color: $secondary;
+    
+    .light & {
+      color: $secondary;
+    }
+    
+    .dark & {
+      color: $secondary-dark;
+    }
   }
 }
 

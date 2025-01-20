@@ -9,7 +9,13 @@
   &__title {
     @include font.m-h3;
     height: 42px;
-    border-bottom: 2px solid $elements;
+    
+    .light & {
+      border-bottom: 2px solid $elements;
+    }
+    .dark & {
+      border-bottom: 2px solid $elements-dark;
+    }
   }
 
   &__list {
@@ -25,11 +31,24 @@
   gap: 16px;
   justify-content: space-between;
   @include font.dt-body-text;
-  color: $secondary;
+
+  .light & {
+    color: $secondary;
+  }
+  .dark & {
+    color: $secondary-dark;
+  }
 
   &__value {
     color: $primary;
     text-align: end;
+
+    .light & {
+      color: $primary;
+    }
+    .dark & {
+      color: $white-dark;
+    }
   }
 }
 

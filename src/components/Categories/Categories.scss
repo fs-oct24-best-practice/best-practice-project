@@ -13,7 +13,6 @@
     font-weight: 800;
     font-size: 22px;
     line-height: 30.8px;
-    color: $primary;
     margin-bottom: 24px;
 
     @include mixins.on-tablet {
@@ -62,7 +61,6 @@
       font-weight: 700;
       font-size: 20px;
       line-height: 25.56px;
-      color: $primary;
     }
 
     &--text {
@@ -70,7 +68,6 @@
       font-weight: 600;
       font-size: 14px;
       line-height: 21px;
-      color: $secondary;
     }
   }
 }

@@ -1,0 +1,14 @@
+@use '@best-practice/styles/fonts' as *;
+
+.favoritesPage {
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__quantity {
+    font-family: 'Regular';
+    font-weight: 600;
+    line-height: 21px;
+    font-size: 14px;
+  }
+}

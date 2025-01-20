@@ -8,7 +8,14 @@
 
   &__subtitle {
     @include font.dt-small-text;
-    color: $secondary;
+
+    .light & {
+      color: $secondary;
+    }
+
+    .dark & {
+      color: $secondary-dark;
+    }
   }
 }
 
@@ -16,8 +23,16 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-bottom: 2px solid $elements;
   height: 79px;
+  
+  .light & {
+    border-bottom: 2px solid $elements;
+  }
+  
+  .dark & {
+    border-bottom: 2px solid $elements-dark;
+  }
+
 
   &__selector {
     display: flex;
@@ -28,16 +43,39 @@
       height: 30px;
       width: 30px;
       border-radius: 50%;
-      border: 2px solid $white;
-      outline: 1px solid $elements;
       transition: $transition outline-color;
+      
+      .light & {
+        border: 2px solid $white;
+        outline: 1px solid $elements;
+
+      }
+
+      .dark & {
+        border: 2px solid $black-dark;
+        outline: 1px solid $elements-dark;
+
+      }
+
 
       &_active {
-        outline-color: $primary;
+        .light & {
+          outline-color: $primary;
+        }
+        
+        .dark & {
+          outline-color: $white-dark;
+        }
       }
 
       &:hover {
-        outline-color: $primary;
+        .light & {
+          outline-color: $primary;
+        }
+
+        .dark & {
+          outline-color: $white-dark;
+        }
       }
     }
   }
@@ -47,8 +85,15 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-bottom: 2px solid $elements;
   height: 79px;
+  
+  .light & {
+    border-bottom: 2px solid $elements;
+  }
+  
+  .dark & {
+    border-bottom: 2px solid $elements-dark;
+  }
 
   &__selector {
     display: flex;
@@ -57,21 +102,44 @@
 
     &__item {
       @include font.dt-body-text;
-      color: $primary;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 5px 8px;
-      border: 1px solid $elements;
       transition: $transition border;
-
-      &_active {
-        background-color: $primary;
+      
+      .light & {
         color: $white;
+        background-color: $primary;
       }
 
-      &:hover {
-        border-color: $primary;
+      .dark & {
+        color: $black-dark;
+        background-color: $white-dark;
+      }
+
+      &_inactive {
+        .light & {
+          background-color:$white;
+          color: $primary;
+          border: 1px solid $icons;
+        }
+        
+        .dark & {
+          background-color: $black-dark;
+          color: $white-dark;
+          border: 1px solid $icons-dark;
+        }
+
+        &:hover {
+          .light & {
+            border-color: $primary;
+          }
+          
+          .dark & {
+            border-color: $white-dark;
+          }
+        }
       }
     }
   }
@@ -91,11 +159,25 @@
   gap: 16px;
   justify-content: space-between;
   @include font.dt-small-text;
-  color: $secondary;
+  
+  .light & {
+    color: $secondary;
+  }
+
+  .dark & {
+    color: $secondary-dark;
+  }
 
   &__value {
-    color: $primary;
     text-align: right;
+
+    .light & {
+      color: $primary;
+    }
+  
+    .dark & {
+      color: $white-dark;
+    }
   }
 }
 

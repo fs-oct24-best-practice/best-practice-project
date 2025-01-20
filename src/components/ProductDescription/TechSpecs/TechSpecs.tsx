@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './TechSpecs.module.scss';
+import cn from 'classnames';
+import { useAppSelector } from '../../../hooks/hooks';
 
 type Props = { currentProductSpec: ProductSpec };
 
@@ -18,6 +20,8 @@ export const TechSpecs: FC<Props> = (props) => {
     },
   } = props;
 
+  const theme = useAppSelector((state) => state.theme.theme);
+
   const techProperties = {
     Screen: screen,
     Resolution: resolution,
@@ -30,7 +34,7 @@ export const TechSpecs: FC<Props> = (props) => {
   };
 
   return (
-    <section className={styles.section}>
+    <section className={cn(styles.section, styles[theme])}>
       <h3 className={styles.section__title}>Tech specs</h3>
       <ul className={styles.section__list}>
         {Object.entries(techProperties).map((property) => {
