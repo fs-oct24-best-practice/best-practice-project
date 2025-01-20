@@ -17,7 +17,7 @@ interface Order {
 export const DashboardPage: React.FC = () => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const navigate = useNavigate();
-  const theme = useAppSelector((state) => state.theme.theme); // Получение текущей темы
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const [activeSection, setActiveSection] = useState<
     'lastOrder' | 'orderHistory'
