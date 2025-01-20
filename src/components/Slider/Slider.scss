@@ -1,5 +1,5 @@
 @use '@best-practice/styles/variables' as *;
-@import '../../styles/mixins.scss';
+@use '../../styles/mixins.scss' as mixins;
 
 .slider {
   margin-top: 56px;
@@ -18,7 +18,7 @@
     line-height: 32px;
     color: $primary;
 
-    @include on-tablet {
+    @include mixins.on-tablet {
       font-size: 32px;
       line-height: 42px;
       letter-spacing: 1%;
@@ -41,15 +41,15 @@
   }
 
   &__container {
-    padding-left: 16px;
+    // padding-left: 16px; // commented by VS
 
-    @include on-tablet {
-      padding-left: 24px;
+    @include mixins.on-tablet {
+      // padding-left: 24px; // commented by VS
       padding-bottom: 64px;
     }
 
-    @include on-desktop {
-      padding-left: 32px;
+    @include mixins.on-desktop {
+      // padding-left: 32px; // commented by VS
       max-width: 1200px;
       margin-inline: auto;
       padding-bottom: 80px;
@@ -64,11 +64,11 @@
     max-width: 212px;
     height: 100%;
 
-    @include on-tablet {
+    @include mixins.on-tablet {
       max-width: 237px;
     }
 
-    @include on-desktop {
+    @include mixins.on-desktop {
       max-width: 272px;
     }
   }

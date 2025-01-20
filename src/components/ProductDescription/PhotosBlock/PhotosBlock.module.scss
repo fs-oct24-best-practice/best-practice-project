@@ -9,8 +9,8 @@
 }
 
 .image {
-  width: 288px;
-  height: 288px;
+  max-width: 288px;
+  max-height: 288px;
   object-fit: contain;
 }
 
@@ -35,13 +35,14 @@
   .section {
     flex-direction: row;
     align-items: flex-start;
-    width: 338px;
+    max-width: 338px;
   }
 
   .preview {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    flex-shrink: 0;
 
     &__select {
       width: 35px;
