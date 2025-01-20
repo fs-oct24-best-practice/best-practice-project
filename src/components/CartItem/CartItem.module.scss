@@ -5,19 +5,32 @@
   height: 128px;
   display: flex;
   align-items: center;
-  border: 1px solid #e0e0e0;
   border-radius: 1px;
   padding: 16px;
   margin: 16px;
   gap: 31px;
-  font-family: 'Regular', sans-serif;
+  font-family: 'Mont-Regular', sans-serif;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
-  color: $primary;
+
+  &.light {
+    color: $primary;
+    background-color: $white;
+    border: 1px solid $elements;
+  }
+
+  &.dark {
+    color: $white-dark;
+    background-color: $surface1-dark;
+  }
 
   &__image {
     height: 88px;
+
+    @media (max-width: 639px) {
+      margin-left: 18px;
+    }
 
     @include onMobile {
       margin-left: 18px;
@@ -30,11 +43,22 @@
 
     &__title {
       text-decoration: none;
-      color: $primary;
+
+      .light & {
+        color: $primary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
 
       @include onMobile {
         font-size: 12px;
       }
+    }
+
+    @media (max-width: 639px) {
+      margin-left: 40px;
     }
 
     @include onMobile {
@@ -55,35 +79,88 @@
       gap: 16px;
 
       &__button {
-        background-color: $white;
-        border: 1px solid #ccc;
         padding: 6px;
         cursor: pointer;
         height: 32px;
         width: 32px;
-        color: #313237;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        &--minus {
-          margin-bottom: 4px;
+        .light & {
+          background-color: $white;
+          &:hover {
+            border: 1px solid $primary;
+          }
         }
+
+        .dark & {
+          &:hover {
+            background-color: $icons-dark;
+          }
+        }
+
+        background-color: $white;
+        border: 1px solid #ccc;
+        color: #313237;
 
         &:hover {
           border: 1px solid #000000;
         }
       }
+
+      &__button_minus {
+        .light & {
+          border: 1px solid $elements;
+        }
+
+        .dark & {
+          background-color: $surface1-dark;
+          border: 1px solid $elements-dark;
+        }
+      }
+
+      &__button_plus {
+        .light & {
+          border: 1px solid $icons;
+        }
+
+        .dark & {
+          background-color: $surface2-dark;
+          border: none;
+        }
+      }
     }
 
     &__price {
-      font-family: 'Bold', sans-serif;
+      font-family: 'Mont-Bold', sans-serif;
       font-size: 22px;
       font-weight: 800;
       line-height: 30.8px;
     }
   }
 
-  &__close {
+  &__icon__close {
     margin-left: 24px;
-    all: unset;
+    border: none;
+    transition: transform $transition;
+
+    &:hover {
+      transform: scale(1.4);
+    }
+
+    .light & {
+      background-color: $white;
+    }
+
+    .dark & {
+      background-color: $surface1-dark;
+    }
+  }
+
+  @media (max-width: 639px) {
+    flex-wrap: wrap;
+    gap: 0;
   }
 
   @include onMobile {
