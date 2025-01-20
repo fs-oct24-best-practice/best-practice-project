@@ -12,7 +12,7 @@ body:has(.slideDown) {
 }
 
 .searchContainer {
-  position: absolute;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +69,7 @@ body:has(.slideDown) {
   transition: max-width 0.5s ease-in-out;
   
 
-  @media (max-width: 1200px) {
+  @include on-tablet {
     position: fixed;
     top: 0;
     left: 0;
@@ -86,8 +86,7 @@ body:has(.slideDown) {
 }
 
 .slideDown {
-  max-width: 100%;
-  right: 0;
+  max-width: 200px;
 
   @include on-tablet {
     max-width: 100%;
@@ -113,6 +112,7 @@ body:has(.slideDown) {
     width: 100%;
     max-width: 60%;
     margin: 100px 0 0 20%;
+  
   }
 }
 
