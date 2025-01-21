@@ -8,3 +8,4 @@ export * from './setDelay';
 export * from './sortStrings';
 export * from './filterFactory';
 export * from './shuffleArray';
+export * from './makeStringCapitalize';

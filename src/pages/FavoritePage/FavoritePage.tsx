@@ -1,6 +1,7 @@
 import { useAppSelector } from '../../hooks/hooks';
 import { Cards } from '../../components/Cards/Cards';
 import styles from './FavoritePage.module.scss';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const FavoritePage = () => {
   // const { t } = useTranslation();
@@ -14,6 +15,7 @@ export const FavoritePage = () => {
 
   return (
     <div className={styles.FavoritesPage}>
+      <Breadcrumbs />
       <h1 className={styles.favoritesPage__title}>Fawotites Page</h1>
       <p
         className={styles.favoritesPage__quantity}
