@@ -12,6 +12,7 @@ import arrowLeft from '../../assets/icons/arrow-left.svg';
 import arrowRight from '../../assets/icons/arrow-right.svg';
 import arrowLeftLight from '../../assets/icons/arrow-left-light.svg';
 import arrowRightLight from '../../assets/icons/arrow-right-light.svg';
+import { useAppSelector } from '../../hooks/hooks';
 
 const bannerSlides = [
   { src: bannerClip1 },
@@ -36,6 +37,7 @@ export const Carousel: React.FC<Props> = ({ themeColor }) => {
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const transformValue = sliderWidth * currentSlideIndex;
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const handlePrevSlide = () => {
     const prevIndex =
@@ -85,7 +87,7 @@ export const Carousel: React.FC<Props> = ({ themeColor }) => {
   }, [currentSlideIndex, handleNextSlide]);
 
   return (
-    <section className='Carousel'>
+    <section className={`Carousel ${[theme]}`}>
       <div className='Carousel__slider'>
         <button
           type='button'

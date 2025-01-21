@@ -35,12 +35,26 @@
   }
 
   .slider__arrow {
-    border: 1px solid $elements;
     width: 32px;
     height: 32px;
+    border: 1px solid $elements;
 
-    &:hover {
-      border: 1px solid $secondary;
+    .light & {
+      border: 1px solid $elements;
+      background-color: $white;
+      &:hover {
+        border: 1px solid $secondary;
+      }
+    }
+
+    .dark & {
+      background-color: $black-dark;
+      border: 1px solid $elements-dark;
+
+      &:hover {
+        background-color: $surface2-dark;
+        border: none;
+      }
     }
   }
 

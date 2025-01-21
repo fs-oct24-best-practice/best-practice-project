@@ -14,6 +14,7 @@ import nextArrowLight from '../../assets/icons/arrow-right-light.svg';
 import './Slider.scss';
 import { CardSkeleton } from '../skeletons';
 import classNames from 'classnames';
+import { useAppSelector } from '../../hooks/hooks';
 
 type Props = {
   products: Product[];
@@ -29,6 +30,7 @@ export const Slider: React.FC<Props> = ({
   themeColor,
 }) => {
   const swiperRef = useRef<SwiperRef | null>(null);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const handlePrevClick = () => {
     swiperRef.current?.swiper.slidePrev();
@@ -39,7 +41,7 @@ export const Slider: React.FC<Props> = ({
   };
 
   return (
-    <div className='slider'>
+    <div className={`slider ${[theme]}`}>
       <div className='slider__container'>
         <div className='slider__header'>
           <h2
