@@ -1,7 +1,8 @@
 @use '@best-practice/styles/variables' as *;
 @use '../../styles/mixins.scss' as mixins;
 
-.categories {
+.categories { 
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -73,19 +74,5 @@
       font-size: 14px;
       line-height: 21px;
     }
-  }
-}
-
-.container {
-  padding-inline: 5px;
-
-  @include mixins.on-tablet {
-    padding-left: 10px;
-  }
-
-  @include mixins.on-desktop {
-    padding-left: 32px;
-    max-width: 1200px;
-    margin-inline: auto;
   }
 }

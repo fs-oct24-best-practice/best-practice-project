@@ -42,46 +42,48 @@ export const HomePage = () => {
 
   return (
     <div className={styles.homePage}>
-      <div className={styles.homePage__title}>
-        <h1
-          className={classNames(styles.title__text, {
-            [styles.title_dark]: theme !== 'light',
-          })}
-        >
-          {t('welcomeMessage')}
-        </h1>
+      <div className={styles.container}>
+        <div className={styles.homePage__title}>
+          <h1
+            className={classNames(styles.title__text, {
+              [styles.title_dark]: theme !== 'light',
+            })}
+          >
+            {t('welcomeMessage')}
+          </h1>
+        </div>
+
+        <section className={styles.carousel}>
+          <Carousel themeColor={theme} />
+        </section>
+
+        <section className={styles.newMmodels}>
+          <Slider
+            products={newProducts}
+            title={t('brandNewModels')}
+            isLoading={isLoading}
+            themeColor={theme}
+          />
+        </section>
+
+        <section className={styles.categories}>
+          <Categories
+            products={productList}
+            title={t('shopByCategory')}
+            isLoading={isLoading}
+            themeColor={theme}
+          />
+        </section>
+
+        <section className={styles.hotPrices}>
+          <Slider
+            products={productsWithDiscount}
+            title={t('hotPrices')}
+            isLoading={isLoading}
+            themeColor={theme}
+          />
+        </section>
       </div>
-
-      <section className={styles.carousel}>
-        <Carousel themeColor={theme} />
-      </section>
-
-      <section className={styles.newMmodels}>
-        <Slider
-          products={newProducts}
-          title={t('brandNewModels')}
-          isLoading={isLoading}
-          themeColor={theme}
-        />
-      </section>
-
-      <section className={styles.categories}>
-        <Categories
-          products={productList}
-          title={t('shopByCategory')}
-          isLoading={isLoading}
-          themeColor={theme}
-        />
-      </section>
-
-      <section className={styles.hotPrices}>
-        <Slider
-          products={productsWithDiscount}
-          title={t('hotPrices')}
-          isLoading={isLoading}
-          themeColor={theme}
-        />
-      </section>
     </div>
   );
 };

@@ -3,22 +3,16 @@
 
 .homePage {
   &__title {
-    display: flex;
-    justify-content: center;
     margin-top: 24px;
-    padding-inline: 16px;
 
     @include mixins.on-tablet {
       margin-top: 32px;
-      padding-inline: 24px;
       justify-content: left;
     }
 
     @include mixins.on-desktop {
       margin-top: 56px;
-      padding-inline: 32px;
       max-width: 1200px;
-      margin-inline: auto;
     }
   }
 }
@@ -38,4 +32,18 @@
 
 .title_dark {
   color: $white;
+}
+
+.container {
+  padding-inline: 16px;
+  max-width: 1200px;
+  margin-inline: auto;
+  
+  @include mixins.on-tablet {
+    padding-inline: 24px;
+  }
+
+  @include mixins.on-desktop {
+    padding-inline: 32px;
+  }
 }
