@@ -11,6 +11,7 @@ import { ProductInCart } from '../../types/ProductInCart';
 import { useAppSelector } from '../../hooks/hooks';
 import cn from 'classnames';
 import { Theme } from '../../types/Theme';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   item: ProductInCart;
@@ -20,6 +21,7 @@ type Props = {
 export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
   const dispatch = useDispatch();
   const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   const handleIncrease = () => {
     if (!isDisabled) dispatch(increaseQuantity(item));
@@ -39,8 +41,9 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
         <button
           className={styles.cart__item__icon__close}
           onClick={handleRemove}
+          aria-label={t('remove')}
         >
-          <img src='/img/icons/Close2.svg' alt='Close' />
+          <img src='/img/icons/Close2.svg' alt={t('remove')} />
         </button>
       )}
 
@@ -51,7 +54,7 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
         >
           <img
             src={item.image}
-            alt={`${item.name} Image`}
+            alt={`${item.name} ${t('image')}`}
             className={styles.cart__item__image}
           />
           {item.name}
@@ -66,8 +69,9 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
             )}
             onClick={handleDecrease}
             disabled={isDisabled}
+            aria-label={t('decrease_quantity')}
           >
-            <img src='/img/icons/Minus.svg' alt='Decrease quantity' />
+            <img src='/img/icons/Minus.svg' alt={t('decrease_quantity')} />
           </button>
           <span>{item.quantity}</span>
           <button
@@ -77,10 +81,13 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
             )}
             onClick={handleIncrease}
             disabled={isDisabled}
+            aria-label={t('increase_quantity')}
           >
             <img
-              src={`/img/icons/${theme === Theme.DARK ? 'UnionWhite.svg' : 'Union.svg'}`}
-              alt='Increase quantity'
+              src={`/img/icons/${
+                theme === Theme.DARK ? 'UnionWhite.svg' : 'Union.svg'
+              }`}
+              alt={t('increase_quantity')}
             />
           </button>
         </div>

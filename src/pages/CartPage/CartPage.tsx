@@ -16,6 +16,7 @@ export const CartPage = () => {
   const { t } = useTranslation();
   const [isEmpty, setIsEmpty] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [modalMessage, setModalMessage] = useState<Cart>(Cart.DEFAULT);
   const cartItems = useAppSelector((state) => state.cartProducts.cartProducts);
 
@@ -138,7 +139,7 @@ export const CartPage = () => {
       {isEmpty && (
         <div className={styles.checkout__modal}>
           <div className={styles.checkout__modal__content}>
-            <h2>{modalMessage}</h2>
+            <p>{t('cartIsEmpty')}</p>
             <button
               className={styles.checkout__button + ' ' + styles.back__button}
               onClick={closeModal}

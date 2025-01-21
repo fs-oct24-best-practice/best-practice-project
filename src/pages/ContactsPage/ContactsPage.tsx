@@ -6,42 +6,44 @@ import yevheniiPhoto from '../../assets/avatars/ye.png';
 import anatoliiPhoto from '../../assets/avatars/at.png';
 import vshchukinPhoto from '../../assets/avatars/VS.png';
 import vsavenetsPhoto from '../../assets/avatars/save.png';
+import { useTranslation } from 'react-i18next';
 
 export const ContactsPage: React.FC = () => {
   const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
 
   const teamMembers = [
     {
       name: 'Diana Skrypnyk',
-      role: 'Junior Front-End Developer',
+      role: t('junior_frontend_developer'),
       phone: '380 99 123 4567',
       email: '123@gmail.com',
       photo: dianaPhoto,
     },
     {
       name: 'Yevhenii Kucherenko',
-      role: 'Team Lead',
+      role: t('team_lead'),
       phone: '380 99 123 4567',
       email: 'chelsea7smile@gmail.com',
       photo: yevheniiPhoto,
     },
     {
       name: 'Anatolii Tarhonii',
-      role: 'Junior Front-End Developer',
+      role: t('junior_frontend_developer'),
       phone: '380 99 123 4567',
       email: '123@gmail.com',
       photo: anatoliiPhoto,
     },
     {
       name: 'Vitalii Shchukin',
-      role: 'Junior Front-End Developer',
+      role: t('junior_frontend_developer'),
       phone: '380 99 123 4567',
       email: '123@gmail.com',
       photo: vshchukinPhoto,
     },
     {
       name: 'Vitalii Savenets',
-      role: 'Junior Front-End Developer',
+      role: t('junior_frontend_developer'),
       phone: '380 99 123 4567',
       email: '123@gmail.com',
       photo: vsavenetsPhoto,
@@ -55,7 +57,7 @@ export const ContactsPage: React.FC = () => {
           [styles['theme-dark']]: theme === 'dark',
         })}
       >
-        About us
+        {t('about_us')}
       </h2>
 
       <h3
@@ -63,7 +65,7 @@ export const ContactsPage: React.FC = () => {
           [styles['theme-dark']]: theme === 'dark',
         })}
       >
-        Best Members of Best Practice team
+        {t('best_members')}
       </h3>
 
       <div className={styles['cards-container']}>
@@ -80,7 +82,9 @@ export const ContactsPage: React.FC = () => {
             <p className={styles.occupation}>{member.role}</p>
 
             <div>
-              <p>Tel: {member.phone}</p>
+              <p>
+                {t('tel')}: {member.phone}
+              </p>
               <a href={`mailto:${member.email}`}>{member.email}</a>
             </div>
 

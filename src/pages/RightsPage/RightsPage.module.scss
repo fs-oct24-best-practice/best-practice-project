@@ -1,0 +1,105 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/mixins' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  padding: 20px;
+  text-align: center;
+  transition: background-color $transition, color $transition;
+
+  &.theme-light {
+    background-color: $background;
+    color: $primary;
+  }
+
+  &.theme-dark {
+    background-color: $surface1-dark;
+    color: $white-dark;
+  }
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  transition: color $transition;
+
+  &.theme-light {
+    color: $primary;
+  }
+
+  &.theme-dark {
+    color: $white-dark;
+  }
+}
+
+.subtitle, .subsubtitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: color $transition;
+
+  &.theme-light {
+    color: $secondary;
+  }
+
+  &.theme-dark {
+    color: $secondary-dark;
+  }
+}
+
+.text {
+  font-size: 22px;
+  line-height: 1.6;
+  max-width: 600px;
+  transition: color $transition;
+
+  &.theme-light {
+    color: $secondary;
+  }
+
+  &.theme-dark {
+    color: $white-dark;
+  }
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+@media (max-width: $viewport-width-mobile) {
+  .container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: $viewport-width-tablet) {
+  .container {
+    padding: 40px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 22px;
+  }
+}

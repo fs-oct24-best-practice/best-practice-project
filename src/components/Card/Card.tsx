@@ -3,6 +3,7 @@ import styles from './Card.module.scss';
 import { Product } from '../../types/Product';
 import { useAppSelector } from '../../hooks/hooks';
 import { Actions } from '../Actions';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
@@ -23,6 +24,7 @@ export const Card: React.FC<Props> = ({ product }) => {
 
   const theme = useAppSelector((state) => state.theme.theme);
   const location = useLocation();
+  const { t } = useTranslation();
 
   return (
     <div className={`${styles.product_card} ${styles[theme]}`}>
@@ -58,17 +60,21 @@ export const Card: React.FC<Props> = ({ product }) => {
       <div className={styles.product_card__separator}></div>
       <div className={styles.product_card__features}>
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>Screen:</div>
+          <div className={styles.product_card__feature_label}>
+            {t('screen')}:
+          </div>
           <div className={styles.product_card__feature_value}>{screen}</div>
         </div>
 
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>Capacity:</div>
+          <div className={styles.product_card__feature_label}>
+            {t('capacity')}:
+          </div>
           <div className={styles.product_card__feature_value}>{capacity}</div>
         </div>
 
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>RAM:</div>
+          <div className={styles.product_card__feature_label}>{t('ram')}:</div>
           <div className={styles.product_card__feature_value}>{ram}</div>
         </div>
       </div>

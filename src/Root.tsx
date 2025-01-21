@@ -16,6 +16,7 @@ import { AuthPage } from './pages/AuthPage/AuthPage';
 import { DashboardPage } from './pages/DashboardPage/DashboardPage';
 import { RegistrationPage } from './pages/RegistrationPage/RegistrationPage';
 import { ContactsPage } from './pages/ContactsPage/ContactsPage';
+import { RightsPage } from './pages/RightsPage/RightsPage';
 
 export const Root = () => {
   const isAuthenticated = (): boolean => {
@@ -57,6 +58,7 @@ export const Root = () => {
               />
               <Route path='register' element={<RegistrationPage />} />
               <Route path='contacts' element={<ContactsPage />} />
+              <Route path='rules' element={<RightsPage />} />
               <Route path='*' element={<NotFoundPage />} />
             </Route>
           </Routes>

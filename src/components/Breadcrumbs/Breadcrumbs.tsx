@@ -4,14 +4,15 @@ import HomeIcon from '../../assets/icons/home.svg';
 import HomeIconWhite from '../../assets/icons/home-white.svg';
 import ArrowRight from '../../assets/icons/arrow-right-grey.svg';
 import cn from 'classnames';
-import { makeStringCapitalize } from '../../utils';
 import { useEffect, useState } from 'react';
 import { getProductListFast, getSpecList } from '../../api';
 import { Categories, Product, ProductSpec } from '../../types';
 import { Theme } from '../../types/Theme';
 import { useAppSelector } from '../../hooks/hooks';
+import { useTranslation } from 'react-i18next';
 
 export const Breadcrumbs = () => {
+  const { t } = useTranslation();
   const [productTitle, setProductTitle] = useState<string | null>(null);
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -57,17 +58,25 @@ export const Breadcrumbs = () => {
         <img
           src={theme === Theme.DARK ? HomeIconWhite : HomeIcon}
           className={styles.bread_crumbs__icon}
-          alt='yankee go home!'
+          alt={t('homeIconAlt')}
         />
       </Link>
-      <img src={ArrowRight} className={styles.bread_crumbs__icon} />
+      <img
+        src={ArrowRight}
+        className={styles.bread_crumbs__icon}
+        alt={t('arrowIconAlt')}
+      />
 
       <Link to={`/${category}`} className={setCrumbsClass({ itemId })}>
-        {makeStringCapitalize(category)}
+        {t(`categories.${category}`)}
       </Link>
       {itemId && (
         <>
-          <img src={ArrowRight} />
+          <img
+            src={ArrowRight}
+            alt={t('arrowIconAlt')}
+            className={styles.bread_crumbs__icon}
+          />
           <p className={styles.bread_crumbs__text}>{productTitle}</p>
         </>
       )}

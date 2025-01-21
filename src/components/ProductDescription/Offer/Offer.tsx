@@ -56,10 +56,10 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
   };
 
   const techProperties = {
-    Screen: screen,
-    Resolution: resolution,
-    Processor: processor,
-    RAM: ram,
+    [t('screen')]: screen,
+    [t('resolution')]: resolution,
+    [t('processor')]: processor,
+    [t('ram')]: ram,
   };
 
   return (
@@ -82,6 +82,7 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
                 style={{
                   backgroundColor: browserSupportedColors[currentColor],
                 }}
+                aria-label={t('color', { color })}
               ></NavLink>
             );
           })}
@@ -101,6 +102,7 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
                 )}`}
                 className={setCapacityClasses}
                 key={capacity}
+                aria-label={t('capacity', { capacity })}
               >
                 {capacity}
               </NavLink>
@@ -118,11 +120,11 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
 
       <div className={styles.properties}>
         <ul className={styles.properties__list}>
-          {Object.entries(techProperties).map((property) => {
+          {Object.entries(techProperties).map(([key, value]) => {
             return (
-              <li key={property[0]} className={styles.property}>
-                <p className={styles.property__title}>{property[0]}</p>
-                <p className={styles.property__value}>{property[1]}</p>
+              <li key={key} className={styles.property}>
+                <p className={styles.property__title}>{key}</p>
+                <p className={styles.property__value}>{value}</p>
               </li>
             );
           })}
