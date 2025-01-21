@@ -7,6 +7,7 @@
 
   @include mixins.on-tablet {
     margin-top: 32px;
+    margin-inline: -16px;
   }
 
   @include mixins.on-desktop {
@@ -21,6 +22,8 @@
       display: flex;
       gap: 19px;
       height: 221px;
+      width: 97%;
+      margin-inline: auto;
     }
 
     @include mixins.on-desktop {
@@ -64,12 +67,17 @@
       }
     }
 
-    &-container {
+    &-container {     
+      position: relative;
+      top: 0;
+      left: -6%;
       height: 320px;
-      width: 100%;
+      width: 112%;
       overflow: hidden;
 
       @include mixins.on-tablet {
+        left: 0;
+        width: 100%;
         height: 189px;
       }
 
