@@ -38,12 +38,24 @@
         align-items: center;
         height: 189px;
         width: 32px;
-        background-color: transparent;
-        border: 1px solid $icons;
         cursor: pointer;
 
-        &:hover {
-          border-color: $primary;
+        .light & {
+          background-color: $white;
+          border: 1px solid $icons;
+
+          &:hover {
+            border-color: $primary;
+          }
+        }
+
+        .dark & {
+          background-color: $surface2-dark;
+          border: none;
+
+          &:hover {
+            background-color: $icons-dark;
+          }
         }
       }
 
