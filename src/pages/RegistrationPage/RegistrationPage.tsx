@@ -9,6 +9,8 @@ import {
   fetchSignInMethodsForEmail,
 } from 'firebase/auth';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '../../hooks/hooks';
+import cn from 'classnames';
 
 interface FormData {
   firstName: string;
@@ -38,6 +40,7 @@ export const RegistrationPage: React.FC = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitted, setSubmitted] = useState(false);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -144,7 +147,7 @@ export const RegistrationPage: React.FC = () => {
   const isButtonDisabled = submitted && !isFormValid;
 
   return (
-    <div className={styles['registration-page']}>
+    <div className={cn(styles['registration-page'], styles[theme])}>
       <h2 className={styles['registration-page__title']}>{t('register')}</h2>
       <div className={styles['registration-page__form-group']}>
         {Object.keys(formData).map((field) => (

@@ -14,10 +14,8 @@ import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
   const { t } = useTranslation();
-
   const dispatch = useDispatch();
   const location = useLocation();
-
   const theme = useAppSelector((state) => state.theme.theme);
 
   const favoritesLength = useAppSelector(

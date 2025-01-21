@@ -35,7 +35,7 @@
 
     &.darkSwitch {
       background-color: $surface1-dark;
-      border: 2px solid $icons-dark;
+      border: 2px solid $secondary;
     }
 
     &.lightSwitch {
@@ -44,7 +44,7 @@
     }
 
     &:hover {
-      background-color: $secondary;
+      background-color: $surface2-dark;
     }
 
     .dark & {
@@ -64,7 +64,7 @@
       border-radius: 50%;
       transition: transform 0.3s, background-color 0.3s;
 
-      background-color: $primary;
+      background-color: $secondary;
 
       .dark & {
         background-color: $secondary-dark;
