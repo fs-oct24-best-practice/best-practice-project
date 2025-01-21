@@ -27,6 +27,7 @@
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 40px;
 }
 
 .cards-container {
@@ -81,11 +82,11 @@
 }
 
 .card {
-  width: 270px;
+  width: 250px;
   height: 400px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   background-color: $secondary-dark;
   opacity: 1;
   visibility: visible;
@@ -136,6 +137,7 @@
 }
 
 .name {
+  height: 40px;
   margin-top: 20px;
   font-size: 20px;
   font-weight: 800;
