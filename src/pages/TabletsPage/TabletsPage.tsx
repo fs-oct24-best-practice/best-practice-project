@@ -3,8 +3,10 @@ import { getProductList } from '../../api/getProductList';
 import { useLocation } from 'react-router-dom';
 import { Catalog } from '../../components/Catalog/Catalog';
 import { Product } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 export const TabletsPage = () => {
+  const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productList, setProductList] = useState<Product[]>([]);
@@ -33,7 +35,7 @@ export const TabletsPage = () => {
 
   return (
     <>
-      <h1>Tablets</h1>
+      <h1>{t('tablets')}</h1>
       <Catalog
         productList={productList}
         isLoading={isLoading}

@@ -12,8 +12,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppSelector } from '../../hooks/hooks';
+import { useTranslation } from 'react-i18next';
 
 export const AuthPage: React.FC = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState({ value: '', isTouched: false });
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export const AuthPage: React.FC = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
-        toast.success('Logged in successfully');
+        toast.success(t('loginSuccess'));
         navigate('/dashboard');
       } else {
         localStorage.removeItem('user');
@@ -31,18 +33,18 @@ export const AuthPage: React.FC = () => {
     });
 
     return () => unsubscribe();
-  }, [navigate]);
+  }, [navigate, t]);
 
   const handleEmailLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password.value);
-      toast.success('Logged in successfully');
+      toast.success(t('loginSuccess'));
       setTimeout(() => {
         navigate('/dashboard');
       });
     } catch (error) {
       console.error('Error during email login:', error);
-      toast.error('Login failed');
+      toast.error(t('loginFailed'));
     }
   };
 
@@ -50,13 +52,13 @@ export const AuthPage: React.FC = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      toast.success('Logged in with Google');
+      toast.success(t('googleLoginSuccess'));
       setTimeout(() => {
         navigate('/dashboard');
       });
     } catch (error) {
       console.error('Error during Google login:', error);
-      toast.error('Google login failed');
+      toast.error(t('googleLoginFailed'));
     }
   };
 
@@ -69,18 +71,18 @@ export const AuthPage: React.FC = () => {
       <div className={`${styles['auth-container']} ${styles[theme]}`}>
         <div className={`${styles['auth-form']} ${styles[theme]}`}>
           <h2 className={styles[`${theme}-text`]}>
-            Login with Email and Password
+            {t('loginWithEmailAndPassword')}
           </h2>
           <input
             type='email'
-            placeholder='Email'
+            placeholder={t('email')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className={styles[theme]}
           />
           <input
             type='password'
-            placeholder='Password'
+            placeholder={t('password')}
             value={password.value}
             onChange={(e) =>
               setPassword({ ...password, value: e.target.value })
@@ -88,13 +90,15 @@ export const AuthPage: React.FC = () => {
             className={styles[theme]}
           />
           <button onClick={handleEmailLogin} disabled={!getIsFormValid()}>
-            Login
+            {t('login')}
           </button>
-          <button onClick={handleGoogleLogin}>Sign In with Google</button>
+          <button onClick={handleGoogleLogin}>{t('signInWithGoogle')}</button>
 
           <div className={styles['auth-switch']}>
-            <p className={styles[`${theme}-text`]}>Don't have an account?</p>
-            <button onClick={() => navigate('/register')}>Register</button>
+            <p className={styles[`${theme}-text`]}>{t('dontHaveAccount')}</p>
+            <button onClick={() => navigate('/register')}>
+              {t('register')}
+            </button>
           </div>
         </div>
       </div>

@@ -3,14 +3,15 @@ import { getProductList } from '../../api/getProductList';
 import { useLocation } from 'react-router-dom';
 import { Catalog } from '../../components/Catalog/Catalog';
 import { Product } from '../../types';
+import { useTranslation } from 'react-i18next';
 
 export const PhonesPage = () => {
+  const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [productList, setProductList] = useState<Product[]>([]);
 
   const location = useLocation();
-
   const category = location.pathname.split('/')[1];
 
   useLayoutEffect(() => {
@@ -33,7 +34,7 @@ export const PhonesPage = () => {
 
   return (
     <>
-      <h1>Mobile phones</h1>
+      <h1>{t('mobilePhones')}</h1>
       <Catalog
         productList={productList}
         isLoading={isLoading}

@@ -6,8 +6,10 @@ import { ProductDescription } from '../../components/ProductDescription';
 import styles from './ProductDetailsPage.module.scss';
 import { filterFactory, shuffleArray } from '../../utils';
 import { Slider } from '../../components/Slider';
+import { useTranslation } from 'react-i18next';
 
 export const ProductDetailsPage: FC = () => {
+  const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
   const [currentProductSpec, setCurrentProductSpec] =
     useState<ProductSpec | null>(null);
@@ -20,7 +22,6 @@ export const ProductDetailsPage: FC = () => {
   );
 
   const location = useLocation();
-
   const category = location.pathname.split('/')[1];
   const itemId = location.pathname.split('/')[2];
 
@@ -33,7 +34,6 @@ export const ProductDetailsPage: FC = () => {
 
       try {
         const specsList = await getSpecList(category);
-
         const currentProductSpec = specsList.find((spec) => spec.id === itemId);
 
         if (currentProductSpec) {
@@ -78,12 +78,10 @@ export const ProductDetailsPage: FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.visually_hidden}>Detailed product specification</h1>
-      {/* <div>* Bread crumbs ... *</div>
-      <div>Back</div> */}
-      {isError && (
-        <h2>Something went wrong, try again or go back to the previous page</h2>
-      )}
+      <h1 className={styles.visually_hidden}>
+        {t('detailedProductSpecification')}
+      </h1>
+      {isError && <h2>{t('somethingWentWrong')}</h2>}
       {!isError && !!currentProductSpec && !!currentProduct && (
         <ProductDescription
           currentProductSpec={currentProductSpec}
@@ -94,7 +92,7 @@ export const ProductDetailsPage: FC = () => {
         <section className={styles.hotPrices}>
           <Slider
             products={recommendetList}
-            title='You may also like'
+            title={t('youMayAlsoLike')}
             isLoading={false}
           />
         </section>

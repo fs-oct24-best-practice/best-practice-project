@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { Pages } from '../../../types';
 import { useAppSelector } from '../../../hooks/hooks';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   isOpen: boolean;
@@ -11,6 +12,8 @@ type Props = {
 };
 
 export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
+  const { t } = useTranslation();
+
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.menu__link]: true,
@@ -59,7 +62,7 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
               to={`/${path}`}
               onClick={toggleMenu}
             >
-              {name}
+              {t(name)}
             </NavLink>
           </li>
         ))}
