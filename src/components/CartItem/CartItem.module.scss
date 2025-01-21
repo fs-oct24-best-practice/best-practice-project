@@ -28,7 +28,7 @@
   &__image {
     height: 88px;
 
-    @include onMobile {
+    @include on-mobile {
       margin-left: 18px;
     }
   }
@@ -39,6 +39,14 @@
 
     &__title {
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: transform $transition;
+
+      &:hover {
+        transform: scale(1.1);
+      }
 
       .light & {
         color: $primary;
@@ -48,12 +56,12 @@
         color: $white-dark;
       }
 
-      @include onMobile {
+      @include on-mobile {
         font-size: 12px;
       }
     }
 
-    @include onMobile {
+    @include on-mobile {
       margin-left: 40px;
     }
   }
@@ -155,7 +163,7 @@
     gap: 0;
   }
 
-  @include onMobile {
+  @include on-mobile {
     flex-wrap: wrap;
     gap: 0;
     height: 190px;

@@ -24,7 +24,7 @@
       border-top: 3px solid $elements-dark;
     }
 
-    @include mixins.onMobile {
+    @include mixins.on-mobile {
       height: auto;
       flex-direction: column;
       gap: 32px;
@@ -35,7 +35,7 @@
   &__navbar {
     display: flex;
     justify-content: space-between;
-    @include mixins.onMobile {
+    @include mixins.on-mobile {
       flex-direction: column;
       gap: 16px;
     }
@@ -43,7 +43,7 @@
 
   &__item {
     flex-grow: 1;
-    @include mixins.onMobile {
+    @include mixins.on-mobile {
       width: 100%;
     }
   }
@@ -68,7 +68,7 @@
     align-items: center;
     justify-content: flex-end;
     gap: 16px;
-    @include mixins.onMobile {
+    @include mixins.on-mobile {
       justify-content: center;
     }
   }
@@ -83,14 +83,14 @@
     justify-content: center;
     align-items: center;
     transition: border $transition;
- 
+
     .light & {
       border: 1px solid $icons;
       &:hover {
         border: 1px solid $primary;
       }
     }
-    
+
     .dark & {
       background-color: $surface2-dark;
       border: none;

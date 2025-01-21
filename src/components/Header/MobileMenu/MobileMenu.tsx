@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { Pages } from '../../../types';
 import { useAppSelector } from '../../../hooks/hooks';
@@ -12,8 +12,9 @@ type Props = {
 };
 
 export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
+  const location = useLocation();
   const { t } = useTranslation();
-
+  
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.menu__link]: true,
@@ -93,7 +94,12 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
         </li>
 
         <li>
-          <NavLink to='/cart' className={setNavClasses} onClick={toggleMenu}>
+          <NavLink
+            to='/cart'
+            className={setNavClasses}
+            state={{ from: location }}
+            onClick={toggleMenu}
+          >
             <div className={styles.menu__chosen__block}>
               <img
                 src='/img/icons/Cart.svg'

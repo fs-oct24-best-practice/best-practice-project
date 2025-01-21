@@ -24,7 +24,7 @@
   }
 
   &__text {
-    @include font.dt-body-text;
+    @include font.body-text;
     color: $secondary;
   }
 }

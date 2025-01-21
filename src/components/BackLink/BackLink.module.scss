@@ -1,0 +1,19 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.link {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  &__arrow {
+    display: inline;
+  }
+
+  &__content {
+    @include font.small-text;
+    color: $secondary;
+    padding-top: 2px;
+  }
+}

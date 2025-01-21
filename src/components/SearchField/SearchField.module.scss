@@ -210,7 +210,7 @@ body:has(.slideDown) {
     color: $secondary;
   }
 
-  @include onMobile {
+  @include on-mobile {
     font-size: 15px;
   }
 }

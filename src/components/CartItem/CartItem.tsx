@@ -43,16 +43,17 @@ export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
           <img src='/img/icons/Close2.svg' alt='Close' />
         </button>
       )}
-      <img
-        src={item.image}
-        alt={`${item.name} Image`}
-        className={styles.cart__item__image}
-      />
+
       <div className={styles.cart__item__description}>
         <Link
           to={`/${item.category}/${item.itemId}`}
           className={styles.cart__item__description__title}
         >
+          <img
+            src={item.image}
+            alt={`${item.name} Image`}
+            className={styles.cart__item__image}
+          />
           {item.name}
         </Link>
       </div>

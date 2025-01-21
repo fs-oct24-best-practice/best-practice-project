@@ -43,7 +43,7 @@
   letter-spacing: normal;
 }
 
-@mixin dt-uppercase {
+@mixin uppercase {
   font-family: 'bold';
   font-size: 12px;
   line-height: 11px;
@@ -51,21 +51,21 @@
   text-transform: uppercase;
 }
 
-@mixin dt-button {
+@mixin button {
   font-family: 'semi-bold';
   font-size: 14px;
   line-height: 21px;
   letter-spacing: normal;
 }
 
-@mixin dt-body-text {
+@mixin body-text {
   font-family: 'regular';
   font-size: 14px;
   line-height: 21px;
   letter-spacing: normal;
 }
 
-@mixin dt-small-text {
+@mixin small-text {
   font-family: 'semi-bold';
   font-size: 12px;
   line-height: 15px;

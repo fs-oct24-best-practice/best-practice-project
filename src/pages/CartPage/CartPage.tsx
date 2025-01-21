@@ -1,12 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { CartItem } from '../../components/CartItem';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
 import { clearCart } from '../../features/cartReducer';
 import { Cart } from '../../types/Cart';
 import styles from './CartPage.module.scss';
 import { useAppSelector } from '../../hooks/hooks';
 import { ProductInCart } from '../../types/ProductInCart';
+import { BackLink } from '../../components/BackLink/BackLink';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
 
@@ -16,8 +17,12 @@ export const CartPage = () => {
   const [isCheckout, setIsCheckout] = useState(false);
   const [modalMessage, setModalMessage] = useState<Cart>(Cart.DEFAULT);
   const cartItems = useAppSelector((state) => state.cartProducts.cartProducts);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? '/');
 
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -74,12 +79,7 @@ export const CartPage = () => {
 
   return (
     <div className={cn(styles.cart__page, styles[theme])}>
-      <div className={styles.cart__back}>
-        <img src='/img/icons/Back.svg' alt='Back' />
-        <a href='' className={styles.cart__back__button}>
-          {t('back')}
-        </a>
-      </div>
+      <BackLink to={backLinkRef.current}>{t('back')}</BackLink>
       <h1 className={styles.cart__title}>{t('cart')}</h1>
       <div className={styles.cart__content}>
         <div className={styles.cart__items}>

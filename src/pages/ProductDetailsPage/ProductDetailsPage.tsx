@@ -1,4 +1,4 @@
-import { FC, useEffect, useLayoutEffect, useState } from 'react';
+import { FC, useEffect, useLayoutEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ProductSpec, Categories, Product } from '../../types';
 import { getSpecList, getProductListFast } from '../../api';
@@ -6,9 +6,12 @@ import { ProductDescription } from '../../components/ProductDescription';
 import styles from './ProductDetailsPage.module.scss';
 import { filterFactory, shuffleArray } from '../../utils';
 import { Slider } from '../../components/Slider';
+import { BackLink } from '../../components/BackLink/BackLink';
+import { useAppSelector } from '../../hooks/hooks';
 import { useTranslation } from 'react-i18next';
 
 export const ProductDetailsPage: FC = () => {
+  const theme = useAppSelector((state) => state.theme.theme);
   const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
   const [currentProductSpec, setCurrentProductSpec] =
@@ -24,6 +27,8 @@ export const ProductDetailsPage: FC = () => {
   const location = useLocation();
   const category = location.pathname.split('/')[1];
   const itemId = location.pathname.split('/')[2];
+
+  const backLinkRef = useRef(location.state?.from ?? `/${category}`);
 
   useLayoutEffect(() => {
     const fetchAndFindProductSpec = async (
@@ -78,10 +83,14 @@ export const ProductDetailsPage: FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.visually_hidden}>
-        {t('detailedProductSpecification')}
-      </h1>
-      {isError && <h2>{t('somethingWentWrong')}</h2>}
+      <h1 className={styles.visually_hidden}>{t('detailedProductSpecification')}</h1>
+      {/* <div>* Bread crumbs ... *</div>*/}
+      <BackLink to={backLinkRef.current}>Back</BackLink>
+
+      {isError && (
+        <h2>{t('somethingWentWrong')}</h2>
+      )}
+
       {!isError && !!currentProductSpec && !!currentProduct && (
         <ProductDescription
           currentProductSpec={currentProductSpec}
@@ -94,6 +103,7 @@ export const ProductDetailsPage: FC = () => {
             products={recommendetList}
             title={t('youMayAlsoLike')}
             isLoading={false}
+            themeColor={theme}
           />
         </section>
       )}
