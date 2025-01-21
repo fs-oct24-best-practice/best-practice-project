@@ -3,12 +3,12 @@ import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './TechSpecs.module.scss';
 import cn from 'classnames';
 import { useAppSelector } from '../../../hooks/hooks';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 type Props = { currentProductSpec: ProductSpec };
 
 export const TechSpecs: FC<Props> = (props) => {
-  // const { t } = useTranslation();
+  const { t } = useTranslation();
   const {
     currentProductSpec: {
       screen,
@@ -25,19 +25,19 @@ export const TechSpecs: FC<Props> = (props) => {
   const theme = useAppSelector((state) => state.theme.theme);
 
   const techProperties = {
-    Screen: screen,
-    Resolution: resolution,
-    Processor: processor,
-    RAM: ram,
-    'Built in memory': capacity,
-    Camera: camera,
-    Zoom: zoom,
-    Cell: cell?.join(', '),
+    [t('screen')]: screen,
+    [t('Resolution')]: resolution,
+    [t('Processor')]: processor,
+    [t('ram')]: ram,
+    [t('Built-in-memory')]: capacity,
+    [t('Camera')]: camera,
+    [t('Zoom')]: zoom,
+    [t('Cell')]: cell?.join(', '),
   };
 
   return (
     <section className={cn(styles.section, styles[theme])}>
-      <h3 className={styles.section__title}>Tech specs</h3>
+      <h3 className={styles.section__title}>{t('tech_specs')}</h3>
       <ul className={styles.section__list}>
         {Object.entries(techProperties).map((property) => {
           return (

@@ -77,7 +77,10 @@
   "tablets2": "Tablets",
   "accessories2": "Accessories",
   "models": "models",
-  "favorites": "Favorites",
+  "favorites_page": {
+  "title": "Favorites",
+  "quantity": "{{count}} {{count, plural, one {item} other {items}}}"
+  },
   "home": "Home",
   "about": "About",
   "available_colors": "Available colors",

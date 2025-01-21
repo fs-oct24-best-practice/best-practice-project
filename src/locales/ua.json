@@ -77,7 +77,10 @@
   "tablets2": "Планшети",
   "accessories2": "Аксесуари",
   "models": "моделі",
-  "favorites": "Обране",
+  "favorites_page": {
+    "title": "Обране",
+    "quantity": "{{count}} {{count > 1 ? 'items' : 'item'}}"
+  },
   "home": "Головна",
   "about": "Про продукт",
   "available_colors": "Доступні кольори",

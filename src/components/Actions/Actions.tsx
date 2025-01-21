@@ -3,7 +3,6 @@ import styles from './Actions.module.scss';
 import favourites_icon from '/img/icons/Favourite.svg';
 import favourites_icon_white from '/img/icons/FavoriteWhite.svg';
 import favourites_icon_filled from '/img/icons/FavouritesFilled.svg';
-import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
@@ -12,6 +11,7 @@ import { increaseQuantity } from '../../features/cartReducer';
 import { useAppSelector } from '../../hooks/hooks';
 import { Theme } from '../../types/Theme';
 import { ProductInCart } from '../../types/ProductInCart';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
@@ -25,10 +25,15 @@ function isProductInList<T extends { id: string | number }>(
 }
 
 export const Actions: React.FC<Props> = ({ product }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const favorites = useAppSelector(
     (state) => state.favoritesProducts.favoritesProducts
   );
+
+  const getButtonText = (isInCart: boolean) => {
+    return isInCart ? t('button.added') : t('button.add_to_cart');
+  };
 
   const addFavorite = (product: Product) =>
     dispatch(favoritesActions.add(product));
@@ -43,12 +48,12 @@ export const Actions: React.FC<Props> = ({ product }) => {
   const addToFavorite = () => {
     if (isProductInList(favorites, product)) {
       removeFavorite(product);
-      toast('Removed from favorites!', {
+      toast(t('Removed from favorites!'), {
         icon: '💔',
       });
     } else {
       addFavorite(product);
-      toast('Added to favorites!', {
+      toast(t('Added to favorites!'), {
         icon: '❤️',
       });
     }
@@ -57,11 +62,11 @@ export const Actions: React.FC<Props> = ({ product }) => {
   const onAddToCart = () => {
     if (!isProductInList(added, product as ProductInCart)) {
       addToCart(product as ProductInCart);
-      toast('Added to cart!', {
+      toast(t('Added to cart!'), {
         icon: '🛒',
       });
     } else {
-      toast('Already in the cart!', {
+      toast(t('Already in the cart!'), {
         icon: '🔔',
       });
     }
@@ -80,9 +85,7 @@ export const Actions: React.FC<Props> = ({ product }) => {
           ),
         })}
       >
-        {isProductInList(added, product as ProductInCart)
-          ? ButtonText.ADDED
-          : ButtonText.ADD_TO_CART}
+        {getButtonText(isProductInList(added, product as ProductInCart))}
       </button>
 
       <button

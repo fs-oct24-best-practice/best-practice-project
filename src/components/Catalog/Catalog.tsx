@@ -6,6 +6,7 @@ import styles from './Catalog.module.scss';
 import { CardSkeleton } from '../skeletons';
 import { useAppSelector } from '../../hooks/hooks';
 import { Cards } from '../Cards/Cards';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   productList: Product[];
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
+  const { t } = useTranslation();
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -105,21 +107,21 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
   if (isError) {
     return (
       <div className={styles.catalog__container}>
-        <p className={styles.catalog__error}>
-          Something went wrong. Please try again.
-        </p>
+        <p className={styles.catalog__error}>{t('something_went_wrong')}</p>
         <button
           onClick={() => window.location.reload()}
           className={styles.catalog__reload}
         >
-          Reload
+          {t('reload')}
         </button>
       </div>
     );
   }
 
   if (productList.length === 0) {
-    return <p className={styles.catalog__message}>No products available.</p>;
+    return (
+      <p className={styles.catalog__message}>{t('no_products_available')}</p>
+    );
   }
 
   return (
@@ -130,9 +132,9 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
           onChange={handleSortChange}
           className={styles.catalog__select}
         >
-          <option value='model'>Newest</option>
-          <option value='alphabet'>Alphabetically</option>
-          <option value='price'>Cheapest</option>
+          <option value='model'>{t('newest')}</option>
+          <option value='alphabet'>{t('alphabetically')}</option>
+          <option value='price'>{t('cheapest')}</option>
         </select>
         <select
           value={perPage}
@@ -142,7 +144,7 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
           <option value='4'>4</option>
           <option value='8'>8</option>
           <option value='16'>16</option>
-          <option value='all'>All</option>
+          <option value='all'>{t('all')}</option>
         </select>
       </div>
 

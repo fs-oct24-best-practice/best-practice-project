@@ -62,10 +62,6 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
     RAM: ram,
   };
 
-  // const getButtonText = (isInCart: boolean) => {
-  //   return isInCart ? t('button.added') : t('button.add_to_cart');
-  // };
-
   return (
     <section className={cn(styles.section, styles[theme])}>
       <div className={styles.colors}>
