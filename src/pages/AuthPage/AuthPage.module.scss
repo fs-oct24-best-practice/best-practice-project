@@ -9,7 +9,7 @@
   background-color: $background;
 
   &.dark {
-    background-color: $surface1-dark;
+    background-color: $black-dark;
   }
 }
 
@@ -54,7 +54,7 @@
       color: $white-dark;
     }
 
-    &:not(.dark) {
+    &.light {
       color: $primary;
     }
   }
@@ -98,7 +98,7 @@
       color: $green;
     }
 
-    &.dark {
+    .dark & {
       background-color: $surface2-dark;
       color: $white-dark;
       border-color: $elements-dark;
@@ -120,7 +120,7 @@
       font-size: 14px;
       text-decoration: underline;
 
-      &.dark {
+      .dark & {
         color: $white-dark;
       }
     }
