@@ -9,6 +9,7 @@ import { Slider } from '../../components/Slider';
 import { BackLink } from '../../components/BackLink/BackLink';
 import { useAppSelector } from '../../hooks/hooks';
 import { useTranslation } from 'react-i18next';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductDetailsPage: FC = () => {
   const theme = useAppSelector((state) => state.theme.theme);
@@ -83,13 +84,13 @@ export const ProductDetailsPage: FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.visually_hidden}>{t('detailedProductSpecification')}</h1>
-      {/* <div>* Bread crumbs ... *</div>*/}
+      <h1 className={styles.visually_hidden}>
+        {t('detailedProductSpecification')}
+      </h1>
+      <Breadcrumbs />
       <BackLink to={backLinkRef.current}>Back</BackLink>
 
-      {isError && (
-        <h2>{t('somethingWentWrong')}</h2>
-      )}
+      {isError && <h2>{t('somethingWentWrong')}</h2>}
 
       {!isError && !!currentProductSpec && !!currentProduct && (
         <ProductDescription

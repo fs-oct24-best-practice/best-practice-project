@@ -1,0 +1,61 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.bread_crumbs {
+  padding: 24px 0;
+  display: flex;
+  gap: 8px;
+  justify-content: start;
+  align-items: center;
+
+  &__link {
+    @include font.small-text;
+    padding-top: 2px;
+
+    .light & {
+      color: $secondary;
+    }
+
+    .dark & {
+      color: $secondary-dark;
+    }
+
+    &__has_product {
+      .light & {
+        color: $primary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
+    }
+  }
+
+  &__text {
+    @include font.small-text;
+    padding-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: $secondary;
+
+    .light & {
+      color: $secondary;
+    }
+
+    .dark & {
+      color: $secondary-dark;
+    }
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .bread_crumbs {
+    padding-bottom: 40px;
+  }
+}

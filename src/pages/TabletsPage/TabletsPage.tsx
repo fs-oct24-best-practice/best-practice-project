@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Catalog } from '../../components/Catalog/Catalog';
 import { Product } from '../../types';
 import { useTranslation } from 'react-i18next';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const TabletsPage = () => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ export const TabletsPage = () => {
 
   return (
     <>
+      <Breadcrumbs />
       <h1>{t('tablets')}</h1>
       <Catalog
         productList={productList}
