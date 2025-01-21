@@ -1,0 +1,158 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/mixins' as *;
+
+@mixin theme-color($theme, $light-color, $dark-color) {
+  .#{$theme} & {
+    color: $light-color;
+  }
+
+  .#{$theme}-dark & {
+    color: $dark-color;
+  }
+}
+
+@mixin theme-bg($theme, $light-color, $dark-color) {
+  .#{$theme} & {
+    background-color: $light-color;
+  }
+
+  .#{$theme}-dark & {
+    background-color: $dark-color;
+  }
+}
+
+.container {
+  max-width: 1136px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.cards-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  @include on-tablet {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  @include on-desktop {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 16px;
+  }
+}
+
+.title {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-left: 16px;
+
+  @include on-desktop {
+    margin-top: 40px;
+    font-size: 40px;
+    font-weight: 800;
+    grid-column: span 8;
+  }
+
+  @include theme-color('light', $primary, $white-dark);
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-left: 16px;
+  margin-top: 10px;
+
+  @include on-desktop {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    color: $secondary;
+    grid-column: span 8;
+  }
+
+  @include theme-color('light', $secondary, $secondary-dark);
+}
+
+.card {
+  width: 270px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $secondary-dark;
+  opacity: 1;
+  visibility: visible;
+  animation: fadeIn 3s forwards;
+  padding-inline: 8px;
+  border-radius: 10%;
+
+  @include on-desktop {
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include theme-bg('light', $elements, $elements);
+  @include theme-bg('dark', $acept-dark, $acept-dark);
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.photo {
+  margin-top: 20px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 800;
+
+  @include theme-color('light', $primary, $white-dark);
+}
+
+.occupation {
+  margin-top: 5px;
+  font-size: 16px;
+  font-weight: 600;
+
+  @include theme-color('light', $secondary, $secondary-dark);
+}
+
+.links-wrapper {
+  display: flex;
+  margin-top: 30px;
+  gap: 8px;
+}
