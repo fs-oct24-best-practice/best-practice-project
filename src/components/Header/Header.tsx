@@ -5,12 +5,18 @@ import { Navbar } from './Navbar/Navbar';
 import { MobileMenu } from './MobileMenu/MobileMenu';
 import { useAppSelector } from '../../hooks/hooks';
 import { Theme } from '../../types/Theme';
+import { SearchField } from '../SearchField/SearchField';
+import { switchTheme } from '../../features/theme';
+import { useDispatch } from 'react-redux';
+import AuthButton from '../../firebase/AuthButton';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 640);
 
   const theme = useAppSelector((state) => state.theme.theme);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,6 +33,12 @@ export const Header = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const onThemeSwitch = () => {
+    swichTheme();
+  };
+
+  const swichTheme = () => dispatch(switchTheme());
 
   const menu_icon = theme === Theme.DARK ? 'MenuWhite.svg' : 'Menu.svg';
   const clode_icon = theme === Theme.DARK ? 'CloseWhite.svg' : 'Close.svg';
@@ -46,12 +58,34 @@ export const Header = () => {
       {isDesktop ? (
         <Navbar />
       ) : (
-        <button className={styles.burger} onClick={toggleMenu}>
-          <img
-            src={`/img/icons/${isOpen ? clode_icon : menu_icon}`}
-            alt={isOpen ? 'Close menu' : 'Open menu'}
-          />
-        </button>
+        <>
+          <div className={styles.search}>
+            <SearchField />
+          </div>
+          <div
+            className={`${styles.header__chosen__block}`}
+            onClick={onThemeSwitch}
+          >
+            <img
+              src={`/img/icons/${theme === Theme.DARK ? 'SunWhite.svg' : 'Moon.svg'}`}
+              alt='Switch Theme'
+              className={
+                theme === Theme.DARK
+                  ? styles.header__theme_toggle_icon_dark
+                  : styles.header__theme_toggle_icon_light
+              }
+            />
+          </div>
+          <div className={styles.header__chosen__block}>
+            <AuthButton />
+          </div>
+          <button className={styles.burger} onClick={toggleMenu}>
+            <img
+              src={`/img/icons/${isOpen ? clode_icon : menu_icon}`}
+              alt={isOpen ? 'Close menu' : 'Open menu'}
+            />
+          </button>
+        </>
       )}
 
       {isOpen && !isDesktop && (

@@ -24,6 +24,9 @@ body:has(.slideDown) {
   @media (min-width: 640px) and (max-width: 770px) {
     height: 36px;
   }
+  @media (max-width: 640px) {
+    height: 48px;
+  }
 
   &.light {
     border-left: 3px solid $elements;
@@ -84,6 +87,22 @@ body:has(.slideDown) {
       background-color: $elements-dark;
     }
   }
+
+  @include on-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    height: 100%;
+    overflow: auto;
+
+    .light & {
+      background-color: $elements;
+    }
+    .dark &  {
+      background-color: $elements-dark;
+    }
+  }
 }
 
 .slideUp {
@@ -91,7 +110,7 @@ body:has(.slideDown) {
 }
 
 .slideDown {
-  max-width: 400px;
+  max-width: 300px;
   opacity: 0.96;
 }
 
@@ -126,6 +145,12 @@ body:has(.slideDown) {
   z-index: 1000;
 
   @include on-tablet {
+    position: fixed;
+    z-index: 1000;
+    top: 50px;
+  }
+
+  @include on-mobile {
     position: fixed;
     z-index: 1000;
     top: 50px;
@@ -234,11 +259,11 @@ body:has(.slideDown) {
 .inputSearch {
   all: unset;
   border-radius: 15px;
-  width: 350px;
+  width: 250px;
   font-family: inherit;
   padding: 5px;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 2px;
 
   .light & {
     background-color: $primary;
@@ -250,6 +275,10 @@ body:has(.slideDown) {
     color: $secondary-dark;
     border: 2px solid $acept-dark;
   }
+
+  @include on-mobile {
+    width: 250px;
+  }
 }
 
 .inputSearch::placeholder {
@@ -258,5 +287,19 @@ body:has(.slideDown) {
   }
   .dark &  {
     color: $secondary-dark;
+  }
+}
+
+.closeIcon {
+  position: absolute;
+  top: 17px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
   }
 }

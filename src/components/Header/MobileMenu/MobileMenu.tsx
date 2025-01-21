@@ -14,7 +14,7 @@ type Props = {
 export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
   const { t } = useTranslation();
-  
+
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.menu__link]: true,
@@ -68,7 +68,6 @@ export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
           </li>
         ))}
       </ul>
-
       <ul className={styles.menu__chosen}>
         <li>
           <NavLink

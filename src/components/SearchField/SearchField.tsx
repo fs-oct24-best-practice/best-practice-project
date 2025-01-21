@@ -34,6 +34,14 @@ export const SearchField: React.FC = () => {
     }
   };
 
+  const closeSearch = () => {
+    setIsVisible(false);
+    setIsShown(false);
+    setSearchTerm('');
+    setProducts([]);
+    inputRef.current?.blur();
+  };
+
   const fetchProducts = (query: string) => {
     const preparedQuery = query.trim().toLowerCase();
 
@@ -113,7 +121,9 @@ export const SearchField: React.FC = () => {
     <div className={classNames(styles.searchContainer, styles[theme])}>
       <div className={classNames(styles.icon)} onClick={toggleSearch}></div>
       <div
-        className={`${styles.searchInput} ${isVisible ? styles.slideDown : styles.slideUp}`}
+        className={`${styles.searchInput} ${
+          isVisible ? styles.slideDown : styles.slideUp
+        }`}
       >
         <input
           className={styles.inputSearch}
@@ -125,6 +135,14 @@ export const SearchField: React.FC = () => {
           onBlur={handleInputBlur}
           onChange={handleInputChange}
         />
+        {isVisible && (
+          <img
+            src={`/img/icons/Close.svg`}
+            alt='Close'
+            className={styles.closeIcon}
+            onClick={closeSearch}
+          />
+        )}
       </div>
       {isShown && products.length !== 0 && (
         <div className={styles.optionsContainer}>
@@ -132,7 +150,7 @@ export const SearchField: React.FC = () => {
             height={window.innerHeight * 0.95}
             itemCount={products.length}
             itemSize={100}
-            width='100%'
+            width={300}
           >
             {renderRow}
           </List>
