@@ -9,8 +9,12 @@ import AuthButton from '../../../firebase/AuthButton';
 import { useDispatch } from 'react-redux';
 import { switchTheme } from '../../../features/theme';
 import { Theme } from '../../../types/Theme';
+import { LanguageSwitcher } from '../../LanguageSwitcher/LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
+  const { t } = useTranslation();
+
   const dispatch = useDispatch();
 
   const theme = useAppSelector((state) => state.theme.theme);
@@ -42,16 +46,19 @@ export const Navbar = () => {
   return (
     <nav className={`${styles.navbar} ${styles[theme]}`}>
       <ul className={styles.navbar__pages}>
-        {Object.entries(Pages).map((page) => {
+        {Object.entries(Pages).map(([key, value]) => {
           return (
-            <li key={page[0]} className={styles.navbar__page}>
-              <NavLink className={setNavClasses} to={`/${page[1]}`}>
-                {page[0]}
+            <li key={key} className={styles.navbar__page}>
+              <NavLink className={setNavClasses} to={`/${value}`}>
+                {t(key)}
               </NavLink>
             </li>
           );
         })}
       </ul>
+      <div className={styles.navbar__language}>
+        <LanguageSwitcher />
+      </div>
 
       <div className={styles.navbar__search}>
         <SearchField />

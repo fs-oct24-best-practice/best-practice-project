@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './Offer.module.scss';
 import cn from 'classnames';
@@ -7,7 +8,6 @@ import buttonstyles from '../../Card/Card.module.scss';
 import favourites_icon from '/img/icons/Favourite.svg';
 import favourites_icon_white from '/img/icons/FavoriteWhite.svg';
 import favourites_icon_filled from '/img/icons/FavouritesFilled.svg';
-import { ButtonText } from '../../../types/ButtonText';
 import { Product } from '../../../types/Product';
 import { toast } from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
@@ -37,6 +37,8 @@ type Props = {
 };
 
 export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
+  const { t } = useTranslation();
+
   const {
     colorsAvailable,
     namespaceId,
@@ -69,12 +71,12 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
   const addToFavorite = () => {
     if (isProductInList(favorites, product)) {
       removeFavorite(product);
-      toast('Removed from favorites!', {
+      toast(t('removed_from_favorites'), {
         icon: '💔',
       });
     } else {
       addFavorite(product);
-      toast('Added to favorites!', {
+      toast(t('added_to_favorites'), {
         icon: '❤️',
       });
     }
@@ -83,11 +85,11 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
   const onAddToCart = () => {
     if (!isProductInList(added, product as ProductInCart)) {
       addToCart(product as ProductInCart);
-      toast('Added to cart!', {
+      toast(t('added_to_cart'), {
         icon: '🛒',
       });
     } else {
-      toast('Already in the cart!', {
+      toast(t('already_in_cart'), {
         icon: '🔔',
       });
     }
@@ -120,10 +122,14 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
     RAM: ram,
   };
 
+  const getButtonText = (isInCart: boolean) => {
+    return isInCart ? t('button.added') : t('button.add_to_cart');
+  };
+
   return (
     <section className={styles.section}>
       <div className={styles.colors}>
-        <p className={styles.section__subtitle}>Available colors</p>
+        <p className={styles.section__subtitle}>{t('available_colors')}</p>
         <div className={styles.colors__selector}>
           {sortStrings(colorsAvailable).map((color: string) => {
             const currentColor: string =
@@ -147,7 +153,7 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
       </div>
 
       <div className={styles.capacity}>
-        <p className={styles.section__subtitle}>Select capacity</p>
+        <p className={styles.section__subtitle}>{t('select_capacity')}</p>
         <div className={styles.capacity__selector}>
           {sortStrings(capacityAvailable).map((capacity) => {
             return (
@@ -182,9 +188,7 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
             ),
           })}
         >
-          {isProductInList(added, product as ProductInCart)
-            ? ButtonText.ADDED
-            : ButtonText.ADD_TO_CART}
+          {getButtonText(isProductInList(added, product as ProductInCart))}
         </button>
 
         <button

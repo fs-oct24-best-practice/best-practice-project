@@ -8,6 +8,7 @@ import tabletsImg from '../../assets/categories/tablets.png';
 import accessoriesImg from '../../assets/categories/accessories.png';
 import { CategorySkeleton } from '../skeletons';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 type CategoriesCard = {
   title: string;
@@ -34,6 +35,8 @@ export const Categories: React.FC<Props> = ({
   isLoading,
   themeColor,
 }) => {
+  const { t } = useTranslation();
+
   const allProducts = products;
 
   const productsCount = (productType: string) => {
@@ -46,17 +49,17 @@ export const Categories: React.FC<Props> = ({
 
   const categoriesList: CategoriesList = {
     phones: {
-      title: 'phones',
+      title: t('phones'),
       image: phonesImg,
       type: 'phones',
     },
     tablets: {
-      title: 'tablets',
+      title: t('tablets2'),
       image: tabletsImg,
       type: 'tablets',
     },
     accessories: {
-      title: 'accessories',
+      title: t('accessories2'),
       image: accessoriesImg,
       type: 'accessories',
     },
@@ -101,7 +104,7 @@ export const Categories: React.FC<Props> = ({
                         {category.title}
                       </h3>
                       <p className='categories__info--text'>
-                        {`${productsCount(category.type)} models`}
+                        {`${productsCount(category.type)} ${t('models')}`}
                       </p>
                     </div>
                   </div>
