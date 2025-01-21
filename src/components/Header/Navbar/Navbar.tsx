@@ -112,7 +112,7 @@ export const Navbar = () => {
         <li>
           <NavLink
             to='/cart'
-            className={setNavClasses}
+            className={setIconClasses}
             state={{ from: location }}
           >
             <div className={styles.navbar__chosen__block}>

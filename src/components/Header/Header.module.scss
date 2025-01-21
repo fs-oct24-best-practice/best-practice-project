@@ -20,6 +20,10 @@
     height: 36px;
   }
 
+  @media (max-width: 640px) {
+    gap: 0px;
+  }
+
   &.light {
     background-color: $background;
     border-bottom: 3px solid $elements;
@@ -30,13 +34,12 @@
   }
 
   &__logo_wrap {
-    height: 64px;
-    padding: 18px 24px;
+   margin-left: 12px;
   }
 
   &__logo {
-    width: 80px;
-    height: 28px;
+    width: 64px;
+    height: 64px;
     transition: $transition;
     transition-property: transform;
 
@@ -51,6 +54,62 @@
     position: relative;
     gap: 48px;
     margin-right: 24px;
+  }
+
+  &__chosen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &__block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 64px;
+      width: 64px;
+      position: relative;
+
+      @media (min-width: 770px) and (max-width: 900px) {
+        height: 48px;
+        width: 48px;
+      }
+
+      @media (min-width: 640px) and (max-width: 770px) {
+        width: 36px;
+        height: 36px;
+      }
+
+      @media (max-width: 640px) {
+        height: 48px;
+      }
+
+      .light & {
+        border-left: 3px solid $elements;
+      }
+
+      .dark & {
+        border-left: 3px solid $elements-dark;
+      }
+    }
+
+    &__icon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__theme_toggle_icon_light {
+    width: 22px;
+    height: 22px;
+  }
+  &__theme_toggle_icon_dark {
+    width: 22px;
+    height: 22px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -77,15 +136,13 @@
   .header {
     justify-content: space-between;
     height: 48px;
-
-    &__logo_wrap {
-      height: 48px;
-      padding: 13px 16px;
-    }
-
-    &__logo {
-      width: 64px;
-      height: 22px;
-    }
   }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: -9px;
+  flex-grow: 1;
 }
