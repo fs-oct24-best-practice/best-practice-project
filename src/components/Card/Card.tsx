@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Card.module.scss';
 import { Product } from '../../types/Product';
 import { useAppSelector } from '../../hooks/hooks';
@@ -22,10 +22,15 @@ export const Card: React.FC<Props> = ({ product }) => {
   } = product;
 
   const theme = useAppSelector((state) => state.theme.theme);
+  const location = useLocation();
 
   return (
     <div className={`${styles.product_card} ${styles[theme]}`}>
-      <Link to={`/${category}/${itemId}`} className={styles.product_card__link}>
+      <Link
+        to={`/${category}/${itemId}`}
+        className={styles.product_card__link}
+        state={{ from: location }}
+      >
         <div className={styles.product_card__link_content}>
           <img
             className={styles.product_card__image}
