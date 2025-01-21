@@ -5,13 +5,27 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background-color: $background;
   min-height: 100vh;
+
+  &.light {
+    background-color: $background;
+  }
+
+  &.dark {
+    background-color: $black-dark;
+  }
 
   &__title {
     font-size: 24px;
-    color: $primary;
     margin-bottom: 20px;
+
+    .light & {
+      color: $primary;
+    }
+
+    .dark & {
+      color: $white-dark;
+    }
   }
 
   &__form-group {
@@ -32,15 +46,37 @@
     font-size: 16px;
     width: 100%;
     height: 40px;
-    background-color: $white;
+    
+    .light & {
+      color: $primary;
+      background-color: $white;
+      &:placeholder-shown {
+        border: 1px solid $secondary;
+      }
+      
+      &:not(:placeholder-shown) {
+        border: 1px solid $primary;
+      }
+    }
+    
+    .dark & {
+      color: $white-dark;
+      border: none;
+      background-color: $surface2-dark;
+      &:placeholder-shown {
+        border: 1px solid $icons-dark;
+      }
+      
+      &:not(:placeholder-shown) {
+        border: 1px solid $icons;
+      }
 
-    &:placeholder-shown {
-      border: 1px solid $secondary;
+      &::placeholder {
+        color: $secondary-dark;
+      }
+      
     }
 
-    &:not(:placeholder-shown) {
-      border: 1px solid $primary;
-    }
   }
 
   &__input--error {
@@ -56,15 +92,21 @@
 
   &__register-button {
     padding: 12px 20px;
-    border: 1px solid $elements;
     background-color: $primary;
-    color: $white;
+    color: $white-dark;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 20px;
+    .light & {
+      border: 1px solid $elements;
+    }
+
+    .dark & {
+      border: 1px solid $icons-dark;
+    }
   }
 
   &__register-button--disabled {
@@ -73,7 +115,6 @@
   }
 
   &:hover {
-    background-color: $hover;
     color: $green;
   }
 }
