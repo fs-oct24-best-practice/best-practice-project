@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../hooks/hooks';
-import { Catalog } from '../../components/Catalog/Catalog';
+import { Cards } from '../../components/Cards/Cards';
 import styles from './FavoritePage.module.scss';
 
 export const FavoritePage = () => {
@@ -17,7 +17,7 @@ export const FavoritePage = () => {
       <p
         className={styles.favoritesPage__quantity}
       >{`${favoritesLength} ${favoritesLength > 1 ? 'items' : 'item'}`}</p>
-      <Catalog productList={favorites} isLoading={false} isError={false} />
+      <Cards products={favorites} />{' '}
     </div>
   );
 };

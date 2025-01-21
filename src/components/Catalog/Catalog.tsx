@@ -1,11 +1,11 @@
 import { useState, FC, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
-import { Card } from '../Card/Card';
 import { Product } from '../../types';
 import styles from './Catalog.module.scss';
 import { CardSkeleton } from '../skeletons';
 import { useAppSelector } from '../../hooks/hooks';
+import { Cards } from '../Cards/Cards';
 
 type Props = {
   productList: Product[];
@@ -147,13 +147,7 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
         </select>
       </div>
 
-      <ul className={styles.catalog__grid}>
-        {paginatedProducts.map((product) => (
-          <li key={product.id} className={styles.catalog__card}>
-            <Card product={product} />
-          </li>
-        ))}
-      </ul>
+      <Cards products={paginatedProducts} />
 
       <div className={styles.catalog__pagination}>
         {[...Array(totalPages)].map((_, index) => (
