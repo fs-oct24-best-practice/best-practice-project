@@ -1,4 +1,4 @@
 export enum ButtonText {
-  ADD_TO_CART = 'Add to cart',
-  ADDED = 'Added',
+  ADD_TO_CART = 'add_to_cart',
+  ADDED = 'added',
 }

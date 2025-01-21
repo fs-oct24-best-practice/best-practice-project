@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styles from './About.module.scss';
-
+import { useTranslation } from 'react-i18next';
 import { ProductSpec } from '../../../types/ProductSpec';
 
 type Props = {
@@ -8,12 +8,15 @@ type Props = {
 };
 
 export const About: FC<Props> = (props) => {
+  const { t } = useTranslation();
+
   const {
     currentProductSpec: { description },
   } = props;
+
   return (
     <section className={styles.section}>
-      <h3 className={styles.section__title}>About</h3>
+      <h3 className={styles.section__title}>{t('about')}</h3>
       {description.map((declaration, idx) => {
         return (
           <div key={idx} className={styles.declaration}>

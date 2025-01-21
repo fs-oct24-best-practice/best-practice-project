@@ -8,8 +8,10 @@ import styles from './CartPage.module.scss';
 import { useAppSelector } from '../../hooks/hooks';
 import { ProductInCart } from '../../types/ProductInCart';
 import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 export const CartPage = () => {
+  const { t } = useTranslation();
   const [isEmpty, setIsEmpty] = useState(false);
   const [isCheckout, setIsCheckout] = useState(false);
   const [modalMessage, setModalMessage] = useState<Cart>(Cart.DEFAULT);
@@ -75,10 +77,10 @@ export const CartPage = () => {
       <div className={styles.cart__back}>
         <img src='/img/icons/Back.svg' alt='Back' />
         <a href='' className={styles.cart__back__button}>
-          Back
+          {t('back')}
         </a>
       </div>
-      <h1 className={styles.cart__title}>Cart</h1>
+      <h1 className={styles.cart__title}>{t('cart')}</h1>
       <div className={styles.cart__content}>
         <div className={styles.cart__items}>
           {cartItems.length > 0 ? (
@@ -87,7 +89,7 @@ export const CartPage = () => {
             ))
           ) : (
             <div className={styles.cart__empty}>
-              <p>Cart is empty</p>
+              <p>{t('cartIsEmpty')}</p>
               <img
                 src='/img/empty.svg'
                 width={350}
@@ -101,23 +103,29 @@ export const CartPage = () => {
           <div className={styles.summary__total}>
             <span className={styles.summary__total__cost}>${totalCost}</span>
             <p className={styles.summary__title}>
-              Total for {totalItems} items:
+              {t('totalForItems', { totalItems })}
             </p>
           </div>
           <button className={styles.checkout__button} onClick={handleCheckout}>
-            Checkout
+            {t('checkout')}
           </button>
           <button className={styles.checkout__button} onClick={handleClearCart}>
-            Clear Cart
+            {t('clearCart')}
           </button>
         </div>
       </div>
       {isCheckout && (
         <div className={styles.checkout__modal}>
           <div className={styles.checkout__modal__content}>
-            <h2>The order has been placed successfully!</h2>
-            <p>Thank you for your purchase!</p>
+            <h2>{t('orderPlaced')}</h2>
+            <p>{t('thankYouForPurchase')}</p>
             <img src='/img/order.png' width={300} height={300} alt='Order' />
+            <button
+              className={styles.checkout__button + ' ' + styles.back__button}
+              onClick={() => navigate('/')}
+            >
+              {t('backToHome')}
+            </button>
           </div>
         </div>
       )}
@@ -130,7 +138,7 @@ export const CartPage = () => {
               className={styles.checkout__button + ' ' + styles.back__button}
               onClick={closeModal}
             >
-              Close
+              {t('close')}
             </button>
           </div>
         </div>

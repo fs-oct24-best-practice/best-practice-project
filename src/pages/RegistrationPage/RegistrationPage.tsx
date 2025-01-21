@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   fetchSignInMethodsForEmail,
 } from 'firebase/auth';
+import { useTranslation } from 'react-i18next';
 
 interface FormData {
   firstName: string;
@@ -20,13 +21,10 @@ interface FormData {
   confirmPassword: string;
 }
 
-// interface FirebaseError extends Error {
-//   code: string;
-// }
-
 export const RegistrationPage: React.FC = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-
+  /* eslint-disable */
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -72,22 +70,21 @@ export const RegistrationPage: React.FC = () => {
     const newErrors: { [key: string]: string } = {};
 
     // Validation checks
-    if (!email) newErrors.email = 'Email is required';
-    if (!firstName) newErrors.firstName = 'First name is required';
-    if (!lastName) newErrors.lastName = 'Last name is required';
-    if (!phoneNumber) newErrors.phoneNumber = 'Phone number is required';
-    if (!city) newErrors.city = 'City is required';
-    if (!newPostOffice)
-      newErrors.newPostOffice = 'Nova Poshta office is required';
-    if (!password) newErrors.password = 'Password is required';
+    if (!email) newErrors.email = t('emailRequired');
+    if (!firstName) newErrors.firstName = t('firstNameRequired');
+    if (!lastName) newErrors.lastName = t('lastNameRequired');
+    if (!phoneNumber) newErrors.phoneNumber = t('phoneNumberRequired');
+    if (!city) newErrors.city = t('cityRequired');
+    if (!newPostOffice) newErrors.newPostOffice = t('novaPoshtaOfficeRequired');
+    if (!password) newErrors.password = t('passwordRequired');
     if (!confirmPassword)
-      newErrors.confirmPassword = 'Confirm password is required';
+      newErrors.confirmPassword = t('confirmPasswordRequired');
 
     if (password !== confirmPassword)
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = t('passwordsDoNotMatch');
 
     if (password.length < 8)
-      newErrors.password = 'Password must be at least 8 characters long';
+      newErrors.password = t('passwordLengthRequirement');
 
     return newErrors;
   };
@@ -103,13 +100,12 @@ export const RegistrationPage: React.FC = () => {
 
     try {
       const { email, password } = formData;
-      console.log('Registering with', email, password);
 
       const methods = await fetchSignInMethodsForEmail(auth, email);
       if (methods.length > 0) {
         setErrors((prevErrors) => ({
           ...prevErrors,
-          email: 'This email is already in use, please use another one',
+          email: t('emailAlreadyInUse'),
         }));
         return;
       }
@@ -119,28 +115,24 @@ export const RegistrationPage: React.FC = () => {
         email,
         password
       );
-      console.log('User created:', userCredential);
 
       const signInCredential = await signInWithEmailAndPassword(
         auth,
         email,
         password
       );
-      console.log('User logged in:', signInCredential);
 
       localStorage.setItem('user', JSON.stringify({ ...formData, email }));
 
-      toast.success('Registration and login successful');
+      toast.success(t('registrationSuccess'));
       setTimeout(() => {
         navigate('/dashboard');
       }, 500);
     } catch (error: unknown) {
       if (error instanceof Error) {
-        toast.error('Registration failed');
-        console.error('Registration error:', error);
+        toast.error(t('registrationFailed'));
       } else {
-        toast.error('An unknown error occurred');
-        console.error('Unknown error:', error);
+        toast.error(t('unknownError'));
       }
     }
   };
@@ -153,7 +145,7 @@ export const RegistrationPage: React.FC = () => {
 
   return (
     <div className={styles['registration-page']}>
-      <h2 className={styles['registration-page__title']}>Register</h2>
+      <h2 className={styles['registration-page__title']}>{t('register')}</h2>
       <div className={styles['registration-page__form-group']}>
         {Object.keys(formData).map((field) => (
           <div
@@ -167,7 +159,7 @@ export const RegistrationPage: React.FC = () => {
               name={field}
               placeholder={
                 field === 'newPostOffice'
-                  ? 'Nova Poshta Office №'
+                  ? t('novaPoshtaOffice')
                   : field
                       .replace(/([A-Z])/g, ' $1')
                       .replace(/^./, (str) => str.toUpperCase())
@@ -197,7 +189,7 @@ export const RegistrationPage: React.FC = () => {
         onClick={handleRegister}
         disabled={isButtonDisabled}
       >
-        Register
+        {t('register2')}
       </button>
     </div>
   );
