@@ -8,6 +8,7 @@ import { Theme } from '../../types/Theme';
 import { SearchField } from '../SearchField/SearchField';
 import { switchTheme } from '../../features/theme';
 import { useDispatch } from 'react-redux';
+import AuthButton from '../../firebase/AuthButton';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,6 +75,9 @@ export const Header = () => {
                   : styles.header__theme_toggle_icon_light
               }
             />
+          </div>
+          <div className={styles.header__chosen__block}>
+            <AuthButton />
           </div>
           <button className={styles.burger} onClick={toggleMenu}>
             <img
