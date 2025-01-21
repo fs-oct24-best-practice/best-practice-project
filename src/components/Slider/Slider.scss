@@ -16,7 +16,7 @@
     font-weight: 800;
     font-size: 22px;
     line-height: 32px;
-    color: $primary;    
+    color: $primary;
 
     @include mixins.on-tablet {
       font-size: 32px;

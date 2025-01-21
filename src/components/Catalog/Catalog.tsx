@@ -1,12 +1,11 @@
 import { useState, FC, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
-import { Card } from '../Card/Card';
 import { Product } from '../../types';
 import styles from './Catalog.module.scss';
 import { CardSkeleton } from '../skeletons';
 import { useAppSelector } from '../../hooks/hooks';
-import { useTranslation } from 'react-i18next';
+import { Cards } from '../Cards/Cards';
 
 type Props = {
   productList: Product[];
@@ -19,7 +18,6 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const theme = useAppSelector((state) => state.theme.theme);
-  const { t } = useTranslation();
 
   useEffect(() => {
     setShowSkeleton(isLoading);
@@ -107,19 +105,21 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
   if (isError) {
     return (
       <div className={styles.catalog__container}>
-        <p className={styles.catalog__error}>{t('somethingWentWrong2')}</p>
+        <p className={styles.catalog__error}>
+          Something went wrong. Please try again.
+        </p>
         <button
           onClick={() => window.location.reload()}
           className={styles.catalog__reload}
         >
-          {t('reload')}
+          Reload
         </button>
       </div>
     );
   }
 
   if (productList.length === 0) {
-    return <p className={styles.catalog__message}>{t('noProducts')}</p>;
+    return <p className={styles.catalog__message}>No products available.</p>;
   }
 
   return (
@@ -130,11 +130,10 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
           onChange={handleSortChange}
           className={styles.catalog__select}
         >
-          <option value='model'>{t('newest')}</option>
-          <option value='alphabet'>{t('alphabetically')}</option>
-          <option value='price'>{t('cheapest')}</option>
+          <option value='model'>Newest</option>
+          <option value='alphabet'>Alphabetically</option>
+          <option value='price'>Cheapest</option>
         </select>
-
         <select
           value={perPage}
           onChange={handlePerPageChange}
@@ -143,17 +142,11 @@ export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
           <option value='4'>4</option>
           <option value='8'>8</option>
           <option value='16'>16</option>
-          <option value='all'>{t('all')}</option>
+          <option value='all'>All</option>
         </select>
       </div>
 
-      <ul className={styles.catalog__grid}>
-        {paginatedProducts.map((product) => (
-          <li key={product.id} className={styles.catalog__card}>
-            <Card product={product} />
-          </li>
-        ))}
-      </ul>
+      <Cards products={paginatedProducts} />
 
       <div className={styles.catalog__pagination}>
         {[...Array(totalPages)].map((_, index) => (

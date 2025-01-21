@@ -1,22 +1,27 @@
 import { FC } from 'react';
 import styles from './About.module.scss';
-import { useTranslation } from 'react-i18next';
+import cn from 'classnames';
+
 import { ProductSpec } from '../../../types/ProductSpec';
+import { useAppSelector } from '../../../hooks/hooks';
+// import { useTranslation } from 'react-i18next';
 
 type Props = {
   currentProductSpec: ProductSpec;
 };
 
 export const About: FC<Props> = (props) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const {
     currentProductSpec: { description },
   } = props;
 
+  const theme = useAppSelector((state) => state.theme.theme);
+
   return (
-    <section className={styles.section}>
-      <h3 className={styles.section__title}>{t('about')}</h3>
+    <section className={cn(styles.section, styles[theme])}>
+      <h3 className={styles.section__title}>About</h3>
       {description.map((declaration, idx) => {
         return (
           <div key={idx} className={styles.declaration}>

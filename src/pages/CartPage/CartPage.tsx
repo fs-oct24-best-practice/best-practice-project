@@ -10,6 +10,7 @@ import { ProductInCart } from '../../types/ProductInCart';
 import { BackLink } from '../../components/BackLink/BackLink';
 import cn from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { Theme } from '../../types/Theme';
 
 export const CartPage = () => {
   const { t } = useTranslation();
@@ -91,7 +92,11 @@ export const CartPage = () => {
             <div className={styles.cart__empty}>
               <p>{t('cartIsEmpty')}</p>
               <img
-                src='/img/empty.svg'
+                src={
+                  theme === Theme.DARK
+                    ? '/img/empty-dark.svg'
+                    : '/img/empty.svg'
+                }
                 width={350}
                 height={350}
                 alt='Empty Cart'
