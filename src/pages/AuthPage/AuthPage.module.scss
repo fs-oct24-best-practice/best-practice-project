@@ -114,15 +114,25 @@
 
     button {
       background: none;
-      border: none;
+      border-color: $white;
       color: $primary;
       cursor: pointer;
       font-size: 14px;
       text-decoration: underline;
 
+      .light & {
+        box-sizing: border-box;
+        &:hover {
+          border-color: $elements;
+          color: $green;
+          background-color: $hover;
+        }
+      }
+
       .dark & {
         color: $white-dark;
       }
+
     }
   }
 
