@@ -35,6 +35,13 @@ export const Navbar = () => {
     });
   };
 
+  const setIconClasses = ({ isActive }: { isActive: boolean }) => {
+    return cn({
+      [styles.navbar__icon]: true,
+      [styles.navbar__icon_active]: isActive,
+    });
+  };
+
   const onThemeSwitch = () => {
     swichTheme();
   };
@@ -76,7 +83,7 @@ export const Navbar = () => {
         </li>
 
         <li>
-          <NavLink to='/favorite' className={setNavClasses}>
+          <NavLink to='/favorite' className={setIconClasses}>
             <div className={styles.navbar__chosen__block}>
               <img
                 src={`/img/icons/${theme === Theme.DARK ? 'FavoriteWhite.svg' : 'Favourite.svg'}`}
@@ -95,7 +102,7 @@ export const Navbar = () => {
         </li>
 
         <li>
-          <NavLink to='/cart' className={setNavClasses}>
+          <NavLink to='/cart' className={setIconClasses}>
             <div className={styles.navbar__chosen__block}>
               <img
                 src={`/img/icons/${theme === Theme.DARK ? 'CartWhite.svg' : 'Cart.svg'}`}

@@ -64,12 +64,6 @@ export const SearchField: React.FC = () => {
     }, 150);
   };
 
-  const handleSearchClose = () => {
-    setSearchTerm('');
-    setIsVisible(false);
-    setProducts([]);
-  };
-
   useEffect(() => {
     if (Object.entries(params).length !== 0) {
       setIsShown(false);
@@ -122,6 +116,7 @@ export const SearchField: React.FC = () => {
         className={`${styles.searchInput} ${isVisible ? styles.slideDown : styles.slideUp}`}
       >
         <input
+          className={styles.inputSearch}
           type='text'
           placeholder='Search...'
           value={searchTerm}
@@ -130,14 +125,11 @@ export const SearchField: React.FC = () => {
           onBlur={handleInputBlur}
           onChange={handleInputChange}
         />
-        <span className={styles.searchClose} onClick={handleSearchClose}>
-          &#x2716;
-        </span>
       </div>
       {isShown && products.length !== 0 && (
         <div className={styles.optionsContainer}>
           <List
-            height={400}
+            height={window.innerHeight * 0.95}
             itemCount={products.length}
             itemSize={100}
             width='100%'

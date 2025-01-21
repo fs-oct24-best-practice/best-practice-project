@@ -118,12 +118,6 @@ export const CartPage = () => {
             <h2>The order has been placed successfully!</h2>
             <p>Thank you for your purchase!</p>
             <img src='/img/order.png' width={300} height={300} alt='Order' />
-            <button
-              className={styles.checkout__button + ' ' + styles.back__button}
-              onClick={() => navigate('/')}
-            >
-              Back to Home
-            </button>
           </div>
         </div>
       )}
