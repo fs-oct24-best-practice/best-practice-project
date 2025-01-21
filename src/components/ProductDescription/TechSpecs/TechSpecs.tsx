@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { ProductSpec } from '../../../types/ProductSpec';
 import styles from './TechSpecs.module.scss';
+import { useTranslation } from 'react-i18next';
 
 type Props = { currentProductSpec: ProductSpec };
 
 export const TechSpecs: FC<Props> = (props) => {
+  const { t } = useTranslation();
   const {
     currentProductSpec: {
       screen,
@@ -31,7 +33,7 @@ export const TechSpecs: FC<Props> = (props) => {
 
   return (
     <section className={styles.section}>
-      <h3 className={styles.section__title}>Tech specs</h3>
+      <h3 className={styles.section__title}>{t('tech_specs')}</h3>
       <ul className={styles.section__list}>
         {Object.entries(techProperties).map((property) => {
           return (

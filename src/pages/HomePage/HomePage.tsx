@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
-
+import { useTranslation } from 'react-i18next';
 import styles from './HomePage.module.scss';
 import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
@@ -10,6 +10,7 @@ import { useAppSelector } from '../../hooks/hooks';
 import classNames from 'classnames';
 
 export const HomePage = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
   const [productList, setProductList] = useState<Product[]>([]);
   const theme = useAppSelector((state) => state.theme.theme);
@@ -47,7 +48,7 @@ export const HomePage = () => {
             [styles.title_dark]: theme !== 'light',
           })}
         >
-          Welcome to Nice Gadgets store!
+          {t('welcomeMessage')}
         </h1>
       </div>
 
@@ -58,7 +59,7 @@ export const HomePage = () => {
       <section className={styles.newMmodels}>
         <Slider
           products={newProducts}
-          title='Brand new models'
+          title={t('brandNewModels')}
           isLoading={isLoading}
           themeColor={theme}
         />
@@ -67,7 +68,7 @@ export const HomePage = () => {
       <section className={styles.categories}>
         <Categories
           products={productList}
-          title={'Shop by category'}
+          title={t('shopByCategory')}
           isLoading={isLoading}
           themeColor={theme}
         />
@@ -76,7 +77,7 @@ export const HomePage = () => {
       <section className={styles.hotPrices}>
         <Slider
           products={productsWithDiscount}
-          title='Hot Prices'
+          title={t('hotPrices')}
           isLoading={isLoading}
           themeColor={theme}
         />

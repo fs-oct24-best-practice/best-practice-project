@@ -68,7 +68,7 @@
 
     &-list {
       height: 100%;
-      width: 400%;
+      width: 500%;
       display: flex;
       transition: transform 1s;
     }
@@ -78,8 +78,7 @@
       width: 100%;
     }
 
-    &-video,
-    &-image {
+    &-video {
       height: 100%;
       width: 100%;
       object-fit: cover;

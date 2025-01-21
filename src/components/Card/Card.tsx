@@ -13,6 +13,7 @@ import { increaseQuantity } from '../../features/cartReducer';
 import { useAppSelector } from '../../hooks/hooks';
 import { Theme } from '../../types/Theme';
 import { ProductInCart } from '../../types/ProductInCart';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
@@ -26,6 +27,7 @@ function isProductInList<T extends { id: string | number }>(
 }
 
 export const Card: React.FC<Props> = ({ product }) => {
+  const { t } = useTranslation();
   const {
     category,
     itemId,
@@ -57,12 +59,12 @@ export const Card: React.FC<Props> = ({ product }) => {
   const addToFavorite = () => {
     if (isProductInList(favorites, product)) {
       removeFavorite(product);
-      toast('Removed from favorites!', {
+      toast(t('removedFromFavorites'), {
         icon: '💔',
       });
     } else {
       addFavorite(product);
-      toast('Added to favorites!', {
+      toast(t('addedToFavorites'), {
         icon: '❤️',
       });
     }
@@ -71,11 +73,11 @@ export const Card: React.FC<Props> = ({ product }) => {
   const onAddToCart = () => {
     if (!isProductInList(added, product as ProductInCart)) {
       addToCart(product as ProductInCart);
-      toast('Added to cart!', {
+      toast(t('addedToCart'), {
         icon: '🛒',
       });
     } else {
-      toast('Already in the cart!', {
+      toast(t('alreadyInCart'), {
         icon: '🔔',
       });
     }
@@ -117,17 +119,21 @@ export const Card: React.FC<Props> = ({ product }) => {
       <div className={styles.product_card__separator}></div>
       <div className={styles.product_card__features}>
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>Screen:</div>
+          <div className={styles.product_card__feature_label}>
+            {t('screen')}
+          </div>
           <div className={styles.product_card__feature_value}>{screen}</div>
         </div>
 
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>Capacity:</div>
+          <div className={styles.product_card__feature_label}>
+            {t('capacity')}
+          </div>
           <div className={styles.product_card__feature_value}>{capacity}</div>
         </div>
 
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>RAM:</div>
+          <div className={styles.product_card__feature_label}>{t('ram')}</div>
           <div className={styles.product_card__feature_value}>{ram}</div>
         </div>
       </div>
@@ -142,8 +148,8 @@ export const Card: React.FC<Props> = ({ product }) => {
           })}
         >
           {isProductInList(added, product as ProductInCart)
-            ? ButtonText.ADDED
-            : ButtonText.ADD_TO_CART}
+            ? t(ButtonText.ADDED)
+            : t(ButtonText.ADD_TO_CART)}
         </button>
 
         <button

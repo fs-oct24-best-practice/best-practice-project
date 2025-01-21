@@ -6,11 +6,25 @@
   align-items: center;
   width: 100%;
 
+  &__language {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 120;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 800;
+
+    
+    padding: 0 16px;
+    margin-left: auto;
+  }
+
   &__pages {
     display: flex;
     align-items: center;
     gap: 64px;
-      
+
     @media (min-width: 770px) and (max-width: 900px) {
       gap: 32px;
     }
@@ -61,7 +75,7 @@
       }
 
       @media (min-width: 640px) and (max-width: 770px) {
-       bottom: 16px;
+        bottom: 16px;
       }
 
       .dark & {
@@ -152,6 +166,66 @@
     }
   }
 
+  &__icon {
+    position: relative;
+    padding: 24px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+
+    .light & {
+      color: $secondary;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .dark & {
+      color: $secondary-dark;
+
+      &:hover {
+        color: $white-dark;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4px;
+      bottom: 2px;
+      left: 0;
+      border-radius: 3px;
+      transition: $transition;
+      transition-property: width;
+      background: $primary;
+
+      .dark & {
+        background: $white-dark;
+      }
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
+    &_active {
+      .light & {
+        color: $primary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
   &__search {
     display: flex;
     align-items: center;
@@ -200,5 +274,3 @@
     }
   }
 }
-
-
