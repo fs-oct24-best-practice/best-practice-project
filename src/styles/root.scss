@@ -34,3 +34,15 @@ body {
     padding: 0 24px;
   }
 }
+
+@media screen and (min-width: $viewport-width-mobile) {
+  main {
+    padding: 0 16px;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  main {
+    padding: 0 8px;
+  }
+}
