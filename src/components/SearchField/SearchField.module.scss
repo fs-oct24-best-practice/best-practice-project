@@ -83,7 +83,7 @@ body:has(.slideDown) {
     .light & {
       background-color: $elements;
     }
-    .dark &  {
+    .dark & {
       background-color: $elements-dark;
     }
   }
@@ -99,7 +99,7 @@ body:has(.slideDown) {
     .light & {
       background-color: $elements;
     }
-    .dark &  {
+    .dark & {
       background-color: $elements-dark;
     }
   }
@@ -213,7 +213,7 @@ body:has(.slideDown) {
   margin-right: 10px;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 }
 
@@ -270,7 +270,7 @@ body:has(.slideDown) {
     color: $background;
     border: 2px solid $secondary;
   }
-  .dark &  {
+  .dark & {
     background-color: $white-dark;
     color: $secondary-dark;
     border: 2px solid $acept-dark;
@@ -285,7 +285,7 @@ body:has(.slideDown) {
   .light & {
     color: $background;
   }
-  .dark &  {
+  .dark & {
     color: $secondary-dark;
   }
 }

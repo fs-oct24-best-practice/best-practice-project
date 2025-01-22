@@ -44,14 +44,14 @@ export const Offer: FC<Props> = ({ currentProductSpec, product }) => {
   const setColorsClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.colors__selector__color]: true,
-      [styles.colors__selector__color_active]: isActive,
+      [styles.colors__selector__color_isactive]: isActive,
     });
   };
 
   const setCapacityClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.capacity__selector__item]: true,
-      [styles.capacity__selector__item_inactive]: !isActive,
+      [styles.capacity__selector__item_isactive]: !isActive,
     });
   };
 
