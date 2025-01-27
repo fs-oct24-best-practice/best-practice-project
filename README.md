@@ -1,4 +1,4 @@
-Nice Gadgets Online Store
+Nice Gadgets Online Store [DEMO] (https://best-practice-project.netlify.app/#/)
 
 This project is an e-commerce platform designed for the “Nice Gadgets” online store, specializing in the sale of various electronic gadgets and accessories. The website features a modern, responsive design with a focus on user experience, performance, and scalability.
 
