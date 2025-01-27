@@ -25,29 +25,48 @@ Key Features:
 • SEO Optimization: Implemented SEO best practices to improve search engine ranking and visibility.
 
 How to Clone and Run the Project:
-	1.	Clone the repository:
+1.	Clone the repository:
+
 	•	Open your terminal (or Git Bash) and navigate to the folder where you want to store the project.
+
 	•	Run the following command to clone the repository:
  
  `git clone https://github.com/fs-oct24-best-practice/best-practice-project.git`
-	2.	Navigate to the project directory:
+
+2.	Navigate to the project directory:
  
  `cd best-practice-project`
-	3.	Install dependencies:
+
+3.	Install dependencies:
+
 	•	Make sure you have Node.js installed. If not, download and install it from Node.js official website.
+
 	•	Install the necessary project dependencies:
+
  `npm install`
-	4.	Run the project locally:
+
+4.	Run the project locally:
+
 	•	Start the local development server:
 
 `npm start`
-	•	Open your browser and go to http://localhost:3000 to see the online store in action.
-	5.	Build the project for production:
+
+•Open your browser and go to http://localhost:3000 to see the online store in action.
+
+5.	Build the project for production:
+
 	•	To create an optimized build for production, use:
+
 `npm run build`
-	6.	Deploy (optional):
-	•	You can deploy the project on platforms like GitHub Pages, Netlify, or Vercel. For GitHub Pages, follow these steps:
-	•	Push your changes to GitHub.
-	•	Go to your GitHub repository, open the Settings tab, and scroll down to the “GitHub Pages” section.
-	•	Select the main branch and save.
-	•	Your online store will be live at https://your-username.github.io/nice-gadgets-online-store/.
+
+7.	Deploy (optional):
+
+•	You can deploy the project on platforms like GitHub Pages, Netlify, or Vercel. For GitHub Pages, follow these steps:
+
+•Push your changes to GitHub.
+
+•Go to your GitHub repository, open the Settings tab, and scroll down to the “GitHub Pages” section.
+
+•Select the main branch and save.
+
+•Your online store will be live at https://your-username.github.io/nice-gadgets-online-store/.
