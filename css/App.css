@@ -1,25 +1,26 @@
 * {
-  margin: 0;
-  padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  border: 0;
-  font: inherit;
-  vertical-align: baseline;
 }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
+body,
 header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
+footer,
+main,
+h1,
+h2,
+h3,
+h4,
+div,
+p,
+ol,
+ul,
+li,
+a,
+img,
+nav {
+  margin: 0;
+  padding: 0;
 }
 
 ul,
@@ -46,4 +47,18 @@ img {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+.App {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  min-height: 100vh;
 }

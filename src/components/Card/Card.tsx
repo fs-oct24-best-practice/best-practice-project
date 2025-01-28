@@ -1,110 +1,85 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import cn from 'classnames';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './Card.module.scss';
-import favourites_icon from '/img/card/favourites-icon.svg';
-import favourites_filled_icon from '/img/card/favourites-filled-icon.svg';
-import { ButtonText } from '../../types/ButtonText';
 import { Product } from '../../types/Product';
+import { useAppSelector } from '../../hooks/hooks';
+import { Actions } from '../Actions';
+import { useTranslation } from 'react-i18next';
 
-type CardItemProps = {
+type Props = {
   product: Product;
 };
 
-export const Card: React.FC<CardItemProps> = ({ product }) => {
-  const [favouriteIcon, setFavouriteIcon] = useState(favourites_icon);
-  const [buttonText, setButtonText] = useState(ButtonText.ADD_TO_CART);
+export const Card: React.FC<Props> = ({ product }) => {
+  const {
+    category,
+    itemId,
+    name,
+    fullPrice,
+    price,
+    screen,
+    capacity,
+    ram,
+    image,
+  } = product;
 
-  const toggleFavourite = () => {
-    setFavouriteIcon(
-      favouriteIcon === favourites_icon
-        ? favourites_filled_icon
-        : favourites_icon
-    );
-  };
-
-  const onAddToCart = () => {
-    setButtonText(
-      buttonText === ButtonText.ADD_TO_CART
-        ? ButtonText.ADDED
-        : ButtonText.ADD_TO_CART
-    );
-  };
+  const theme = useAppSelector((state) => state.theme.theme);
+  const location = useLocation();
+  const { t } = useTranslation();
 
   return (
-    <div className={styles.product_card}>
-      <img
-        className={styles.product_card__image}
-        src={product.images[0]}
-        alt={`${product.name} Image`}
-      />
-
+    <div className={`${styles.product_card} ${styles[theme]}`}>
       <Link
-        to={`/${product.category}/${product.id}`}
-        className={styles.product_card__name}
+        to={`/${category}/${itemId}`}
+        className={styles.product_card__link}
+        state={{ from: location }}
       >
-        {product.name}
-      </Link>
+        <div className={styles.product_card__link_content}>
+          <img
+            className={styles.product_card__image}
+            src={image}
+            alt={`${name} Image`}
+          />
 
+          <div className={styles.product_card__name}>{name}</div>
+        </div>
+      </Link>
       <div className={styles.product_card__price}>
-        {product.priceDiscount ? (
+        {price ? (
           <>
             <span className={styles.product_card__price_discount}>
-              ${product.priceDiscount}
+              ${price}
             </span>
-            <span className={styles.product_card__fullPrice}>
-              ${product.priceRegular}
+            <span className={styles.product_card__full_price}>
+              ${fullPrice}
             </span>
           </>
         ) : (
-          <span className={styles.product_card__price}>
-            ${product.priceRegular}
-          </span>
+          <span className={styles.product_card__full_price}>${fullPrice}</span>
         )}
       </div>
-
       <div className={styles.product_card__separator}></div>
-
       <div className={styles.product_card__features}>
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>Screen:</div>
-          <div className={styles.product_card__feature_value}>
-            {product.screen}
+          <div className={styles.product_card__feature_label}>
+            {t('screen')}:
           </div>
+          <div className={styles.product_card__feature_value}>{screen}</div>
         </div>
 
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>Capacity:</div>
-          <div className={styles.product_card__feature_value}>
-            {product.capacity}
+          <div className={styles.product_card__feature_label}>
+            {t('capacity')}:
           </div>
+          <div className={styles.product_card__feature_value}>{capacity}</div>
         </div>
 
         <div className={styles.product_card__feature}>
-          <div className={styles.product_card__feature_label}>RAM:</div>
-          <div className={styles.product_card__feature_value}>
-            {product.ram}
-          </div>
+          <div className={styles.product_card__feature_label}>{t('ram')}:</div>
+          <div className={styles.product_card__feature_value}>{ram}</div>
         </div>
       </div>
 
-      <div className={styles.product_card__actions}>
-        <button
-          onClick={onAddToCart}
-          className={cn(styles.product_card__buy, {
-            [styles.product_card__added]: buttonText === ButtonText.ADDED,
-          })}
-        >
-          {buttonText}
-        </button>
-
-        <button
-          onClick={toggleFavourite}
-          className={styles.product_card__favourite_button}
-        >
-          <img src={favouriteIcon} alt='favourite icon' />
-        </button>
-      </div>
+      <Actions product={product} />
     </div>
   );
 };

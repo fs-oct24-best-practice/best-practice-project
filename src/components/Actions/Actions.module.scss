@@ -1,0 +1,86 @@
+@use '@best-practice/styles/variables' as *;
+@use '../../styles/mixins' as mixins;
+
+.actions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  height: 40px;
+
+  &__buy {
+    border: none;
+    all: unset;
+
+    text-decoration: none;
+    height: 40px;
+    font-size: 14px;
+    font-family: 'Bold', sans-serif;
+    font-weight: 700;
+    line-height: 40px;
+    text-align: center;
+    flex-grow: 1;
+
+    .light & {
+      color: $white;
+      background-color: $primary;
+    }
+
+    .dark & {
+      color: $white-dark;
+      background-color: $acept-dark;
+    }
+  }
+
+  &__favourite_button {
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .light & {
+      background-color: white;
+      border: 1px solid $icons;
+      transition: border $transition;
+      &:hover {
+        border: 1px solid $primary;
+      }
+    }
+
+    .dark & {
+      background-color: $surface2-dark;
+      border: none;
+      transition: none;
+      &:hover {
+        background-color: $icons-dark;
+      }
+    }
+  }
+
+  &__added_to_favourite {
+    .light & {
+      border: 1px solid $elements;
+    }
+
+    .dark & {
+      border: 1px solid $elements-dark;
+      background-color: $black-dark;
+    }
+  }
+
+  &__added_to_cart {
+    .light & {
+      color: $green;
+      background-color: $white;
+      border: 1px solid $elements;
+    }
+
+    .dark & {
+      color: $white-dark;
+      background-color: $surface2-dark;
+    }
+  }
+}

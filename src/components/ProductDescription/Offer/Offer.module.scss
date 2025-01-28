@@ -1,6 +1,208 @@
-.div {
-  height: 32px;
-  width: 32px;
-  border-radius: 50%;
-  background-color: aqua;
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 237px;
+
+  &__subtitle {
+    @include font.small-text;
+
+    .light & {
+      color: $secondary;
+    }
+
+    .dark & {
+      color: $secondary-dark;
+    }
+  }
+}
+
+.colors {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 79px;
+
+  .light & {
+    border-bottom: 2px solid $elements;
+  }
+
+  .dark & {
+    border-bottom: 2px solid $elements-dark;
+  }
+
+  &__selector {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    &__color {
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      transition: $transition outline-color;
+
+      .light & {
+        border: 2px solid $white;
+        outline: 1px solid $elements;
+      }
+
+      .dark & {
+        border: 2px solid $black-dark;
+        outline: 1px solid $elements-dark;
+      }
+
+      &_isactive {
+        .light & {
+          outline-color: $primary;
+        }
+
+        .dark & {
+          outline-color: $white-dark;
+        }
+      }
+
+      &:hover {
+        .light & {
+          outline-color: $primary;
+        }
+
+        .dark & {
+          outline-color: $white-dark;
+        }
+      }
+    }
+  }
+}
+
+.capacity {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 79px;
+
+  .light & {
+    border-bottom: 2px solid $elements;
+  }
+
+  .dark & {
+    border-bottom: 2px solid $elements-dark;
+  }
+
+  &__selector {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+
+    &__item {
+      @include font.body-text;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 8px;
+      transition: $transition border;
+
+      .light & {
+        color: $white;
+        background-color: $primary;
+      }
+
+      .dark & {
+        color: $black-dark;
+        background-color: $white-dark;
+      }
+
+      &_isactive {
+        .light & {
+          background-color: $white;
+          color: $primary;
+          border: 1px solid $icons;
+        }
+
+        .dark & {
+          background-color: $black-dark;
+          color: $white-dark;
+          border: 1px solid $icons-dark;
+        }
+
+        &:hover {
+          .light & {
+            border-color: $primary;
+          }
+
+          .dark & {
+            border-color: $white-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+.properties {
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.property {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  justify-content: space-between;
+  @include font.small-text;
+
+  .light & {
+    color: $secondary;
+  }
+
+  .dark & {
+    color: $secondary-dark;
+  }
+
+  &__value {
+    text-align: right;
+
+    .light & {
+      color: $primary;
+    }
+
+    .dark & {
+      color: $white-dark;
+    }
+  }
+}
+
+.prices {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+
+  &__discount {
+    @include font.dt-h2;
+  }
+
+  &__regular {
+    @include font.dt-h4;
+    color: $secondary;
+    text-decoration: line-through;
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .section {
+    width: 237px;
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .section {
+    width: 320px;
+  }
 }

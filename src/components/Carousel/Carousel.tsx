@@ -1,40 +1,60 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './Carousel.scss';
-
-import bannerAccessories from '../../assets/banner-images/banner-accessories.png';
-import bannerPhones from '../../assets/banner-images/banner-phones.png';
-import bannerTablets from '../../assets/banner-images/banner-tablets.png';
-import arrowLeft from '../../assets/icons/arrow-left.svg';
-import arrowRight from '../../assets/icons/arrow-right.svg';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-const bannerImages = [bannerAccessories, bannerPhones, bannerTablets];
+import bannerClip1 from '../../assets/banner-videos/banner-clip1.mp4';
+import bannerClip2 from '../../assets/banner-videos/banner-clip2.mp4';
+import bannerClip3 from '../../assets/banner-videos/banner-clip3.mp4';
+import bannerClip4 from '../../assets/banner-videos/banner-clip4.mp4';
+import bannerClip5 from '../../assets/banner-videos/banner-clip5.mp4';
 
-export const Carousel = () => {
+import arrowLeft from '../../assets/icons/arrow-left.svg';
+import arrowRight from '../../assets/icons/arrow-right.svg';
+import arrowLeftLight from '../../assets/icons/arrow-left-light.svg';
+import arrowRightLight from '../../assets/icons/arrow-right-light.svg';
+import { useAppSelector } from '../../hooks/hooks';
+
+const bannerSlides = [
+  { src: bannerClip1 },
+  { src: bannerClip2 },
+  { src: bannerClip3 },
+  { src: bannerClip4 },
+  { src: bannerClip5 },
+];
+
+type Props = {
+  themeColor: string;
+};
+
+export const Carousel: React.FC<Props> = ({ themeColor }) => {
   const firstSlideIndex = 0;
-  const lastSlideIndex = bannerImages.length - 1;
+  const lastSlideIndex = bannerSlides.length - 1;
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(firstSlideIndex);
   const [sliderWidth, setSliderWidth] = useState(0);
 
   const banner = useRef<HTMLDivElement>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const transformValue = sliderWidth * currentSlideIndex;
+  const theme = useAppSelector((state) => state.theme.theme);
 
   const handlePrevSlide = () => {
-    if (currentSlideIndex !== firstSlideIndex) {
-      setCurrentSlideIndex(currentSlideIndex - 1);
-    } else {
-      setCurrentSlideIndex(lastSlideIndex);
-    }
+    const prevIndex =
+      currentSlideIndex === firstSlideIndex
+        ? lastSlideIndex
+        : currentSlideIndex - 1;
+
+    setCurrentSlideIndex(prevIndex);
   };
 
   const handleNextSlide = useCallback(() => {
-    if (currentSlideIndex !== lastSlideIndex) {
-      setCurrentSlideIndex(currentSlideIndex + 1);
-    } else {
-      setCurrentSlideIndex(firstSlideIndex);
-    }
+    const nextIndex =
+      currentSlideIndex === lastSlideIndex
+        ? firstSlideIndex
+        : currentSlideIndex + 1;
+
+    setCurrentSlideIndex(nextIndex);
   }, [currentSlideIndex, lastSlideIndex]);
 
   const handleDotActive = (index: number) => {
@@ -45,40 +65,55 @@ export const Carousel = () => {
     if (banner.current) {
       setSliderWidth(banner.current.offsetWidth);
     }
-  }, [currentSlideIndex]);
+  }, []);
 
   useEffect(() => {
-    const timerID = setInterval(() => {
-      handleNextSlide();
-    }, 5000);
+    const currentVideo = videoRefs.current[currentSlideIndex];
 
-    return () => clearInterval(timerID);
+    if (currentVideo) {
+      currentVideo.currentTime = 0;
+      currentVideo.play();
+
+      const handleVideoEnd = () => {
+        handleNextSlide();
+      };
+
+      currentVideo.addEventListener('ended', handleVideoEnd);
+
+      return () => {
+        currentVideo.removeEventListener('ended', handleVideoEnd);
+      };
+    }
   }, [currentSlideIndex, handleNextSlide]);
 
   return (
-    <section className='carousel'>
-      <div className='carousel__slider'>
+    <section className={`Carousel ${[theme]}`}>
+      <div className='Carousel__slider'>
         <button
           type='button'
-          className='carousel__slider-button'
-          onClick={() => handlePrevSlide()}
+          className='Carousel__slider-button'
+          onClick={handlePrevSlide}
         >
-          <img src={arrowLeft} alt='Arrow left' className='icon--left' />
+          <img
+            src={themeColor === 'light' ? arrowLeft : arrowLeftLight}
+            alt='Arrow left'
+          />
         </button>
 
-        <div className='carousel__slider-container' ref={banner}>
+        <div className='Carousel__slider-container' ref={banner}>
           <ul
-            className='carousel__slider-list'
+            className='Carousel__slider-list'
             style={{
               transform: `translateX(-${transformValue}px)`,
             }}
           >
-            {bannerImages.map((img) => (
-              <li className='carousel__slider-item' key={img}>
-                <img
-                  className='carousel__slider-image'
-                  src={img}
-                  alt='Banner image'
+            {bannerSlides.map((slide, index) => (
+              <li className='Carousel__slider-item' key={index}>
+                <video
+                  ref={(el) => (videoRefs.current[index] = el)}
+                  className='Carousel__slider-video'
+                  src={slide.src}
+                  muted
                 />
               </li>
             ))}
@@ -87,19 +122,22 @@ export const Carousel = () => {
 
         <button
           type='button'
-          className='carousel__slider-button'
-          onClick={() => handleNextSlide()}
+          className='Carousel__slider-button'
+          onClick={handleNextSlide}
         >
-          <img src={arrowRight} alt='Arrow left' className='icon--right' />
+          <img
+            src={themeColor === 'light' ? arrowRight : arrowRightLight}
+            alt='Arrow right'
+          />
         </button>
       </div>
 
-      <div className='carousel__dots'>
-        {bannerImages.map((img, i) => (
-          <label className='carousel__dots-container' key={img}>
+      <div className='Carousel__dots'>
+        {bannerSlides.map((_, i) => (
+          <label className='Carousel__dots-container' key={i}>
             <button
               type='button'
-              className={classNames('carousel__dots-item', {
+              className={classNames('Carousel__dots-item', {
                 'banner-active': currentSlideIndex === i,
               })}
               onClick={() => handleDotActive(i)}

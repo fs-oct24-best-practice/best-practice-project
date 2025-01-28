@@ -1,7 +1,47 @@
-import React from 'react';
+import { useLayoutEffect, useState } from 'react';
+import { getProductList } from '../../api/getProductList';
+import { useLocation } from 'react-router-dom';
 import { Catalog } from '../../components/Catalog/Catalog';
-import { getAccessories } from '../../components/api/apiE';
+import { Product } from '../../types';
+import { useTranslation } from 'react-i18next';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 
-export const AccessoriesPage: React.FC = () => {
-  return <Catalog fetchProducts={getAccessories} title='Accessories' />;
+export const AccessoriesPage = () => {
+  const { t } = useTranslation();
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [productList, setProductList] = useState<Product[]>([]);
+
+  const location = useLocation();
+  const category = location.pathname.split('/')[1];
+
+  useLayoutEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      setIsError(false);
+
+      try {
+        const data = await getProductList();
+        setProductList(data.filter((product) => product.category === category));
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [category]);
+
+  return (
+    <>
+      <Breadcrumbs />
+      <h1>{t('accessories')}</h1>
+      <Catalog
+        productList={productList}
+        isLoading={isLoading}
+        isError={isError}
+      />
+    </>
+  );
 };

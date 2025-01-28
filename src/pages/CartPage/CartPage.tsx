@@ -1,31 +1,154 @@
+import { useDispatch } from 'react-redux';
 import { CartItem } from '../../components/CartItem';
-import './CartPage.scss';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRef, useState } from 'react';
+import { clearCart } from '../../features/cartReducer';
+import { Cart } from '../../types/Cart';
+import styles from './CartPage.module.scss';
+import { useAppSelector } from '../../hooks/hooks';
+import { ProductInCart } from '../../types/ProductInCart';
+import { BackLink } from '../../components/BackLink/BackLink';
+import cn from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { Theme } from '../../types/Theme';
 
 export const CartPage = () => {
-	return (
-		<div className='cart__page'>
-			<div className='cart__back'>
-				<img src='/img/icons/Back.svg' alt='Back' />
-				<a href='' className='cart__back__button'>
-					Back
-				</a>
-			</div>
-			<h1 className='cart__title'>Cart</h1>
-			<div className='cart__content'>
-				<div className='cart__items'>
-					<CartItem />
-					<CartItem />
-				</div>
-				<div className='cart__summary'>
-					<div className='summary__total'>
-						<span>$2657</span>
-						<p className='summary__title'>Total for 3 items:</p>
-					</div>
-					<div className='checkout__wrap'>
-						<button className='checkout__button'>Checkout</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+  const { t } = useTranslation();
+  const [isEmpty, setIsEmpty] = useState(false);
+  const [isCheckout, setIsCheckout] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [modalMessage, setModalMessage] = useState<Cart>(Cart.DEFAULT);
+  const cartItems = useAppSelector((state) => state.cartProducts.cartProducts);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const backLinkRef = useRef(location.state?.from ?? '/');
+
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  const totalCost = cartItems.reduce(
+    (sum: number, item: ProductInCart) =>
+      sum + (item.price || item.fullPrice) * item.quantity,
+    0
+  );
+
+  const totalItems = cartItems.reduce(
+    (count: number, item: ProductInCart) => count + item.quantity,
+    0
+  );
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      setModalMessage(Cart.NO_PRODUCTS);
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+      setIsCheckout(true);
+      dispatch(clearCart());
+
+      const order = {
+        items: cartItems,
+        totalCost,
+        totalItems,
+        date: new Date().toISOString(),
+      };
+
+      const previousOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      const updatedOrders = [...previousOrders, order];
+      localStorage.setItem('orders', JSON.stringify(updatedOrders));
+
+      setTimeout(() => {
+        setIsCheckout(false);
+        navigate('/dashboard');
+      }, 3000);
+    }
+  };
+
+  const handleClearCart = () => {
+    if (cartItems.length === 0) {
+      setModalMessage(Cart.EMPTY_CART);
+      setIsEmpty(true);
+    } else {
+      dispatch(clearCart());
+    }
+  };
+
+  const closeModal = () => {
+    setIsEmpty(false);
+  };
+
+  return (
+    <div className={cn(styles.cart__page, styles[theme])}>
+      <BackLink to={backLinkRef.current}>{t('back')}</BackLink>
+      <h1 className={styles.cart__title}>{t('cart')}</h1>
+      <div className={styles.cart__content}>
+        <div className={styles.cart__items}>
+          {cartItems.length > 0 ? (
+            cartItems.map((item: ProductInCart) => (
+              <CartItem key={item.id} item={item} />
+            ))
+          ) : (
+            <div className={styles.cart__empty}>
+              <p>{t('cartIsEmpty')}</p>
+              <img
+                src={
+                  theme === Theme.DARK
+                    ? '/img/empty-dark.svg'
+                    : '/img/empty.svg'
+                }
+                width={350}
+                height={350}
+                alt='Empty Cart'
+              />
+            </div>
+          )}
+        </div>
+        <div className={styles.cart__summary}>
+          <div className={styles.summary__total}>
+            <span className={styles.summary__total__cost}>${totalCost}</span>
+            <p className={styles.summary__title}>
+              {t('totalForItems', { totalItems })}
+            </p>
+          </div>
+          <button className={styles.checkout__button} onClick={handleCheckout}>
+            {t('checkout')}
+          </button>
+          <button className={styles.checkout__button} onClick={handleClearCart}>
+            {t('clearCart')}
+          </button>
+        </div>
+      </div>
+      {isCheckout && (
+        <div className={styles.checkout__modal}>
+          <div className={styles.checkout__modal__content}>
+            <h2>{t('orderPlaced')}</h2>
+            <p>{t('thankYouForPurchase')}</p>
+            <img src='/img/order.png' width={300} height={300} alt='Order' />
+            <button
+              className={styles.checkout__button + ' ' + styles.back__button}
+              onClick={() => navigate('/')}
+            >
+              {t('backToHome')}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {isEmpty && (
+        <div className={styles.checkout__modal}>
+          <div className={styles.checkout__modal__content}>
+            <p>{t('cartIsEmpty')}</p>
+            <button
+              className={styles.checkout__button + ' ' + styles.back__button}
+              onClick={closeModal}
+            >
+              {t('close')}
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };

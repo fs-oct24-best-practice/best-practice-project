@@ -1,9 +1,14 @@
 import { FC } from 'react';
 import { ProductSpec } from '../../../types/ProductSpec';
+import styles from './TechSpecs.module.scss';
+import cn from 'classnames';
+import { useAppSelector } from '../../../hooks/hooks';
+import { useTranslation } from 'react-i18next';
 
 type Props = { currentProductSpec: ProductSpec };
 
 export const TechSpecs: FC<Props> = (props) => {
+  const { t } = useTranslation();
   const {
     currentProductSpec: {
       screen,
@@ -16,52 +21,33 @@ export const TechSpecs: FC<Props> = (props) => {
       capacity,
     },
   } = props;
+
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  const techProperties = {
+    [t('screen')]: screen,
+    [t('Resolution')]: resolution,
+    [t('Processor')]: processor,
+    [t('ram')]: ram,
+    [t('Built-in-memory')]: capacity,
+    [t('Camera')]: camera,
+    [t('Zoom')]: zoom,
+    [t('Cell')]: cell?.join(', '),
+  };
+
   return (
-    <>
-      <h3>Tech specs</h3>
-      <table>
-        <tbody>
-          <tr>
-            <td>Screen</td>
-            <td className='text-smtext-red-600 text-lg'>{screen}</td>
-          </tr>
-
-          <tr>
-            <td>Resolution</td>
-            <td>{resolution}</td>
-          </tr>
-
-          <tr>
-            <td>Processor</td>
-            <td>{processor}</td>
-          </tr>
-
-          <tr>
-            <td>RAM</td>
-            <td>{ram}</td>
-          </tr>
-
-          <tr>
-            <td>Built in memory</td>
-            <td>{capacity}</td>
-          </tr>
-
-          <tr>
-            <td>Camera</td>
-            <td>{camera}</td>
-          </tr>
-
-          <tr>
-            <td>Zoom</td>
-            <td>{zoom}</td>
-          </tr>
-
-          <tr>
-            <td>Cell</td>
-            <td>{cell?.join(', ')}</td>
-          </tr>
-        </tbody>
-      </table>
-    </>
+    <section className={cn(styles.section, styles[theme])}>
+      <h3 className={styles.section__title}>{t('tech_specs')}</h3>
+      <ul className={styles.section__list}>
+        {Object.entries(techProperties).map((property) => {
+          return (
+            <li key={property[0]} className={styles.property}>
+              <p className={styles.property__title}>{property[0]}</p>
+              <p className={styles.property__value}>{property[1]}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 };

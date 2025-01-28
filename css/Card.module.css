@@ -1,0 +1,203 @@
+@font-face {
+  font-family: "Mont-Regular";
+  src: url("/fonts/Mont-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: "Mont-Bold";
+  src: url("/fonts/Mont-Bold.otf") format("opentype");
+}
+@font-face {
+  font-family: "Mont-SemiBold";
+  src: url("/fonts/Mont-SemiBold.otf") format("opentype");
+}
+.product_card {
+  background-color: #FFFFFF;
+  border: 1px solid #E2E6E9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  max-width: 272px;
+  height: 506px;
+  padding: 32px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .product_card {
+    max-width: 288px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .product_card {
+    max-width: 229px;
+  }
+}
+@media (max-width: 639px) {
+  .product_card {
+    max-width: 287px;
+    height: 440px;
+  }
+}
+.product_card__image {
+  width: 100%;
+  height: 180px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-bottom: 8px;
+}
+@media (max-width: 639px) {
+  .product_card__image {
+    max-height: 140px;
+  }
+}
+.product_card__name {
+  font-family: "Mont-Regular", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 21px;
+  color: #313237;
+  padding-top: 16px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+.product_card__price {
+  text-decoration: none;
+  font-size: 22px;
+  font-family: "Mont-Bold", sans-serif;
+  font-weight: 700;
+  line-height: 30px;
+  color: #313237;
+  margin-bottom: 8px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.product_card__price_discount {
+  font-size: 22px;
+  font-family: "Mont-Bold", sans-serif;
+  font-weight: 700;
+  line-height: 30px;
+  color: #313237;
+}
+.product_card__fullPrice {
+  font-size: 22px;
+  font-family: "Mont-Regular", sans-serif;
+  font-weight: 600;
+  line-height: 28.12px;
+  text-decoration-line: line-through;
+  -webkit-text-decoration-skip-ink: none;
+          text-decoration-skip-ink: none;
+  color: #89939A;
+  margin-left: 8px;
+}
+.product_card__separator {
+  border-top: 1px solid #E2E6E9;
+  margin-bottom: 8px;
+  width: 100%;
+}
+.product_card__features {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-width: 77px;
+  overflow: hidden;
+  padding: 8px;
+}
+.product_card__feature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  font-family: "Mont-Regular", sans-serif;
+  font-weight: 600;
+}
+.product_card__feature_label {
+  font-size: 12px;
+  line-height: 15px;
+  color: #89939A;
+}
+.product_card__feature_value {
+  color: #313237;
+  font-size: 12px;
+  line-height: 15px;
+}
+.product_card__actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+.product_card__buy {
+  text-decoration: none;
+  color: #FFFFFF;
+  background-color: #313237;
+  height: 40px;
+  font-size: 14px;
+  font-family: "Mont-Bold", sans-serif;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: center;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.product_card__favourite_button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border: 1px solid #B4BDC3;
+  height: 40px;
+  width: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: border 0.3s ease;
+  transition: border 0.3s ease;
+}
+.product_card__favourite_button:hover {
+  border: 1px solid #313237;
+}
+.product_card__added {
+  color: #27AE60;
+  background-color: #FFFFFF;
+  border: 1px solid #E2E6E9;
+}

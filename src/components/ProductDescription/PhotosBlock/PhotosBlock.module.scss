@@ -1,0 +1,72 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.section {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px;
+  align-items: center;
+}
+
+.image {
+  width: 288px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.preview {
+  display: flex;
+  gap: 8px;
+
+  &__select {
+    width: 50px;
+    aspect-ratio: 1;
+    border: 1px solid $elements;
+    object-fit: contain;
+    cursor: pointer;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .section {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 338px;
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+
+    &__select {
+      width: 35px;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .section {
+    width: calc(50% - 32px);
+  }
+
+  .image {
+    width: 464px;
+    object-fit: contain;
+  }
+
+  .preview {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__select {
+      width: 80px;
+    }
+  }
+}

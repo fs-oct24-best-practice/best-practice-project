@@ -1,31 +1,58 @@
+import { useAppSelector } from '../../hooks/hooks';
+import { Theme } from '../../types/Theme';
 import styles from './Footer.module.scss';
-import logo from '/img/footer/Logo.svg';
-import back_to_top_icon from '/img/footer/back-to-top-icon.svg';
+import logo from '/icons/logo.svg';
+import logo_white from '/icons/logo-white.svg';
+import back_to_top_icon from '/img/icons/Top.svg';
+import white_back_to_top_icon from '/img/icons/TopWhite.svg';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
-	const scrollToTop = () => {
-		window.scrollTo({top: 0, behavior: 'smooth'});
-	};
+  const { t } = useTranslation();
 
-	return (
-		<footer className={styles.footer}>
-			<div className={styles.footer_wrapper}>
-				<a className={styles.footer_item} href='https://example.com'>
-					<img src={logo} alt='logo' />
-				</a>
-				<div className={`${styles.footer_item} ${styles.footer_navbar}`}>
-					<a href='https://example.com'>Github</a>
-					<a href='https://example.com'>Contacts</a>
-					<a href='https://example.com'>rights</a>
-				</div>
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
-				<div className={`${styles.footer_item} ${styles.back_to_top}`}>
-					<span>Back to top</span>
-					<button onClick={scrollToTop} className={styles.back_to_top_button}>
-						<img src={back_to_top_icon} alt='back to top icon' />
-					</button>
-				</div>
-			</div>
-		</footer>
-	);
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  return (
+    <footer className={`${styles.footer} ${styles[theme]}`}>
+      <div className={styles.footer__wrapper}>
+        <a className={styles.footer__item} href='#'>
+          <img src={theme === Theme.DARK ? logo_white : logo} alt='logo' />
+        </a>
+        <div className={`${styles.footer__item} ${styles.footer__navbar}`}>
+          <a
+            className={styles.footer__links}
+            href='https://github.com/fs-oct24-best-practice/best-practice-project'
+          >
+            {t('github')}
+          </a>
+          <Link className={styles.footer__links} to='/contacts'>
+            {t('contacts')}
+          </Link>
+          <Link className={styles.footer__links} to='/rules'>
+            {t('rules')}
+          </Link>
+        </div>
+
+        <div className={`${styles.footer__item} ${styles.footer__back_to_top}`}>
+          <span>{t('back_to_top')}</span>
+          <button
+            onClick={scrollToTop}
+            className={styles.footer__back_to_top_button}
+          >
+            <img
+              src={
+                theme === Theme.DARK ? white_back_to_top_icon : back_to_top_icon
+              }
+              alt={t('back_to_top_icon')}
+            />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
 };

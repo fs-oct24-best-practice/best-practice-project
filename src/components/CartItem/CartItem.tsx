@@ -1,41 +1,100 @@
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  increaseQuantity,
+  decreaseQuantity,
+  deleteCart,
+} from '../../features/cartReducer';
+import styles from './CartItem.module.scss';
 import { Link } from 'react-router-dom';
-import './CartItem.scss';
+import { ProductInCart } from '../../types/ProductInCart';
+import { useAppSelector } from '../../hooks/hooks';
+import cn from 'classnames';
+import { Theme } from '../../types/Theme';
+import { useTranslation } from 'react-i18next';
 
-export const CartItem = () => {
-	return (
-		<div className='cart__item'>
-			<a href='#' className='cart__item__icon__close'>
-				<img src='/img/icons/Close.svg' alt='Close' />
-			</a>
-			<img
-				src='/img/phones/apple-iphone-14-pro/spaceblack/00.webp'
-				alt='Product Image'
-				className='cart__item__image'
-			/>
-			<div className='cart__item__description'>
-				<Link to={`/phones/:productId`} className='cart__item__description__title'>
-					Apple iPhone 14 Pro 128GB Silver (MQ023)
-				</Link>
-			</div>
-			<div className='cart__item__actions'>
-				<div className='cart__item__actions__counter'>
-					<button className='cart__item__actions__counter__button'>
-						<img
-							src='/img/icons/Minus.svg'
-							alt='Decrease quantity'
-							className='cart__item__actions__counter__button--minus'
-						/>
-					</button>
-					<span>1</span>
-					<button className='cart__item__actions__counter__button'>
-						<img
-							src='/img/icons/Union.svg'
-							alt='Increase quantity'
-						/>
-					</button>
-				</div>
-				<span className='cart__item__price'>$999</span>
-			</div>
-		</div>
-	);
+type Props = {
+  item: ProductInCart;
+  isDisabled?: boolean;
+};
+
+export const CartItem: React.FC<Props> = ({ item, isDisabled = false }) => {
+  const dispatch = useDispatch();
+  const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
+
+  const handleIncrease = () => {
+    if (!isDisabled) dispatch(increaseQuantity(item));
+  };
+
+  const handleDecrease = () => {
+    if (!isDisabled) dispatch(decreaseQuantity(item));
+  };
+
+  const handleRemove = () => {
+    if (!isDisabled) dispatch(deleteCart(item));
+  };
+
+  return (
+    <div className={cn(styles.cart__item, styles[theme])}>
+      {!isDisabled && (
+        <button
+          className={styles.cart__item__icon__close}
+          onClick={handleRemove}
+          aria-label={t('remove')}
+        >
+          <img src='/img/icons/Close2.svg' alt={t('remove')} />
+        </button>
+      )}
+
+      <div className={styles.cart__item__description}>
+        <Link
+          to={`/${item.category}/${item.itemId}`}
+          className={styles.cart__item__description__title}
+        >
+          <img
+            src={item.image}
+            alt={`${item.name} ${t('image')}`}
+            className={styles.cart__item__image}
+          />
+          {item.name}
+        </Link>
+      </div>
+      <div className={styles.cart__item__actions}>
+        <div className={styles.cart__item__actions__counter}>
+          <button
+            className={cn(
+              styles.cart__item__actions__counter__button,
+              styles.cart__item__actions__counter__button_minus
+            )}
+            onClick={handleDecrease}
+            disabled={isDisabled}
+            aria-label={t('decrease_quantity')}
+          >
+            <img src='/img/icons/Minus.svg' alt={t('decrease_quantity')} />
+          </button>
+          <span>{item.quantity}</span>
+          <button
+            className={cn(
+              styles.cart__item__actions__counter__button,
+              styles.cart__item__actions__counter__button_plus
+            )}
+            onClick={handleIncrease}
+            disabled={isDisabled}
+            aria-label={t('increase_quantity')}
+          >
+            <img
+              src={`/img/icons/${
+                theme === Theme.DARK ? 'UnionWhite.svg' : 'Union.svg'
+              }`}
+              alt={t('increase_quantity')}
+            />
+          </button>
+        </div>
+        <span className={styles.cart__item__price}>
+          ${(item.price || item.fullPrice) * item.quantity}
+        </span>
+      </div>
+    </div>
+  );
 };

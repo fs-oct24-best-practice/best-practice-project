@@ -1,116 +1,135 @@
-@use '../../App.scss';
+@use '@best-practice/styles/variables' as *;
+@use '../../styles/mixins.scss' as mixins;
 
-.carousel {
-    margin-top: 24px;
+.Carousel {
+  margin-top: 24px;
+  z-index: 1;
 
-    @media (min-width: 640px) {
-        margin-top: 32px;
-        }
+  @include mixins.on-tablet {
+    margin-top: 32px;
+    margin-inline: -16px;
+  }
 
-        @media (min-width: 1200px) {
-        margin-top: 56px;
-        }
+  @include mixins.on-desktop {
+    margin-top: 56px;
+  }
 
-    &__slider {
-        height: 352px;
-        max-width: 1200px;
-    
-        @media (min-width: 640px) {
-            display: flex;
-            gap: 19px;
-            height: 221px;
-        }
+  &__slider {
+    height: 352px;
+    max-width: 1200px;
 
-        @media (min-width: 1200px) {
-            height: 432px;
-            gap: 16px;
-            margin: 0 auto;
-        }
-
-        &-button {
-        display: none;
-
-            @media (min-width: 640px) {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 340px;
-                width: 32px;
-                background-color: #fff;
-                border: 1px solid #b4bdc3;
-                cursor: pointer;
-    
-                &:hover {
-                    border-color: #313237;
-                }
-            }
-    
-            @media (min-width: 1200px) {
-            height: 400px;
-            }
-        }
-
-        &-container {
-            height: 320px;
-            width: 100%;
-            overflow: hidden;
-    
-            @media (min-width: 640px) {
-            height: 340px;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            }
-    
-            @media (min-width: 1200px) {
-            height: 400px;
-            }
-        }
-
-        &-list {
-            height: 100%;
-            width: 300%;
-            display: flex;
-            transition: transform 1s;
-        }
-
-        &-item {
-            height: 100%;
-            width: 100%;
-        }
-
-        &-image {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-        }
+    @include mixins.on-tablet {
+      display: flex;
+      gap: 19px;
+      height: 221px;
+      width: 97%;
+      margin-inline: auto;
     }
 
-    &__dots {
+    @include mixins.on-desktop {
+      height: 432px;
+      gap: 16px;
+      margin: 0 auto;
+    }
+
+    &-button {
+      display: none;
+
+      @include mixins.on-tablet {
         display: flex;
-        gap: 4px;
         justify-content: center;
-        margin-top: 8px;
+        align-items: center;
+        height: 189px;
+        width: 32px;
+        cursor: pointer;
 
-        &-container {
-            display: flex;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
+        .light & {
+          background-color: $white;
+          border: 1px solid $icons;
+
+          &:hover {
+            border-color: $primary;
+          }
         }
 
-        &-item {
-            width: 14px;
-            height: 4px;
-            background-color: #e2e6e9;
-            border: none;
-            cursor: pointer;
+        .dark & {
+          background-color: $surface2-dark;
+          border: none;
+
+          &:hover {
+            background-color: $icons-dark;
+          }
         }
+      }
+
+      @include mixins.on-desktop {
+        height: 400px;
+      }
     }
+
+    &-container {     
+      position: relative;
+      top: 0;
+      left: -6%;
+      height: 320px;
+      width: 112%;
+      overflow: hidden;
+
+      @include mixins.on-tablet {
+        left: 0;
+        width: 100%;
+        height: 189px;
+      }
+
+      @include mixins.on-desktop {
+        height: 400px;
+      }
+    }
+
+    &-list {
+      height: 100%;
+      width: 500%;
+      display: flex;
+      transition: transform 1s;
+    }
+
+    &-item {
+      height: 100%;
+      width: 100%;
+    }
+
+    &-video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 8px;
+
+    &-container {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-item {
+      width: 14px;
+      height: 4px;
+      background-color: $elements;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .banner-active {
-background-color: #313237;
+  background-color: $primary;
 }

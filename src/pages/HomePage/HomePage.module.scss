@@ -1,0 +1,49 @@
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/mixins.scss' as mixins;
+
+.homePage {
+  &__title {
+    margin-top: 24px;
+
+    @include mixins.on-tablet {
+      margin-top: 32px;
+      justify-content: left;
+    }
+
+    @include mixins.on-desktop {
+      margin-top: 56px;
+      max-width: 1200px;
+    }
+  }
+}
+
+.title__text {
+  font-family: 'Bold', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 41px;
+  letter-spacing: -1%;
+
+  @include mixins.on-tablet {
+    font-size: 48px;
+    line-height: 56px;
+  }
+}
+
+.title_dark {
+  color: $white;
+}
+
+.container {
+  padding-inline: 16px;
+  max-width: 1200px;
+  margin-inline: auto;
+  
+  @include mixins.on-tablet {
+    padding-inline: 24px;
+  }
+
+  @include mixins.on-desktop {
+    padding-inline: 32px;
+  }
+}

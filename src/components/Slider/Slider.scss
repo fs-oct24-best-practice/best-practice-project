@@ -1,37 +1,90 @@
-.slider__title {
-font-family: 'Mont', sans-serif;
-font-style: normal;
-font-weight: 800;
-font-size: 32px;
-line-height: 41px;
-letter-spacing: -0.01em;
-color: #313237;
+@use '@best-practice/styles/variables' as *;
+@use '../../styles/mixins.scss' as mixins;
 
+.slider {
+  margin-top: 56px;
+  margin-bottom: 56px;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    font-family: 'Bold', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 32px;
+    color: $primary;
+
+    @include mixins.on-tablet {
+      font-size: 32px;
+      line-height: 42px;
+      letter-spacing: 1%;
+    }
+  }
+
+  .title_dark {
+    color: $white;
+  }
+
+  &__buttons {
+    display: flex;
+    margin-left: 16px;
+  }
+
+  .slider__arrow {
+    width: 32px;
+    height: 32px;
+    border: 1px solid $elements;
+
+    .light & {
+      border: 1px solid $elements;
+      background-color: $white;
+      &:hover {
+        border: 1px solid $secondary;
+      }
+    }
+
+    .dark & {
+      background-color: $black-dark;
+      border: 1px solid $elements-dark;
+
+      &:hover {
+        background-color: $surface2-dark;
+        border: none;
+      }
+    }
+  }
+
+  &__container {
+    @include mixins.on-tablet {
+      padding-bottom: 64px;
+    }
+
+    @include mixins.on-desktop {
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-bottom: 80px;
+    }
+  }
 }
+
 .swiper {
-    padding-top: 100px;
-    position: relative;
+  &-slide {
+    width: auto;
+    flex: 0 0 auto;
+    max-width: 212px;
+    height: 100%;
 
-    &-slide {
-
-        img {
-            
-            height: 270px;
-            width: 500px;
-            object-fit: contain;
-        }
+    @include mixins.on-tablet {
+      max-width: 237px;
     }
 
-    &-button-prev {
-        position: absolute;
-        top: 50px;
-        left: 93%;
+    @include mixins.on-desktop {
+      max-width: 272px;
     }
-
-    &-button-next {
-        position: absolute;
-        top: 50px;
-        right: 0px;
-    }
+  }
 }

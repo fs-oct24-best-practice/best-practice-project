@@ -1,43 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { useState, FC, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import cn from 'classnames';
-import { Loader } from '../Loader';
-import { Product } from '../../types/Product';
-import { Card } from '../Card/Card';
+import { Product } from '../../types';
 import styles from './Catalog.module.scss';
+import { CardSkeleton } from '../skeletons';
+import { useAppSelector } from '../../hooks/hooks';
+import { Cards } from '../Cards/Cards';
+import { useTranslation } from 'react-i18next';
 
-type CatalogProps = {
-  fetchProducts: () => Promise<Product[]>;
-  title: string;
+type Props = {
+  productList: Product[];
+  isLoading: boolean;
+  isError: boolean;
 };
 
-export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+export const Catalog: FC<Props> = ({ productList, isLoading, isError }) => {
+  const { t } = useTranslation();
+  const [showSkeleton, setShowSkeleton] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  useEffect(() => {
+    setShowSkeleton(isLoading);
+  }, [isLoading]);
 
   const sortOption = searchParams.get('sort') || 'model';
   const page = parseInt(searchParams.get('page') || '1', 10);
   const perPage = searchParams.get('perPage') || 'all';
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(false);
-
-      try {
-        const data = await fetchProducts();
-        setProducts(data);
-      } catch {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [fetchProducts]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -59,13 +49,13 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
     });
   };
 
-  const sortedProducts = [...products].sort((a, b) => {
+  const sortedProducts = [...productList].sort((a, b) => {
     if (sortOption === 'alphabet') {
       return a.name.localeCompare(b.name);
     }
 
     if (sortOption === 'price') {
-      return a.priceRegular - b.priceRegular;
+      return a.fullPrice - b.fullPrice;
     }
 
     if (sortOption === 'model') {
@@ -91,52 +81,61 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
   });
 
   const itemsPerPage =
-    perPage === 'all' ? products.length : parseInt(perPage, 10);
+    perPage === 'all' ? productList.length : parseInt(perPage, 10);
+
   const paginatedProducts = sortedProducts.slice(
     (page - 1) * itemsPerPage,
     page * itemsPerPage
   );
-  const totalPages = Math.ceil(products.length / itemsPerPage);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const totalPages = Math.ceil(productList.length / itemsPerPage);
 
-  if (error) {
+  if (showSkeleton) {
     return (
       <div className={styles.catalog__container}>
-        <p className={styles.catalog__error}>
-          Something went wrong. Please try again.
-        </p>
+        <ul className={styles.catalog__grid}>
+          {Array.from({ length: 8 }).map((_, index) => (
+            <li key={index} className={styles.catalog__card}>
+              <CardSkeleton />
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className={styles.catalog__container}>
+        <p className={styles.catalog__error}>{t('something_went_wrong')}</p>
         <button
           onClick={() => window.location.reload()}
           className={styles.catalog__reload}
         >
-          Reload
+          {t('reload')}
         </button>
       </div>
     );
   }
 
-  if (products.length === 0) {
-    return <p className={styles.catalog__message}>No products available.</p>;
+  if (productList.length === 0) {
+    return (
+      <p className={styles.catalog__message}>{t('no_products_available')}</p>
+    );
   }
 
   return (
-    <div className={styles.catalog__container}>
-      <h1 className={styles.catalog__title}>{title}</h1>
-
+    <div className={cn(styles.catalog__container, styles[theme])}>
       <div className={styles.catalog__filters}>
         <select
           value={sortOption}
           onChange={handleSortChange}
           className={styles.catalog__select}
         >
-          <option value='model'>Newest</option>
-          <option value='alphabet'>Alphabetically</option>
-          <option value='price'>Cheapest</option>
+          <option value='model'>{t('newest')}</option>
+          <option value='alphabet'>{t('alphabetically')}</option>
+          <option value='price'>{t('cheapest')}</option>
         </select>
-
         <select
           value={perPage}
           onChange={handlePerPageChange}
@@ -145,17 +144,11 @@ export const Catalog: React.FC<CatalogProps> = ({ fetchProducts, title }) => {
           <option value='4'>4</option>
           <option value='8'>8</option>
           <option value='16'>16</option>
-          <option value='all'>All</option>
+          <option value='all'>{t('all')}</option>
         </select>
       </div>
 
-      <ul className={styles.catalog__grid}>
-        {paginatedProducts.map((product) => (
-          <li key={product.id} className={styles.catalog__card}>
-            <Card product={product} />
-          </li>
-        ))}
-      </ul>
+      <Cards products={paginatedProducts} />
 
       <div className={styles.catalog__pagination}>
         {[...Array(totalPages)].map((_, index) => (

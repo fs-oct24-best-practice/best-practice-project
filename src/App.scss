@@ -1,3 +1,25 @@
-@use './styles/reset.scss';
-@use './utils/vars.scss';
-@use './utils/mixins.scss';
+@use '@best-practice/styles/variables' as *;
+@use '../src/styles/reset.scss';
+@use '../src/styles/mixins.scss';
+
+.App {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.main {
+  flex: 1;
+}
+
+.light {
+  background-color: $white;
+  color: $primary;
+}
+
+.dark {
+  background-color: $black-dark;
+  color: $white-dark;
+}

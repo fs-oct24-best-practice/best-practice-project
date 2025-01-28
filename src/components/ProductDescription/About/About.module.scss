@@ -1,28 +1,64 @@
-//styleName: Desktop & Tablet/H3;
-.title {
-  font-family: 'Mont-Bold', sans-serif;
-  font-size: 22px;
-  font-weight: 800;
-  line-height: 1.4;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: #313237;
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/fonts.scss' as font;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 56px;
+
+  &__title {
+    @include font.m-h3;
+    height: 42px;
+
+    .light & {
+      border-bottom: 2px solid $elements;
+    }
+    .dark & {
+      border-bottom: 2px solid $elements-dark;
+    }
+  }
 }
 
-// H1 — The quick brown fox jumps over the lazy dog
-// Font: Mont Bold / Size: 48px / Line height: 56px / Letter spacing: -0.01em
-// H2 — The quick brown fox jumps over the lazy dog
-// Font: Mont Bold / Size: 32px / Line height: 41px / Letter spacing: -0.01em
-// H3 — The quick brown fox jumps over the lazy dog
-// Font: Mont Bold / Size: 22px / Line height: 31px / Letter spacing: 0
-// H4 — The quick brown fox jumps over the lazy dog
-// Font: Mont SemiBold / Size: 20px / Line height: 26px / Letter spacing: 0
-// Uppercase — The quick brown fox jumps over the lazy dog
-// Font: Mont Bold / Size: 12px / Line height: 11px / Letter spacing: 0.04em
-// Buttons — The quick brown fox jumps over the lazy dog
-// Font: Mont SemiBold / Size: 14px / Line height: 21px / Letter spacing: 0
-// Body text — The quick brown fox jumps over the lazy dog
-// Font: Mont Regular / Size: 14px / Line height: 21px / Letter spacing: 0
-// Small text — The quick brown fox jumps over the lazy dog
-// Font: Mont SemiBold / Size: 12px / Line height: 15px / Letter spacing: 0
+.declaration {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &__title {
+    @include font.m-h4;
+  }
+
+  &__text {
+    @include font.body-text;
+    
+    .light & {
+      color: $secondary;
+    }
+    
+    .dark & {
+      color: $secondary-dark;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-tablet) {
+  .section {
+    &__title {
+      @include font.dt-h3;
+      height: 47px;
+    }
+  }
+
+  .declaration {
+    &__title {
+      @include font.dt-h4;
+    }
+  }
+}
+
+@media (min-width: $viewport-width-desktop) {
+  .section {
+    width: calc(50% - 32px);
+  }
+}

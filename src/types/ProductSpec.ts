@@ -4,7 +4,7 @@ export interface ProductDescription {
 }
 
 export interface ProductSpec {
-  id: string;
+  id?: string;
   category: string;
   namespaceId: string;
   name: string;
@@ -16,7 +16,7 @@ export interface ProductSpec {
   color: string;
   images: string[];
   description: ProductDescription[];
-  screen: string;
+  screen?: string;
   resolution: string;
   processor: string;
   ram: string;

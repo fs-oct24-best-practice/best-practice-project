@@ -1,0 +1,82 @@
+@use '@best-practice/styles/variables' as *;
+
+.language_switcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .currentLanguage {
+    font-size: 14px;
+    font-weight: bold;
+
+    &.darkText {
+      color: $white;
+    }
+
+    &.lightText {
+      color: #000;
+    }
+  }
+
+  .switch {
+    position: relative;
+    width: 46px;
+    height: 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    box-sizing: border-box;
+
+    background-color: $elements;
+    border: 2px solid #000;
+
+    &.darkSwitch {
+      background-color: $surface1-dark;
+      border: 2px solid $secondary;
+    }
+
+    &.lightSwitch {
+      background-color: $elements;
+      border: 2px solid #000;
+    }
+
+    &:hover {
+      background-color: $surface2-dark;
+    }
+
+    .dark & {
+      background-color: $surface1-dark;
+      border: 2px solid $icons-dark;
+      
+      &:hover {
+        background-color: $surface1-dark;
+      }
+    }
+
+    .slider {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      left: 0.5px;
+      border-radius: 50%;
+      transition: transform 0.3s, background-color 0.3s;
+
+      background-color: $secondary;
+
+      .dark & {
+        background-color: $secondary-dark;
+      }
+
+      &.en {
+        transform: translateX(0);
+      }
+
+      &.ua {
+        transform: translateX(22px);
+      }
+    }
+  }
+}

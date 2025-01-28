@@ -6,20 +6,55 @@
   align-items: center;
   width: 100%;
 
+  &__language {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 120;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 0 16px;
+    margin-left: auto;
+  }
+
   &__pages {
     display: flex;
     align-items: center;
     gap: 64px;
+
+    @media (min-width: 770px) and (max-width: 900px) {
+      gap: 32px;
+    }
+
+    @media (min-width: 640px) and (max-width: 770px) {
+      gap: 20px;
+    }
   }
 
   &__link {
     position: relative;
     padding: 24px 0;
     text-align: center;
-    color: $secondary;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 800;
+
+    .light & {
+      color: $secondary;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .dark & {
+      color: $secondary-dark;
+
+      &:hover {
+        color: $white-dark;
+      }
+    }
 
     &::after {
       content: '';
@@ -29,13 +64,21 @@
       bottom: 2px;
       left: 0;
       border-radius: 3px;
-      background: $primary;
       transition: $transition;
       transition-property: width;
-    }
+      background: $primary;
 
-    &:hover {
-      color: $primary;
+      @media (min-width: 770px) and (max-width: 900px) {
+        bottom: 10px;
+      }
+
+      @media (min-width: 640px) and (max-width: 770px) {
+        bottom: 16px;
+      }
+
+      .dark & {
+        background: $white-dark;
+      }
     }
 
     &:hover::after {
@@ -43,11 +86,16 @@
     }
 
     &_active {
-      color: $primary;
+      .light & {
+        color: $primary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
 
       &::after {
         width: 100%;
-        background: $primary;
       }
     }
   }
@@ -64,13 +112,163 @@
       align-items: center;
       height: 64px;
       width: 64px;
+      position: relative;
 
-      border-left: 3px solid $elements;
+      @media (min-width: 770px) and (max-width: 900px) {
+        height: 48px;
+        width: 48px;
+      }
+
+      @media (min-width: 640px) and (max-width: 770px) {
+        width: 36px;
+        height: 36px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 4px;
+        bottom: 2px;
+        left: 0;
+        border-radius: 3px;
+        transition: $transition;
+        transition-property: width;
+        background: $primary;
+
+        @media (min-width: 640px) and (max-width: 900px) {
+          height: 4px;
+        }
+
+        .dark & {
+          background: $white-dark;
+        }
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+
+      .light & {
+        border-left: 3px solid $elements;
+      }
+
+      .dark & {
+        border-left: 3px solid $elements-dark;
+      }
     }
 
     &__icon {
       width: 18px;
       height: 18px;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    padding: 24px 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+
+    .light & {
+      color: $secondary;
+
+      &:hover {
+        color: $primary;
+      }
+    }
+
+    .dark & {
+      color: $secondary-dark;
+
+      &:hover {
+        color: $white-dark;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 4px;
+      bottom: 2px;
+      left: 0;
+      border-radius: 3px;
+      transition: $transition;
+      transition-property: width;
+      background: $primary;
+
+      .dark & {
+        background: $white-dark;
+      }
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
+    &_active {
+      .light & {
+        color: $primary;
+      }
+
+      .dark & {
+        color: $white-dark;
+      }
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: -9px;
+    flex-grow: 1;
+  }
+
+  &__notification_badge {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    background-color: red;
+    color: white;
+
+    .light & {
+      border: 1px solid white;
+    }
+
+    .dark & {
+      border: 1px solid $black-dark;
+    }
+  }
+
+  &__hidden {
+    display: none;
+  }
+
+  &__theme_toggle_icon_light {
+    width: 22px;
+    height: 22px;
+  }
+  &__theme_toggle_icon_dark {
+    width: 30px;
+    height: 30px;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }

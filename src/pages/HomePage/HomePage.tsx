@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
-import { getProducts } from '../../components/api/apiE';
-import { Loader } from '../../components/Loader';
-import { Carousel } from '../../components/Carousel';
-
-import './HomePage.scss';
+import { useTranslation } from 'react-i18next';
+import styles from './HomePage.module.scss';
 import { Slider } from '../../components/Slider';
 import { Categories } from '../../components/Categories';
+import { getProductList } from '../../api/getProductList';
+import { Carousel } from '../../components/Carousel';
+import { useAppSelector } from '../../hooks/hooks';
+import classNames from 'classnames';
 
 export const HomePage = () => {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [productList, setProductList] = useState<Product[]>([]);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
-    getProducts()
-      .then((data) => setProducts(data))
+    getProductList()
+      .then((data) => setProductList(data))
       .catch(() => 'Unable to load data from server!')
       .finally(() => {
         setTimeout(() => {
@@ -27,25 +30,58 @@ export const HomePage = () => {
     window.scrollTo({ top: 0 });
   }, []);
 
-  return isLoading ? (
-    <Loader />
-  ) : (
-    <div className='home-page'>
-      <div className='home-page__container'>
-        <div className='home-page__title'>
-          <h1>Welcome to Nice Gadgets store!</h1>
+  const newProducts = [...productList].filter(
+    (product) => product.year >= 2022
+  );
+
+  const productsWithDiscount = [...productList]
+    .sort(
+      (a, b) => b.fullPrice - (b.price || 0) - (a.fullPrice - (a.price || 0))
+    )
+    .filter((prod) => prod.fullPrice - (prod.price || 0) > 80);
+
+  return (
+    <div className={styles.homePage}>
+      <div className={styles.container}>
+        <div className={styles.homePage__title}>
+          <h1
+            className={classNames(styles.title__text, {
+              [styles.title_dark]: theme !== 'light',
+            })}
+          >
+            {t('welcomeMessage')}
+          </h1>
         </div>
 
-        <Carousel />
-
-        <section className='new-models'>
-          <Slider products={products} title='Brand new models' />
+        <section className={styles.carousel}>
+          <Carousel themeColor={theme} />
         </section>
 
-        <Categories products={products} title={'Shop by category'} />
+        <section className={styles.newMmodels}>
+          <Slider
+            products={newProducts}
+            title={t('brandNewModels')}
+            isLoading={isLoading}
+            themeColor={theme}
+          />
+        </section>
 
-        <section className='hot-prices'>
-          <Slider products={products} title='Hot Prices' />
+        <section className={styles.categories}>
+          <Categories
+            products={productList}
+            title={t('shopByCategory')}
+            isLoading={isLoading}
+            themeColor={theme}
+          />
+        </section>
+
+        <section className={styles.hotPrices}>
+          <Slider
+            products={productsWithDiscount}
+            title={t('hotPrices')}
+            isLoading={isLoading}
+            themeColor={theme}
+          />
         </section>
       </div>
     </div>

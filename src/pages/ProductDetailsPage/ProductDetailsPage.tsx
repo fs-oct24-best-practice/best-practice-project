@@ -1,57 +1,113 @@
-import { FC, useLayoutEffect, useState } from 'react';
-import { ProductSpec, Categories } from '../../types';
-import { getSpecsList } from '../../api';
+import { FC, useEffect, useLayoutEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
+import { ProductSpec, Categories, Product } from '../../types';
+import { getSpecList, getProductListFast } from '../../api';
 import { ProductDescription } from '../../components/ProductDescription';
-
-const currentProductID = 'apple-iphone-11-128gb-black';
+import styles from './ProductDetailsPage.module.scss';
+import { filterFactory, shuffleArray } from '../../utils';
+import { Slider } from '../../components/Slider';
+import { BackLink } from '../../components/BackLink/BackLink';
+import { useAppSelector } from '../../hooks/hooks';
+import { useTranslation } from 'react-i18next';
+import { Breadcrumbs } from '../../components/Breadcrumbs/Breadcrumbs';
 
 export const ProductDetailsPage: FC = () => {
+  const theme = useAppSelector((state) => state.theme.theme);
+  const { t } = useTranslation();
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [productSpecs, setProductSpecs] = useState<ProductSpec[]>([]);
+  const [currentProductSpec, setCurrentProductSpec] =
+    useState<ProductSpec | null>(null);
+  const [currentProduct, setCurrentProduct] = useState<
+    Product | null | undefined
+  >(null);
+  const [productList, setProductList] = useState<Product[] | null>(null);
+  const [recommendetList, setRecommendetList] = useState<Product[] | null>(
+    null
+  );
+
+  const location = useLocation();
+  const category = location.pathname.split('/')[1];
+  const itemId = location.pathname.split('/')[2];
+
+  const backLinkRef = useRef(location.state?.from ?? `/${category}`);
 
   useLayoutEffect(() => {
-    async function fetchProductSpecs(category: Categories) {
+    const fetchAndFindProductSpec = async (
+      category: Categories,
+      itemId: string
+    ) => {
+      setIsError(false);
+
       try {
-        setIsError(false);
-        setIsLoading(true);
-        setProductSpecs(await getSpecsList(category));
-      } catch (error) {
+        const specsList = await getSpecList(category);
+        const currentProductSpec = specsList.find((spec) => spec.id === itemId);
+
+        if (currentProductSpec) {
+          setCurrentProductSpec(currentProductSpec);
+        } else {
+          throw Error;
+        }
+      } catch {
         setIsError(true);
-        throw new Error(String(error));
-      } finally {
-        setIsLoading(false);
       }
+    };
+
+    fetchAndFindProductSpec(category as Categories, itemId);
+  }, [category, itemId]);
+
+  useEffect(() => {
+    const findProduct = async () => {
+      const data = await getProductListFast();
+      if (data) {
+        setProductList(await getProductListFast());
+      }
+      setCurrentProduct(data.find((product) => product.itemId === itemId));
+    };
+
+    findProduct();
+  }, [itemId]);
+
+  useEffect(() => {
+    if (productList && currentProduct) {
+      const recommendedList = productList.filter(
+        filterFactory(
+          (product) => product.category === currentProductSpec?.category,
+          (product) =>
+            currentProductSpec?.capacityAvailable.includes(product.capacity) ??
+            false,
+          (product) => product.ram === currentProductSpec?.ram
+        )
+      );
+      setRecommendetList(shuffleArray(recommendedList));
     }
-
-    fetchProductSpecs('phones'); // зараз захардкодив, потім буде братися з URL або передаватися пропсом
-  }, []);
-
-  const currentProductSpec = productSpecs.find(
-    (spec) => currentProductID === spec.id
-  );
-  // console.log('currentProduct ProductDetailsPage: ', currentProductSpec); // temporary for developing
-
-  const componentForRender = () => {
-    switch (true) {
-      case isLoading:
-        return <div>loading, please wait</div>;
-      case isError:
-        return <div>something wrong</div>;
-      case !productSpecs.length:
-        return <div>no list</div>;
-      case !currentProductSpec:
-        return <div>no specs</div>;
-      default:
-        return <ProductDescription currentProductSpec={currentProductSpec} />;
-    }
-  };
+  }, [currentProduct, currentProductSpec, productList]);
 
   return (
-    <>
-      <div>* Bread crumbs ... *</div>
-      <div>Back</div>
-      {componentForRender()}
-    </>
+    <div className={styles.container}>
+      <h1 className={styles.visually_hidden}>
+        {t('detailedProductSpecification')}
+      </h1>
+      <Breadcrumbs />
+      <BackLink to={backLinkRef.current}>Back</BackLink>
+
+      {isError && <h2>{t('somethingWentWrong')}</h2>}
+
+      {!isError && !!currentProductSpec && !!currentProduct && (
+        <ProductDescription
+          currentProductSpec={currentProductSpec}
+          currentProduct={currentProduct}
+        />
+      )}
+      {recommendetList && (
+        <section className={styles.hotPrices}>
+          <Slider
+            products={recommendetList}
+            title={t('youMayAlsoLike')}
+            isLoading={false}
+            themeColor={theme}
+          />
+        </section>
+      )}
+    </div>
   );
 };

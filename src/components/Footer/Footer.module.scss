@@ -1,73 +1,102 @@
-@use '../../utils/mixins' as mixins;
-@use '../../utils/vars' as *;
+@use '@best-practice/styles/variables' as *;
+@use '@best-practice/styles/mixins' as mixins;
 
-.footer{
-  background-color: $white;
-}
-
-.footer_wrapper{
-  height: $footer-height;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 24px;
-  border-top: 1px solid $elements;
-
-  @include mixins.onMobile {
-    height: auto;
-    flex-direction: column; 
-    gap: 32px;
-    padding: 32px 24px;
+.footer {
+  &.light {
+    background-color: $white;
   }
-}
-
-.footer_navbar {
-  display: flex;
-  justify-content: space-between;
-  @include mixins.onMobile {
-    flex-direction: column; 
-    gap: 16px;
+  &.dark {
+    background-color: $black-dark;
   }
-}
 
-.footer_item{
-  flex-grow: 1;
-  @include mixins.onMobile {
-    width: 100%;
-  }
-}
+  &__wrapper {
+    height: $footer-height;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
 
-.back_to_top{
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-  @include mixins.onMobile {
-    justify-content: center;
-  }
-}
-
-a {
-  color: $secondary;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.back_to_top_button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  border: 1px solid $icons;
-  height: 32px;
-  width: 32px;
-  display: flex;
-  justify-content: center; 
-  align-items: center;
-  transition: border $transition-duration ease;
-    &:hover {
-      border: 1px solid $primary;
+    .light & {
+      border-top: 3px solid $elements;
     }
+
+    .dark & {
+      border-top: 3px solid $elements-dark;
+    }
+
+    @include mixins.on-mobile {
+      height: auto;
+      flex-direction: column;
+      gap: 32px;
+      padding: 32px 24px;
+    }
+  }
+
+  &__navbar {
+    display: flex;
+    justify-content: space-between;
+    @include mixins.on-mobile {
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  &__item {
+    flex-grow: 1;
+    @include mixins.on-mobile {
+      width: 100%;
+    }
+  }
+
+  &__links {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 800;
+
+    .light & {
+      color: $secondary;
+    }
+    
+    .dark & {
+      color: $white-dark;
+    }
+  }
+
+  &__back_to_top {
+    color: $secondary;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    @include mixins.on-mobile {
+      justify-content: center;
+    }
+  }
+
+  &__back_to_top_button {
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border $transition;
+
+    .light & {
+      border: 1px solid $icons;
+      &:hover {
+        border: 1px solid $primary;
+      }
+    }
+
+    .dark & {
+      background-color: $surface2-dark;
+      border: none;
+      &:hover {
+        background-color: $icons-dark;
+      }
+    }
+  }
 }

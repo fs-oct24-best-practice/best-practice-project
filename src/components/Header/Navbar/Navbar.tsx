@@ -1,9 +1,36 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './Navbar.module.scss';
 import { Pages } from '../../../types';
+import { SearchField } from '../../SearchField/SearchField';
+import { useAppSelector } from '../../../hooks/hooks';
+import AuthButton from '../../../firebase/AuthButton';
+
+import { useDispatch } from 'react-redux';
+import { switchTheme } from '../../../features/theme';
+import { Theme } from '../../../types/Theme';
+import { LanguageSwitcher } from '../../LanguageSwitcher/LanguageSwitcher';
+import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  const favoritesLength = useAppSelector(
+    (state) => state.favoritesProducts.favoritesProducts
+  ).length;
+
+  const cartLength = useAppSelector((state) =>
+    state.cartProducts.cartProducts.reduce(
+      (total, item) => total + item.quantity,
+      0
+    )
+  );
+
+  const swichTheme = () => dispatch(switchTheme());
+
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
       [styles.navbar__link]: true,
@@ -11,43 +38,102 @@ export const Navbar = () => {
     });
   };
 
+  const setIconClasses = ({ isActive }: { isActive: boolean }) => {
+    return cn({
+      [styles.navbar__icon]: true,
+      [styles.navbar__icon_active]: isActive,
+    });
+  };
+
+  const onThemeSwitch = () => {
+    swichTheme();
+  };
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${styles[theme]}`}>
       <ul className={styles.navbar__pages}>
-        {Object.entries(Pages).map((page) => {
+        {Object.entries(Pages).map(([key, value]) => {
           return (
-            <li key={page[0]} className={styles.navbar__page}>
-              <NavLink className={setNavClasses} to={`/${page[1]}`}>
-                {page[0]}
+            <li key={key} className={styles.navbar__page}>
+              <NavLink className={setNavClasses} to={`/${value}`}>
+                {t(key)}
               </NavLink>
             </li>
           );
         })}
       </ul>
+      <div className={styles.navbar__language}>
+        <LanguageSwitcher />
+      </div>
+
+      <div className={styles.navbar__search}>
+        <SearchField />
+      </div>
 
       <ul className={styles.navbar__chosen}>
         <li>
-          <NavLink to='/favorite' className={setNavClasses}>
+          <div
+            className={`${styles.navbar__chosen__block}`}
+            onClick={onThemeSwitch}
+          >
+            <img
+              src={`/img/icons/${theme === Theme.DARK ? 'SunWhite.svg' : 'Moon.svg'}`}
+              alt='Switch Theme'
+              className={
+                theme === Theme.DARK
+                  ? styles.navbar__theme_toggle_icon_dark
+                  : styles.navbar__theme_toggle_icon_light
+              }
+            />
+          </div>
+        </li>
+
+        <li>
+          <NavLink to='/favorite' className={setIconClasses}>
             <div className={styles.navbar__chosen__block}>
               <img
-                src='/img/icons/Favourites.svg'
+                src={`/img/icons/${theme === Theme.DARK ? 'FavoriteWhite.svg' : 'Favourite.svg'}`}
                 alt='Favourites'
                 className={styles.navbar__chosen__icon}
               />
+              <div
+                className={cn([styles.navbar__notification_badge], {
+                  [styles.navbar__hidden]: !favoritesLength,
+                })}
+              >
+                {favoritesLength}
+              </div>
             </div>
           </NavLink>
         </li>
 
         <li>
-          <NavLink to='/cart' className={setNavClasses}>
+          <NavLink
+            to='/cart'
+            className={setIconClasses}
+            state={{ from: location }}
+          >
             <div className={styles.navbar__chosen__block}>
               <img
-                src='/img/icons/Cart.svg'
+                src={`/img/icons/${theme === Theme.DARK ? 'CartWhite.svg' : 'Cart.svg'}`}
                 alt='Cart'
                 className={styles.navbar__chosen__icon}
               />
+              {cartLength > 0 && (
+                <span className={styles.navbar__notification_badge}>
+                  {cartLength}
+                </span>
+              )}
             </div>
           </NavLink>
+        </li>
+
+        <li className={styles.navbar__divider}></li>
+
+        <li>
+          <div className={styles.navbar__chosen__block}>
+            <AuthButton />
+          </div>
         </li>
       </ul>
     </nav>

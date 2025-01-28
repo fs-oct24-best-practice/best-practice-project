@@ -1,16 +1,19 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styles from './MobileMenu.module.scss';
 import { Pages } from '../../../types';
+import { useAppSelector } from '../../../hooks/hooks';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const MobileMenu: FC<Props> = (props) => {
-  const { isOpen, setIsOpen } = props;
+export const MobileMenu: FC<Props> = ({ isOpen, setIsOpen }) => {
+  const location = useLocation();
+  const { t } = useTranslation();
 
   const setNavClasses = ({ isActive }: { isActive: boolean }) => {
     return cn({
@@ -23,24 +26,48 @@ export const MobileMenu: FC<Props> = (props) => {
     setIsOpen(!isOpen);
   };
 
-  return (
-    <nav className={styles.menu}>
-      <ul className={styles.menu__pages}>
-        {Object.entries(Pages).map((page) => {
-          return (
-            <li key={page[0]} className={styles.menu__page}>
-              <NavLink
-                className={setNavClasses}
-                to={`/${page[1]}`}
-                onClick={toggleMenu}
-              >
-                {page[0]}
-              </NavLink>
-            </li>
-          );
-        })}
-      </ul>
+  const favoritesLength = useAppSelector(
+    (state) => state.favoritesProducts.favoritesProducts
+  ).length;
 
+  const cartLength = useAppSelector((state) =>
+    state.cartProducts.cartProducts.reduce(
+      (total, item) => total + item.quantity,
+      0
+    )
+  );
+
+  const theme = useAppSelector((state) => state.theme.theme);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  return (
+    <nav
+      className={cn(styles.menu, styles[theme], { [styles.menu_open]: isOpen })}
+    >
+      <ul className={styles.menu__pages}>
+        {Object.entries(Pages).map(([name, path]) => (
+          <li key={name} className={styles.menu__page}>
+            <NavLink
+              className={setNavClasses}
+              to={`/${path}`}
+              onClick={toggleMenu}
+            >
+              {t(name)}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
       <ul className={styles.menu__chosen}>
         <li>
           <NavLink
@@ -50,22 +77,39 @@ export const MobileMenu: FC<Props> = (props) => {
           >
             <div className={styles.menu__chosen__block}>
               <img
-                src='/img/icons/Favourites.svg'
+                src='/img/icons/Favourite.svg'
                 alt='Favourites'
                 className={styles.menu__chosen__icon}
               />
+              <div
+                className={cn([styles.menu__notification_badge], {
+                  [styles.menu__hidden]: !favoritesLength,
+                })}
+              >
+                {favoritesLength}
+              </div>
             </div>
           </NavLink>
         </li>
 
         <li>
-          <NavLink to='/cart' className={setNavClasses} onClick={toggleMenu}>
+          <NavLink
+            to='/cart'
+            className={setNavClasses}
+            state={{ from: location }}
+            onClick={toggleMenu}
+          >
             <div className={styles.menu__chosen__block}>
               <img
                 src='/img/icons/Cart.svg'
                 alt='Cart'
                 className={styles.menu__chosen__icon}
               />
+              {cartLength > 0 && (
+                <span className={styles.menu__notification_badge}>
+                  {cartLength}
+                </span>
+              )}
             </div>
           </NavLink>
         </li>

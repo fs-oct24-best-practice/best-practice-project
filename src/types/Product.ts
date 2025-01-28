@@ -1,8 +1,8 @@
+import { Categories } from './Categories';
+
 export interface Product {
-  priceRegular: number;
-  priceDiscount?: number;
   id: number;
-  category: string;
+  category: Categories;
   itemId: string;
   name: string;
   fullPrice: number;
@@ -12,5 +12,6 @@ export interface Product {
   color: string;
   ram: string;
   year: number;
-  images: string;
+  image: string;
+  quantity?: number;
 }
